@@ -86,8 +86,8 @@ function SignInPage() {
 							</Link>
 						</Form.Item>
 
-						<article className="flex flex-col items-center gap-[14px]">
-							<p className="font-roboto text-medinfo-dark-4">Or</p>
+						<article className="flex flex-col items-center gap-[14px] md:gap-7">
+							<p className="font-roboto text-medinfo-dark-4 md:text-[20px]">Or</p>
 
 							<div className="flex gap-8">
 								<Button size="small" theme="outline" className="rounded-[8px]">
@@ -105,11 +105,11 @@ function SignInPage() {
 							<Button type="submit">Sign In</Button>
 
 							<div className="space-y-1 text-center">
-								<Link href="#doctor" className="text-medinfo-primary-main">
+								<Link href="#doctor" className="text-medinfo-primary-main md:text-[20px]">
 									Sign in as a doctor
 								</Link>
 
-								<p>
+								<p className="md:hidden">
 									Don't have an account?
 									<Link href="/signup" className="text-medinfo-primary-main">
 										Sign up
