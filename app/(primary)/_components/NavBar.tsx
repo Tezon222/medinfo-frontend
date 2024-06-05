@@ -13,14 +13,15 @@ function NavBar() {
 		<header
 			ref={headerRef}
 			className={cnJoin(
-				"sticky inset-[0_0_auto_0] z-[500] flex w-full items-center justify-between bg-white/90 px-6 py-[17px] backdrop-blur-md [transition:box-shadow_0.3s_ease] lg:px-[102px] lg:py-5",
+				`sticky inset-[0_0_auto_0] z-[500] flex w-full items-center justify-between bg-white/90
+				px-6 py-[17px] backdrop-blur-md [transition:box-shadow_0.3s_ease] lg:px-[102px] lg:py-5`,
 				isScrolled && "shadow-[0_4px_8px_hsl(150,20%,25%,0.25)]"
 			)}
 		>
 			<Logo className="min-w-fit max-lg:h-[46px] max-lg:w-[60px]" />
 
 			<nav className="min-w-fit max-lg:hidden">
-				<ul className="flex font-medium lg:gap-[56px] lg:text-[22px]">
+				<ul className="flex font-medium lg:gap-14 lg:text-[22px]">
 					<li>Home</li>
 					<li>Library</li>
 					<li>About us</li>

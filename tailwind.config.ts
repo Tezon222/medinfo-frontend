@@ -38,10 +38,10 @@ const tailwindConfig = withTV({
 					},
 
 					dark: {
-						"1": "var(-color-dark-1)",
-						"2": "var(-color-dark-2)",
-						"3": "var(-color-dark-3)",
-						"4": "var(-color-dark-4)",
+						"1": "var(--color-dark-1)",
+						"2": "var(--color-dark-2)",
+						"3": "var(--color-dark-3)",
+						"4": "var(--color-dark-4)",
 					},
 				},
 

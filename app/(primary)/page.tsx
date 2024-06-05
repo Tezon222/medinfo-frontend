@@ -67,10 +67,18 @@ function HomePage() {
 	const { dragScrollProps, dragContainerClasses, dragItemClasses } = useDragScroll<HTMLUListElement>();
 
 	return (
-		<main className="mx-auto space-y-[56px] px-6 py-[56px] max-md:max-w-[400px] md:space-y-[92px] md:px-[70px] md:py-[92px] lg:px-[100px]">
+		<main
+			className="mx-auto space-y-14 px-6 py-14 max-md:max-w-[400px] md:space-y-[92px] md:px-[70px]
+				md:py-[92px] lg:px-[100px]"
+		>
 			<section className="md:flex md:flex-row-reverse md:items-center md:gap-[67px]">
 				<div>
-					<h1 className="text-[clamp(32px,5.2vw,68px)] font-bold leading-10 text-medinfo-primary-main max-md:text-center md:text-balance md:leading-[76px] [&:hover>span]:text-medinfo-secondary-darker [&>span]:[transition:color_250ms_ease-in-out]">
+					<h1
+						className="text-[clamp(32px,5.2vw,68px)] font-bold leading-10
+							text-medinfo-primary-main max-md:text-center md:text-balance md:leading-[76px]
+							[&:hover>span]:text-medinfo-secondary-darker
+							[&>span]:[transition:color_250ms_ease-in-out]"
+					>
 						Free <span>access</span> to knowledge and an easy chit-chat with the best{" "}
 						<span>doctors</span>
 					</h1>
@@ -87,7 +95,10 @@ function HomePage() {
 				</div>
 
 				<div className="relative ml-[19px] w-max shrink-0 max-md:mt-[calc(40px_+_19px)]">
-					<span className="absolute bottom-[19px] right-[19px] z-[-1] block size-full rounded-[16px] bg-medinfo-primary-main md:bottom-[28px] md:right-[28px]" />
+					<span
+						className="absolute bottom-[19px] right-[19px] z-[-1] block size-full
+							rounded-[16px] bg-medinfo-primary-main md:bottom-[28px] md:right-[28px]"
+					/>
 
 					<Image
 						className="aspect-[223/273] min-h-[273px] md:aspect-[340/415] md:min-h-[415px]"
@@ -101,12 +112,16 @@ function HomePage() {
 			</section>
 
 			<section>
-				<h2 className="text-center text-[28px] font-semibold leading-9 text-medinfo-primary-main md:text-[52px] md:font-bold md:leading-[60px]">
+				<h2
+					className="text-center text-[28px] font-semibold leading-9 text-medinfo-primary-main
+						md:text-[52px] md:font-bold md:leading-[60px]"
+				>
 					Our Core Services
 				</h2>
 
 				<CoreServiceList
-					className="mt-6 flex flex-col items-center gap-4 text-center text-[22px] font-medium md:mt-[56px] md:flex-row md:justify-center md:gap-[28px]"
+					className="mt-6 flex flex-col items-center gap-4 text-center text-[22px] font-medium
+						md:mt-14 md:flex-row md:justify-center md:gap-[28px]"
 					each={coreServices}
 					render={(coreService, index) => (
 						<li key={coreService.description}>
@@ -127,19 +142,29 @@ function HomePage() {
 			</section>
 
 			<section>
-				<h2 className="text-center text-[28px] font-semibold leading-9 text-medinfo-primary-main md:text-[52px] md:font-bold md:leading-[60px]">
+				<h2
+					className="text-center text-[28px] font-semibold leading-9 text-medinfo-primary-main
+						md:text-[52px] md:font-bold md:leading-[60px]"
+				>
 					Why MedInfo Nigeria?
 				</h2>
 
 				<FeatureList
-					className="mt-12 grid grid-cols-2 justify-center gap-x-5 gap-y-10 text-center md:mt-[88px] md:grid-cols-[repeat(4,_minmax(161px,248px))] md:gap-x-[28px]"
+					className="mt-12 grid grid-cols-2 justify-center gap-x-5 gap-y-10 text-center
+						md:mt-[88px] md:grid-cols-[repeat(4,_minmax(161px,248px))] md:gap-x-[28px]"
 					each={features}
 					render={(feature) => (
 						<li
 							key={feature.description}
-							className="relative flex flex-col items-center justify-center rounded-[16px] border border-medinfo-primary-main px-[3.5px] py-[54px] md:px-[47px] md:py-[67px]"
+							className="relative flex flex-col items-center justify-center rounded-[16px]
+								border border-medinfo-primary-main px-[3.5px] py-[54px] md:px-[47px]
+								md:py-[67px]"
 						>
-							<span className="md:text-10 absolute top-[-24px] block size-12 rounded-full bg-white p-3 text-[24px] [box-shadow:0_4px_4px_hsl(0,0%,0%,0.12)] md:size-[64px]">
+							<span
+								className="md:text-10 absolute top-[-24px] block size-12 rounded-full
+									bg-white p-3 text-[24px] [box-shadow:0_4px_4px_hsl(0,0%,0%,0.12)]
+									md:size-16"
+							>
 								<IconBox icon={feature.icon} />
 							</span>
 
@@ -150,16 +175,22 @@ function HomePage() {
 			</section>
 
 			<section>
-				<h2 className="text-center text-[28px] font-semibold leading-9 text-medinfo-primary-main md:text-[52px] md:font-bold md:leading-[60px]">
+				<h2
+					className="text-center text-[28px] font-semibold leading-9 text-medinfo-primary-main
+						md:text-[52px] md:font-bold md:leading-[60px]"
+				>
 					Advantages of Virtual Healthcare
 				</h2>
 
 				<AdvantageList
-					className="mt-6 flex flex-col gap-6 md:mt-[56px] md:flex-row md:gap-[28px]"
+					className="mt-6 flex flex-col gap-6 md:mt-14 md:flex-row md:gap-[28px]"
 					each={advantages}
 					render={(advantage) => (
 						<li key={advantage.title}>
-							<span className="bg-medinfo-primary-main-subtle block size-[92px] rounded-[16px] p-6 text-[44px] text-medinfo-primary-main">
+							<span
+								className="bg-medinfo-primary-main-subtle block size-[92px] rounded-[16px]
+									p-6 text-[44px] text-medinfo-primary-main"
+							>
 								<IconBox icon={advantage.icon} />
 							</span>
 
@@ -174,23 +205,24 @@ function HomePage() {
 			</section>
 
 			<section>
-				<h2 className="text-center text-[28px] font-semibold leading-9 text-medinfo-primary-main md:text-[52px] md:font-bold md:leading-[60px]">
+				<h2
+					className="text-center text-[28px] font-semibold leading-9 text-medinfo-primary-main
+						md:text-[52px] md:font-bold md:leading-[60px]"
+				>
 					Did you know?
 				</h2>
 
 				<CardList
 					{...dragScrollProps}
-					className={cnJoin(
-						"mt-6 gap-5 [align-items:safe_center] md:mt-[56px]",
-						dragContainerClasses
-					)}
+					className={cnJoin("mt-6 gap-5 [align-items:safe_center] md:mt-14", dragContainerClasses)}
 					each={[...Array(4).keys()]}
 					render={(item) => (
 						<Card
 							as="li"
 							key={item}
 							className={cnJoin(
-								"w-[161px] shrink-0 space-y-3 rounded-[16px] border-[1.4px] border-medinfo-light-1 pb-3 md:w-[276px]",
+								`w-[161px] shrink-0 space-y-3 rounded-[16px] border-[1.4px]
+								border-medinfo-light-1 pb-3 md:w-[276px]`,
 								dragItemClasses
 							)}
 						>
@@ -219,31 +251,44 @@ function HomePage() {
 			</section>
 
 			<section>
-				<h2 className="text-center text-[28px] font-semibold leading-9 text-medinfo-primary-main md:text-[52px] md:font-bold md:leading-[60px]">
+				<h2
+					className="text-center text-[28px] font-semibold leading-9 text-medinfo-primary-main
+						md:text-[52px] md:font-bold md:leading-[60px]"
+				>
 					Frequently Asked Questions
 				</h2>
 
 				<Accordion.Root type="single" collapsible={true} asChild={true}>
 					<FAQList
-						className="mt-6 w-full space-y-2 md:mt-[56px] md:space-y-4"
+						className="mt-6 w-full space-y-2 md:mt-14 md:space-y-4"
 						each={FAQs}
 						render={(FAQ) => (
 							<Accordion.Item key={FAQ.question} value={FAQ.answer} asChild={true}>
 								<li>
 									<Accordion.Trigger
 										icon={
-											<span className="flex items-center justify-center rounded-full bg-medinfo-primary-main p-[10px] md:p-4">
+											<span
+												className="flex items-center justify-center rounded-full
+													bg-medinfo-primary-main p-[10px] md:p-4"
+											>
 												<ChevronDownIcon className="size-4 md:size-6" />
 											</span>
 										}
 										classNames={{
-											base: "text-[22px] md:font-semibold md:text-[32px] min-h-[68px] rounded-t-[16px] border-x border-t border-medinfo-primary-main-darker data-[state=closed]:rounded-b-[16px] data-[state=closed]:border-b py-[15px] px-6 md:p-6",
+											base: `border-medinfo-primary-main-darker min-h-[68px]
+											rounded-t-[16px] border-x border-t px-6 py-[15px] text-[22px]
+											data-[state=closed]:rounded-b-[16px]
+											data-[state=closed]:border-b md:p-6 md:text-[32px]
+											md:font-semibold`,
 										}}
 									>
 										{FAQ.question}
 									</Accordion.Trigger>
 
-									<Accordion.Content className="border-medinfo-primary-main-darker rounded-b-[16px] border-x border-b px-6 pb-6 pt-0">
+									<Accordion.Content
+										className="rounded-b-[16px] border-x border-b
+											border-medinfo-primary-darker px-6 pb-6 pt-0"
+									>
 										<hr className="mb-4 h-[2px] bg-medinfo-secondary-main" />
 										{FAQ.answer}
 									</Accordion.Content>

@@ -16,18 +16,20 @@ export type ButtonProps = Prettify<{
 
 const button = tv(
 	{
-		base: "rounded-[8px]",
+		base: "flex items-center justify-center rounded-[8px]",
+
 		variants: {
 			theme: {
 				primary: "bg-medinfo-primary-main text-white",
 				outline: "border-2 border-medinfo-primary-main bg-transparent text-medinfo-primary-main",
-				"outline-white": "border-2 border-white bg-transparent text-white",
+				"outline-inverted": "border-2 border-white bg-transparent text-white",
 			},
 			size: {
-				small: "p-[14px] lg:p-5",
-				medium: "px-6 py-3 text-base lg:px-8 lg:py-[18px] lg:text-[20px]",
+				small: "size-12 md:size-16",
+				medium: "px-6 py-3 text-base md:px-8 md:py-[18px] md:text-[20px]",
 			},
 		},
+
 		defaultVariants: {
 			theme: "primary",
 			size: "medium",
@@ -52,13 +54,10 @@ function Button(props: ButtonProps, ref: ForwardedRefType<HTMLButtonElement>) {
 
 	const Component = asChild ? Slot : "button";
 
+	const BTN_CLASSES = !unstyled ? button({ theme, size, className }) : className;
+
 	return (
-		<Component
-			ref={ref}
-			type={type}
-			className={!unstyled ? button({ theme, size, className }) : className}
-			{...otherValidBtnProps}
-		>
+		<Component ref={ref} type={type} className={BTN_CLASSES} {...otherValidBtnProps}>
 			{children}
 		</Component>
 	);

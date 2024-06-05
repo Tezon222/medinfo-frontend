@@ -528,15 +528,22 @@ const eslintConfigArray = [
 	// == Tailwind Rules
 	...eslintTailwind.configs["flat/recommended"],
 	{
+		settings: {
+			tailwindcss: {
+				callees: ["tv", "cnMerge", "cn", "cnJoin", "twMerge", "twJoin"],
+				cssFiles: [],
+				config: "./tailwind.config.ts",
+				removeDuplicates: false, // Turned off cuz prettier already handles this via plugin
+			},
+		},
 		rules: {
-			"tailwindcss/no-custom-classname": "off",
-			"tailwindcss/no-contradicting-classname": "off",
-			"tailwindcss/classnames-order": [
+			"tailwindcss/classnames-order": "warn",
+			"tailwindcss/no-custom-classname": [
 				"warn",
-				{
-					config: "./tailwind.config.ts",
-				},
+				{ ignoredKeys: ["responsiveVariants", "compoundVariants", "defaultVariants"] },
 			],
+			"tailwindcss/no-contradicting-classname": "off", // Turned off cuz tw intellisense already handles this
+			"tailwindcss/no-unnecessary-arbitrary-value": "off",
 		},
 	},
 

@@ -73,7 +73,7 @@ function FormItem<TValues extends FieldValues>(props: FormItemProps<TValues>) {
 
 	return (
 		<FormItemProvider value={inputDetails}>
-			<div className={cnMerge(`flex flex-col`, className)}>{children}</div>
+			<div className={cnMerge("flex flex-col", className)}>{children}</div>
 		</FormItemProvider>
 	);
 }
@@ -82,7 +82,7 @@ const FormLabel = ({ children, className }: { children: string; className?: stri
 	const { id } = useFormItemContext();
 
 	return (
-		<label htmlFor={id} className={cnMerge("text-label", className)}>
+		<label htmlFor={id} className={className}>
 			{children}
 		</label>
 	);
