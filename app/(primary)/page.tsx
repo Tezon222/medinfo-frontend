@@ -68,7 +68,7 @@ function HomePage() {
 
 	return (
 		<main
-			className="mx-auto space-y-14 px-6 py-14 max-md:max-w-[400px] md:space-y-[92px] md:px-[70px]
+			className="w-full space-y-14 px-6 py-14 max-md:max-w-[400px] md:space-y-[92px] md:px-[70px]
 				md:py-[92px] lg:px-[100px]"
 		>
 			<section className="md:flex md:flex-row-reverse md:items-center md:gap-[67px]">
@@ -161,9 +161,9 @@ function HomePage() {
 								md:py-[67px]"
 						>
 							<span
-								className="md:text-10 absolute top-[-24px] block size-12 rounded-full
-									bg-white p-3 text-[24px] [box-shadow:0_4px_4px_hsl(0,0%,0%,0.12)]
-									md:size-16"
+								className="absolute top-[-24px] block size-12 rounded-full bg-white p-3
+									text-[24px] [box-shadow:0_4px_4px_hsl(0,0%,0%,0.12)] md:size-16
+									md:text-[40px]"
 							>
 								<IconBox icon={feature.icon} />
 							</span>
@@ -188,8 +188,8 @@ function HomePage() {
 					render={(advantage) => (
 						<li key={advantage.title}>
 							<span
-								className="bg-medinfo-primary-main-subtle block size-[92px] rounded-[16px]
-									p-6 text-[44px] text-medinfo-primary-main"
+								className="block size-[92px] rounded-[16px] bg-medinfo-primary-subtle p-6
+									text-[44px] text-medinfo-primary-main"
 							>
 								<IconBox icon={advantage.icon} />
 							</span>
