@@ -132,8 +132,8 @@ function HomePage() {
 								)}
 								src={coreService.imageSrc}
 								alt=""
-								width={272}
-								height={292}
+								width={340}
+								height={362}
 							/>
 							<p className="mt-4">{coreService.description}</p>
 						</li>
