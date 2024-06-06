@@ -6,9 +6,6 @@ import { Slot } from "../common/Slot";
 
 // prettier-ignore
 export type ButtonProps = Prettify<{
-	/**
-	 * Whether the button should be rendered as a child of another element
-	 */
 	asChild?: boolean;
 	unstyled?: boolean;
 } & VariantProps<typeof button> & React.ComponentPropsWithRef<"button">>
