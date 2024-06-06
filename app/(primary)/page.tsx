@@ -157,8 +157,8 @@ function HomePage() {
 						<li
 							key={feature.description}
 							className="relative flex flex-col items-center justify-center rounded-[16px]
-								border border-medinfo-primary-main px-[3.5px] py-[54px] md:px-[47px]
-								md:py-[67px]"
+								border border-medinfo-primary-main px-[3.5px] py-[54px]
+								text-medinfo-primary-main md:px-[47px] md:py-[67px]"
 						>
 							<span
 								className="absolute top-[-24px] block size-12 rounded-full bg-white p-3
@@ -275,8 +275,8 @@ function HomePage() {
 											</span>
 										}
 										classNames={{
-											base: `border-medinfo-primary-main-darker min-h-[68px]
-											rounded-t-[16px] border-x border-t px-6 py-[15px] text-[22px]
+											base: `min-h-[68px] rounded-t-[16px] border-x border-t
+											border-medinfo-primary-darker px-6 py-[15px] text-[22px]
 											data-[state=closed]:rounded-b-[16px]
 											data-[state=closed]:border-b md:p-6 md:text-[32px]
 											md:font-semibold`,

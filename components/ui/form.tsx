@@ -1,9 +1,8 @@
 "use client";
 
 import { createCustomContext, useElementList } from "@/lib/hooks";
-import type { ForwardedRefType } from "@/lib/type-helpers/global-type-helpers";
 import { cnMerge } from "@/lib/utils/cn";
-import { forwardRef, useEffect, useId, useMemo, useRef } from "react";
+import { useEffect, useId, useMemo, useRef } from "react";
 import {
 	type Control,
 	type FieldValues,
@@ -89,13 +88,12 @@ const FormLabel = ({ children, className }: { children: string; className?: stri
 };
 
 const FormInput = (
-	props: Omit<React.ComponentPropsWithRef<"input">, "id" | "name"> & { errorClassName?: string },
-	ref: ForwardedRefType<HTMLInputElement>
+	props: Omit<React.ComponentPropsWithRef<"input">, "id" | "name"> & { errorClassName?: string }
 ) => {
 	const { id, name } = useFormItemContext();
 	const { register, formState } = useHookFormContext();
 
-	const { className, errorClassName, ...restOfProps } = props;
+	const { className, errorClassName, ref, ...restOfProps } = props;
 
 	return (
 		<Input
@@ -175,7 +173,7 @@ const Form = {
 	Item: FormItem,
 	Label: FormLabel,
 	ErrorMessage: FormErrorMessage,
-	Input: forwardRef(FormInput),
+	Input: FormInput,
 };
 
 export default Form;

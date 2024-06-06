@@ -1,7 +1,6 @@
 "use client";
 
-import type { ForwardedRefType, Prettify } from "@/lib/type-helpers/global-type-helpers";
-import { forwardRef } from "react";
+import type { Prettify } from "@/lib/type-helpers/global-type-helpers";
 import { type VariantProps, tv } from "tailwind-variants";
 import { Slot } from "../common/Slot";
 
@@ -12,7 +11,7 @@ export type ButtonProps = Prettify<{
 	 */
 	asChild?: boolean;
 	unstyled?: boolean;
-} & VariantProps<typeof button> & React.ComponentPropsWithoutRef<"button">>
+} & VariantProps<typeof button> & React.ComponentPropsWithRef<"button">>
 
 const button = tv(
 	{
@@ -40,7 +39,7 @@ const button = tv(
 	}
 );
 
-function Button(props: ButtonProps, ref: ForwardedRefType<HTMLButtonElement>) {
+function Button(props: ButtonProps) {
 	const {
 		asChild,
 		children,
@@ -57,10 +56,10 @@ function Button(props: ButtonProps, ref: ForwardedRefType<HTMLButtonElement>) {
 	const BTN_CLASSES = !unstyled ? button({ theme, size, className }) : className;
 
 	return (
-		<Component ref={ref} type={type} className={BTN_CLASSES} {...otherValidBtnProps}>
+		<Component type={type} className={BTN_CLASSES} {...otherValidBtnProps}>
 			{children}
 		</Component>
 	);
 }
 
-export default forwardRef(Button);
+export default Button;

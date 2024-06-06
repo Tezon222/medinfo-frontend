@@ -1,5 +1,4 @@
-import type { ForwardedRefType } from "@/lib/type-helpers/global-type-helpers";
-import { Children, cloneElement, forwardRef, isValidElement } from "react";
+import { Children, cloneElement, isValidElement } from "react";
 import SlotClone from "./SlotClone";
 
 type SlotProps = {
@@ -24,7 +23,7 @@ const isSlottable = (child: React.ReactNode): child is React.ReactElement => {
 
 type ReactElementWithChildren = { props: { children: React.ReactNode } };
 
-function Slot(props: SlotProps, forwardedRef: ForwardedRefType<HTMLElement>) {
+function Slot(props: SlotProps) {
 	const { children, ...restOfSlotProps } = props;
 
 	const childrenArray = Children.toArray(children);
@@ -50,17 +49,13 @@ function Slot(props: SlotProps, forwardedRef: ForwardedRefType<HTMLElement>) {
 		});
 
 		return (
-			<SlotClone {...restOfSlotProps} ref={forwardedRef}>
+			<SlotClone {...restOfSlotProps}>
 				{isValidElement(newElement) ? cloneElement(newElement, undefined, newChildren) : null}
 			</SlotClone>
 		);
 	}
 
-	return (
-		<SlotClone {...restOfSlotProps} ref={forwardedRef}>
-			{children}
-		</SlotClone>
-	);
+	return <SlotClone {...restOfSlotProps}>{children}</SlotClone>;
 }
 
-export default forwardRef(Slot);
+export default Slot;

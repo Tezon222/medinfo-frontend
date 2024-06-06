@@ -14,13 +14,13 @@ function SignInPage() {
 
 	return (
 		<main
-			className="mx-6 my-14 w-[min(100%,342px)] rounded-[16px] border-[1.4px] border-medinfo-light-2
-				shadow-[0_0_0_2px_hsl(0,0%,0%,0.25)] md:mx-[100px] md:my-[92px] md:flex md:w-fit"
+			className="mx-6 my-14 max-w-max rounded-[16px] border-[1.4px] border-medinfo-light-2
+				shadow-[0_0_0_2px_hsl(0,0%,0%,0.25)] md:mx-[100px] md:my-[92px] md:flex"
 		>
 			<section className="p-6 md:p-11">
 				<Logo className="max-lg:h-[46px] max-lg:w-[60px]" />
 
-				<div className="mt-3 flex w-max shrink-0 flex-col items-center gap-8 md:px-12">
+				<div className="mt-3 flex flex-col items-center gap-8 md:w-max md:px-12">
 					<h1
 						className="max-w-[186px] text-center text-[24px] font-semibold leading-[32px]
 							text-medinfo-primary-darker md:mx-[42px] md:max-w-[375px] md:text-[48px]
@@ -37,14 +37,12 @@ function SignInPage() {
 						>
 							<Form.Label className="font-medium">Email</Form.Label>
 
-							{/* // FIXME - Abstract this structure into an Form.InputGroup, giving access to LeftItem and RightItem */}
+							{/* // FIXME - Abstract this structure into an Form.InputGroup, giving access to Form.LeftItem and Form.RightItem */}
 							<div
 								className="flex items-center justify-between gap-4 rounded-[8px]
 									border-[1.4px] border-medinfo-primary-main px-4 py-3 md:px-4 md:py-5"
 							>
-								<span>
-									<IconBox icon="mynaui:envelope" className="size-5 md:size-6" />
-								</span>
+								<IconBox icon="mynaui:envelope" className="size-5 md:size-6" />
 
 								<Form.Input
 									type="email"
@@ -66,9 +64,7 @@ function SignInPage() {
 								className="flex items-center justify-between gap-4 rounded-[8px]
 									border-[1.4px] border-medinfo-primary-main px-4 py-3 md:px-4 md:py-5"
 							>
-								<span>
-									<IconBox icon="mynaui:lock-password" className="size-5 md:size-6" />
-								</span>
+								<IconBox icon="mynaui:lock-password" className="size-5 md:size-6" />
 
 								<Form.Input
 									type={"password"}
@@ -86,7 +82,7 @@ function SignInPage() {
 							</Link>
 						</Form.Item>
 
-						<article className="flex flex-col items-center gap-[14px] md:gap-7">
+						<div className="flex flex-col items-center gap-[14px] md:gap-7">
 							<p className="font-roboto text-medinfo-dark-4 md:text-[20px]">Or</p>
 
 							<div className="flex gap-8">
@@ -116,7 +112,7 @@ function SignInPage() {
 									</Link>
 								</p>
 							</div>
-						</article>
+						</div>
 					</Form.Root>
 				</div>
 			</section>

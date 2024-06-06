@@ -8,7 +8,7 @@ const tailwindConfig = withTV({
 	theme: {
 		screens: {
 			sm: "480px",
-			md: "768px",
+			md: "800px",
 			lg: "1000px",
 			xl: "1280px",
 		},
