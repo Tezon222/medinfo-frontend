@@ -11,5 +11,5 @@ export type ForwardedRefType<TComponent extends React.ElementType | HTMLElement>
 
 export type InferProps<TComponent extends React.ElementType | HTMLElement> =
 	TComponent extends React.ElementType
-		? React.ComponentPropsWithoutRef<TComponent>
+		? React.ComponentPropsWithRef<TComponent>
 		: React.HTMLAttributes<TComponent>;

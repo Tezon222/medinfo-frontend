@@ -1,5 +1,6 @@
 import { withTV } from "tailwind-variants/transformer";
 import type { Config } from "tailwindcss";
+import animationPlugin from "tailwindcss-animate";
 import plugin from "tailwindcss/plugin";
 
 const tailwindConfig = withTV({
@@ -42,22 +43,32 @@ const tailwindConfig = withTV({
 						"2": "var(--color-dark-2)",
 						"3": "var(--color-dark-3)",
 						"4": "var(--color-dark-4)",
+						"body-text": "var(--body-text)",
 					},
 				},
 
+				sonner: {
+					"success-bg": "hsl(150 100% 6%)",
+					"success-text": "hsl(150 100% 90%)",
+					"success-border": "hsl(147 100% 12%)",
+					"error-bg": "hsl(358 76% 10%)",
+					"error-text": "hsl(358 100% 81%)",
+					"error-border": "hsl(357 89% 16%)",
+				},
+
 				shadcn: {
-					background: "theme(colors.black)",
+					background: "hsl(0,0%,0%)",
 					foreground: "hsl(222.2 47.4% 11.2%)",
-					popover: "theme(colors.background)",
-					primary: "theme(colors.foreground)",
+					popover: "theme(colors.shadcn.background)",
+					primary: "theme(colors.shadcn.foreground)",
 					"primary-foreground": "hsl(210 40% 98%)",
-					"popover-foreground": "theme(colors.foreground)",
+					"popover-foreground": "theme(colors.shadcn.foreground)",
 					accent: "hsl(210 40% 96.1%)",
-					"accent-foreground": "theme(colors.foreground)",
+					"accent-foreground": "theme(colors.shadcn.foreground)",
 					input: "hsl(214.3 31.8% 91.4%)",
-					border: "theme(colors.input)",
+					border: "theme(colors.shadcn.input)",
 					ring: "hsl(215 20.2% 65.1%)",
-					muted: "theme(colors.accent)",
+					muted: "theme(colors.shadcn.accent)",
 					"muted-foreground": "hsl(215.4 16.3% 46.9%)",
 				},
 			},
@@ -86,6 +97,7 @@ const tailwindConfig = withTV({
 	},
 
 	plugins: [
+		animationPlugin,
 		plugin(({ addComponents }) => {
 			const scrollNone = {
 				".scrollbar-none": {

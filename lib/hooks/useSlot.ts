@@ -1,19 +1,22 @@
 import { Children, isValidElement, useMemo } from "react";
+import { isArray } from "../type-helpers/typeof";
 
 type Noop = () => void;
-type NoopWithSlot = { slot?: string };
+type WithSlot = { slot?: string };
 
-const isSlotElement = (
+export const isSlotElement = <TProps>(
 	child: React.ReactNode,
-	SlotWrapper: React.ElementType
+	SlotWrapper: React.ComponentType<TProps>
 ) => {
 	if (!isValidElement(child)) {
 		return false;
 	}
 
-	if (
-		(child.type as NoopWithSlot).slot === (SlotWrapper as NoopWithSlot).slot
-	) {
+	if ((child.type as WithSlot).slot && (child.type as WithSlot).slot === (SlotWrapper as WithSlot).slot) {
+		return true;
+	}
+
+	if ((child.type as Noop).name === (SlotWrapper as Noop).name) {
 		return true;
 	}
 
@@ -21,23 +24,51 @@ const isSlotElement = (
 		return true;
 	}
 
-	return (
-		(child.type as Noop).name === (SlotWrapper as Noop).name ||
-		child.type.toString() === SlotWrapper.toString()
-	);
+	return child.type.toString() === SlotWrapper.toString();
 };
 
-const useSlot = <TProps extends Record<string, unknown>>(
+type UseSlotOptions = {
+	throwOnMultipleMatch?: boolean;
+	errorMessage?: string;
+};
+
+export const useSlot = <TProps>(
 	children: React.ReactNode,
-	SlotWrapper: React.ElementType<TProps>
+	SlotWrapper: React.ComponentType<TProps>,
+	options: UseSlotOptions = {}
 ) => {
+	const {
+		throwOnMultipleMatch = false,
+		errorMessage = "Only one instance of the SlotComponent is allowed",
+	} = options;
+
 	const Slot = useMemo(() => {
 		const childrenArray = Children.toArray(children);
 
-		return childrenArray.find((child) => isSlotElement(child, SlotWrapper));
-	}, [children, SlotWrapper]);
+		return throwOnMultipleMatch
+			? childrenArray.filter((child) => isSlotElement(child, SlotWrapper))
+			: childrenArray.find((child) => isSlotElement(child, SlotWrapper));
+	}, [children, SlotWrapper, throwOnMultipleMatch]);
 
-	return Slot as React.ReactElement<TProps>;
+	if (isArray(Slot) && Slot.length > 1) {
+		throw new Error(errorMessage);
+	}
+
+	return (isArray(Slot) ? Slot[0] : Slot) as React.ReactElement<TProps> | undefined;
 };
 
-export { useSlot };
+export const useGetOtherChildren = <TProps>(
+	children: React.ReactNode,
+	SlotWrappers: React.ComponentType<TProps> | Array<React.ComponentType<TProps>>
+) => {
+	const otherChildren = useMemo(() => {
+		const childrenArray = Children.toArray(children);
+
+		// prettier-ignore
+		return isArray(SlotWrappers)
+			? childrenArray.filter((child) => SlotWrappers.some((slotWrapper) => !isSlotElement(child, slotWrapper)))
+			: childrenArray.filter((child) => !isSlotElement(child, SlotWrappers));
+	}, [SlotWrappers, children]);
+
+	return otherChildren;
+};

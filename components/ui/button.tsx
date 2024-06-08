@@ -22,7 +22,8 @@ const button = tv(
 			},
 			size: {
 				small: "size-12 md:size-16",
-				medium: "px-6 py-3 text-base md:px-8 md:py-[18px] md:text-[20px]",
+				medium: "px-6 py-3 text-base md:px-8 md:py-[18px] md:text-[20px] md:font-medium",
+				large: "w-full py-3 text-base",
 			},
 		},
 

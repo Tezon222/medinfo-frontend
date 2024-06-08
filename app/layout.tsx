@@ -2,6 +2,7 @@ import { cnJoin } from "@/lib/utils/cn";
 import type { Metadata } from "next";
 import { Roboto, Work_Sans } from "next/font/google";
 import "../styles/index.css";
+import SonnerToaster from "@/components/common/Toaster";
 
 type RootLayoutProps = {
 	children: React.ReactNode;
@@ -15,7 +16,7 @@ const workSans = Work_Sans({
 
 const roboto = Roboto({
 	subsets: ["latin"],
-	weight: ["400"],
+	weight: ["400", "500"],
 	variable: "--font-roboto",
 });
 
@@ -26,8 +27,10 @@ export const metadata: Metadata = {
 
 function RootLayout({ children }: RootLayoutProps) {
 	return (
-		<html lang="en">
+		<html lang="en" data-theme="">
 			<body className={cnJoin(roboto.variable, workSans.variable)}>{children}</body>
+
+			<SonnerToaster />
 		</html>
 	);
 }

@@ -1,14 +1,16 @@
 "use client";
 
+// FIXME - Change accordions component to another suitable one and then remove use client from this page
+
 import { IconBox } from "@/components/common";
 import { ChevronDownIcon } from "@/components/icons";
-import { Accordion, Button, Card } from "@/components/ui";
-import { useDragScroll } from "@/lib/hooks";
+import { Accordion, Button } from "@/components/ui";
 import { useElementList } from "@/lib/hooks/useElementList";
 import { cnJoin } from "@/lib/utils/cn";
-import { feature1, feature2, feature3, hero, tipPlaceHolder } from "@/public/assets/images/landing-page";
+import { feature1, feature2, feature3, hero } from "@/public/assets/images/landing-page";
 import Image from "next/image";
 import Link from "next/link";
+import { ScrollableTipCards } from "./_components";
 
 const coreServices = [
 	{ imageSrc: feature1 as string, description: "SubSpecialists" },
@@ -62,9 +64,6 @@ function HomePage() {
 	const [FeatureList] = useElementList();
 	const [AdvantageList] = useElementList();
 	const [FAQList] = useElementList();
-	const [CardList] = useElementList();
-
-	const { dragScrollProps, dragContainerClasses, dragItemClasses } = useDragScroll<HTMLUListElement>();
 
 	return (
 		<main
@@ -91,15 +90,17 @@ function HomePage() {
 						Tempus nec vel euismod amet cras.
 					</p>
 
-					<Button className="mt-6">Join Us</Button>
+					<Button asChild={true} className="mt-6">
+						<Link href={{ pathname: "/signup", query: { type: "patient" } }}>Join Us</Link>
+					</Button>
 				</div>
 
 				<div className="relative ml-[19px] w-max shrink-0 max-md:mt-[calc(40px_+_19px)]">
 					<span
 						className="absolute bottom-[19px] right-[19px] z-[-1] block size-full
-							rounded-[16px] bg-medinfo-primary-main md:bottom-[28px] md:right-[28px]"
+							rounded-[16px] bg-medinfo-primary-main md:bottom-[28px] md:right-[28px]
+							md:rounded-[24px]"
 					/>
-
 					<Image
 						className="aspect-[223/273] min-h-[273px] md:aspect-[340/415] md:min-h-[415px]"
 						src={hero as string}
@@ -132,8 +133,8 @@ function HomePage() {
 								)}
 								src={coreService.imageSrc}
 								alt=""
-								width={340}
-								height={362}
+								width={272}
+								height={292}
 							/>
 							<p className="mt-4">{coreService.description}</p>
 						</li>
@@ -167,7 +168,6 @@ function HomePage() {
 							>
 								<IconBox icon={feature.icon} />
 							</span>
-
 							<p className="md:text-[20px]">{feature.description}</p>
 						</li>
 					)}
@@ -181,7 +181,6 @@ function HomePage() {
 				>
 					Advantages of Virtual Healthcare
 				</h2>
-
 				<AdvantageList
 					className="mt-6 flex flex-col gap-6 md:mt-14 md:flex-row md:gap-[28px]"
 					each={advantages}
@@ -193,11 +192,9 @@ function HomePage() {
 							>
 								<IconBox icon={advantage.icon} />
 							</span>
-
 							<h3 className="mt-5 text-[24px] font-semibold text-medinfo-primary-main">
 								{advantage.title}
 							</h3>
-
 							<p className="mt-3">Lorem ipsum dolor sit amet consectetur. Placerat cras id.</p>
 						</li>
 					)}
@@ -212,42 +209,7 @@ function HomePage() {
 					Did you know?
 				</h2>
 
-				<CardList
-					{...dragScrollProps}
-					className={cnJoin("mt-6 gap-5 [align-items:safe_center] md:mt-14", dragContainerClasses)}
-					each={[...Array(4).keys()]}
-					render={(item) => (
-						<Card
-							as="li"
-							key={item}
-							className={cnJoin(
-								`w-[161px] shrink-0 space-y-3 rounded-[16px] border-[1.4px]
-								border-medinfo-light-1 pb-3 md:w-[276px]`,
-								dragItemClasses
-							)}
-						>
-							<Card.Header>
-								<Image
-									className="min-h-[117px] rounded-t-[16px] object-cover md:max-h-[176px]"
-									src={tipPlaceHolder as string}
-									alt=""
-									draggable={false}
-									width={161}
-									height={117}
-								/>
-							</Card.Header>
-
-							<Card.Content className="px-3">Lorem ipsum dolor sit amet consectetur.</Card.Content>
-
-							<Card.Footer className="px-3" asChild={true}>
-								<Link href="/" className="flex items-center gap-4">
-									Learn More
-									<IconBox icon="material-symbols:play-arrow" className="text-[20px]" />
-								</Link>
-							</Card.Footer>
-						</Card>
-					)}
-				/>
+				<ScrollableTipCards />
 			</section>
 
 			<section>
@@ -277,14 +239,13 @@ function HomePage() {
 										classNames={{
 											base: `min-h-[68px] rounded-t-[16px] border-x border-t
 											border-medinfo-primary-darker px-6 py-[15px] text-[22px]
-											data-[state=closed]:rounded-b-[16px]
+											text-medinfo-primary-main data-[state=closed]:rounded-b-[16px]
 											data-[state=closed]:border-b md:p-6 md:text-[32px]
 											md:font-semibold`,
 										}}
 									>
 										{FAQ.question}
 									</Accordion.Trigger>
-
 									<Accordion.Content
 										className="rounded-b-[16px] border-x border-b
 											border-medinfo-primary-darker px-6 pb-6 pt-0"

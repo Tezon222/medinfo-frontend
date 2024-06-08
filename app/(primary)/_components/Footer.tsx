@@ -5,7 +5,7 @@ function Footer() {
 	return (
 		<footer
 			className="mt-auto flex w-full flex-col gap-[44px] bg-medinfo-primary-main px-6 py-10
-				text-white lg:flex-row lg:items-start lg:justify-between lg:px-[102px] lg:py-14"
+				text-white lg:flex-row lg:items-start lg:justify-between lg:px-[100px] lg:py-14"
 		>
 			<div className="mt-5 flex flex-col">
 				<Logo type="footer" className="max-lg:h-[46px] max-lg:max-w-[60px]" />

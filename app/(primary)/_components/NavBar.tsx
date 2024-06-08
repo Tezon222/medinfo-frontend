@@ -5,6 +5,7 @@ import { HamburgerIcon, SearchIcon } from "@/components/icons";
 import { Button } from "@/components/ui";
 import { useScrollObserver } from "@/lib/hooks";
 import { cnJoin } from "@/lib/utils/cn";
+import Link from "next/link";
 
 function NavBar() {
 	const { observedElementRef: headerRef, isScrolled } = useScrollObserver();
@@ -14,7 +15,7 @@ function NavBar() {
 			ref={headerRef}
 			className={cnJoin(
 				`sticky inset-[0_0_auto_0] z-[500] flex w-full items-center justify-between bg-white/90
-				px-6 py-[17px] backdrop-blur-md [transition:box-shadow_0.3s_ease] lg:px-[102px] lg:py-5`,
+				px-6 py-[17px] backdrop-blur-md [transition:box-shadow_0.3s_ease] lg:px-[100px] lg:py-5`,
 				isScrolled && "shadow-[0_4px_8px_hsl(150,20%,25%,0.25)]"
 			)}
 		>
@@ -34,7 +35,9 @@ function NavBar() {
 					<SearchIcon />
 				</Button>
 
-				<Button>Join Us</Button>
+				<Button asChild={true}>
+					<Link href={{ pathname: "/signup", query: { type: "patient" } }}>Join Us</Link>
+				</Button>
 			</div>
 
 			<button className="lg:hidden">

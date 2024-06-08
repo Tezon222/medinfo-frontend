@@ -1,16 +1,22 @@
 "use client";
 
-import { IconBox, Logo } from "@/components/common";
+import { IconBox, Logo, Show } from "@/components/common";
 import { Button, Form } from "@/components/ui";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 function SignInPage() {
 	const methods = useForm({
-		defaultValues: { email: "", password: "" },
+		defaultValues: {
+			email: "",
+			password: "",
+		},
 	});
 
 	const { control } = methods;
+
+	const type = useSearchParams().get("type") as "doctor" | "patient" | null;
 
 	return (
 		<main
@@ -37,12 +43,13 @@ function SignInPage() {
 						>
 							<Form.Label className="font-medium">Email</Form.Label>
 
-							{/* // FIXME - Abstract this structure into an Form.InputGroup, giving access to Form.LeftItem and Form.RightItem */}
-							<div
-								className="flex items-center justify-between gap-4 rounded-[8px]
-									border-[1.4px] border-medinfo-primary-main px-4 py-3 md:px-4 md:py-5"
+							<Form.InputGroup
+								className="h-[48px] rounded-[8px] border-[1.4px]
+									border-medinfo-primary-main px-4 py-3 md:h-[64px] md:px-4 md:py-5"
 							>
-								<IconBox icon="mynaui:envelope" className="size-5 md:size-6" />
+								<Form.InputLeftItem>
+									<IconBox icon="mynaui:envelope" className="size-5 md:size-6" />
+								</Form.InputLeftItem>
 
 								<Form.Input
 									type="email"
@@ -50,7 +57,7 @@ function SignInPage() {
 									className="border-none p-0 font-medium placeholder:text-medinfo-dark-4
 										focus-visible:ring-transparent md:text-base"
 								/>
-							</div>
+							</Form.InputGroup>
 						</Form.Item>
 
 						<Form.Item
@@ -60,19 +67,21 @@ function SignInPage() {
 						>
 							<Form.Label className="font-medium">Password</Form.Label>
 
-							<div
-								className="flex items-center justify-between gap-4 rounded-[8px]
-									border-[1.4px] border-medinfo-primary-main px-4 py-3 md:px-4 md:py-5"
+							<Form.InputGroup
+								className="h-[48px] rounded-[8px] border-[1.4px]
+									border-medinfo-primary-main px-4 py-3 md:h-[64px] md:px-4 md:py-5"
 							>
-								<IconBox icon="mynaui:lock-password" className="size-5 md:size-6" />
+								<Form.InputLeftItem>
+									<IconBox icon="mynaui:lock-password" className="size-5 md:size-6" />
+								</Form.InputLeftItem>
 
 								<Form.Input
-									type={"password"}
+									type="password"
 									placeholder="enter password"
 									className="border-none p-0 font-medium placeholder:text-medinfo-dark-4
 										focus-visible:ring-transparent md:text-base"
 								/>
-							</div>
+							</Form.InputGroup>
 
 							<Link
 								href="#forgot"
@@ -82,37 +91,47 @@ function SignInPage() {
 							</Link>
 						</Form.Item>
 
-						<div className="flex flex-col items-center gap-[14px] md:gap-7">
-							<p className="font-roboto text-medinfo-dark-4 md:text-[20px]">Or</p>
+						<article className="flex flex-col items-center gap-[14px] md:mt-[14px] md:gap-7">
+							<Show when={type === "patient"}>
+								<p className="text-medinfo-dark-4 md:text-[20px]">Or</p>
 
-							<div className="flex gap-8">
-								<Button size="small" theme="outline" className="rounded-[8px]">
-									<IconBox
-										icon="icon-park-outline:google"
-										className="size-[18px] lg:size-6"
-									/>
-								</Button>
+								<div className="flex gap-8">
+									<Button size="small" theme="outline" className="rounded-[8px]">
+										<IconBox
+											icon="icon-park-outline:google"
+											className="size-[18px] lg:size-6"
+										/>
+									</Button>
 
-								<Button size="small" theme="outline" className="rounded-[8px]">
-									<IconBox icon="basil:facebook-outline" className="size-[18px] lg:size-6" />
-								</Button>
-							</div>
+									<Button size="small" theme="outline" className="rounded-[8px]">
+										<IconBox
+											icon="basil:facebook-outline"
+											className="size-[18px] lg:size-6"
+										/>
+									</Button>
+								</div>
+							</Show>
 
 							<Button type="submit">Sign In</Button>
 
-							<div className="space-y-1 text-center">
-								<Link href="#doctor" className="text-medinfo-primary-main md:text-[20px]">
-									Sign in as a doctor
+							<div className="space-y-2 text-center">
+								<Link
+									href={{
+										query: { type: type === "doctor" ? "patient" : "doctor" },
+									}}
+									className="text-medinfo-primary-main md:text-[20px]"
+								>
+									{type === "doctor" ? "Sign in as a patient" : "Sign in as a doctor"}
 								</Link>
 
 								<p className="md:hidden">
-									Don't have an account?
+									Don't have an account?{" "}
 									<Link href="/signup" className="text-medinfo-primary-main">
 										Sign up
 									</Link>
 								</p>
 							</div>
-						</div>
+						</article>
 					</Form.Root>
 				</div>
 			</section>
@@ -121,7 +140,7 @@ function SignInPage() {
 				className="flex max-w-[432px] flex-col items-center justify-center rounded-r-[16px]
 					bg-medinfo-primary-main px-[35px] text-center text-white max-md:hidden"
 			>
-				<h2 className="text-[32px] font-semibold">Welcome Friend!</h2>
+				<h2 className="text-[32px] font-semibold">Welcome friend!</h2>
 
 				<p className="mt-6 text-[18px]">Enter in your details and lets get you started</p>
 

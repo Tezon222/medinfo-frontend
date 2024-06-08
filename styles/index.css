@@ -33,7 +33,7 @@
 		--color-error-lighter: hsl(0, 100%, 68%);
 		--color-error-subtle: hsl(0, 100%, 75%);
 
-		--text-body: hsl(0, 0%, 20%);
+		--body-text: hsl(0, 0%, 20%);
 		--text-disabled: hsl(0, 0%, 93%);
 	}
 }
@@ -41,7 +41,6 @@
 /* ------------------*/
 /* General CSS Reset */
 /*-------------------*/
-
 @layer base {
 	* {
 		margin: 0;
@@ -77,11 +76,9 @@
 		outline: transparent;
 	}
 
-
 	body {
-		font-size: 16px;
 		line-height: 1.5;
 		font-family: theme("fontFamily.work-sans");
-		color: var(--text-body)
+		color: theme("colors.medinfo.dark.body-text");
 	}
 }

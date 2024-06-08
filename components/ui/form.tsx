@@ -1,14 +1,15 @@
 "use client";
 
-import { createCustomContext, useElementList } from "@/lib/hooks";
+import { createCustomContext, useElementList, useSlot } from "@/lib/hooks";
 import { cnMerge } from "@/lib/utils/cn";
 import { useEffect, useId, useMemo, useRef } from "react";
 import {
 	type Control,
+	Controller,
 	type FieldValues,
 	FormProvider as HookFormProvider,
 	type UseFormReturn,
-	useFormContext as useHookFormContext,
+	useFormContext as useHookFormContext
 } from "react-hook-form";
 import Input from "./input";
 
@@ -66,7 +67,7 @@ function FormItem<TValues extends FieldValues>(props: FormItemProps<TValues>) {
 	const uniqueId = useId();
 
 	const inputDetails = useMemo(
-		() => ({ name: name as string, id: `${String(name)}__${uniqueId}` }),
+		() => ({ name: name as string, id: `${String(name)}-(${uniqueId})` }),
 		[name, uniqueId]
 	);
 
@@ -77,7 +78,7 @@ function FormItem<TValues extends FieldValues>(props: FormItemProps<TValues>) {
 	);
 }
 
-const FormLabel = ({ children, className }: { children: string; className?: string }) => {
+function FormLabel({ children, className }: { children: string; className?: string }) {
 	const { id } = useFormItemContext();
 
 	return (
@@ -85,11 +86,26 @@ const FormLabel = ({ children, className }: { children: string; className?: stri
 			{children}
 		</label>
 	);
-};
+}
 
-const FormInput = (
+function FormInputGroup(props: React.ComponentPropsWithRef<"div"> & { displayOtherChildren?: boolean }) {
+	const { children, className, displayOtherChildren, ...restOfProps } = props;
+	const InputSlot = useSlot(children, FormInput);
+	const LeftItemSlot = useSlot(children, FormInputLeftItem);
+	const RightItemSlot = useSlot(children, FormInputRightItem);
+
+	return (
+		<div className={cnMerge("flex items-center justify-between gap-4", className)} {...restOfProps}>
+			{LeftItemSlot}
+			{!displayOtherChildren ? InputSlot ?? children : children}
+			{RightItemSlot}
+		</div>
+	);
+}
+
+function FormInput(
 	props: Omit<React.ComponentPropsWithRef<"input">, "id" | "name"> & { errorClassName?: string }
-) => {
+) {
 	const { id, name } = useFormItemContext();
 	const { register, formState } = useHookFormContext();
 
@@ -97,14 +113,38 @@ const FormInput = (
 
 	return (
 		<Input
-			{...(Boolean(name) && register(name))}
-			{...(Boolean(ref) && { ref })}
 			id={id}
 			className={cnMerge(formState.errors[name] && errorClassName, className)}
+			{...(Boolean(name) && register(name))}
+			{...(Boolean(ref) && { ref })}
 			{...restOfProps}
 		/>
 	);
-};
+}
+FormInput.slot = Symbol.for("input");
+
+function FormInputLeftItem(props: React.ComponentPropsWithRef<"div">) {
+	const { children, className, ...restOfProps } = props;
+
+	return (
+		<span className={cnMerge("inline-block", className)} {...restOfProps}>
+			{children}
+		</span>
+	);
+}
+FormInputLeftItem.slot = Symbol.for("leftItem");
+
+// eslint-disable-next-line sonarjs/no-identical-functions
+function FormInputRightItem(props: React.ComponentPropsWithRef<"div">) {
+	const { children, className, ...restOfProps } = props;
+
+	return (
+		<span className={cnMerge("inline-block", className)} {...restOfProps}>
+			{children}
+		</span>
+	);
+}
+FormInputRightItem.slot = Symbol.for("rightItem");
 
 function FormErrorMessage<TStepData extends FieldValues>(props: FormErrorMessageProps<TStepData>) {
 	const { className, errorField, type } = props;
@@ -174,6 +214,10 @@ const Form = {
 	Label: FormLabel,
 	ErrorMessage: FormErrorMessage,
 	Input: FormInput,
+	InputGroup: FormInputGroup,
+	InputLeftItem: FormInputLeftItem,
+	InputRightItem: FormInputRightItem,
+	Controller,
 };
 
 export default Form;

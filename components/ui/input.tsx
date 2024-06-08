@@ -6,14 +6,15 @@ import Button from "./button";
 export type InputProps = React.ComponentPropsWithRef<"input">;
 
 function Input(props: InputProps) {
-	const { className, type, ...restOfProps } = props;
+	const { className, type, id, ...restOfProps } = props;
 
-	const [isPasswordVisible, togglePasswordVisibility] = useToggle(false);
+	const [isPasswordVisible, toggleVisibility] = useToggle(false);
 
 	return (
 		<>
 			<input
 				type={type === "password" && isPasswordVisible ? "text" : type}
+				id={id}
 				className={cnMerge(
 					`flex w-full rounded-md border border-shadcn-input px-3 py-2 text-sm file:border-0
 					file:bg-transparent placeholder:text-shadcn-muted-foreground focus-visible:outline-none
@@ -25,7 +26,7 @@ function Input(props: InputProps) {
 			/>
 
 			{type === "password" && (
-				<Button unstyled={true} onClick={togglePasswordVisibility}>
+				<Button unstyled={true} onClick={toggleVisibility}>
 					<IconBox
 						icon={
 							isPasswordVisible
