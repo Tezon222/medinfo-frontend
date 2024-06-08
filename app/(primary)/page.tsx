@@ -71,7 +71,7 @@ function HomePage() {
 				md:py-[92px] lg:px-[100px]"
 		>
 			<section className="md:flex md:flex-row-reverse md:items-center md:gap-[67px]">
-				<div>
+				<div className="flex flex-col items-start">
 					<h1
 						className="text-[clamp(32px,5.2vw,68px)] font-bold leading-10
 							text-medinfo-primary-main max-md:text-center md:text-balance md:leading-[76px]
