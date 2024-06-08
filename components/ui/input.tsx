@@ -1,3 +1,5 @@
+"use client";
+
 import { useToggle } from "@/lib/hooks/useToggle";
 import { cnMerge } from "@/lib/utils/cn";
 import { IconBox } from "../common";

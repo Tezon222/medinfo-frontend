@@ -1,8 +1,9 @@
+"use client"
+
 import { useToggle } from "@/lib/hooks";
 import { isFunction, isObject } from "@/lib/type-helpers/typeof";
 import { cnMerge } from "@/lib/utils/cn";
 import { handleFileValidation } from "@/lib/utils/handleFileValidation";
-import type React from "react";
 import type { ChangeEvent, DragEvent } from "react";
 import { toast } from "sonner";
 import Input from "./input";
