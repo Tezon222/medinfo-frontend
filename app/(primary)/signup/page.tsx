@@ -7,6 +7,8 @@ import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import DropZoneInput from "./DropZoneInput";
 
+export const dynamic = 'force-dynamic'
+
 function SignUpPage() {
 	const methods = useForm({
 		defaultValues: {
