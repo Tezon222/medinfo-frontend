@@ -157,6 +157,9 @@ function SignInPage() {
 	);
 }
 
+// == Necessary workaround to avoid build errors due to the usage of useSearchParams
+// LINK - https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout
+
 // eslint-disable-next-line react/display-name, unicorn/no-anonymous-default-export
 export default () => (
 	<Suspense>
