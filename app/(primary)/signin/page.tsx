@@ -6,8 +6,6 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 
-export const dynamic = 'force-dynamic'
-
 function SignInPage() {
 	const methods = useForm({
 		defaultValues: {
