@@ -252,7 +252,7 @@ function SignUpPage() {
 						</Form.Item>
 
 						<article className="flex flex-col items-center gap-[14px] md:mt-[14px] md:gap-7">
-							<Show when={type === "patient"}>
+							<Show when={type !== "doctor"}>
 								<p className="font-roboto text-medinfo-dark-4 md:text-[20px]">Or</p>
 
 								<div className="flex gap-8">
