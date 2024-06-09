@@ -4,6 +4,7 @@ import { IconBox, Logo, Show } from "@/components/common";
 import { Button, Form, Select } from "@/components/ui";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import { useForm } from "react-hook-form";
 import DropZoneInput from "./DropZoneInput";
 
@@ -318,4 +319,9 @@ function SignUpPage() {
 	);
 }
 
-export default SignUpPage;
+// eslint-disable-next-line react/display-name, unicorn/no-anonymous-default-export
+export default () => (
+	<Suspense>
+		<SignUpPage />
+	</Suspense>
+);

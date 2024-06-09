@@ -13,3 +13,5 @@ export type InferProps<TComponent extends React.ElementType | HTMLElement> =
 	TComponent extends React.ElementType
 		? React.ComponentPropsWithRef<TComponent>
 		: React.HTMLAttributes<TComponent>;
+
+export type SelectorFn<TStore, TResult> = (state: TStore) => TResult;

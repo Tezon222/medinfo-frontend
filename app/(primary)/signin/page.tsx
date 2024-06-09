@@ -4,6 +4,7 @@ import { IconBox, Logo, Show } from "@/components/common";
 import { Button, Form } from "@/components/ui";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import { useForm } from "react-hook-form";
 
 function SignInPage() {
@@ -156,4 +157,9 @@ function SignInPage() {
 	);
 }
 
-export default SignInPage;
+// eslint-disable-next-line react/display-name, unicorn/no-anonymous-default-export
+export default () => (
+	<Suspense>
+		<SignInPage />
+	</Suspense>
+);
