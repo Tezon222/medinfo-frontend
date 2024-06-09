@@ -116,7 +116,7 @@ function SelectItem(props: InferProps<typeof SelectPrimitive.Item>) {
 		<SelectPrimitive.Item
 			className={cnMerge(
 				`relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-[25px]
-				pr-2 text-xs outline-none focus:bg-shadcn-accent focus:text-shadcn-accent-foreground
+				pr-2 text-sm outline-none focus:bg-shadcn-accent focus:text-shadcn-accent-foreground
 				data-[disabled]:pointer-events-none data-[disabled]:opacity-50`,
 				className
 			)}

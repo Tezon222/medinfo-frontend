@@ -287,7 +287,7 @@ function SignUpPage() {
 
 								<p className="md:hidden">
 									Already have an account?{" "}
-									<Link href="/signup" className="text-medinfo-primary-main">
+									<Link href="/signin" className="text-medinfo-primary-main">
 										Sign in
 									</Link>
 								</p>
