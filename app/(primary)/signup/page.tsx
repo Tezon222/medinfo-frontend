@@ -306,8 +306,12 @@ function SignUpPage() {
 					Enter in your details and lets continue from where you stopped
 				</p>
 
-				<Button theme="outline-inverted" className="mt-[38px]">
-					Sign in
+				<Button theme="outline-inverted" className="mt-[38px]" asChild={true}>
+					<Link
+						href={{ pathname: "/signin", query: { type: type === "doctor" ? "doctor" : "patient" } }}
+					>
+						Sign in
+					</Link>
 				</Button>
 			</section>
 		</main>

@@ -71,10 +71,10 @@ function HomePage() {
 				md:py-[92px] lg:px-[100px]"
 		>
 			<section className="md:flex md:flex-row-reverse md:items-center md:gap-[67px]">
-				<div className="flex flex-col items-start">
+				<div className="flex flex-col items-center max-md:text-center md:items-start">
 					<h1
 						className="text-[clamp(32px,5.2vw,68px)] font-bold leading-10
-							text-medinfo-primary-main max-md:text-center md:text-balance md:leading-[76px]
+							text-medinfo-primary-main md:text-balance md:leading-[76px]
 							[&:hover>span]:text-medinfo-secondary-darker
 							[&>span]:[transition:color_250ms_ease-in-out]"
 					>
@@ -95,9 +95,12 @@ function HomePage() {
 					</Button>
 				</div>
 
-				<div className="relative ml-[19px] w-max shrink-0 max-md:mt-[calc(40px_+_19px)]">
+				<div
+					className="relative ml-[--offset] w-max shrink-0 [--offset:19px]
+						max-md:mt-[calc(40px_+_var(--offset))]"
+				>
 					<span
-						className="absolute bottom-[19px] right-[19px] z-[-1] block size-full
+						className="absolute bottom-[--offset] right-[--offset] z-[-1] block size-full
 							rounded-[16px] bg-medinfo-primary-main md:bottom-[28px] md:right-[28px]
 							md:rounded-[24px]"
 					/>
