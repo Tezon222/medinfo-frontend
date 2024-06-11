@@ -43,8 +43,11 @@ const tailwindConfig = withTV({
 						"2": "var(--color-dark-2)",
 						"3": "var(--color-dark-3)",
 						"4": "var(--color-dark-4)",
-						"body-text": "var(--body-text)",
 					},
+
+					disabled: "var(--disabled)",
+
+					"body-color": "var(--body-color)",
 				},
 
 				sonner: {
@@ -71,6 +74,10 @@ const tailwindConfig = withTV({
 					muted: "theme(colors.shadcn.accent)",
 					"muted-foreground": "hsl(215.4 16.3% 46.9%)",
 				},
+			},
+
+			borderRadius: {
+				full: "50%",
 			},
 
 			fontFamily: {

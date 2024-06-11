@@ -33,8 +33,9 @@
 		--color-error-lighter: hsl(0, 100%, 68%);
 		--color-error-subtle: hsl(0, 100%, 75%);
 
-		--body-text: hsl(0, 0%, 20%);
-		--text-disabled: hsl(0, 0%, 93%);
+		--disabled: hsl(0, 0%, 93%);
+
+		--body-color: hsl(0, 0%, 20%);
 	}
 }
 
@@ -79,6 +80,6 @@
 	body {
 		line-height: 1.5;
 		font-family: theme("fontFamily.work-sans");
-		color: theme("colors.medinfo.dark.body-text");
+		color: theme("colors.medinfo.body-color");
 	}
 }

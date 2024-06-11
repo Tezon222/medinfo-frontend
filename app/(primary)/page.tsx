@@ -145,7 +145,7 @@ function HomePage() {
 								<span
 									className="absolute inset-0 flex items-end rounded-[16px]
 										bg-medinfo-primary-main p-7 font-normal text-white opacity-0
-										[transition:opacity_250ms_ease-in-out] group-hover:opacity-100
+										[transition:opacity_300ms_ease] group-hover:opacity-100
 										md:text-[18px]"
 								>
 									Lorem ipsum dolor sit amet consectetur. Malesuada viverra neque euismod amet
@@ -154,9 +154,8 @@ function HomePage() {
 							</div>
 
 							<p
-								className="mt-4 text-[22px] font-medium
-									[transition:opacity_250ms_ease-in-out] group-hover:opacity-0
-									md:text-[24px] md:font-semibold"
+								className="mt-4 text-[22px] font-medium [transition:opacity_300ms_ease]
+									group-hover:opacity-0 md:text-[24px] md:font-semibold"
 							>
 								{coreService.description}
 							</p>

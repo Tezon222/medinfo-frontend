@@ -41,6 +41,6 @@
 		"noUncheckedIndexedAccess": true
 	},
 
-	"include": ["**/*.ts", "**/*.tsx", "public/**/*.tsx", ".next/types/**/*.ts"],
-	"exclude": ["node_modules"]
+	"include": ["**/*.ts", "**/*.tsx", "public/**/*.tsx"],
+	"exclude": ["node_modules", ".next"]
 }

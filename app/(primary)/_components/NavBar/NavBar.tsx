@@ -52,7 +52,7 @@ function DesktopNavigation({ className }: { className?: string }) {
 			</nav>
 
 			<div className="flex min-w-fit items-center gap-8">
-				<Button size="small" theme="outline">
+				<Button size="icon" theme="secondary">
 					<SearchIcon type="green" />
 				</Button>
 
@@ -71,7 +71,7 @@ function MobileNavigation({ className, isNavShow }: { className?: string; isNavS
 				`fixed inset-[0_0_0_auto] flex flex-col items-center gap-7 overflow-hidden
 				bg-medinfo-primary-main pt-10 text-white`,
 				isNavShow
-					? "w-[min(254px,80%)] [transition:width_250ms_ease]"
+					? "w-[min(254px,_80%)] [transition:width_300ms_ease]"
 					: "w-0 [transition:width_500ms_ease]",
 				className
 			)}
@@ -92,7 +92,7 @@ function MobileNavigation({ className, isNavShow }: { className?: string; isNavS
 					<SearchIcon type="white" />
 				</Button>
 
-				<Button theme="primary-inverted" className="w-[105px] px-0" asChild={true}>
+				<Button theme="primary-inverted" asChild={true}>
 					<Link href={{ pathname: "/signup", query: { type: "patient" } }}>Join Us</Link>
 				</Button>
 			</div>

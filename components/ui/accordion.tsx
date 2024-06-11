@@ -29,7 +29,8 @@ function AccordionTrigger(
 			<AccordionPrimitive.Trigger
 				ref={ref}
 				className={cnMerge(
-					"flex flex-1 items-center justify-between py-4 text-[14px] font-medium transition-all [&[data-state=open]>svg]:rotate-180",
+					`flex flex-1 items-center justify-between py-4 text-[14px] font-medium transition-all
+					[&[data-state=open]>svg]:rotate-180`,
 					classNames?.base
 				)}
 				{...restOfProps}
@@ -62,7 +63,8 @@ function AccordionContent(
 		<AccordionPrimitive.Content
 			ref={ref}
 			className={cnMerge(
-				"overflow-hidden py-4 text-[14px] data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
+				`overflow-hidden py-4 text-[14px] data-[state=closed]:animate-accordion-up
+				data-[state=open]:animate-accordion-down`,
 				className
 			)}
 			{...restOfProps}

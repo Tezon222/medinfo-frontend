@@ -97,14 +97,14 @@ function SignInPage() {
 								<p className="text-medinfo-dark-4 md:text-[20px]">Or</p>
 
 								<div className="flex gap-8">
-									<Button size="small" theme="outline" className="rounded-[8px]">
+									<Button size="icon" theme="secondary" className="rounded-[8px]">
 										<IconBox
 											icon="icon-park-outline:google"
 											className="size-[18px] lg:size-6"
 										/>
 									</Button>
 
-									<Button size="small" theme="outline" className="rounded-[8px]">
+									<Button size="icon" theme="secondary" className="rounded-[8px]">
 										<IconBox
 											icon="basil:facebook-outline"
 											className="size-[18px] lg:size-6"
@@ -145,7 +145,7 @@ function SignInPage() {
 
 				<p className="mt-6 text-[18px]">Enter in your details and lets get you started</p>
 
-				<Button theme="outline-inverted" className="mt-[38px]" asChild={true}>
+				<Button theme="secondary-inverted" className="mt-[38px]" asChild={true}>
 					<Link
 						href={{ pathname: "/signup", query: { type: type === "doctor" ? "doctor" : "patient" } }}
 					>

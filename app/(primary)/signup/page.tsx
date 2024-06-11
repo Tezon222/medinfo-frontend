@@ -115,7 +115,7 @@ function SignUpPage() {
 												border-medinfo-primary-main px-4 font-medium
 												data-[placeholder]:text-medinfo-dark-4 md:h-[64px] md:px-4
 												md:text-base`,
-												icon: "text-medinfo-dark-body-text md:size-6",
+												icon: "text-medinfo-body-color md:size-6",
 											}}
 										>
 											<Select.Value placeholder="select your country" />
@@ -160,7 +160,7 @@ function SignUpPage() {
 													border-medinfo-primary-main px-4 font-medium
 													data-[placeholder]:text-medinfo-dark-4 md:h-[64px]
 													md:text-base`,
-													icon: "text-medinfo-dark-body-text md:size-6",
+													icon: "text-medinfo-body-color md:size-6",
 												}}
 											>
 												<Select.Value placeholder="select your specialty" />
@@ -257,14 +257,14 @@ function SignUpPage() {
 								<p className="font-roboto text-medinfo-dark-4 md:text-[20px]">Or</p>
 
 								<div className="flex gap-8">
-									<Button size="small" theme="outline" className="rounded-[8px]">
+									<Button size="icon" theme="secondary" className="rounded-[8px]">
 										<IconBox
 											icon="icon-park-outline:google"
 											className="size-[18px] lg:size-6"
 										/>
 									</Button>
 
-									<Button size="small" theme="outline" className="rounded-[8px]">
+									<Button size="icon" theme="secondary" className="rounded-[8px]">
 										<IconBox
 											icon="basil:facebook-outline"
 											className="size-[18px] lg:size-6"
@@ -307,7 +307,7 @@ function SignUpPage() {
 					Enter in your details and lets continue from where you stopped
 				</p>
 
-				<Button theme="outline-inverted" className="mt-[38px]" asChild={true}>
+				<Button theme="secondary-inverted" className="mt-[38px]" asChild={true}>
 					<Link
 						href={{ pathname: "/signin", query: { type: type === "doctor" ? "doctor" : "patient" } }}
 					>
