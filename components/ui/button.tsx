@@ -17,6 +17,7 @@ const button = tv(
 		variants: {
 			theme: {
 				primary: "bg-medinfo-primary-main text-white",
+				"primary-inverted": "bg-white text-medinfo-primary-main",
 				outline: "border-2 border-medinfo-primary-main bg-transparent text-medinfo-primary-main",
 				"outline-inverted": "border-2 border-white bg-transparent text-white",
 			},

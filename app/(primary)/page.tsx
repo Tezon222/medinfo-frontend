@@ -124,22 +124,42 @@ function HomePage() {
 				</h2>
 
 				<CoreServiceList
-					className="mt-6 flex flex-col items-center gap-4 text-center text-[22px] font-medium
-						md:mt-14 md:flex-row md:justify-center md:gap-[28px]"
+					className="mt-6 flex flex-col items-center gap-4 text-center md:mt-14 md:flex-row
+						md:justify-center md:gap-[28px]"
 					each={coreServices}
 					render={(coreService, index) => (
-						<li key={coreService.description}>
-							<Image
-								className={cnJoin(
-									"aspect-[272/292] max-h-[292px] md:aspect-[340/362] md:max-h-[362px]",
-									index === 1 && "md:mt-[80px]"
-								)}
-								src={coreService.imageSrc}
-								alt=""
-								width={272}
-								height={292}
-							/>
-							<p className="mt-4">{coreService.description}</p>
+						<li key={coreService.description} className="group">
+							<div className="relative">
+								<Image
+									className={cnJoin(
+										`aspect-[272/292] max-h-[292px] md:aspect-[340/362]
+										md:max-h-[362px]`,
+										index === 1 && "md:mt-[80px]"
+									)}
+									src={coreService.imageSrc}
+									alt=""
+									width={272}
+									height={292}
+								/>
+
+								<span
+									className="absolute inset-0 flex items-end rounded-[16px]
+										bg-medinfo-primary-main p-7 font-normal text-white opacity-0
+										[transition:opacity_250ms_ease-in-out] group-hover:opacity-100
+										md:text-[18px]"
+								>
+									Lorem ipsum dolor sit amet consectetur. Malesuada viverra neque euismod amet
+									vel. Erat id sed at praesent sagittis porttitor. Cras quisque lacinia.
+								</span>
+							</div>
+
+							<p
+								className="mt-4 text-[22px] font-medium
+									[transition:opacity_250ms_ease-in-out] group-hover:opacity-0
+									md:text-[24px] md:font-semibold"
+							>
+								{coreService.description}
+							</p>
 						</li>
 					)}
 				/>
