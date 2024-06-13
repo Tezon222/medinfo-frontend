@@ -117,7 +117,42 @@ const tailwindConfig = withTV({
 				},
 			};
 
-			addComponents(scrollNone);
+			const navLinkTransition = {
+				".navLink-transition": {
+					"&::before": {
+						content: '""',
+						position: "absolute",
+						bottom: "20px",
+						left: "50%",
+						backgroundColor: "theme(colors.white)",
+
+						"@media screen(md)": {
+							backgroundColor: "theme(colors.medinfo.primary.darker)",
+						},
+
+						opacity: "0",
+						transform: "translateX(-50%)",
+						height: " 2px",
+						width: "2px",
+						borderRadius: "50%",
+						transition: `opacity 0.4s ease 0s,
+						bottom 0.3s ease 0.1s,
+						height 0.5s ease 0.3s,
+						border-radius 0.2s ease 0.4s,
+						width 0.5s ease 0.4s`,
+					},
+
+					"&:hover::before": {
+						bottom: "-0.7px",
+						height: "2px",
+						width: "calc(100% + 2px)",
+						borderRadius: "20px",
+						opacity: "1",
+					},
+				},
+			};
+
+			addComponents([scrollNone, navLinkTransition]);
 		}),
 	],
 }) satisfies Config;

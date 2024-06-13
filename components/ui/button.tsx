@@ -49,7 +49,7 @@ const button = tv(
 			},
 			{
 				size: "icon",
-				className: "hover:rounded-[50%]",
+				className: "hover:rounded-full",
 			},
 		],
 

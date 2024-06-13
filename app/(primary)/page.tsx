@@ -3,13 +3,13 @@
 // FIXME - Change accordions component to another suitable one and then remove use client from this page
 
 import { IconBox } from "@/components/common";
+import NavLink from "@/components/common/NavLink";
 import { ChevronDownIcon } from "@/components/icons";
 import { Accordion, Button } from "@/components/ui";
 import { useElementList } from "@/lib/hooks/useElementList";
 import { cnJoin } from "@/lib/utils/cn";
 import { feature1, feature2, feature3, hero } from "@/public/assets/images/landing-page";
 import Image from "next/image";
-import Link from "next/link";
 import { ScrollableTipCards } from "./_components";
 
 const coreServices = [
@@ -73,9 +73,8 @@ function HomePage() {
 			<section className="md:flex md:flex-row-reverse md:items-center md:gap-[67px]">
 				<div className="flex flex-col items-center max-md:text-center md:items-start">
 					<h1
-						className="text-[clamp(32px,5.2vw,68px)] font-bold leading-10
-							text-medinfo-primary-main md:text-balance md:leading-[76px]
-							[&:hover>span]:text-medinfo-secondary-darker
+						className="text-[clamp(32px,5.2vw,68px)] font-bold leading-10 text-medinfo-primary-main
+							md:text-balance md:leading-[76px] [&:hover>span]:text-medinfo-secondary-darker
 							[&>span]:[transition:color_250ms_ease-in-out]"
 					>
 						Free <span>access</span> to knowledge and an easy chit-chat with the best{" "}
@@ -91,7 +90,7 @@ function HomePage() {
 					</p>
 
 					<Button asChild={true} className="mt-6">
-						<Link href={{ pathname: "/signup", query: { type: "patient" } }}>Join Us</Link>
+						<NavLink href={{ pathname: "/signup", query: { type: "patient" } }}>Join Us</NavLink>
 					</Button>
 				</div>
 
@@ -132,8 +131,7 @@ function HomePage() {
 							<div className="relative">
 								<Image
 									className={cnJoin(
-										`aspect-[272/292] max-h-[292px] md:aspect-[340/362]
-										md:max-h-[362px]`,
+										"aspect-[272/292] max-h-[292px] md:aspect-[340/362] md:max-h-[362px]",
 										index === 1 && "md:mt-[80px]"
 									)}
 									src={coreService.imageSrc}
@@ -145,8 +143,7 @@ function HomePage() {
 								<span
 									className="absolute inset-0 flex items-end rounded-[16px]
 										bg-medinfo-primary-main p-7 font-normal text-white opacity-0
-										[transition:opacity_300ms_ease] group-hover:opacity-100
-										md:text-[18px]"
+										[transition:opacity_300ms_ease] group-hover:opacity-100 md:text-[18px]"
 								>
 									Lorem ipsum dolor sit amet consectetur. Malesuada viverra neque euismod amet
 									vel. Erat id sed at praesent sagittis porttitor. Cras quisque lacinia.
@@ -173,20 +170,19 @@ function HomePage() {
 				</h2>
 
 				<FeatureList
-					className="mt-12 grid grid-cols-2 justify-center gap-x-5 gap-y-10 text-center
-						md:mt-[88px] md:grid-cols-[repeat(4,_minmax(161px,248px))] md:gap-x-[28px]"
+					className="mt-12 grid grid-cols-2 justify-center gap-x-5 gap-y-10 text-center md:mt-[88px]
+						md:grid-cols-[repeat(4,_minmax(161px,248px))] md:gap-x-[28px]"
 					each={features}
 					render={(feature) => (
 						<li
 							key={feature.description}
-							className="relative flex flex-col items-center justify-center rounded-[16px]
-								border border-medinfo-primary-main px-[3.5px] py-[54px]
-								text-medinfo-primary-main md:px-[47px] md:py-[67px]"
+							className="relative flex flex-col items-center justify-center rounded-[16px] border
+								border-medinfo-primary-main px-[3.5px] py-[54px] text-medinfo-primary-main
+								md:px-[47px] md:py-[67px]"
 						>
 							<span
-								className="absolute top-[-24px] block size-12 rounded-full bg-white p-3
-									text-[24px] [box-shadow:0_4px_4px_hsl(0,0%,0%,0.12)] md:size-16
-									md:text-[40px]"
+								className="absolute top-[-24px] block size-12 rounded-full bg-white p-3 text-[24px]
+									[box-shadow:0_4px_4px_hsl(0,0%,0%,0.12)] md:size-16 md:text-[40px]"
 							>
 								<IconBox icon={feature.icon} />
 							</span>
@@ -262,15 +258,14 @@ function HomePage() {
 											base: `min-h-[68px] rounded-t-[16px] border-x border-t
 											border-medinfo-primary-darker px-6 py-[15px] text-[22px]
 											text-medinfo-primary-main data-[state=closed]:rounded-b-[16px]
-											data-[state=closed]:border-b md:p-6 md:text-[32px]
-											md:font-semibold`,
+											data-[state=closed]:border-b md:p-6 md:text-[32px] md:font-semibold`,
 										}}
 									>
 										{FAQ.question}
 									</Accordion.Trigger>
 									<Accordion.Content
-										className="rounded-b-[16px] border-x border-b
-											border-medinfo-primary-darker px-6 pb-6 pt-0"
+										className="rounded-b-[16px] border-x border-b border-medinfo-primary-darker
+											px-6 pb-6 pt-0"
 									>
 										<hr className="mb-4 h-[2px] bg-medinfo-secondary-main" />
 										{FAQ.answer}

@@ -1,13 +1,12 @@
 "use client";
 
-import { Logo } from "@/components/common";
+import { Logo, ProgressBar } from "@/components/common";
+import NavLink from "@/components/common/NavLink";
 import Overlay from "@/components/common/Overlay";
 import { HamburgerIcon, SearchIcon, XIcon } from "@/components/icons";
 import { Button } from "@/components/ui";
 import { useScrollObserver, useToggle } from "@/lib/hooks";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
-import Link from "next/link";
-import NavLink from "./NavLink";
 
 function NavBar() {
 	const { observedElementRef: headerRef, isScrolled } = useScrollObserver();
@@ -15,22 +14,25 @@ function NavBar() {
 
 	return (
 		<header
+			id="NavBar"
 			ref={headerRef}
 			className={cnJoin(
 				`sticky inset-[0_0_auto_0] z-[500] flex w-full items-center justify-between bg-white px-6
-				py-[17px] [transition:box-shadow_0.3s_ease] lg:px-[100px] lg:py-5`,
+				py-[17px] [transition:box-shadow_0.3s_ease] md:px-10 md:py-5 lg:px-[100px]`,
 				isScrolled && "shadow-[0_4px_8px_hsl(150,20%,25%,0.25)]"
 			)}
 		>
+			<ProgressBar />
+
 			<Logo className="min-w-fit max-lg:h-[46px] max-lg:w-[60px]" />
 
 			<Overlay isOpen={isNavShow} onClose={toggleNavShow} />
 
-			<DesktopNavigation className="max-lg:hidden" />
+			<DesktopNavigation className="max-md:hidden" />
 
-			<MobileNavigation isNavShow={isNavShow} className="lg:hidden" />
+			<MobileNavigation isNavShow={isNavShow} toggleNavShow={toggleNavShow} className="md:hidden" />
 
-			<button className="z-10 lg:hidden" onClick={toggleNavShow}>
+			<button className="z-10 md:hidden" onClick={toggleNavShow}>
 				{isNavShow ? <XIcon /> : <HamburgerIcon />}
 			</button>
 		</header>
@@ -42,13 +44,19 @@ export default NavBar;
 function DesktopNavigation({ className }: { className?: string }) {
 	return (
 		<article className={cnMerge("flex w-full items-center", className)}>
-			<nav className="mx-auto">
-				<ul className="flex min-w-fit font-medium lg:gap-14 lg:text-[22px]">
-					<NavLink href="/">Home</NavLink>
-					<NavLink href="/library">Library</NavLink>
-					<NavLink href="/about">About us</NavLink>
-					<NavLink href="/contact">Contact us</NavLink>
-				</ul>
+			<nav className="mx-auto flex min-w-fit gap-14 text-[22px] font-medium">
+				<NavLink type="NavBar" href="/">
+					Home
+				</NavLink>
+				<NavLink type="NavBar" href="/library">
+					Library
+				</NavLink>
+				<NavLink type="NavBar" href="/about">
+					About us
+				</NavLink>
+				<NavLink type="NavBar" href="/contact">
+					Contact us
+				</NavLink>
 			</nav>
 
 			<div className="flex min-w-fit items-center gap-8">
@@ -57,15 +65,18 @@ function DesktopNavigation({ className }: { className?: string }) {
 				</Button>
 
 				<Button asChild={true}>
-					<Link href={{ pathname: "/signup", query: { type: "patient" } }}>Join Us</Link>
+					<NavLink href={{ pathname: "/signup", query: { type: "patient" } }}>Join Us</NavLink>
 				</Button>
 			</div>
 		</article>
 	);
 }
 
-function MobileNavigation({ className, isNavShow }: { className?: string; isNavShow: boolean }) {
+function MobileNavigation(props: { className?: string; isNavShow: boolean; toggleNavShow: () => void }) {
+	const { className, isNavShow, toggleNavShow } = props;
+
 	return (
+		// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
 		<article
 			className={cnMerge(
 				`fixed inset-[0_0_0_auto] flex flex-col items-center gap-7 overflow-hidden
@@ -75,16 +86,26 @@ function MobileNavigation({ className, isNavShow }: { className?: string; isNavS
 					: "w-0 [transition:width_500ms_ease]",
 				className
 			)}
+			onClick={(event) => {
+				const element = event.target as HTMLElement;
+				element.tagName === "A" && toggleNavShow();
+			}}
 		>
 			<Logo type="footer" className="h-[46px] w-[60px]" />
 
-			<nav>
-				<ul className="flex flex-col items-center gap-5 text-nowrap font-medium lg:text-[22px]">
-					<NavLink href="/">Home</NavLink>
-					<NavLink href="/library">Library</NavLink>
-					<NavLink href="/about">About us</NavLink>
-					<NavLink href="/contact">Contact us</NavLink>
-				</ul>
+			<nav className="flex flex-col items-center gap-5 text-nowrap font-medium lg:text-[22px]">
+				<NavLink type="NavBar" href="/">
+					Home
+				</NavLink>
+				<NavLink type="NavBar" href="/library">
+					Library
+				</NavLink>
+				<NavLink type="NavBar" href="/about">
+					About us
+				</NavLink>
+				<NavLink type="NavBar" href="/contact">
+					Contact us
+				</NavLink>
 			</nav>
 
 			<div className="flex flex-col items-center gap-4">
@@ -93,7 +114,7 @@ function MobileNavigation({ className, isNavShow }: { className?: string; isNavS
 				</Button>
 
 				<Button theme="primary-inverted" asChild={true}>
-					<Link href={{ pathname: "/signup", query: { type: "patient" } }}>Join Us</Link>
+					<NavLink href={{ pathname: "/signup", query: { type: "patient" } }}>Join Us</NavLink>
 				</Button>
 			</div>
 		</article>

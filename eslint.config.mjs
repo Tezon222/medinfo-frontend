@@ -4,6 +4,7 @@ import { fixupPluginRules } from "@eslint/compat";
 import eslintBase from "@eslint/js";
 import eslintNextjs from "@next/eslint-plugin-next";
 import eslintImportX from "eslint-plugin-import-x";
+import eslintJsdoc from "eslint-plugin-jsdoc";
 import eslintJsxA11y from "eslint-plugin-jsx-a11y";
 import eslintReact from "eslint-plugin-react";
 import eslintReactHooks from "eslint-plugin-react-hooks";
@@ -78,7 +79,6 @@ const eslintConfigArray = [
 			"no-constant-condition": "warn",
 			"no-empty": "error",
 			"no-func-assign": "error",
-			"valid-jsdoc": "error",
 			"no-await-in-loop": "error",
 			"no-cond-assign": ["error", "always"],
 			"no-duplicate-case": "error",
@@ -291,6 +291,16 @@ const eslintConfigArray = [
 			"@typescript-eslint/no-shadow": "error",
 			"@typescript-eslint/no-redeclare": "error",
 			"@typescript-eslint/prefer-nullish-coalescing": ["error", { ignoreConditionalTests: true }],
+		},
+	},
+
+	// == Jsdoc rules
+	eslintJsdoc.configs["flat/recommended-typescript"],
+	{
+		plugins: { jsdoc: eslintJsdoc },
+		rules: {
+			"jsdoc/require-description": "warn",
+			"jsdoc/require-jsdoc": "off"
 		},
 	},
 

@@ -40,7 +40,6 @@
 		"noErrorTruncation": true,
 		"noUncheckedIndexedAccess": true
 	},
-
-	"include": ["**/*.ts", "**/*.tsx", "public/**/*.tsx"],
+	"include": ["**/*.ts", "**/*.tsx", "public/**/*.tsx", ".next/types/**/*.ts"],
 	"exclude": ["node_modules", ".next"]
 }
