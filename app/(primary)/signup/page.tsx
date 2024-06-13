@@ -38,8 +38,8 @@ function SignUpPage() {
 				<div className="mt-3 flex flex-col items-center gap-8 md:w-max md:px-12">
 					<h1
 						className="max-w-[186px] text-center text-[24px] font-semibold leading-[32px]
-							text-medinfo-primary-darker md:mx-[42px] md:max-w-[375px] md:text-[48px]
-							md:font-bold md:leading-[56px]"
+							text-medinfo-primary-darker md:mx-[42px] md:max-w-[375px] md:text-[48px] md:font-bold
+							md:leading-[56px]"
 					>
 						Join MedInfo Nigeria
 					</h1>
@@ -53,8 +53,8 @@ function SignUpPage() {
 							<Form.Label className="font-medium">First name</Form.Label>
 
 							<Form.InputGroup
-								className="h-[48px] rounded-[8px] border-[1.4px]
-									border-medinfo-primary-main px-4 py-3 md:h-[64px] md:px-4 md:py-5"
+								className="h-[48px] rounded-[8px] border-[1.4px] border-medinfo-primary-main px-4
+									py-3 md:h-[64px] md:px-4 md:py-5"
 							>
 								<Form.InputLeftItem>
 									<IconBox icon="majesticons:user-line" className="size-5 md:size-6" />
@@ -77,8 +77,8 @@ function SignUpPage() {
 							<Form.Label className="font-medium">Last name</Form.Label>
 
 							<Form.InputGroup
-								className="h-[48px] rounded-[8px] border-[1.4px]
-									border-medinfo-primary-main px-4 py-3 md:h-[64px] md:px-4 md:py-5"
+								className="h-[48px] rounded-[8px] border-[1.4px] border-medinfo-primary-main px-4
+									py-3 md:h-[64px] md:px-4 md:py-5"
 							>
 								<Form.InputLeftItem>
 									<IconBox icon="majesticons:user-line" className="size-5 md:size-6" />
@@ -93,11 +93,7 @@ function SignUpPage() {
 							</Form.InputGroup>
 						</Form.Item>
 
-						<Form.Item
-							control={control}
-							name="country"
-							className="gap-1 font-roboto md:text-[20px]"
-						>
+						<Form.Item control={control} name="country" className="gap-1 font-roboto md:text-[20px]">
 							<Form.Label className="font-medium">Country</Form.Label>
 
 							<Form.Controller
@@ -111,24 +107,37 @@ function SignUpPage() {
 									>
 										<Select.Trigger
 											classNames={{
-												base: `h-[48px] gap-2 rounded-[8px] border-[1.4px]
+												base: `group h-[48px] gap-2 rounded-[8px] border-[1.4px]
 												border-medinfo-primary-main px-4 font-medium
-												data-[placeholder]:text-medinfo-dark-4 md:h-[64px] md:px-4
-												md:text-base`,
-												icon: "text-medinfo-body-color md:size-6",
+												data-[placeholder]:text-medinfo-dark-4 md:h-[64px] md:text-base`,
+												icon: `text-medinfo-body-color group-data-[state=open]:rotate-180
+												md:size-6`,
 											}}
 										>
 											<Select.Value placeholder="select your country" />
 										</Select.Trigger>
 
-										<Select.Content className="bg-white/90 backdrop-blur-lg">
+										<Select.Content
+											classNames={{
+												base: `border-[1.4px] border-medinfo-primary-main bg-white/90 p-0
+												backdrop-blur-lg`,
+												viewport: "gap-1",
+											}}
+										>
 											<Select.Item
 												value="Nigeria"
-												className="font-medium md:text-base"
+												className="h-[48px] bg-medinfo-light-3 font-medium text-medinfo-dark-4
+													focus:bg-medinfo-light-1 focus:text-medinfo-body-color
+													data-[state=checked]:bg-medinfo-light-1 md:h-[64px] md:text-base"
 											>
 												Nigeria
 											</Select.Item>
-											<Select.Item value="Ghana" className="font-medium md:text-base">
+											<Select.Item
+												value="Ghana"
+												className="h-[48px] bg-medinfo-light-3 font-medium text-medinfo-dark-4
+													focus:bg-medinfo-light-1 focus:text-medinfo-body-color
+													data-[state=checked]:bg-medinfo-light-1 md:h-[64px] md:text-base"
+											>
 												Ghana
 											</Select.Item>
 										</Select.Content>
@@ -156,26 +165,38 @@ function SignUpPage() {
 										>
 											<Select.Trigger
 												classNames={{
-													base: `h-[48px] gap-2 rounded-[8px] border-[1.4px]
+													base: `group h-[48px] gap-2 rounded-[8px] border-[1.4px]
 													border-medinfo-primary-main px-4 font-medium
-													data-[placeholder]:text-medinfo-dark-4 md:h-[64px]
-													md:text-base`,
-													icon: "text-medinfo-body-color md:size-6",
+													data-[placeholder]:text-medinfo-dark-4 md:h-[64px] md:text-base`,
+													icon: `text-medinfo-body-color group-data-[state=open]:rotate-180
+													md:size-6`,
 												}}
 											>
 												<Select.Value placeholder="select your specialty" />
 											</Select.Trigger>
 
-											<Select.Content className="bg-white/90 backdrop-blur-lg">
+											<Select.Content
+												classNames={{
+													base: `border-[1.4px] border-medinfo-primary-main bg-white/90 p-0
+													backdrop-blur-lg`,
+													viewport: "gap-1",
+												}}
+											>
 												<Select.Item
 													value="steeze"
-													className="font-medium md:text-base"
+													className="h-[48px] bg-medinfo-light-3 font-medium
+														text-medinfo-dark-4 focus:bg-medinfo-light-1
+														focus:text-medinfo-body-color
+														data-[state=checked]:bg-medinfo-light-1 md:h-[64px] md:text-base"
 												>
 													Steeze
 												</Select.Item>
 												<Select.Item
 													value="cooking"
-													className="font-medium md:text-base"
+													className="h-[48px] bg-medinfo-light-3 font-medium
+														text-medinfo-dark-4 focus:bg-medinfo-light-1
+														focus:text-medinfo-body-color
+														data-[state=checked]:bg-medinfo-light-1 md:h-[64px] md:text-base"
 												>
 													Cooking
 												</Select.Item>
@@ -212,8 +233,8 @@ function SignUpPage() {
 							<Form.Label className="font-medium">Password</Form.Label>
 
 							<Form.InputGroup
-								className="h-[48px] rounded-[8px] border-[1.4px]
-									border-medinfo-primary-main px-4 py-3 md:h-[64px] md:px-4 md:py-5"
+								className="h-[48px] rounded-[8px] border-[1.4px] border-medinfo-primary-main px-4
+									py-3 md:h-[64px] md:px-4 md:py-5"
 							>
 								<Form.InputLeftItem>
 									<IconBox icon="mynaui:lock-password" className="size-5 md:size-6" />
@@ -236,8 +257,8 @@ function SignUpPage() {
 							<Form.Label className="font-medium">Confirm password</Form.Label>
 
 							<Form.InputGroup
-								className="h-[48px] rounded-[8px] border-[1.4px]
-									border-medinfo-primary-main px-4 py-3 md:h-[64px] md:px-4 md:py-5"
+								className="h-[48px] rounded-[8px] border-[1.4px] border-medinfo-primary-main px-4
+									py-3 md:h-[64px] md:px-4 md:py-5"
 							>
 								<Form.InputLeftItem>
 									<IconBox icon="mynaui:lock-password" className="size-5 md:size-6" />
@@ -258,17 +279,11 @@ function SignUpPage() {
 
 								<div className="flex gap-8">
 									<Button size="icon" theme="secondary" className="rounded-[8px]">
-										<IconBox
-											icon="icon-park-outline:google"
-											className="size-[18px] lg:size-6"
-										/>
+										<IconBox icon="icon-park-outline:google" className="size-[18px] lg:size-6" />
 									</Button>
 
 									<Button size="icon" theme="secondary" className="rounded-[8px]">
-										<IconBox
-											icon="basil:facebook-outline"
-											className="size-[18px] lg:size-6"
-										/>
+										<IconBox icon="basil:facebook-outline" className="size-[18px] lg:size-6" />
 									</Button>
 								</div>
 							</Show>
