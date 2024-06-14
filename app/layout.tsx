@@ -2,7 +2,6 @@ import { cnJoin } from "@/lib/utils/cn";
 import type { Metadata } from "next";
 import { Roboto, Work_Sans } from "next/font/google";
 import "../styles/index.css";
-import { Providers } from "@/components/common";
 import SonnerToaster from "@/components/common/Toaster";
 
 type RootLayoutProps = {
@@ -30,7 +29,7 @@ function RootLayout({ children }: RootLayoutProps) {
 	return (
 		<html lang="en" data-theme="light">
 			<body className={cnJoin(roboto.variable, workSans.variable)}>
-				<Providers>{children}</Providers>
+				{children}
 
 				<SonnerToaster />
 			</body>

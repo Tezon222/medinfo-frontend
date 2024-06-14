@@ -3,5 +3,4 @@ export { default as For } from "./For";
 export { default as Logo } from "./Logo/logo";
 export { IconBox } from "./IconBox";
 export { default as Show } from "./Show";
-export { default as Providers } from "./Providers";
 export { default as ProgressBar } from "./ProgressBar";

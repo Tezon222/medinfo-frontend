@@ -2,17 +2,13 @@
 
 import type { InferProps } from "@/lib/type-helpers";
 import { cnMerge } from "@/lib/utils/cn";
+import { useRouter } from "next-nprogress-bar";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { startTransition } from "react";
-import { useProgressContext } from "./Providers/progressContext";
 
 function NavLink(props: InferProps<typeof Link> & { type?: "NavBar" | "Regular" }) {
 	const { children, className, onClick, type = "Regular", ...restOfProps } = props;
 
 	const router = useRouter();
-
-	const { start, done } = useProgressContext();
 
 	return (
 		<Link
@@ -20,12 +16,7 @@ function NavLink(props: InferProps<typeof Link> & { type?: "NavBar" | "Regular" 
 			onClick={(event) => {
 				event.preventDefault();
 
-				start();
-
-				startTransition(() => {
-					router.push(event.currentTarget.href);
-					done();
-				});
+				router.push(event.currentTarget.href);
 
 				onClick?.(event);
 			}}

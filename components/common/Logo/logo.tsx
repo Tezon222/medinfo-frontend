@@ -1,4 +1,4 @@
-import Link from "next/link";
+import NavLink from "../NavLink";
 import { LOGO_TYPE_LOOKUP } from "./logo-type-lookup";
 
 const Logo = (
@@ -12,9 +12,9 @@ const Logo = (
 	const { [type]: LogoType } = LOGO_TYPE_LOOKUP;
 
 	return (
-		<Link href={href}>
+		<NavLink href={href}>
 			<LogoType {...restOfProps} />
-		</Link>
+		</NavLink>
 	);
 };
 
