@@ -37,7 +37,7 @@ const createCustomContext = <TContextValue, TStrict extends boolean = true>(
 
 	Context.displayName = name;
 
-	const useCustomContext = (): UseCustomContextResult<TContextValue, TStrict> => {
+	const useCustomContext = () => {
 		const contextValue = useContext(Context);
 
 		if (strict && contextValue === null) {

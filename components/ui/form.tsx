@@ -9,8 +9,9 @@ import {
 	type FieldValues,
 	FormProvider as HookFormProvider,
 	type UseFormReturn,
-	useFormContext as useHookFormContext
+	useFormContext as useHookFormContext,
 } from "react-hook-form";
+import { Show } from "../common";
 import Input from "./input";
 
 type FormRootProps<TValues extends FieldValues> = React.ComponentPropsWithoutRef<"form"> & {
@@ -19,7 +20,6 @@ type FormRootProps<TValues extends FieldValues> = React.ComponentPropsWithoutRef
 };
 
 type FormItemProps<TValues extends FieldValues> = {
-	// eslint-disable-next-line react/no-unused-prop-types
 	control?: Control<TValues>; // == Here for type inference of name prop for the time being
 	name: keyof TValues;
 	children: React.ReactNode;
@@ -66,13 +66,13 @@ function FormItem<TValues extends FieldValues>(props: FormItemProps<TValues>) {
 
 	const uniqueId = useId();
 
-	const inputDetails = useMemo(
+	const value = useMemo(
 		() => ({ name: name as string, id: `${String(name)}-(${uniqueId})` }),
 		[name, uniqueId]
 	);
 
 	return (
-		<FormItemProvider value={inputDetails}>
+		<FormItemProvider value={value}>
 			<div className={cnMerge("flex flex-col", className)}>{children}</div>
 		</FormItemProvider>
 	);
@@ -155,8 +155,6 @@ function FormErrorMessage<TStepData extends FieldValues>(props: FormErrorMessage
 
 	const paragraphRef = useRef<HTMLParagraphElement>(null);
 
-	const paragraphClasses = "animate-shake pt-[0.3rem] text-[1.1rem] text-error";
-
 	useEffect(() => {
 		if (!paragraphRef.current) return;
 
@@ -174,18 +172,21 @@ function FormErrorMessage<TStepData extends FieldValues>(props: FormErrorMessage
 		return null;
 	}
 
+	const paragraphClasses = "animate-shake pt-[0.3rem] text-[1.1rem] text-error";
+
 	const splitterRegex = /, (?=[A-Z])/;
 
-	if (splitterRegex.test(message)) {
-		const messageArray = message.split(splitterRegex);
+	const messageArray = message.split(splitterRegex);
 
-		return (
+	return (
+		<Show when={splitterRegex.test(message)}>
 			<ErrorMessageList
 				each={messageArray}
 				render={(messageItem, index) => (
 					<p
 						className={cnMerge(
-							`ml-[1.5rem] list-item ${paragraphClasses}`,
+							"ml-[1.5rem] list-item",
+							paragraphClasses,
 							className,
 							index === 0 && "mt-[0.4rem]"
 						)}
@@ -194,17 +195,17 @@ function FormErrorMessage<TStepData extends FieldValues>(props: FormErrorMessage
 					</p>
 				)}
 			/>
-		);
-	}
 
-	return (
-		<p
-			ref={paragraphRef}
-			className={cnMerge(paragraphClasses, className)}
-			onAnimationEnd={() => paragraphRef.current?.classList.remove("animate-shake")}
-		>
-			*{message}
-		</p>
+			<Show.Fallback>
+				<p
+					ref={paragraphRef}
+					className={cnMerge(paragraphClasses, className)}
+					onAnimationEnd={() => paragraphRef.current?.classList.remove("animate-shake")}
+				>
+					*{message}
+				</p>
+			</Show.Fallback>
+		</Show>
 	);
 }
 

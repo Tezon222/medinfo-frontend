@@ -9,21 +9,21 @@ type ShowProps = {
 };
 
 function Show({ when, children, fallback }: ShowProps) {
-	const fallBackChild = useSlot(children, ShowFallback, {
+	const fallBackSlot = useSlot(children, ShowFallback, {
 		throwOnMultipleMatch: true,
 		errorMessage: "Only one <Show.Default> component is allowed",
 	});
 
 	const otherChildren = useGetOtherChildren(children, ShowFallback);
 
-	if (fallBackChild && fallback) {
+	if (fallBackSlot && fallback) {
 		throw new Error(`
 			Both fallback mechanisms cannot be used at the same time.
 			Either the "fallback" prop is used or "<Show.Fallback>" component is used
 		`);
 	}
 
-	return when ? otherChildren : fallBackChild ?? fallback;
+	return when ? otherChildren : fallBackSlot ?? fallback;
 }
 
 function ShowFallback({ children }: Pick<ShowProps, "children">) {
