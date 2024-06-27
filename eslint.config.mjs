@@ -1,5 +1,3 @@
-/* eslint-disable unicorn/no-abusive-eslint-disable */
-/* eslint-disable */
 import eslintReact from "@eslint-react/eslint-plugin";
 import { fixupPluginRules } from "@eslint/compat";
 import eslintJs from "@eslint/js";
