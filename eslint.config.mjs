@@ -3,7 +3,6 @@
 import eslintReact from "@eslint-react/eslint-plugin";
 import { fixupPluginRules } from "@eslint/compat";
 import eslintJs from "@eslint/js";
-import { Linter } from "eslint";
 import eslintImportX from "eslint-plugin-import-x";
 import eslintReactHooks from "eslint-plugin-react-hooks";
 import eslintSonarjs from "eslint-plugin-sonarjs";
