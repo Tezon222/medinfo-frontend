@@ -85,7 +85,7 @@ function SelectContent(
 				position={position}
 				{...restOfProps}
 			>
-				<Select.ScrollDownButton />
+				<ScrollDownButton />
 
 				<SelectPrimitive.Viewport
 					className={cnMerge(
@@ -98,7 +98,7 @@ function SelectContent(
 					{children}
 				</SelectPrimitive.Viewport>
 
-				<Select.ScrollDownButton />
+				<ScrollDownButton />
 			</SelectPrimitive.Content>
 		</SelectPrimitive.Portal>
 	);
@@ -150,17 +150,11 @@ function SelectSeparator(props: InferProps<typeof SelectPrimitive.Separator>) {
 	);
 }
 
-const Select = {
-	Root: SelectPrimitive.Root,
-	Content: SelectContent,
-	Group: SelectPrimitive.Group,
-	Item: SelectItem,
-	Label: SelectLabel,
-	ScrollDownButton: SelectScrollDownButton,
-	ScrollUpButton: SelectScrollUpButton,
-	Separator: SelectSeparator,
-	Trigger: SelectTrigger,
-	Value: SelectPrimitive.Value,
-};
-
-export default Select;
+export const { Root, Group, Value } = SelectPrimitive;
+export const Content = SelectContent;
+export const Item = SelectItem;
+export const Label = SelectLabel;
+export const ScrollDownButton = SelectScrollDownButton;
+export const ScrollUpButton = SelectScrollUpButton;
+export const Separator = SelectSeparator;
+export const Trigger = SelectTrigger;

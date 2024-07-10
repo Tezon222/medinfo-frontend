@@ -4,7 +4,7 @@ import animationPlugin from "tailwindcss-animate";
 import plugin from "tailwindcss/plugin";
 
 const tailwindConfig = withTV({
-	content: ["./**/*.{ts,tsx,mdx}"],
+	content: ["./**/*.{ts,tsx}"],
 
 	theme: {
 		screens: {

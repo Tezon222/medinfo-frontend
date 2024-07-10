@@ -5,14 +5,13 @@ import { cnMerge } from "@/lib/utils/cn";
 import { useEffect, useId, useMemo, useRef } from "react";
 import {
 	type Control,
-	Controller,
 	type FieldValues,
 	FormProvider as HookFormProvider,
 	type UseFormReturn,
 	useFormContext as useHookFormContext,
 } from "react-hook-form";
 import { Show } from "../common";
-import Input from "./input";
+import InputPrimitive from "./input";
 
 type FormRootProps<TValues extends FieldValues> = React.ComponentPropsWithoutRef<"form"> & {
 	methods: UseFormReturn<TValues>;
@@ -112,7 +111,7 @@ function FormInput(
 	const { className, errorClassName, ref, ...restOfProps } = props;
 
 	return (
-		<Input
+		<InputPrimitive
 			id={id}
 			className={cnMerge(formState.errors[name] && errorClassName, className)}
 			{...(Boolean(name) && register(name))}
@@ -209,16 +208,12 @@ function FormErrorMessage<TStepData extends FieldValues>(props: FormErrorMessage
 	);
 }
 
-const Form = {
-	Root: FormRoot,
-	Item: FormItem,
-	Label: FormLabel,
-	ErrorMessage: FormErrorMessage,
-	Input: FormInput,
-	InputGroup: FormInputGroup,
-	InputLeftItem: FormInputLeftItem,
-	InputRightItem: FormInputRightItem,
-	Controller,
-};
-
-export default Form;
+export const Root = FormRoot;
+export const Item = FormItem;
+export const Label = FormLabel;
+export const ErrorMessage = FormErrorMessage;
+export const Input = FormInput;
+export const InputGroup = FormInputGroup;
+export const InputLeftItem = FormInputLeftItem;
+export const InputRightItem = FormInputRightItem;
+export { Controller } from "react-hook-form";
