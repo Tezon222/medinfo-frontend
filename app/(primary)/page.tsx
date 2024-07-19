@@ -70,9 +70,7 @@ function HomePage() {
 			className="w-full space-y-14 px-6 py-14 max-md:max-w-[400px] md:space-y-[92px] md:px-[70px]
 				md:py-[92px] lg:px-[100px]"
 		>
-			<section
-				className="flex flex-col items-center md:flex-row-reverse md:gap-[67px]"
-			>
+			<section className="flex flex-col items-center md:flex-row-reverse md:gap-[67px]">
 				<div className="flex flex-col items-center max-md:text-center md:items-start">
 					<h1
 						className="text-[clamp(32px,5.2vw,68px)] font-bold leading-10 text-medinfo-primary-main

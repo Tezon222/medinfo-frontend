@@ -2,7 +2,7 @@ import { cnJoin } from "@/lib/utils/cn";
 import type { Metadata } from "next";
 import { Roboto, Work_Sans } from "next/font/google";
 import "../styles/index.css";
-import SonnerToaster from "@/components/common/Toaster";
+import { SonnerToaster } from "@/components/common";
 
 type RootLayoutProps = {
 	children: React.ReactNode;

@@ -1,8 +1,8 @@
 "use client";
 
 import { IconBox, Logo, Show } from "@/components/common";
+import NavLink from "@/components/common/NavLink";
 import { Button, Form, Select } from "@/components/ui";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { useForm } from "react-hook-form";
@@ -291,20 +291,20 @@ function SignUpPage() {
 							<Button type="submit">Sign Up</Button>
 
 							<div className="space-y-2 text-center">
-								<Link
+								<NavLink
 									href={{
 										query: { type: type === "doctor" ? "patient" : "doctor" },
 									}}
 									className="text-medinfo-primary-main md:text-[20px]"
 								>
 									{type === "doctor" ? "Register as a patient" : "Register as a doctor"}
-								</Link>
+								</NavLink>
 
 								<p className="md:hidden">
 									Already have an account?{" "}
-									<Link href="/signin" className="text-medinfo-primary-main">
+									<NavLink href="/signin" className="text-medinfo-primary-main">
 										Sign in
-									</Link>
+									</NavLink>
 								</p>
 							</div>
 						</article>
@@ -323,11 +323,11 @@ function SignUpPage() {
 				</p>
 
 				<Button theme="secondary-inverted" className="mt-[38px]" asChild={true}>
-					<Link
+					<NavLink
 						href={{ pathname: "/signin", query: { type: type === "doctor" ? "doctor" : "patient" } }}
 					>
 						Sign in
-					</Link>
+					</NavLink>
 				</Button>
 			</section>
 		</main>
