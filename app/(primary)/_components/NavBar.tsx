@@ -1,8 +1,6 @@
 "use client";
 
-import { Logo, ProgressBar } from "@/components/common";
-import NavLink from "@/components/common/NavLink";
-import Overlay from "@/components/common/Overlay";
+import { Logo, NavLink, Overlay, ProgressBar } from "@/components/common";
 import { HamburgerIcon, SearchIcon, XIcon } from "@/components/icons";
 import { Button } from "@/components/ui";
 import { useScrollObserver, useToggle } from "@/lib/hooks";
@@ -32,9 +30,9 @@ function NavBar() {
 
 			<MobileNavigation isNavShow={isNavShow} toggleNavShow={toggleNavShow} className="md:hidden" />
 
-			<button className="z-10 md:hidden" onClick={toggleNavShow}>
+			<Button unstyled={true} className="z-10 md:hidden" onClick={toggleNavShow}>
 				{isNavShow ? <XIcon /> : <HamburgerIcon />}
-			</button>
+			</Button>
 		</header>
 	);
 }
@@ -45,16 +43,16 @@ function DesktopNavigation({ className }: { className?: string }) {
 	return (
 		<article className={cnMerge("flex w-full items-center", className)}>
 			<nav className="mx-auto flex min-w-fit gap-14 text-[22px] font-medium">
-				<NavLink type="NavBar" href="/">
+				<NavLink type="Navbar" href="/">
 					Home
 				</NavLink>
-				<NavLink type="NavBar" href="/library">
+				<NavLink type="Navbar" href="/library">
 					Library
 				</NavLink>
-				<NavLink type="NavBar" href="/about">
+				<NavLink type="Navbar" href="/about">
 					About us
 				</NavLink>
-				<NavLink type="NavBar" href="/contact">
+				<NavLink type="Navbar" href="/contact">
 					Contact us
 				</NavLink>
 			</nav>
@@ -76,7 +74,6 @@ function MobileNavigation(props: { className?: string; isNavShow: boolean; toggl
 	const { className, isNavShow, toggleNavShow } = props;
 
 	return (
-		// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
 		<article
 			className={cnMerge(
 				`fixed inset-[0_0_0_auto] flex flex-col items-center gap-7 overflow-hidden
@@ -94,16 +91,16 @@ function MobileNavigation(props: { className?: string; isNavShow: boolean; toggl
 			<Logo type="footer" className="h-[46px] w-[60px]" />
 
 			<nav className="flex flex-col items-center gap-5 text-nowrap font-medium lg:text-[22px]">
-				<NavLink type="NavBar" href="/">
+				<NavLink type="Navbar" href="/">
 					Home
 				</NavLink>
-				<NavLink type="NavBar" href="/library">
+				<NavLink type="Navbar" href="/library">
 					Library
 				</NavLink>
-				<NavLink type="NavBar" href="/about">
+				<NavLink type="Navbar" href="/about">
 					About us
 				</NavLink>
-				<NavLink type="NavBar" href="/contact">
+				<NavLink type="Navbar" href="/contact">
 					Contact us
 				</NavLink>
 			</nav>

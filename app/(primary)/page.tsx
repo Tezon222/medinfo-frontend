@@ -1,10 +1,8 @@
 "use client";
 
-// FIXME - Change accordions component to another suitable one and then remove use client from this page
-
-import { IconBox } from "@/components/common";
-import NavLink from "@/components/common/NavLink";
+import { IconBox, NavLink } from "@/components/common";
 import { ChevronDownIcon } from "@/components/icons";
+// FIXME - Change accordions component to another suitable one and then remove use client from this page`
 import { Accordion, Button } from "@/components/ui";
 import { useElementList } from "@/lib/hooks/useElementList";
 import { cnJoin } from "@/lib/utils/cn";
@@ -124,7 +122,7 @@ function HomePage() {
 
 				<CoreServiceList
 					className="mt-6 flex flex-col items-center gap-4 text-center md:mt-14 md:flex-row
-						md:justify-center md:gap-[28px]"
+						md:justify-between md:gap-[28px]"
 					each={coreServices}
 					render={(coreService, index) => (
 						<li key={coreService.description} className="group">
