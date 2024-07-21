@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import eslintReact from "@eslint-react/eslint-plugin";
 import { fixupPluginRules } from "@eslint/compat";
@@ -310,6 +309,7 @@ const eslintConfigArray = [
 			"@eslint-react/naming-convention/component-name": "warn",
 			"@eslint-react/hooks-extra/ensure-custom-hooks-using-other-hooks": "error",
 			"@eslint-react/hooks-extra/prefer-use-state-lazy-initialization": "error",
+			"@eslint-react/prefer-read-only-props": "off",
 
 			"react-hooks/exhaustive-deps": "warn",
 			"react-hooks/rules-of-hooks": "error",

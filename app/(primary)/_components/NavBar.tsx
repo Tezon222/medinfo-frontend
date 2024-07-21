@@ -3,22 +3,18 @@
 import { Logo, NavLink, Overlay, ProgressBar } from "@/components/common";
 import { HamburgerIcon, SearchIcon, XIcon } from "@/components/icons";
 import { Button } from "@/components/ui";
-import { useScrollObserver, useToggle } from "@/lib/hooks";
-import { cnJoin, cnMerge } from "@/lib/utils/cn";
+import { useToggle } from "@/lib/hooks";
+import { cnMerge } from "@/lib/utils/cn";
 
 function NavBar() {
-	const { observedElementRef: headerRef, isScrolled } = useScrollObserver();
 	const [isNavShow, toggleNavShow] = useToggle(false);
 
 	return (
 		<header
 			id="NavBar"
-			ref={headerRef}
-			className={cnJoin(
-				`sticky inset-[0_0_auto_0] z-[500] flex w-full items-center justify-between bg-white px-6
-				py-[17px] [transition:box-shadow_0.3s_ease] md:px-10 md:py-5 lg:px-[100px]`,
-				isScrolled && "shadow-[0_4px_8px_hsl(150,20%,25%,0.25)]"
-			)}
+			className={`sticky inset-[0_0_auto_0] z-[500] flex w-full items-center justify-between bg-white
+				px-6 py-[17px] shadow-[0_4px_8px_hsl(150,20%,25%,0.25)] [transition:box-shadow_0.3s_ease]
+				md:px-10 md:py-5 lg:px-[100px]`}
 		>
 			<ProgressBar />
 
@@ -70,7 +66,13 @@ function DesktopNavigation({ className }: { className?: string }) {
 	);
 }
 
-function MobileNavigation(props: { className?: string; isNavShow: boolean; toggleNavShow: () => void }) {
+type MobileNavProps = {
+	className?: string;
+	isNavShow: boolean;
+	toggleNavShow: () => void;
+};
+
+function MobileNavigation(props: MobileNavProps) {
 	const { className, isNavShow, toggleNavShow } = props;
 
 	return (
