@@ -1,6 +1,5 @@
 function PatientPage() {
-  return (
-	 <div>PatientPage</div>
-  )
+	return <div>PatientPage</div>;
 }
-export default PatientPage
+
+export default PatientPage;
