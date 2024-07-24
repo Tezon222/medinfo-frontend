@@ -81,12 +81,13 @@ function MobileNavigation(props: MobileNavProps) {
 				`fixed inset-[0_0_0_auto] flex flex-col items-center gap-7 overflow-hidden
 				bg-medinfo-primary-main pt-10 text-white`,
 				isNavShow
-					? "w-[min(254px,_80%)] [transition:width_300ms_ease]"
+					? "w-[min(254px,_80%)] [transition:width_350ms_ease]"
 					: "w-0 [transition:width_500ms_ease]",
 				className
 			)}
 			onClick={(event) => {
 				const element = event.target as HTMLElement;
+
 				element.tagName === "A" && toggleNavShow();
 			}}
 		>

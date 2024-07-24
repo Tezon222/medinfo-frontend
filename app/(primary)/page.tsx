@@ -65,7 +65,7 @@ function HomePage() {
 
 	return (
 		<main
-			className="w-full space-y-14 px-6 py-14 max-md:max-w-[400px] md:space-y-[92px] md:px-[70px]
+			className="grid w-full gap-14 px-6 py-14 max-md:max-w-[400px] md:gap-[92px] md:px-[70px]
 				md:py-[92px] lg:px-[100px]"
 		>
 			<section className="flex flex-col items-center md:flex-row-reverse md:gap-[67px]">
@@ -217,7 +217,7 @@ function HomePage() {
 				/>
 			</section>
 
-			<section>
+			<section className="flex justify-center">
 				<h2
 					className="text-center text-[28px] font-semibold leading-9 text-medinfo-primary-main
 						md:text-[52px] md:font-bold md:leading-[60px]"
@@ -238,7 +238,7 @@ function HomePage() {
 
 				<Accordion.Root type="single" collapsible={true} asChild={true}>
 					<FAQList
-						className="mt-6 w-full space-y-2 md:mt-14 md:space-y-4"
+						className="mt-6 grid w-full gap-2 md:mt-14 md:gap-4"
 						each={FAQs}
 						render={(FAQ) => (
 							<Accordion.Item key={FAQ.question} value={FAQ.answer} asChild={true}>

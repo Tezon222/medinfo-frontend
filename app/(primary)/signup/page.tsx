@@ -306,7 +306,7 @@ function SignUpPage() {
 
 								<Button type="submit">Sign Up</Button>
 
-								<div className="space-y-2 text-center">
+								<div className="grid gap-2 text-center">
 									<NavLink
 										type="Navbar"
 										href={{

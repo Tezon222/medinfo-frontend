@@ -23,8 +23,8 @@ function ScrollableTipCards() {
 					as="li"
 					key={item}
 					className={cnJoin(
-						`w-[161px] shrink-0 space-y-3 rounded-[16px] border-[1.4px] border-medinfo-light-1
-						pb-3 md:w-[276px]`,
+						`grid w-[161px] shrink-0 gap-3 rounded-[16px] border-[1.4px] border-medinfo-light-1 pb-3
+						md:w-[276px]`,
 						dragItemClasses
 					)}
 				>
