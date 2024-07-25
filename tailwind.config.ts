@@ -124,12 +124,13 @@ const tailwindConfig = withTV({
 						position: "absolute",
 						bottom: "20px",
 						left: "50%",
-						backgroundColor: "theme(colors.white)",
+						backgroundColor: "theme(colors.medinfo.primary.darker)",
 
-						"@media screen(md)": {
-							backgroundColor: "theme(colors.medinfo.primary.darker)",
+						"@media (width < 800px)": {
+							".nav-mobile&": {
+								backgroundColor: "white",
+							},
 						},
-
 						opacity: "0",
 						transform: "translateX(-50%)",
 						height: " 2px",

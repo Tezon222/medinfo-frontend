@@ -115,9 +115,8 @@ function SignInPage() {
 
 								<Button type="submit">Sign In</Button>
 
-								<div className="grid gap-2 text-center">
+								<div className="flex flex-col gap-2 text-center">
 									<NavLink
-										type="Navbar"
 										href={{
 											query: { type: type === "doctor" ? "patient" : "doctor" },
 										}}

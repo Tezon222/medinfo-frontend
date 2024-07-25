@@ -65,7 +65,7 @@ function HomePage() {
 
 	return (
 		<main
-			className="grid w-full gap-14 px-6 py-14 max-md:max-w-[400px] md:gap-[92px] md:px-[70px]
+			className="flex w-full flex-col gap-14 px-6 py-14 max-md:max-w-[400px] md:gap-[92px] md:px-[70px]
 				md:py-[92px] lg:px-[100px]"
 		>
 			<section className="flex flex-col items-center md:flex-row-reverse md:gap-[67px]">
@@ -86,7 +86,6 @@ function HomePage() {
 						pharetra cras duis mauris. Viverra a placerat maecenas felis tristique lectus erat.
 						Tempus nec vel euismod amet cras.
 					</p>
-
 					<Button asChild={true} className="mt-6">
 						<NavLink href={{ pathname: "/signup", query: { type: "patient" } }}>Join Us</NavLink>
 					</Button>
@@ -217,7 +216,7 @@ function HomePage() {
 				/>
 			</section>
 
-			<section className="flex justify-center">
+			<section className="flex flex-col items-center">
 				<h2
 					className="text-center text-[28px] font-semibold leading-9 text-medinfo-primary-main
 						md:text-[52px] md:font-bold md:leading-[60px]"

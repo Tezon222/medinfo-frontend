@@ -106,9 +106,9 @@ const useDragScroll = <TElement extends HTMLElement>(options: UseDragScrollOptio
 	};
 
 	const dragContainerClasses = cnJoin(
-		"scrollbar-none flex w-full cursor-grab snap-x snap-mandatory flex-row overflow-y-clip overflow-x-scroll",
+		"scrollbar-none flex w-full cursor-grab snap-x snap-mandatory overflow-y-clip overflow-x-scroll",
 		dragOrientation === "horizontal" && "w-full flex-row",
-		dragOrientation === "vertical" && "flex-col ",
+		dragOrientation === "vertical" && "flex-col",
 		usage === "mobileAndTabletOnly" && "md:cursor-default md:flex-col",
 		usage === "desktopOnly" && "max-md:cursor-default max-md:flex-col"
 	);

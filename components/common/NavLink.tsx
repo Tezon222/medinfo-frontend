@@ -5,14 +5,18 @@ import { cnMerge } from "@/lib/utils/cn";
 import { useRouter } from "next-nprogress-bar";
 import Link from "next/link";
 
-function NavLink(props: InferProps<typeof Link> & { type?: "Navbar" | "Regular" }) {
+function NavLink(props: InferProps<typeof Link> & { type?: "Navbar" | "Regular" | "No-Transition" }) {
 	const { children, className, onClick, type = "Regular", ...restOfProps } = props;
 
 	const router = useRouter();
 
 	return (
 		<Link
-			className={cnMerge(type === "Navbar" && "navLink-transition relative", className)}
+			className={cnMerge(
+				type !== "No-Transition" && "navLink-transition relative",
+				type === "Navbar" && "nav-mobile",
+				className
+			)}
 			onClick={(event) => {
 				event.preventDefault();
 

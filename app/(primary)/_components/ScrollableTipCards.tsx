@@ -16,14 +16,17 @@ function ScrollableTipCards() {
 	return (
 		<CardList
 			{...dragScrollProps}
-			className={cnJoin("mt-6 gap-5 [align-items:safe_center] md:mt-14", dragContainerClasses)}
+			className={cnJoin(
+				"mt-6 select-none gap-5 [align-items:safe_center] md:mt-14",
+				dragContainerClasses
+			)}
 			each={[...Array(4).keys()]}
 			render={(item) => (
 				<Card
 					as="li"
 					key={item}
 					className={cnJoin(
-						`grid w-[161px] shrink-0 gap-3 rounded-[16px] border-[1.4px] border-medinfo-light-1 pb-3
+						`w-[161px] shrink-0 space-y-3 rounded-[16px] border-[1.4px] border-medinfo-light-1 pb-3
 						md:w-[276px]`,
 						dragItemClasses
 					)}
