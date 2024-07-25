@@ -4,15 +4,16 @@ import { IconBox } from "@/components/common";
 import { SearchIcon } from "@/components/icons";
 import { DropdownMenu } from "@/components/ui";
 import { useElementList } from "@/lib/hooks";
+import { cnJoin } from "@/lib/utils/cn";
 import { useState } from "react";
 import TipCard from "./TipCard";
 
 function LibraryPage() {
-	const [filter, setFilter] = useState("grid");
+	const [filter, setFilter] = useState<"list" | "grid">("grid");
 	const [CardList] = useElementList("base");
 
 	return (
-		<main className="grid justify-items-center gap-6 px-6 py-14">
+		<main className="grid max-w-[400px] justify-items-center gap-6 px-6 py-14">
 			<section className="grid gap-3 text-center">
 				<h1 className="text-[22px] font-medium text-medinfo-primary-darker">
 					Lorem ipsum dolor sit amet consectetur
@@ -45,20 +46,25 @@ function LibraryPage() {
 							backdrop-blur-lg"
 						align="start"
 					>
-						<DropdownMenu.RadioGroup value={filter} onValueChange={setFilter}>
+						<DropdownMenu.RadioGroup
+							value={filter}
+							onValueChange={(value) => setFilter(value as typeof filter)}
+						>
 							<DropdownMenu.RadioItem
 								value="grid"
 								className="h-[48px] bg-medinfo-light-3 font-medium text-medinfo-dark-4
-									focus:text-medinfo-body-color data-[state=checked]:bg-medinfo-light-1
-									md:h-[64px] md:text-base"
+									focus:text-base focus:text-medinfo-body-color
+									data-[state=checked]:bg-medinfo-light-1 md:h-[64px] md:text-base
+									md:focus:text-[18px]"
 							>
 								grid
 							</DropdownMenu.RadioItem>
 							<DropdownMenu.RadioItem
 								value="list"
 								className="h-[48px] bg-medinfo-light-3 font-medium text-medinfo-dark-4
-									focus:text-medinfo-body-color data-[state=checked]:bg-medinfo-light-1
-									md:h-[64px] md:text-base"
+									focus:text-base focus:text-medinfo-body-color
+									data-[state=checked]:bg-medinfo-light-1 md:h-[64px] md:text-base
+									md:focus:text-[18px]"
 							>
 								list
 							</DropdownMenu.RadioItem>
@@ -82,8 +88,13 @@ function LibraryPage() {
 				</form>
 			</section>
 
-			<section className="grid w-fit grid-cols-2 gap-x-[17px] gap-y-[25px]">
-				<CardList each={[...Array(6).keys()]} render={(item) => <TipCard key={item} />} />
+			<section
+				className={cnJoin("grid w-full gap-y-6", filter === "grid" && "grid-cols-2 gap-x-[16px]")}
+			>
+				<CardList
+					each={[...Array(6).keys()]}
+					render={(item) => <TipCard key={item} type={filter} />}
+				/>
 			</section>
 
 			<section>

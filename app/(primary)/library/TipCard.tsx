@@ -2,28 +2,42 @@
 
 import { IconBox } from "@/components/common";
 import { Card } from "@/components/ui";
+import { cnJoin } from "@/lib/utils/cn";
 import libraryPlaceholder from "@/public/assets/images/library.svg";
 import Image from "next/image";
 import Link from "next/link";
 
-function TipCard() {
+function TipCard({ type }: { type: "list" | "grid" }) {
 	return (
-		<Card className="w-[161px]">
+		<Card
+			className={cnJoin(
+				"w-full",
+				type === "list" && "flex gap-[44px] rounded-[16px] border-2 border-medinfo-primary-main p-6"
+			)}
+		>
 			<Card.Header>
 				<Image
-					className="h-[176px] rounded-[7px] object-cover"
+					className={cnJoin(
+						"object-cover",
+						type === "grid" && "h-[176px] rounded-[7px]",
+						type === "list" && "aspect-square w-[68px] rounded-[4px]"
+					)}
 					src={libraryPlaceholder as string}
 					alt=""
 					priority={true}
-					draggable={false}
-					width={161}
-					height={176}
+					width={type === "grid" ? 161 : 68}
+					height={type === "grid" ? 176 : 68}
 				/>
 			</Card.Header>
 
-			<Card.Footer
-				className="relative z-[1] ml-auto mt-[calc(-95px/2)] grid h-[95px] w-max justify-between
-					rounded-[16px] border-2 border-medinfo-primary-main bg-white pl-2 pt-2"
+			<Card.Content
+				className={cnJoin(
+					"grid",
+					type === "list" && "content-between",
+					type === "grid" &&
+						`relative z-[1] ml-auto mt-[calc(-95px/2)] h-[95px] w-max justify-between rounded-[16px]
+						border-2 border-medinfo-primary-main bg-white pl-2 pt-2`
+				)}
 			>
 				<h4 className="text-[18px] font-medium text-medinfo-primary-main">Title</h4>
 
@@ -31,7 +45,7 @@ function TipCard() {
 					See more
 					<IconBox icon="lucide:chevron-right" className="size-5" />
 				</Link>
-			</Card.Footer>
+			</Card.Content>
 		</Card>
 	);
 }
