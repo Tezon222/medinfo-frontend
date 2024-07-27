@@ -6,14 +6,14 @@ import { DropdownMenu } from "@/components/ui";
 import { useElementList } from "@/lib/hooks";
 import { cnJoin } from "@/lib/utils/cn";
 import { useState } from "react";
-import TipCard from "./TipCard";
+import { TipCard } from "./TipCard";
 
 function LibraryPage() {
 	const [filter, setFilter] = useState<"list" | "grid">("grid");
 	const [CardList] = useElementList("base");
 
 	return (
-		<main className="grid max-w-[400px] justify-items-center gap-6 px-6 py-14">
+		<main className="flex max-w-[400px] flex-col justify-center gap-6 px-6 py-14">
 			<section className="grid gap-3 text-center">
 				<h1 className="text-[22px] font-medium text-medinfo-primary-darker">
 					Lorem ipsum dolor sit amet consectetur
@@ -93,7 +93,7 @@ function LibraryPage() {
 			>
 				<CardList
 					each={[...Array(6).keys()]}
-					render={(item) => <TipCard key={item} type={filter} />}
+					render={(index) => <TipCard key={index} type={filter} id={index + 1} />}
 				/>
 			</section>
 
