@@ -14,15 +14,16 @@ function NavLink(
 	const router = useRouter();
 	const pathname = usePathname();
 
-	const isRelativeLink = isString(href) ? !href.startsWith("/") : !href.pathname?.startsWith("/");
+	const isRelativeLink = (value: typeof href | undefined | null): value is string =>
+		isString(value) && !value.startsWith("/");
 
-	if (isRelativeLink && !isString(href)) {
+	if (!isString(href) && isRelativeLink(href.pathname)) {
 		Reflect.set(href, "pathname", `${pathname}/${href.pathname}`);
 	}
 
 	return (
 		<Link
-			href={isRelativeLink && isString(href) ? `${pathname}/${href}` : href}
+			href={isRelativeLink(href) ? `${pathname}/${href}` : href}
 			className={cnMerge(
 				type !== "No-Transition" && "navLink-transition relative",
 				type === "Navbar" && "nav-mobile",
