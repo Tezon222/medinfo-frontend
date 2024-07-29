@@ -4,8 +4,8 @@ import { CopyrightIcon } from "@/components/icons";
 function Footer() {
 	return (
 		<footer
-			className="mt-auto flex w-full flex-col gap-[44px] bg-medinfo-primary-main px-6 py-10
-				text-white lg:flex-row lg:items-start lg:justify-between lg:px-[100px] lg:py-14"
+			className="mt-auto flex w-full flex-col gap-[44px] bg-medinfo-primary-main px-6 py-10 text-white
+				lg:flex-row lg:items-start lg:justify-between lg:px-[100px] lg:py-14"
 		>
 			<div className="mt-5 flex flex-col">
 				<Logo type="footer" className="max-lg:h-[46px] max-lg:max-w-[60px]" />
@@ -19,7 +19,7 @@ function Footer() {
 			<div className="text-[18px]">
 				<h3 className="text-[20px] text-medinfo-secondary-darker">Quick links</h3>
 
-				<ul className="mt-6 space-y-4">
+				<ul className="mt-6 grid gap-4">
 					<li>About us</li>
 					<li>FAQs</li>
 					<li>Library</li>
@@ -29,7 +29,7 @@ function Footer() {
 			<div className="text-[18px]">
 				<h3 className="text-[20px] text-medinfo-secondary-darker">Contact us</h3>
 
-				<ul className="mt-6 space-y-4">
+				<ul className="mt-6 grid gap-4">
 					<li className="flex items-center gap-3">
 						<IconBox icon="bi:telephone" className="size-[22px]" />
 						<p>+234 8123 456 789</p>

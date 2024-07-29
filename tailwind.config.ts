@@ -4,7 +4,7 @@ import animationPlugin from "tailwindcss-animate";
 import plugin from "tailwindcss/plugin";
 
 const tailwindConfig = withTV({
-	content: ["./**/*.{ts,tsx}"],
+	content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./lib/hooks/useDragScroll.ts"],
 
 	theme: {
 		screens: {
@@ -124,12 +124,13 @@ const tailwindConfig = withTV({
 						position: "absolute",
 						bottom: "20px",
 						left: "50%",
-						backgroundColor: "theme(colors.white)",
+						backgroundColor: "theme(colors.medinfo.primary.darker)",
 
-						"@media screen(md)": {
-							backgroundColor: "theme(colors.medinfo.primary.darker)",
+						"@media (width < 800px)": {
+							".nav-mobile&": {
+								backgroundColor: "white",
+							},
 						},
-
 						opacity: "0",
 						transform: "translateX(-50%)",
 						height: " 2px",
