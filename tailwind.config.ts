@@ -4,7 +4,7 @@ import animationPlugin from "tailwindcss-animate";
 import plugin from "tailwindcss/plugin";
 
 const tailwindConfig = withTV({
-	content: ["./**/*.{ts,tsx}"],
+	content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./lib/hooks/useDragScroll.ts"],
 
 	theme: {
 		screens: {

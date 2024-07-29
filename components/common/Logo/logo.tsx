@@ -12,7 +12,7 @@ const Logo = (
 	const { [type]: LogoType } = LOGO_TYPE_LOOKUP;
 
 	return (
-		<NavLink type="No-Transition" href={href}>
+		<NavLink href={href}>
 			<LogoType {...restOfProps} />
 		</NavLink>
 	);

@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 function NavLink(
 	props: InferProps<typeof Link> & { type?: "Navbar" | "Regular" | "No-Transition"; relative?: boolean }
 ) {
-	const { children, className, onClick, type = "Regular", href, ...restOfProps } = props;
+	const { children, className, onClick, type = "No-Transition", href, ...restOfProps } = props;
 
 	const router = useRouter();
 	const pathname = usePathname();

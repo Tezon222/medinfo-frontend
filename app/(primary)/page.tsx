@@ -87,9 +87,7 @@ function HomePage() {
 						Tempus nec vel euismod amet cras.
 					</p>
 					<Button asChild={true} className="mt-6">
-						<NavLink type="No-Transition" href={{ pathname: "/signup", query: { type: "patient" } }}>
-							Join Us
-						</NavLink>
+						<NavLink href={{ pathname: "/signup", query: { type: "patient" } }}>Join Us</NavLink>
 					</Button>
 				</div>
 

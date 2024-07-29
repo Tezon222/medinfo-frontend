@@ -46,7 +46,6 @@ export function TipCard({ type, id }: TipCardProps) {
 					<h4 className={cnJoin("text-[18px] font-medium text-medinfo-primary-main")}>Title</h4>
 				</div>
 				<NavLink
-					type="No-Transition"
 					href={`tip/${id}`}
 					className="inline-flex w-fit items-center gap-[14px] text-medinfo-primary-main"
 				>
@@ -105,12 +104,11 @@ export function AlternateTipCard({ id, type }: TipCardProps) {
 				</p>
 
 				{type === "list" ? (
-					<NavLink type="No-Transition" href={`/library/tip/${id}`} className="w-fit">
+					<NavLink href={`/library/tip/${id}`} className="w-fit">
 						<IconBox icon="akar-icons:link-out" className="size-5" />
 					</NavLink>
 				) : (
 					<NavLink
-						type="No-Transition"
 						href={`/library/tip/${id}`}
 						className="inline-flex w-fit items-center gap-[14px] text-medinfo-primary-main"
 					>
