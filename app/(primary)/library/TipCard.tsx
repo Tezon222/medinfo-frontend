@@ -24,7 +24,7 @@ export function TipCard({ type, id }: TipCardProps) {
 					className={cnJoin(
 						"object-cover",
 						type === "grid" && "h-[176px] rounded-[7px]",
-						type === "list" && "aspect-square w-[68px] rounded-[4px]"
+						type === "list" && "size-[68px] rounded-[4px]"
 					)}
 					src={libraryPlaceholder as string}
 					alt=""
@@ -72,7 +72,7 @@ export function AlternateTipCard({ id, type }: TipCardProps) {
 					className={cnJoin(
 						"object-cover",
 						type === "grid" && "h-[132px] rounded-[7.5px]",
-						type === "list" && "aspect-square w-[92px] rounded-[6px]"
+						type === "list" && "size-[92px] rounded-[6px]"
 					)}
 					src={libraryPlaceholder as string}
 					alt=""

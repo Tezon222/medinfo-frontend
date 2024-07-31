@@ -54,7 +54,7 @@ function SignUpPage() {
 
 								<Form.InputGroup
 									className="h-[48px] rounded-[8px] border-[1.4px] border-medinfo-primary-main
-										px-4 py-3 md:h-[64px] md:px-4 md:py-5"
+										px-4 py-3 md:h-[64px] md:py-5"
 								>
 									<Form.InputLeftItem>
 										<IconBox icon="majesticons:user-line" className="size-5 md:size-6" />
@@ -78,7 +78,7 @@ function SignUpPage() {
 
 								<Form.InputGroup
 									className="h-[48px] rounded-[8px] border-[1.4px] border-medinfo-primary-main
-										px-4 py-3 md:h-[64px] md:px-4 md:py-5"
+										px-4 py-3 md:h-[64px] md:py-5"
 								>
 									<Form.InputLeftItem>
 										<IconBox icon="majesticons:user-line" className="size-5 md:size-6" />
@@ -244,7 +244,7 @@ function SignUpPage() {
 
 								<Form.InputGroup
 									className="h-[48px] rounded-[8px] border-[1.4px] border-medinfo-primary-main
-										px-4 py-3 md:h-[64px] md:px-4 md:py-5"
+										px-4 py-3 md:h-[64px] md:py-5"
 								>
 									<Form.InputLeftItem>
 										<IconBox icon="mynaui:lock-password" className="size-5 md:size-6" />
@@ -268,7 +268,7 @@ function SignUpPage() {
 
 								<Form.InputGroup
 									className="h-[48px] rounded-[8px] border-[1.4px] border-medinfo-primary-main
-										px-4 py-3 md:h-[64px] md:px-4 md:py-5"
+										px-4 py-3 md:h-[64px] md:py-5"
 								>
 									<Form.InputLeftItem>
 										<IconBox icon="mynaui:lock-password" className="size-5 md:size-6" />

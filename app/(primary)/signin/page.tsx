@@ -46,10 +46,10 @@ function SignInPage() {
 
 								<Form.InputGroup
 									className="h-[48px] rounded-[8px] border-[1.4px] border-medinfo-primary-main
-										px-4 py-3 md:h-[64px] md:px-4 md:py-5"
+										px-4 py-3 md:h-[64px] md:py-5"
 								>
-									<Form.InputLeftItem>
-										<IconBox icon="mynaui:envelope" className="size-5 md:size-6" />
+									<Form.InputLeftItem className="size-5 md:size-6">
+										<IconBox icon="mynaui:envelope" className="size-full" />
 									</Form.InputLeftItem>
 
 									<Form.Input
@@ -70,10 +70,10 @@ function SignInPage() {
 
 								<Form.InputGroup
 									className="h-[48px] rounded-[8px] border-[1.4px] border-medinfo-primary-main
-										px-4 py-3 md:h-[64px] md:px-4 md:py-5"
+										px-4 py-3 md:h-[64px] md:py-5"
 								>
-									<Form.InputLeftItem>
-										<IconBox icon="mynaui:lock-password" className="size-5 md:size-6" />
+									<Form.InputLeftItem className="size-5 md:size-6">
+										<IconBox icon="mynaui:lock-password" className="size-full" />
 									</Form.InputLeftItem>
 
 									<Form.Input

@@ -7,7 +7,7 @@ const TipDetailsPage = ({ params }: { params: { id: string } }) => {
 		<main className="flex w-full flex-col items-start px-6 py-14">
 			<section>
 				<Image
-					className="aspect-square w-[272px]"
+					className="size-[272px]"
 					src={libraryPlaceholder as string}
 					alt=""
 					priority={true}
