@@ -31,8 +31,7 @@ const button = tv(
 
 			size: {
 				icon: "size-12 md:size-16",
-				medium: `h-[48px] w-[105px] text-base md:h-[64px] md:w-[135px] md:text-[20px]
-				md:font-medium`,
+				medium: "h-[48px] w-[105px] text-base md:h-[64px] md:w-[135px] md:text-[20px] md:font-medium",
 				large: "h-[48px] w-full text-base",
 			},
 

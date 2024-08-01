@@ -1,10 +1,9 @@
 "use client";
 
-import { IconBox, NavLink } from "@/components/common";
+import { IconBox, NavLink, getElementList } from "@/components/common";
 import { ChevronDownIcon } from "@/components/icons";
 // FIXME - Change accordions component to another suitable one and then remove use client from this page`
 import { Accordion, Button } from "@/components/ui";
-import { useElementList } from "@/lib/hooks/useElementList";
 import { cnJoin } from "@/lib/utils/cn";
 import { feature1, feature2, feature3, hero } from "@/public/assets/images/landing-page";
 import Image from "next/image";
@@ -58,10 +57,10 @@ const FAQs = [
 ];
 
 function HomePage() {
-	const [CoreServiceList] = useElementList();
-	const [FeatureList] = useElementList();
-	const [AdvantageList] = useElementList();
-	const [FAQList] = useElementList();
+	const [CoreServiceList] = getElementList();
+	const [FeatureList] = getElementList();
+	const [AdvantageList] = getElementList();
+	const [FAQList] = getElementList();
 
 	return (
 		<main

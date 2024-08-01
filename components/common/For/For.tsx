@@ -54,9 +54,5 @@ function ForList<TArrayItem, TElement extends React.ElementType = "ul">(
 	);
 }
 
-const For = {
-	Base: ForBase,
-	List: ForList,
-};
-
-export default For;
+export const Base = ForBase;
+export const List = ForList;

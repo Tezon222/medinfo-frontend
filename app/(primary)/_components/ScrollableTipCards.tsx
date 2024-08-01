@@ -1,15 +1,15 @@
 "use client";
 
-import { IconBox } from "@/components/common";
+import { IconBox, getElementList } from "@/components/common";
 import { Card } from "@/components/ui";
-import { useDragScroll, useElementList } from "@/lib/hooks";
+import { useDragScroll } from "@/lib/hooks";
 import { cnJoin } from "@/lib/utils/cn";
 import { tipPlaceHolder } from "@/public/assets/images/landing-page";
 import Image from "next/image";
 import Link from "next/link";
 
 function ScrollableTipCards() {
-	const [CardList] = useElementList();
+	const [CardList] = getElementList();
 
 	const { dragScrollProps, dragContainerClasses, dragItemClasses } = useDragScroll<HTMLUListElement>();
 

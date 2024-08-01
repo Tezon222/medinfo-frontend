@@ -1,16 +1,15 @@
 "use client";
 
-import { IconBox } from "@/components/common";
+import { IconBox, getElementList } from "@/components/common";
 import { SearchIcon } from "@/components/icons";
 import { DropdownMenu } from "@/components/ui";
-import { useElementList } from "@/lib/hooks";
 import { cnJoin } from "@/lib/utils/cn";
 import { useState } from "react";
 import { TipCard } from "./TipCard";
 
 function LibraryPage() {
 	const [filter, setFilter] = useState<"list" | "grid">("grid");
-	const [CardList] = useElementList("base");
+	const [CardList] = getElementList("base");
 
 	return (
 		<main className="flex max-w-[400px] flex-col justify-center gap-6 px-6 py-14">

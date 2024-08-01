@@ -1,6 +1,6 @@
 "use client";
 
-import { createCustomContext, useElementList, useSlot, useToggle } from "@/lib/hooks";
+import { createCustomContext, useGetSlot, useToggle } from "@/lib/hooks";
 import type { PolymorphicPropsWithRef } from "@/lib/type-helpers";
 import { cnMerge } from "@/lib/utils/cn";
 import React, { useEffect, useId, useMemo, useRef } from "react";
@@ -17,7 +17,7 @@ import {
 	type UseFormStateReturn,
 	useFormContext as useHookFormContext,
 } from "react-hook-form";
-import { IconBox, Show } from "../common";
+import { IconBox, Show, getElementList } from "../common";
 import Button from "./button";
 import InputPrimitive, { type InputProps } from "./input";
 
@@ -106,9 +106,9 @@ function FormLabel({ children, className }: { children: string; className?: stri
 
 function FormInputGroup(props: React.ComponentPropsWithRef<"div"> & { displayOtherChildren?: boolean }) {
 	const { children, className, displayOtherChildren, ...restOfProps } = props;
-	const InputSlot = useSlot(children, FormInput);
-	const LeftItemSlot = useSlot(children, FormInputLeftItem);
-	const RightItemSlot = useSlot(children, FormInputRightItem);
+	const InputSlot = useGetSlot(children, FormInput);
+	const LeftItemSlot = useGetSlot(children, FormInputLeftItem);
+	const RightItemSlot = useGetSlot(children, FormInputRightItem);
 
 	return (
 		<div className={cnMerge("flex items-center justify-between gap-4", className)} {...restOfProps}>
@@ -232,7 +232,7 @@ function FormErrorMessage<TStepData extends FieldValues>(props: FormErrorMessage
 
 	const { formState } = useHookFormContext();
 
-	const [ErrorMessageList] = useElementList();
+	const [ErrorMessageList] = getElementList();
 
 	const paragraphRef = useRef<HTMLParagraphElement>(null);
 

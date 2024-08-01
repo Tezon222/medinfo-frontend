@@ -51,7 +51,7 @@ function ProfilePage() {
 			>
 				<h3 className="text-[18px] font-medium">User Identity</h3>
 
-				<Form.Root className="w-full max-w-[372px] gap-3" methods={userIdentityMethods}>
+				<Form.Root className="w-full max-w-[372px] gap-3 self-center" methods={userIdentityMethods}>
 					<Form.Item<typeof userIdentityMethods.control>
 						name="firstName"
 						className="gap-1 font-roboto font-medium"
@@ -148,7 +148,7 @@ function ProfilePage() {
 			>
 				<h3 className="text-[18px] font-medium">Contact Info</h3>
 
-				<Form.Root className="w-full max-w-[372px] gap-3" methods={contactInfoMethods}>
+				<Form.Root className="w-full max-w-[372px] gap-3 self-center" methods={contactInfoMethods}>
 					<Form.Item<typeof contactInfoMethods.control>
 						name="email"
 						className="gap-1 font-roboto font-medium"
@@ -187,7 +187,7 @@ function ProfilePage() {
 			>
 				<h3 className="text-[18px] font-medium">Location</h3>
 
-				<Form.Root className="w-full max-w-[372px] gap-3" methods={locationMethods}>
+				<Form.Root className="w-full max-w-[372px] gap-3 self-center" methods={locationMethods}>
 					<Form.Item<typeof locationMethods.control>
 						name="country"
 						className="gap-1 font-roboto font-medium"
@@ -226,7 +226,7 @@ function ProfilePage() {
 			>
 				<h3 className="text-[18px] font-medium">Change Password</h3>
 
-				<Form.Root className="w-full max-w-[372px] gap-3" methods={changePasswordMethods}>
+				<Form.Root className="w-full max-w-[372px] gap-3 self-center" methods={changePasswordMethods}>
 					<Form.Item<typeof changePasswordMethods.control>
 						name="oldPassword"
 						className="gap-1 font-roboto font-medium"

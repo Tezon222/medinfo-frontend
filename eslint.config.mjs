@@ -18,7 +18,7 @@ import tsEslint from "typescript-eslint";
 
 const eslintConfigArray = [
 	// == Global Options
-	{ ignores: ["dist/**", "node_modules/**", "build/**"] },
+	{ ignores: ["dist/**", "node_modules/**", "build/**", ".next/**"] },
 
 	{
 		languageOptions: {
@@ -309,6 +309,10 @@ const eslintConfigArray = [
 			"@eslint-react/hooks-extra/ensure-custom-hooks-using-other-hooks": "error",
 			"@eslint-react/hooks-extra/prefer-use-state-lazy-initialization": "error",
 			"@eslint-react/prefer-read-only-props": "off",
+			"@eslint-react/no-children-to-array": "off",
+			"@eslint-react/no-children-only": "off",
+			"@eslint-react/no-children-count": "off",
+			"@eslint-react/no-clone-element": "off",
 
 			"react-hooks/exhaustive-deps": "warn",
 			"react-hooks/rules-of-hooks": "error",
@@ -350,7 +354,11 @@ const eslintConfigArray = [
 		},
 		rules: {
 			"tailwindcss/no-contradicting-classname": "off", // Turned off cuz tw intellisense already handles this
-			"tailwindcss/no-unnecessary-arbitrary-value": "off", // Turned off cuz using a custom root font-size (10px)
+			"tailwindcss/no-unnecessary-arbitrary-value": "off", // Turned off cuz using a custom root font-size (10px),
+			"tailwindcss/no-custom-classname": [
+				"warn",
+				{ ignoredKeys: ["compoundVariants", "defaultVariants", "responsiveVariants"] },
+			],
 		},
 	},
 ];
