@@ -2,7 +2,7 @@ import libraryPlaceholder from "@/public/assets/images/library-details.svg";
 import Image from "next/image";
 import { AlternateTipCard } from "../../TipCard";
 
-const TipDetailsPage = () => {
+const TipDetailsPage = ({ params }: { params: { id: string } }) => {
 	return (
 		<main className="flex w-full flex-col items-start px-6 py-14">
 			<section>
