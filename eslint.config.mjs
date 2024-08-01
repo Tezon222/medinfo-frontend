@@ -304,7 +304,6 @@ const eslintConfigArray = [
 			"@eslint-react/prefer-shorthand-fragment": "error",
 			"@eslint-react/no-array-index-key": "error",
 			"@eslint-react/no-children-prop": "error",
-			"@eslint-react/naming-convention/filename-extension": ["warn", "as-needed"],
 			"@eslint-react/naming-convention/use-state": "warn",
 			"@eslint-react/naming-convention/component-name": "warn",
 			"@eslint-react/hooks-extra/ensure-custom-hooks-using-other-hooks": "error",

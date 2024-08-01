@@ -15,10 +15,9 @@ function Input<TType extends React.HTMLInputTypeAttribute | "textarea">(props: I
 		<Element
 			type={type}
 			className={cnMerge(
-				`flex w-full rounded-md border border-shadcn-input px-3 py-2 text-sm file:border-0
-				file:bg-transparent placeholder:text-shadcn-muted-foreground focus-visible:outline-none
-				focus-visible:ring-2 focus-visible:ring-shadcn-ring disabled:cursor-not-allowed
-				disabled:opacity-50`,
+				`flex w-full rounded-md border border-shadcn-input text-sm file:border-0 file:bg-transparent
+				placeholder:text-shadcn-muted-foreground focus-visible:outline-none focus-visible:ring-2
+				focus-visible:ring-shadcn-ring disabled:cursor-not-allowed disabled:opacity-50`,
 				className
 			)}
 			{...restOfProps}

@@ -3,14 +3,10 @@
 import { Logo } from "@/components/common";
 import EmojiHandIcon from "@/components/icons/EmojiHandIcon";
 import LogoutIcon from "@/components/icons/LogoutIcon";
-import { useState } from "react";
 import Header from "../(dashboard)/_components/Header";
 import Sidebar from "../(dashboard)/_components/Sidebar";
-import { menuItems } from "../(dashboard)/_components/SidebarLinks";
 
 function DashboardLayout({ children }: { children: React.ReactNode }) {
-	const [activeTitle, setActiveTitle] = useState(menuItems[0]?.title as string);
-
 	return (
 		<div className="flex h-full lg:bg-medinfo-light-4">
 			<aside
@@ -19,7 +15,7 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
 			>
 				<Logo className="mx-auto" />
 				<div className="flex h-full flex-col justify-between py-6">
-					<Sidebar setActiveTitle={setActiveTitle} />
+					<Sidebar />
 					<div className="px-6">
 						<hr className="w-full" />
 					</div>
@@ -39,7 +35,7 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
 			</aside>
 
 			<main className="flex w-full flex-col">
-				<Header activeTitle={activeTitle} />
+				<Header />
 				{children}
 			</main>
 		</div>

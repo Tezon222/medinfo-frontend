@@ -4,11 +4,11 @@ import MessageIcon from "@/components/icons/MessageIcon";
 import ProfileIcon from "@/components/icons/ProfileIcon";
 import SettingsIcon from "@/components/icons/SettingsIcon";
 
-interface MenuItem {
+type MenuItem = {
 	href: string;
 	title: string;
 	icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
-}
+};
 
 export const menuItems: MenuItem[] = [
 	{

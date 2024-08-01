@@ -37,12 +37,8 @@ function SignInPage() {
 						</h1>
 
 						<Form.Root methods={methods} className="w-full gap-[14px]">
-							<Form.Item
-								control={control}
-								name="email"
-								className="gap-1 font-roboto md:text-[20px]"
-							>
-								<Form.Label className="font-medium">Email</Form.Label>
+							<Form.Item control={control} name="email" className="gap-1 font-roboto font-medium">
+								<Form.Label className="md:text-[20px]">Email</Form.Label>
 
 								<Form.InputGroup
 									className="h-[48px] rounded-[8px] border-[1.4px] border-medinfo-primary-main
@@ -55,7 +51,7 @@ function SignInPage() {
 									<Form.Input
 										type="email"
 										placeholder="enter email"
-										className="border-none p-0 font-medium placeholder:text-medinfo-dark-4
+										className="border-none placeholder:text-medinfo-dark-4
 											focus-visible:ring-transparent md:text-base"
 									/>
 								</Form.InputGroup>
@@ -64,9 +60,9 @@ function SignInPage() {
 							<Form.Item
 								control={control}
 								name="password"
-								className="gap-1 font-roboto md:text-[20px]"
+								className="gap-1 font-roboto font-medium"
 							>
-								<Form.Label className="font-medium">Password</Form.Label>
+								<Form.Label className="md:text-[20px]">Password</Form.Label>
 
 								<Form.InputGroup
 									className="h-[48px] rounded-[8px] border-[1.4px] border-medinfo-primary-main
@@ -79,7 +75,7 @@ function SignInPage() {
 									<Form.Input
 										type="password"
 										placeholder="enter password"
-										className="border-none p-0 font-medium placeholder:text-medinfo-dark-4
+										className="border-none placeholder:text-medinfo-dark-4
 											focus-visible:ring-transparent md:text-base"
 									/>
 								</Form.InputGroup>

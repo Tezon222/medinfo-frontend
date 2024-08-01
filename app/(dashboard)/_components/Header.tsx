@@ -1,10 +1,14 @@
+"use client";
+
 import { SearchIcon } from "@/components/icons";
+import { usePathname } from "next/navigation";
+import { menuItems } from "./SidebarLinks";
 
-type HeaderProps = {
-	activeTitle: string;
-};
+const Header = () => {
+	const pathName = usePathname();
 
-const Header = ({ activeTitle }: HeaderProps) => {
+	const activeTitle = menuItems.find((menuItem) => menuItem.href === pathName)?.title;
+
 	return (
 		<header className="flex items-center justify-between bg-white px-[40px] py-[16px] shadow-md">
 			<div className="text-[32px] font-semibold">{activeTitle}</div>

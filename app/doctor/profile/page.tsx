@@ -2,188 +2,25 @@
 
 import { CameraIcon } from "@/components/icons";
 import { Button, Form, Select } from "@/components/ui";
-
-// function Page() {
-// 	return (
-// 		<div className="p-[40px]">
-// 			<div className="rounded-[16px] bg-white p-[28px] shadow-md">
-// 				<div className="relative">
-// 					<div
-// 						className="size-[140px] rounded-full border-[1.4px] border-solid
-// 							border-medinfo-primary-main bg-gray-300"
-// 					/>
-// 					<div
-// 						className="absolute left-[6rem] top-0 w-[40px] rounded-full border-[1.4px] border-solid
-// 							border-medinfo-primary-main bg-white p-[7px]"
-// 					>
-// 						<CameraIcon />
-// 					</div>
-// 				</div>
-// 				<div className="mt-[20px] flex gap-[16px] text-[20px] font-medium">
-// 					<Button theme="secondary">Remove</Button>
-// 					<Button theme="primary">Change</Button>
-// 				</div>
-// 			</div>
-
-// 			<div className="mt-[32px] flex w-full items-end rounded-[16px] bg-white p-[28px] shadow-md">
-// 				<div className="flex w-full gap-[95px]">
-// 					<h2 className="text-[18px] font-medium">User identity</h2>
-// 					<Form.Root className="w-full max-w-[372px] gap-3">
-// 						<Form.Item className="space-y-[4px]">
-// 							<Form.Label className="text-[20px] font-medium">First name</Form.Label>
-// 							<Form.Input
-// 								type="text"
-// 								className="w-full rounded-[8px] border-[1.4px] border-solid
-// 									border-medinfo-primary-main px-[16px] py-[12px] font-medium
-// 									text-medinfo-primary-main"
-// 							/>
-// 						</Form.Item>
-
-// 						<Form.Item className="space-y-[4px]">
-// 							<Form.Label className="text-[20px] font-medium">Last name</Form.Label>
-// 							<Form.Input
-// 								type="text"
-// 								className="w-full rounded-[8px] border-[1.4px] border-solid
-// 									border-medinfo-primary-main px-[16px] py-[12px] font-medium
-// 									text-medinfo-primary-main"
-// 							/>
-// 						</Form.Item>
-
-// 						<Form.Item className="space-y-[4px]">
-// 							<Form.Label className="text-[20px] font-medium">Gender</Form.Label>
-// 							<Form.Input
-// 								type="text"
-// 								className="w-full rounded-[8px] border-[1.4px] border-solid
-// 									border-medinfo-primary-main px-[16px] py-[12px] font-medium
-// 									text-medinfo-primary-main"
-// 							/>
-// 						</Form.Item>
-
-// 						<Form.Item className="space-y-[4px]">
-// 							<Form.Label className="text-[20px] font-medium">Bio</Form.Label>
-// 							<textarea
-// 								className="w-full rounded-[8px] border-[1.4px] border-solid
-// 									border-medinfo-primary-main px-[16px] py-[12px] font-medium
-// 									text-medinfo-primary-main"
-// 							/>
-// 						</Form.Item>
-// 					</Form.Root>
-// 				</div>
-// 				<div className="mt-[20px] flex gap-[16px] text-[20px] font-medium">
-// 					<Button theme="secondary">Cancel</Button>
-// 					<Button theme="primary">Save</Button>
-// 				</div>
-// 			</div>
-
-// 			<div className="mt-[32px] flex w-full items-end rounded-[16px] bg-white p-[28px] shadow-md">
-// 				<div className="flex w-full gap-[95px]">
-// 					<h2 className="text-[18px] font-medium">Contact info</h2>
-// 					<Form.Root className="w-full max-w-[372px] space-y-[12px]">
-// 						<Form.Item className="space-y-[4px]">
-// 							<Form.Label className="text-[20px] font-medium">Email</Form.Label>
-// 							<Form.Input
-// 								type="email"
-// 								className="w-full rounded-[8px] border-[1.4px] border-solid
-// 									border-medinfo-primary-main px-[16px] py-[12px] font-medium
-// 									text-medinfo-primary-main"
-// 							/>
-// 						</Form.Item>
-
-// 						<Form.Item className="space-y-[4px]">
-// 							<Form.Label className="text-[20px] font-medium">Phone number</Form.Label>
-// 							<Form.Input
-// 								type="text"
-// 								className="w-full rounded-[8px] border-[1.4px] border-solid
-// 									border-medinfo-primary-main px-[16px] py-[12px] font-medium
-// 									text-medinfo-primary-main"
-// 							/>
-// 						</Form.Item>
-// 					</Form.Root>
-// 				</div>
-// 				<div className="mt-[20px] flex gap-[16px] text-[20px] font-medium">
-// 					<Button theme="secondary">Cancel</Button>
-// 					<Button theme="primary">Save</Button>
-// 				</div>
-// 			</div>
-
-// 			<div className="mt-[32px] flex w-full items-end rounded-[16px] bg-white p-[28px] shadow-md">
-// 				<div className="flex w-full gap-[95px]">
-// 					<h2 className="text-[18px] font-medium">Location</h2>
-// 					<Form.Root className="space-y-[12px]">
-// 						<Form.Item className="space-y-[4px]">
-// 							<Form.Label className="text-[20px] font-medium">Country</Form.Label>
-// 							<Form.Input
-// 								type="text"
-// 								className="w-full rounded-[8px] border-[1.4px] border-solid
-// 									border-medinfo-primary-main px-[16px] py-[12px] font-medium
-// 									text-medinfo-primary-main"
-// 							/>
-// 						</Form.Item>
-
-// 						<Form.Item className="space-y-[4px]">
-// 							<Form.Label className="text-[20px] font-medium">City</Form.Label>
-// 							<Form.Input
-// 								type="text"
-// 								className="w-full rounded-[8px] border-[1.4px] border-solid
-// 									border-medinfo-primary-main px-[16px] py-[12px] font-medium
-// 									text-medinfo-primary-main"
-// 							/>
-// 						</Form.Item>
-// 					</Form.Root>
-// 				</div>
-// 				<div className="mt-[20px] flex gap-[16px] text-[20px] font-medium">
-// 					<Button theme="secondary">Cancel</Button>
-// 					<Button theme="primary">Save</Button>
-// 				</div>
-// 			</div>
-
-// 			<div className="mt-[32px] flex w-full items-end rounded-[16px] bg-white p-[28px] shadow-md">
-// 				<div className="flex w-full gap-[95px]">
-// 					<h2 className="text-[18px] font-medium">Change password</h2>
-// 					<Form.Root className="space-y-[12px]">
-// 						<Form.Item className="space-y-[4px]">
-// 							<Form.Label className="text-[20px] font-medium">Old password</Form.Label>
-// 							<Form.InputGroup
-// 								className="rounded-[8px] border-[1.4px] border-medinfo-primary-main px-[16px]
-// 									py-[12px]"
-// 							>
-// 								<Form.Input
-// 									type="password"
-// 									className="w-full font-medium text-medinfo-primary-main"
-// 								/>
-// 							</Form.InputGroup>
-// 						</Form.Item>
-
-// 						<Form.Item className="space-y-[4px]">
-// 							<Form.Label className="text-[20px] font-medium">New password</Form.Label>
-// 							<Form.Input
-// 								type="password"
-// 								className="w-full rounded-[8px] border-[1.4px] border-solid
-// 									border-medinfo-primary-main px-[16px] py-[12px] font-medium
-// 									text-medinfo-primary-main"
-// 							/>
-// 						</Form.Item>
-
-// 						<Form.Item className="space-y-[4px]">
-// 							<Form.Label className="text-[20px] font-medium">Confirm password</Form.Label>
-// 							<Form.Input
-// 								type="password"
-// 								className="w-full rounded-[8px] border-[1.4px] border-solid
-// 									border-medinfo-primary-main px-[16px] py-[12px] font-medium
-// 									text-medinfo-primary-main"
-// 							/>
-// 						</Form.Item>
-// 					</Form.Root>
-// 				</div>
-// 				<div className="mt-[20px] flex gap-[16px] text-[20px] font-medium">
-// 					<Button theme="secondary">Remove</Button>
-// 					<Button theme="primary">Change</Button>
-// 				</div>
-// 			</div>
-// 		</div>
-// 	);
+import { useForm } from "react-hook-form";
 
 function ProfilePage() {
+	const userIdentityMethods = useForm({
+		defaultValues: { firstName: "", lastName: "", gender: "", bio: "" },
+	});
+
+	const contactInfoMethods = useForm({
+		defaultValues: { email: "", phoneNumber: "" },
+	});
+
+	const locationMethods = useForm({
+		defaultValues: { country: "", city: "" },
+	});
+
+	const changePasswordMethods = useForm({
+		defaultValues: { oldPassword: "", newPassword: "", confirmPassword: "" },
+	});
+
 	return (
 		<div className="flex flex-col gap-8 px-6 py-14">
 			<section
@@ -210,36 +47,39 @@ function ProfilePage() {
 
 			<section
 				className="flex flex-col gap-5 rounded-[16px] p-4 shadow-[0_4px_6px_hsl(150,20%,25%,0.25)]
-					lg:bg-white lg:p-8"
+					lg:flex-row lg:justify-between lg:bg-white lg:p-8"
 			>
 				<h3 className="text-[18px] font-medium">User Identity</h3>
 
-				<Form.Root className="gap-3">
-					<Form.Item className="gap-1">
-						<Form.Label className="font-roboto text-base font-medium">First Name</Form.Label>
+				<Form.Root className="w-full max-w-[372px] gap-3" methods={userIdentityMethods}>
+					<Form.Item<typeof userIdentityMethods.control>
+						name="firstName"
+						className="gap-1 font-roboto font-medium"
+					>
+						<Form.Label className="md:text-[20px]">First Name</Form.Label>
 						<Form.Input
 							type="text"
 							className="h-[48px] rounded-[8px] border-[1.4px] border-medinfo-primary-main px-4 py-3
-								font-roboto font-medium placeholder:text-medinfo-dark-4
-								focus-visible:ring-transparent md:h-[64px] md:py-5 md:text-base"
+								placeholder:text-medinfo-dark-4 focus-visible:ring-transparent md:h-[64px] md:py-5
+								md:text-base"
 						/>
 					</Form.Item>
-					<Form.Item className="gap-1">
-						<Form.Label className="font-roboto text-base font-medium">Last Name</Form.Label>
+					<Form.Item<typeof userIdentityMethods.control>
+						name="lastName"
+						className="gap-1 font-roboto font-medium"
+					>
+						<Form.Label className="md:text-[20px]">Last Name</Form.Label>
 						<Form.Input
 							type="text"
 							className="h-[48px] rounded-[8px] border-[1.4px] border-medinfo-primary-main px-4 py-3
-								font-roboto font-medium placeholder:text-medinfo-dark-4
-								focus-visible:ring-transparent md:h-[64px] md:py-5 md:text-base"
+								placeholder:text-medinfo-dark-4 focus-visible:ring-transparent md:h-[64px] md:py-5
+								md:text-base"
 						/>
 					</Form.Item>
-
-					{/* <Form.Item className="gap-1 font-roboto md:text-[20px]">
-						<Form.Label className="font-medium">Gender</Form.Label>
+					<Form.Item name="gender" className="gap-1 font-roboto font-medium">
+						<Form.Label className="md:text-[20px]">Gender</Form.Label>
 
 						<Form.Controller
-							// control={control}
-							name="gender"
 							render={({ field }) => (
 								<Select.Root name={field.name} value={field.value} onValueChange={field.onChange}>
 									<Select.Trigger
@@ -281,20 +121,160 @@ function ProfilePage() {
 								</Select.Root>
 							)}
 						/>
-					</Form.Item> */}
-
-					<Form.Item className="gap-1">
-						<Form.Label className="font-roboto text-base font-medium">Bio</Form.Label>
+					</Form.Item>
+					<Form.Item<typeof userIdentityMethods.control>
+						name="bio"
+						className="gap-1 font-roboto font-medium"
+					>
+						<Form.Label className="md:text-[20px]">Bio</Form.Label>
 						<Form.Input
 							type="textarea"
 							className="h-[163px] rounded-[8px] border-[1.4px] border-medinfo-primary-main px-4
-								py-5 font-roboto font-medium placeholder:text-medinfo-dark-4
-								focus-visible:ring-transparent md:h-[64px] md:text-base"
+								py-5 placeholder:text-medinfo-dark-4 focus-visible:ring-transparent md:h-[159px]
+								md:text-base"
 						/>
 					</Form.Item>
 				</Form.Root>
 
-				<div className="flex gap-6 self-center">
+				<div className="flex gap-6 self-center lg:self-end">
+					<Button theme="secondary">Cancel</Button>
+					<Button theme="primary">Save</Button>
+				</div>
+			</section>
+
+			<section
+				className="flex flex-col gap-5 rounded-[16px] p-4 shadow-[0_4px_6px_hsl(150,20%,25%,0.25)]
+					lg:flex-row lg:justify-between lg:bg-white lg:p-8"
+			>
+				<h3 className="text-[18px] font-medium">Contact Info</h3>
+
+				<Form.Root className="w-full max-w-[372px] gap-3" methods={contactInfoMethods}>
+					<Form.Item<typeof contactInfoMethods.control>
+						name="email"
+						className="gap-1 font-roboto font-medium"
+					>
+						<Form.Label className="md:text-[20px]">Email</Form.Label>
+						<Form.Input
+							type="text"
+							className="h-[48px] rounded-[8px] border-[1.4px] border-medinfo-primary-main px-4 py-3
+								placeholder:text-medinfo-dark-4 focus-visible:ring-transparent md:h-[64px] md:py-5
+								md:text-base"
+						/>
+					</Form.Item>
+					<Form.Item<typeof contactInfoMethods.control>
+						name="phoneNumber"
+						className="gap-1 font-roboto font-medium"
+					>
+						<Form.Label className="md:text-[20px]">Phone number</Form.Label>
+						<Form.Input
+							type="number"
+							className="h-[48px] rounded-[8px] border-[1.4px] border-medinfo-primary-main px-4 py-3
+								placeholder:text-medinfo-dark-4 focus-visible:ring-transparent md:h-[64px] md:py-5
+								md:text-base"
+						/>
+					</Form.Item>
+				</Form.Root>
+
+				<div className="flex gap-6 self-center lg:self-end">
+					<Button theme="secondary">Cancel</Button>
+					<Button theme="primary">Save</Button>
+				</div>
+			</section>
+
+			<section
+				className="flex flex-col gap-5 rounded-[16px] p-4 shadow-[0_4px_6px_hsl(150,20%,25%,0.25)]
+					lg:flex-row lg:justify-between lg:bg-white lg:p-8"
+			>
+				<h3 className="text-[18px] font-medium">Location</h3>
+
+				<Form.Root className="w-full max-w-[372px] gap-3" methods={locationMethods}>
+					<Form.Item<typeof locationMethods.control>
+						name="country"
+						className="gap-1 font-roboto font-medium"
+					>
+						<Form.Label className="md:text-[20px]">Country</Form.Label>
+						<Form.Input
+							type="text"
+							className="h-[48px] rounded-[8px] border-[1.4px] border-medinfo-primary-main px-4 py-3
+								placeholder:text-medinfo-dark-4 focus-visible:ring-transparent md:h-[64px] md:py-5
+								md:text-base"
+						/>
+					</Form.Item>
+					<Form.Item<typeof locationMethods.control>
+						name="city"
+						className="gap-1 font-roboto font-medium"
+					>
+						<Form.Label className="md:text-[20px]">City</Form.Label>
+						<Form.Input
+							type="text"
+							className="h-[48px] rounded-[8px] border-[1.4px] border-medinfo-primary-main px-4 py-3
+								placeholder:text-medinfo-dark-4 focus-visible:ring-transparent md:h-[64px] md:py-5
+								md:text-base"
+						/>
+					</Form.Item>
+				</Form.Root>
+
+				<div className="flex gap-6 self-center lg:self-end">
+					<Button theme="secondary">Cancel</Button>
+					<Button theme="primary">Save</Button>
+				</div>
+			</section>
+
+			<section
+				className="flex flex-col gap-5 rounded-[16px] p-4 shadow-[0_4px_6px_hsl(150,20%,25%,0.25)]
+					lg:flex-row lg:justify-between lg:bg-white lg:p-8"
+			>
+				<h3 className="text-[18px] font-medium">Change Password</h3>
+
+				<Form.Root className="w-full max-w-[372px] gap-3" methods={changePasswordMethods}>
+					<Form.Item<typeof changePasswordMethods.control>
+						name="oldPassword"
+						className="gap-1 font-roboto font-medium"
+					>
+						<Form.Label className="md:text-[20px]">Old password</Form.Label>
+						<Form.Input
+							type="password"
+							classNames={{
+								inputGroup: `h-[48px] rounded-[8px] border-[1.4px] border-medinfo-primary-main px-4
+								py-3 md:h-[64px] md:py-5`,
+								input: `border-none placeholder:text-medinfo-dark-4 focus-visible:ring-transparent
+								md:text-base`,
+							}}
+						/>
+					</Form.Item>
+					<Form.Item<typeof changePasswordMethods.control>
+						name="newPassword"
+						className="gap-1 font-roboto font-medium"
+					>
+						<Form.Label className="md:text-[20px]">New password</Form.Label>
+						<Form.Input
+							type="password"
+							classNames={{
+								inputGroup: `h-[48px] rounded-[8px] border-[1.4px] border-medinfo-primary-main px-4
+								py-3 md:h-[64px] md:py-5`,
+								input: `border-none placeholder:text-medinfo-dark-4 focus-visible:ring-transparent
+								md:text-base`,
+							}}
+						/>
+					</Form.Item>
+					<Form.Item<typeof changePasswordMethods.control>
+						name="confirmPassword"
+						className="gap-1 font-roboto font-medium"
+					>
+						<Form.Label className="md:text-[20px]">Confirm password</Form.Label>
+						<Form.Input
+							type="password"
+							classNames={{
+								inputGroup: `h-[48px] rounded-[8px] border-[1.4px] border-medinfo-primary-main px-4
+								py-3 md:h-[64px] md:py-5`,
+								input: `border-none placeholder:text-medinfo-dark-4 focus-visible:ring-transparent
+								md:text-base`,
+							}}
+						/>
+					</Form.Item>
+				</Form.Root>
+
+				<div className="flex gap-6 self-center lg:self-end">
 					<Button theme="secondary">Cancel</Button>
 					<Button theme="primary">Save</Button>
 				</div>
