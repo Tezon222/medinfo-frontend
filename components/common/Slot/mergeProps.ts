@@ -21,7 +21,6 @@ const mergeProps = (slotProps: UnknownProps, childProps: UnknownProps) => {
 
 		const isHandler = /^on[A-Z]/.test(propName);
 
-		 
 		if (!isHandler) continue;
 
 		// if the handler exists on both, we compose them

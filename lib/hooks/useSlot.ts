@@ -62,7 +62,6 @@ export const getOtherChildren = <TProps>(
 ) => {
 	const childrenArray = isArray<React.ReactNode>(children) ? children : [children];
 
-	
 	const otherChildren = isArray(SlotWrapperOrWrappers)
 		? childrenArray.filter((child) =>
 				SlotWrapperOrWrappers.some((slotWrapper) => !isSlotElement(child, slotWrapper))

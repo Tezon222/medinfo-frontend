@@ -218,9 +218,7 @@ function SignUpPage() {
 									</Form.Label>
 
 									<Form.Controller
-										render={({ field }) => (
-											<DropZoneInput onChange={field.onChange} />
-										)}
+										render={({ field }) => <DropZoneInput onChange={field.onChange} />}
 									/>
 								</Form.Item>
 							</Show>

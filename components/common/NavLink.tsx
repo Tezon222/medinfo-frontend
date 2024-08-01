@@ -21,7 +21,6 @@ function NavLink(
 		return isString(value) && !value.startsWith("/");
 	};
 
-
 	if (!isString(href) && isRelativeLink(href.pathname)) {
 		Reflect.set(href, "pathname", `${pathname}/${href.pathname}`);
 	}
