@@ -7,8 +7,8 @@
 		"build": "next build",
 		"start": "next start",
 		"test:check-types": "tsc --pretty --incremental -p tsconfig.json",
-		"test:format": "prettier --write --cache .",
-		"test:lint": "eslint ./**/*.{ts,tsx} --max-warnings 0 --report-unused-disable-directives",
+		"test:format": "prettier --cache --write .",
+		"test:lint": "eslint --cache ./**/*.{ts,tsx} --max-warnings 0 --report-unused-disable-directives",
 		"prepare": "husky"
 	},
 	"dependencies": {
