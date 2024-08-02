@@ -250,6 +250,7 @@ function FormErrorMessage<TStepData extends FieldValues>(props: FormErrorMessage
 				block: "center",
 			});
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [formState.submitCount]);
 
 	const message =
