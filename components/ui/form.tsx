@@ -234,14 +234,22 @@ function FormErrorMessage<TStepData extends FieldValues>(props: FormErrorMessage
 
 	const [ErrorMessageList] = getElementList();
 
-	const paragraphRef = useRef<HTMLParagraphElement>(null);
+	const errorParagraphRef = useRef<HTMLParagraphElement>(null);
 
 	useEffect(() => {
-		if (!paragraphRef.current) return;
+		if (!errorParagraphRef.current) return;
 
-		if (paragraphRef.current.classList.contains("animate-shake")) return;
+		if (!errorParagraphRef.current.classList.contains("animate-shake")) {
+			errorParagraphRef.current.classList.add("animate-shake");
+		}
 
-		paragraphRef.current.classList.add("animate-shake");
+		// Scroll to first error message
+		if (Object.keys(formState.errors).indexOf(errorField as string) === 0) {
+			errorParagraphRef.current.scrollIntoView({
+				behavior: "smooth",
+				block: "center",
+			});
+		}
 	}, [formState.submitCount]);
 
 	const message =
@@ -279,9 +287,9 @@ function FormErrorMessage<TStepData extends FieldValues>(props: FormErrorMessage
 
 			<Show.Fallback>
 				<p
-					ref={paragraphRef}
+					ref={errorParagraphRef}
 					className={cnMerge(paragraphClasses, className)}
-					onAnimationEnd={() => paragraphRef.current?.classList.remove("animate-shake")}
+					onAnimationEnd={() => errorParagraphRef.current?.classList.remove("animate-shake")}
 				>
 					*{message}
 				</p>
