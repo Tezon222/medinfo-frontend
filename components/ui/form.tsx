@@ -244,7 +244,7 @@ function FormErrorMessage<TStepData extends FieldValues>(props: FormErrorMessage
 		}
 
 		// Scroll to first error message
-		if (Object.keys(formState.errors).indexOf(errorField) === 0) {
+		if (Object.keys(formState.errors).indexOf(errorField as string) === 0) {
 			errorParagraphRef.current.scrollIntoView({
 				behavior: "smooth",
 				block: "center",
