@@ -15,6 +15,7 @@ export function TipCard({ type, id }: TipCardProps) {
 	return (
 		<Card
 			className={cnJoin(
+				type === "grid" && "relative h-full max-lg:max-h-[176px]",
 				type === "list" &&
 					"flex w-full gap-[44px] rounded-[16px] border-2 border-medinfo-primary-main p-6"
 			)}
@@ -23,8 +24,8 @@ export function TipCard({ type, id }: TipCardProps) {
 				<Image
 					className={cnJoin(
 						"object-cover",
-						type === "grid" && "lg: h-[176px] rounded-[7px] lg:h-[400px] lg:max-w-[368px]",
-						type === "list" && "size-[68px] rounded-[4px]"
+						type === "grid" && "h-full rounded-[7px] lg:max-w-[368px] lg:rounded-[16px]",
+						type === "list" && "size-[68px] rounded-[4px] lg:size-[202px] lg:rounded-[12px]"
 					)}
 					src={libraryPlaceholder as string}
 					alt=""
@@ -38,19 +39,42 @@ export function TipCard({ type, id }: TipCardProps) {
 				className={cnJoin(
 					"flex flex-col justify-between",
 					type === "grid" &&
-						`relative ml-auto mt-[calc(-95px/2)] h-[95px] w-fit rounded-[16px] border-2
-						border-medinfo-primary-main bg-white p-2`
+						`absolute bottom-[calc(-95px/2)] right-0 h-[95px] w-fit rounded-[16px] border-2
+						border-medinfo-primary-main bg-white p-2 lg:bottom-[calc((400px-182px)/2)] lg:h-[182px]
+						lg:max-w-[229px] lg:p-6`
 				)}
 			>
 				<div>
-					<h4 className={cnJoin("text-[18px] font-medium text-medinfo-primary-main")}>Title</h4>
+					<h4
+						className={cnJoin(
+							"text-[18px] text-medinfo-primary-main",
+							type === "grid" && "font-medium lg:text-[22px]",
+							type === "list" && "text-[32px] lg:font-bold"
+						)}
+					>
+						Title
+					</h4>
+
+					{type === "list" && (
+						<p className="mt-[16px] hidden text-sm text-medinfo-dark-1 lg:block">
+							A condition in which your blood sugar level is lower than normal
+						</p>
+					)}
 				</div>
+
+				{type === "grid" && (
+					<p className="hidden text-sm text-medinfo-dark-1 lg:block">
+						A condition in which your blood sugar level is lower than normal
+					</p>
+				)}
+
 				<NavLink
 					href={`tip/${id}`}
-					className="inline-flex w-fit items-center gap-[14px] text-medinfo-primary-main"
+					className="inline-flex w-fit items-center gap-[14px] text-medinfo-primary-main lg:gap-4
+						lg:text-[20px] lg:font-medium"
 				>
 					See more
-					<IconBox icon="lucide:chevron-right" className="size-5" />
+					<IconBox icon="lucide:chevron-right" className="size-5 lg:size-6" />
 				</NavLink>
 			</Card.Content>
 		</Card>
