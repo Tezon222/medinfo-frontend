@@ -23,7 +23,7 @@ export function TipCard({ type, id }: TipCardProps) {
 				<Image
 					className={cnJoin(
 						"object-cover",
-						type === "grid" && "h-[176px] rounded-[7px]",
+						type === "grid" && "lg: h-[176px] rounded-[7px] lg:h-[400px] lg:max-w-[368px]",
 						type === "list" && "size-[68px] rounded-[4px]"
 					)}
 					src={libraryPlaceholder as string}
