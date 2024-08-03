@@ -1,10 +1,9 @@
 "use client";
 
-import { IconBox, NavLink } from "@/components/common";
+import { IconBox, NavLink, getElementList } from "@/components/common";
 import { ChevronDownIcon } from "@/components/icons";
 // FIXME - Change accordions component to another suitable one and then remove use client from this page`
 import { Accordion, Button } from "@/components/ui";
-import { useElementList } from "@/lib/hooks/useElementList";
 import { cnJoin } from "@/lib/utils/cn";
 import { feature1, feature2, feature3, hero } from "@/public/assets/images/landing-page";
 import Image from "next/image";
@@ -58,14 +57,14 @@ const FAQs = [
 ];
 
 function HomePage() {
-	const [CoreServiceList] = useElementList();
-	const [FeatureList] = useElementList();
-	const [AdvantageList] = useElementList();
-	const [FAQList] = useElementList();
+	const [CoreServiceList] = getElementList();
+	const [FeatureList] = getElementList();
+	const [AdvantageList] = getElementList();
+	const [FAQList] = getElementList();
 
 	return (
 		<main
-			className="w-full space-y-14 px-6 py-14 max-md:max-w-[400px] md:space-y-[92px] md:px-[70px]
+			className="flex w-full flex-col gap-14 px-6 py-14 max-md:max-w-[400px] md:gap-[92px] md:px-[70px]
 				md:py-[92px] lg:px-[100px]"
 		>
 			<section className="flex flex-col items-center md:flex-row-reverse md:gap-[67px]">
@@ -86,7 +85,6 @@ function HomePage() {
 						pharetra cras duis mauris. Viverra a placerat maecenas felis tristique lectus erat.
 						Tempus nec vel euismod amet cras.
 					</p>
-
 					<Button asChild={true} className="mt-6">
 						<NavLink href={{ pathname: "/signup", query: { type: "patient" } }}>Join Us</NavLink>
 					</Button>
@@ -217,7 +215,7 @@ function HomePage() {
 				/>
 			</section>
 
-			<section>
+			<section className="flex flex-col items-center">
 				<h2
 					className="text-center text-[28px] font-semibold leading-9 text-medinfo-primary-main
 						md:text-[52px] md:font-bold md:leading-[60px]"
@@ -238,7 +236,7 @@ function HomePage() {
 
 				<Accordion.Root type="single" collapsible={true} asChild={true}>
 					<FAQList
-						className="mt-6 w-full space-y-2 md:mt-14 md:space-y-4"
+						className="mt-6 grid w-full gap-2 md:mt-14 md:gap-4"
 						each={FAQs}
 						render={(FAQ) => (
 							<Accordion.Item key={FAQ.question} value={FAQ.answer} asChild={true}>

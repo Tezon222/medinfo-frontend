@@ -1,4 +1,3 @@
-/* eslint-disable valid-jsdoc */
 export type PossibleRef<TRef> = React.Ref<TRef> | undefined;
 
 /**

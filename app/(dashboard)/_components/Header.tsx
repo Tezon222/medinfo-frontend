@@ -1,16 +1,25 @@
+"use client";
+
 import { SearchIcon } from "@/components/icons";
+import { usePathname } from "next/navigation";
+import { menuItems } from "./SidebarLinks";
 
-interface HeaderProps {
-	activeTitle: string;
-}
+const Header = () => {
+	const pathName = usePathname();
 
-const Header: React.FC<HeaderProps> = ({ activeTitle }) => {
+	const activeTitle = menuItems.find((menuItem) => menuItem.href === pathName)?.title;
+
 	return (
-		<header className="flex items-center justify-between bg-white shadow-md py-[16px] px-[40px]">
+		<header className="flex items-center justify-between bg-white px-[40px] py-[16px] shadow-md">
 			<div className="text-[32px] font-semibold">{activeTitle}</div>
-			<div className="flex items-center space-x-4 relative">
+			<div className="relative flex items-center space-x-4">
 				<SearchIcon type="green" className="absolute left-8" />
-				<input type="text" placeholder="search" className="rounded-[8px] text-[#414141] border w-[400px] border-medinfo-primary-main px-12 py-2" />
+				<input
+					type="text"
+					placeholder="search"
+					className="w-[400px] rounded-[8px] border border-medinfo-primary-main px-12 py-2
+						text-[#414141]"
+				/>
 			</div>
 			<div className="flex items-center space-x-[40px]">
 				<span>
@@ -35,7 +44,7 @@ const Header: React.FC<HeaderProps> = ({ activeTitle }) => {
 						/>
 					</svg>
 				</span>
-				<div className="h-[40px] w-[40px] rounded-full bg-gray-500"></div>
+				<div className="size-[40px] rounded-full bg-gray-500"></div>
 			</div>
 		</header>
 	);

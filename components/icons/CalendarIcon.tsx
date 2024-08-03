@@ -1,5 +1,12 @@
 const CalendarIcon = (props: React.SVGProps<SVGSVGElement>) => (
-	<svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<svg
+		width="44"
+		height="44"
+		viewBox="0 0 44 44"
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+		{...props}
+	>
 		<path
 			d="M14.667 10.542C13.9153 10.542 13.292 9.91866 13.292 9.16699V3.66699C13.292 2.91533 13.9153 2.29199 14.667 2.29199C15.4187 2.29199 16.042 2.91533 16.042 3.66699V9.16699C16.042 9.91866 15.4187 10.542 14.667 10.542Z"
 			fill="#E6B800"

@@ -1,6 +1,6 @@
 "use client";
 
-import { useSlot } from "@/lib/hooks";
+import { useGetSlot } from "@/lib/hooks";
 import { Children, useMemo } from "react";
 
 type ValidSwitchComponentType = React.ReactElement<SwitchCaseProps, "">;
@@ -18,8 +18,8 @@ type SwitchCaseProps<TWhen = unknown> = {
 function Switch<TCondition>(props: SwitchProps<TCondition>) {
 	const { children, condition = Symbol.for("no-condition") as never } = props;
 
-	const defaultCase = useSlot(children, Default, {
-		throwOnMultipleMatch: true,
+	const defaultCase = useGetSlot(children, Default, {
+		throwOnMultipleSlotMatch: true,
 		errorMessage: "Only one <Switch.Default> component is allowed",
 	});
 

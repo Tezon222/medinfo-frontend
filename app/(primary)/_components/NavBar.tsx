@@ -1,6 +1,6 @@
 "use client";
 
-import { Logo, NavLink, Overlay, ProgressBar } from "@/components/common";
+import { Logo, NavLink, ProgressBar } from "@/components/common";
 import { HamburgerIcon, SearchIcon, XIcon } from "@/components/icons";
 import { Button } from "@/components/ui";
 import { useToggle } from "@/lib/hooks";
@@ -20,8 +20,6 @@ function NavBar() {
 
 			<Logo className="min-w-fit max-lg:h-[46px] max-lg:w-[60px]" />
 
-			<Overlay isOpen={isNavShow} onClose={toggleNavShow} />
-
 			<DesktopNavigation className="max-md:hidden" />
 
 			<MobileNavigation isNavShow={isNavShow} toggleNavShow={toggleNavShow} className="md:hidden" />
@@ -39,16 +37,16 @@ function DesktopNavigation({ className }: { className?: string }) {
 	return (
 		<article className={cnMerge("flex w-full items-center", className)}>
 			<nav className="mx-auto flex min-w-fit gap-14 text-[22px] font-medium">
-				<NavLink type="Navbar" href="/">
+				<NavLink transitionType="Navbar" href="/">
 					Home
 				</NavLink>
-				<NavLink type="Navbar" href="/library">
+				<NavLink transitionType="Navbar" href="/library">
 					Library
 				</NavLink>
-				<NavLink type="Navbar" href="/about">
+				<NavLink transitionType="Navbar" href="/about">
 					About us
 				</NavLink>
-				<NavLink type="Navbar" href="/contact">
+				<NavLink transitionType="Navbar" href="/contact">
 					Contact us
 				</NavLink>
 			</nav>
@@ -80,29 +78,28 @@ function MobileNavigation(props: MobileNavProps) {
 			className={cnMerge(
 				`fixed inset-[0_0_0_auto] flex flex-col items-center gap-7 overflow-hidden
 				bg-medinfo-primary-main pt-10 text-white`,
-				isNavShow
-					? "w-[min(254px,_80%)] [transition:width_300ms_ease]"
-					: "w-0 [transition:width_500ms_ease]",
+				isNavShow ? "w-full [transition:width_350ms_ease]" : "w-0 [transition:width_500ms_ease]",
 				className
 			)}
 			onClick={(event) => {
 				const element = event.target as HTMLElement;
+
 				element.tagName === "A" && toggleNavShow();
 			}}
 		>
 			<Logo type="footer" className="h-[46px] w-[60px]" />
 
 			<nav className="flex flex-col items-center gap-5 text-nowrap font-medium lg:text-[22px]">
-				<NavLink type="Navbar" href="/">
+				<NavLink transitionType="Navbar" href="/">
 					Home
 				</NavLink>
-				<NavLink type="Navbar" href="/library">
+				<NavLink transitionType="Navbar" href="/library">
 					Library
 				</NavLink>
-				<NavLink type="Navbar" href="/about">
+				<NavLink transitionType="Navbar" href="/about">
 					About us
 				</NavLink>
-				<NavLink type="Navbar" href="/contact">
+				<NavLink transitionType="Navbar" href="/contact">
 					Contact us
 				</NavLink>
 			</nav>

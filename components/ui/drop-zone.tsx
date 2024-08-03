@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useToggle } from "@/lib/hooks";
 import { isFunction, isObject } from "@/lib/type-helpers/typeof";

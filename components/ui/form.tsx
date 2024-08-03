@@ -1,36 +1,51 @@
 "use client";
 
-import { createCustomContext, useElementList, useSlot } from "@/lib/hooks";
+import { createCustomContext, useGetSlot, useToggle } from "@/lib/hooks";
+import type { PolymorphicPropsWithRef } from "@/lib/type-helpers";
 import { cnMerge } from "@/lib/utils/cn";
-import { useEffect, useId, useMemo, useRef } from "react";
+import React, { useEffect, useId, useMemo, useRef } from "react";
 import {
 	type Control,
+	type ControllerFieldState,
+	Controller as ControllerPrimitive,
+	type ControllerProps,
+	type ControllerRenderProps,
+	type FieldPath,
 	type FieldValues,
 	FormProvider as HookFormProvider,
 	type UseFormReturn,
+	type UseFormStateReturn,
 	useFormContext as useHookFormContext,
 } from "react-hook-form";
-import { Show } from "../common";
-import InputPrimitive from "./input";
+import { IconBox, Show, getElementList } from "../common";
+import Button from "./button";
+import InputPrimitive, { type InputProps } from "./input";
 
 type FormRootProps<TValues extends FieldValues> = React.ComponentPropsWithoutRef<"form"> & {
 	methods: UseFormReturn<TValues>;
 	children: React.ReactNode;
 };
 
-type FormItemProps<TValues extends FieldValues> = {
-	control?: Control<TValues>; // == Here for type inference of name prop for the time being
-	name: keyof TValues;
-	children: React.ReactNode;
-	className?: string;
-};
+type FormItemProps<TControl, TFieldValues extends FieldValues> =
+	TControl extends Control<infer TValues>
+		? {
+				name: keyof TValues;
+				children: React.ReactNode;
+				className?: string;
+			}
+		: {
+				control?: Control<TFieldValues>;
+				name: keyof TFieldValues;
+				children: React.ReactNode;
+				className?: string;
+			};
 
 type FormErrorMessageProps<TValues extends FieldValues> =
 	| {
 			type: "regular";
-			className?: string;
-			control: Control<TValues>;
+			control: Control<TValues>; // == Here for type inference of errorField prop
 			errorField: keyof TValues;
+			className?: string;
 	  }
 	| {
 			type: "root";
@@ -60,13 +75,15 @@ function FormRoot<TValues extends FieldValues>(props: FormRootProps<TValues>) {
 	);
 }
 
-function FormItem<TValues extends FieldValues>(props: FormItemProps<TValues>) {
+function FormItem<TControl, TFieldValues extends FieldValues = FieldValues>(
+	props: FormItemProps<TControl, TFieldValues>
+) {
 	const { children, className, name } = props;
 
 	const uniqueId = useId();
 
 	const value = useMemo(
-		() => ({ name: name as string, id: `${String(name)}-(${uniqueId})` }),
+		() => ({ name: String(name), id: `${String(name)}-(${uniqueId})` }),
 		[name, uniqueId]
 	);
 
@@ -89,40 +106,26 @@ function FormLabel({ children, className }: { children: string; className?: stri
 
 function FormInputGroup(props: React.ComponentPropsWithRef<"div"> & { displayOtherChildren?: boolean }) {
 	const { children, className, displayOtherChildren, ...restOfProps } = props;
-	const InputSlot = useSlot(children, FormInput);
-	const LeftItemSlot = useSlot(children, FormInputLeftItem);
-	const RightItemSlot = useSlot(children, FormInputRightItem);
+	const InputSlot = useGetSlot(children, FormInput);
+	const LeftItemSlot = useGetSlot(children, FormInputLeftItem);
+	const RightItemSlot = useGetSlot(children, FormInputRightItem);
 
 	return (
 		<div className={cnMerge("flex items-center justify-between gap-4", className)} {...restOfProps}>
 			{LeftItemSlot}
-			{!displayOtherChildren ? InputSlot ?? children : children}
+			{!displayOtherChildren ? (InputSlot ?? children) : children}
 			{RightItemSlot}
 		</div>
 	);
 }
+type FormSideItemProps = {
+	children?: React.ReactNode;
+	className?: string;
+};
 
-function FormInput(
-	props: Omit<React.ComponentPropsWithRef<"input">, "id" | "name"> & { errorClassName?: string }
+function FormInputLeftItem<TElement extends React.ElementType = "span">(
+	props: PolymorphicPropsWithRef<TElement, FormSideItemProps>
 ) {
-	const { id, name } = useFormItemContext();
-	const { register, formState } = useHookFormContext();
-
-	const { className, errorClassName, ref, ...restOfProps } = props;
-
-	return (
-		<InputPrimitive
-			id={id}
-			className={cnMerge(formState.errors[name] && errorClassName, className)}
-			{...(Boolean(name) && register(name))}
-			{...(Boolean(ref) && { ref })}
-			{...restOfProps}
-		/>
-	);
-}
-FormInput.slot = Symbol.for("input");
-
-function FormInputLeftItem(props: React.ComponentPropsWithRef<"div">) {
 	const { children, className, ...restOfProps } = props;
 
 	return (
@@ -133,33 +136,121 @@ function FormInputLeftItem(props: React.ComponentPropsWithRef<"div">) {
 }
 FormInputLeftItem.slot = Symbol.for("leftItem");
 
-// eslint-disable-next-line sonarjs/no-identical-functions
-function FormInputRightItem(props: React.ComponentPropsWithRef<"div">) {
-	const { children, className, ...restOfProps } = props;
+function FormInputRightItem<TElement extends React.ElementType = "span">(
+	props: PolymorphicPropsWithRef<TElement, FormSideItemProps>
+) {
+	const { as: Element = "span", children, className, ...restOfProps } = props;
 
 	return (
-		<span className={cnMerge("inline-block", className)} {...restOfProps}>
+		<Element className={cnMerge("inline-block", className)} {...restOfProps}>
 			{children}
-		</span>
+		</Element>
 	);
 }
 FormInputRightItem.slot = Symbol.for("rightItem");
+
+function FormInput<TType extends React.HTMLInputTypeAttribute | "textarea">(
+	props: Omit<InputProps<TType>, "id" | "name"> & {
+		errorClassName?: string;
+		withEyeIcon?: boolean;
+		classNames?: { inputGroup?: string; input?: string };
+	}
+) {
+	const { id, name } = useFormItemContext();
+	const { register, formState } = useHookFormContext();
+
+	const [isPasswordVisible, toggleVisibility] = useToggle(false);
+
+	const { className, classNames, errorClassName, ref, type, withEyeIcon = true, ...restOfProps } = props;
+
+	const shouldHaveEyeIcon = withEyeIcon && type === "password";
+
+	const Element = shouldHaveEyeIcon ? FormInputGroup : React.Fragment;
+
+	// FIXME - Had to do this unsafe type coercion to shut TS up about props mismatch for now, figure out a better solution later
+	const InputPrimitiveCoerced = InputPrimitive as unknown as string;
+
+	return (
+		<Element {...(shouldHaveEyeIcon && { className: cnMerge("w-full", classNames?.inputGroup) })}>
+			<InputPrimitiveCoerced
+				id={id}
+				type={type === "password" && isPasswordVisible ? "text" : type}
+				className={cnMerge(
+					name && formState.errors[name] && errorClassName,
+					className,
+					classNames?.input
+				)}
+				{...(Boolean(name) && register(name))}
+				{...(Boolean(ref) && { ref })}
+				{...restOfProps}
+			/>
+
+			<Show when={shouldHaveEyeIcon}>
+				<FormInputRightItem
+					as={Button}
+					unstyled={true}
+					onClick={toggleVisibility}
+					className="size-5 shrink-0 lg:size-6"
+				>
+					<IconBox
+						icon={
+							isPasswordVisible
+								? "material-symbols:visibility-outline-rounded"
+								: "material-symbols:visibility-off-outline-rounded"
+						}
+						className="size-full"
+					/>
+				</FormInputRightItem>
+			</Show>
+		</Element>
+	);
+}
+FormInput.slot = Symbol.for("input");
+
+type FormControllerProps = Omit<
+	ControllerProps<FieldValues, FieldPath<FieldValues>>,
+	"name" | "control" | "render"
+> & {
+	render: (props: {
+		field: Omit<ControllerRenderProps, "value"> & { value: never };
+		fieldState: ControllerFieldState;
+		formState: UseFormStateReturn<FieldValues>;
+	}) => React.ReactElement;
+};
+
+function FormController(props: FormControllerProps) {
+	const { control } = useHookFormContext<FieldValues, FieldPath<FieldValues>>();
+	const { name } = useFormItemContext();
+
+	return (
+		<ControllerPrimitive name={name} control={control} {...(props as Omit<ControllerProps, "name">)} />
+	);
+}
 
 function FormErrorMessage<TStepData extends FieldValues>(props: FormErrorMessageProps<TStepData>) {
 	const { className, errorField, type } = props;
 
 	const { formState } = useHookFormContext();
 
-	const [ErrorMessageList] = useElementList();
+	const [ErrorMessageList] = getElementList();
 
-	const paragraphRef = useRef<HTMLParagraphElement>(null);
+	const errorParagraphRef = useRef<HTMLParagraphElement>(null);
 
 	useEffect(() => {
-		if (!paragraphRef.current) return;
+		if (!errorParagraphRef.current) return;
 
-		if (paragraphRef.current.classList.contains("animate-shake")) return;
+		if (!errorParagraphRef.current.classList.contains("animate-shake")) {
+			errorParagraphRef.current.classList.add("animate-shake");
+		}
 
-		paragraphRef.current.classList.add("animate-shake");
+		// Scroll to first error message
+		if (Object.keys(formState.errors).indexOf(errorField as string) === 0) {
+			errorParagraphRef.current.scrollIntoView({
+				behavior: "smooth",
+				block: "center",
+			});
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [formState.submitCount]);
 
 	const message =
@@ -197,9 +288,9 @@ function FormErrorMessage<TStepData extends FieldValues>(props: FormErrorMessage
 
 			<Show.Fallback>
 				<p
-					ref={paragraphRef}
+					ref={errorParagraphRef}
 					className={cnMerge(paragraphClasses, className)}
-					onAnimationEnd={() => paragraphRef.current?.classList.remove("animate-shake")}
+					onAnimationEnd={() => errorParagraphRef.current?.classList.remove("animate-shake")}
 				>
 					*{message}
 				</p>
@@ -216,4 +307,6 @@ export const Input = FormInput;
 export const InputGroup = FormInputGroup;
 export const InputLeftItem = FormInputLeftItem;
 export const InputRightItem = FormInputRightItem;
-export { Controller } from "react-hook-form";
+export const Controller = FormController;
+// eslint-disable-next-line unicorn/prefer-export-from
+export { ControllerPrimitive };

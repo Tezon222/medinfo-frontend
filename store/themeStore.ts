@@ -22,7 +22,7 @@ const prefersDarkMode = () => isBrowser() && window.matchMedia("(prefers-color-s
 const themeStoreObjectFn: StateCreator<ThemeStore> = (set, get) => ({
 	theme: prefersDarkMode() ? "dark" : "light",
 
-	isDarkMode: prefersDarkMode() ? true : false,
+	isDarkMode: Boolean(prefersDarkMode()),
 
 	actions: {
 		toggleTheme: () => {

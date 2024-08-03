@@ -1,17 +1,26 @@
 import { DocumentUploadIcon } from "@/components/icons";
 import { Button, DropZone } from "@/components/ui";
+import type { DropZoneProps } from "@/components/ui/drop-zone";
+import { toast } from "sonner";
 
 type DropZoneInputProps = {
-	value: File[];
-	onChange: (files: File[]) => void;
+	onChange: (file: File | null | undefined) => void;
 };
 
 function DropZoneInput(props: DropZoneInputProps) {
-	const { value, onChange } = props;
+	const { onChange } = props;
+
+	const handleImageUpload: DropZoneProps["onDrop"] = ({ acceptedFiles }) => {
+		onChange(acceptedFiles[0]);
+
+		toast.success("Success", {
+			description: `Uploaded ${acceptedFiles.length} file${acceptedFiles.length > 1 ? "s" : ""}!`,
+		});
+	};
 
 	return (
 		<DropZone
-			onDrop={({ acceptedFiles }) => {}}
+			onDrop={handleImageUpload}
 			classNames={{
 				base: `items-center gap-2 rounded-[8px] border-[1.4px] border-dashed
 				border-medinfo-primary-darker px-4 py-3`,

@@ -10,14 +10,16 @@ type SlotCloneProps = {
 function SlotClone(props: SlotCloneProps) {
 	const { children, ref: forwardedRef, ...restOfSlotProps } = props;
 
-	if (isValidElement(children)) {
-		const unknownChildren = children as unknown as UnknownProps;
-
+	if (isValidElement<UnknownProps>(children)) {
 		const clonedProps = {
-			...mergeProps(restOfSlotProps, children.props as UnknownProps),
+			...mergeProps(restOfSlotProps, children.props),
 			ref: forwardedRef
-				? composeRefs(forwardedRef, unknownChildren.ref as PossibleRef<unknown>)
-				: unknownChildren.ref,
+				? composeRefs(
+						forwardedRef,
+						(children.props.ref ??
+							(children as unknown as typeof children.props).ref) as PossibleRef<unknown>
+					)
+				: (children.props.ref ?? (children as unknown as typeof children.props).ref),
 		};
 
 		return cloneElement(children, clonedProps);

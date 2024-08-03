@@ -22,4 +22,4 @@ const CopyrightIcon = (props: React.SVGProps<SVGSVGElement>) => {
 	);
 };
 
-export default CopyrightIcon
+export default CopyrightIcon;

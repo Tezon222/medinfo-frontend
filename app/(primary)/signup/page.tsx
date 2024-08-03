@@ -16,7 +16,7 @@ function SignUpPage() {
 			password: "",
 			confirmPassword: "",
 			specialty: "",
-			license: [],
+			license: null,
 			country: "",
 			photo: null,
 		},
@@ -48,13 +48,13 @@ function SignUpPage() {
 							<Form.Item
 								control={control}
 								name="firstName"
-								className="gap-1 font-roboto md:text-[20px]"
+								className="gap-1 font-roboto font-medium"
 							>
-								<Form.Label className="font-medium">First name</Form.Label>
+								<Form.Label className="md:text-[20px]">First name</Form.Label>
 
 								<Form.InputGroup
 									className="h-[48px] rounded-[8px] border-[1.4px] border-medinfo-primary-main
-										px-4 py-3 md:h-[64px] md:px-4 md:py-5"
+										px-4 py-3 md:h-[64px] md:py-5"
 								>
 									<Form.InputLeftItem>
 										<IconBox icon="majesticons:user-line" className="size-5 md:size-6" />
@@ -63,7 +63,7 @@ function SignUpPage() {
 									<Form.Input
 										type="text"
 										placeholder="enter first name"
-										className="border-none p-0 font-medium placeholder:text-medinfo-dark-4
+										className="border-none placeholder:text-medinfo-dark-4
 											focus-visible:ring-transparent md:text-base"
 									/>
 								</Form.InputGroup>
@@ -72,13 +72,13 @@ function SignUpPage() {
 							<Form.Item
 								control={control}
 								name="lastName"
-								className="gap-1 font-roboto md:text-[20px]"
+								className="gap-1 font-roboto font-medium"
 							>
-								<Form.Label className="font-medium">Last name</Form.Label>
+								<Form.Label className="md:text-[20px]">Last name</Form.Label>
 
 								<Form.InputGroup
 									className="h-[48px] rounded-[8px] border-[1.4px] border-medinfo-primary-main
-										px-4 py-3 md:h-[64px] md:px-4 md:py-5"
+										px-4 py-3 md:h-[64px] md:py-5"
 								>
 									<Form.InputLeftItem>
 										<IconBox icon="majesticons:user-line" className="size-5 md:size-6" />
@@ -87,22 +87,16 @@ function SignUpPage() {
 									<Form.Input
 										type="text"
 										placeholder="enter last name"
-										className="border-none p-0 font-medium placeholder:text-medinfo-dark-4
+										className="border-none placeholder:text-medinfo-dark-4
 											focus-visible:ring-transparent md:text-base"
 									/>
 								</Form.InputGroup>
 							</Form.Item>
 
-							<Form.Item
-								control={control}
-								name="country"
-								className="gap-1 font-roboto md:text-[20px]"
-							>
-								<Form.Label className="font-medium">Country</Form.Label>
+							<Form.Item control={control} name="country" className="gap-1 font-roboto font-medium">
+								<Form.Label className="md:text-[20px]">Country</Form.Label>
 
 								<Form.Controller
-									control={control}
-									name="country"
 									render={({ field }) => (
 										<Select.Root
 											name={field.name}
@@ -123,7 +117,7 @@ function SignUpPage() {
 
 											<Select.Content
 												classNames={{
-													base: `border-[1.4px] border-medinfo-primary-main bg-white/90 p-0
+													base: `border-[1.4px] border-medinfo-primary-main bg-white/90
 													backdrop-blur-lg`,
 													viewport: "gap-1",
 												}}
@@ -156,13 +150,11 @@ function SignUpPage() {
 								<Form.Item
 									control={control}
 									name="specialty"
-									className="gap-1 font-roboto md:text-[20px]"
+									className="gap-1 font-roboto font-medium"
 								>
-									<Form.Label className="font-medium">Specialty</Form.Label>
+									<Form.Label className="md:text-[20px]">Specialty</Form.Label>
 
 									<Form.Controller
-										control={control}
-										name="specialty"
 										render={({ field }) => (
 											<Select.Root
 												name={field.name}
@@ -219,18 +211,14 @@ function SignUpPage() {
 								<Form.Item
 									control={control}
 									name="license"
-									className="gap-1 font-roboto md:text-[20px]"
+									className="gap-1 font-roboto font-medium"
 								>
-									<Form.Label className="font-medium">
+									<Form.Label className="md:text-[20px]">
 										Upload medical license/certificate
 									</Form.Label>
 
 									<Form.Controller
-										control={control}
-										name="license"
-										render={({ field }) => (
-											<DropZoneInput value={field.value} onChange={field.onChange} />
-										)}
+										render={({ field }) => <DropZoneInput onChange={field.onChange} />}
 									/>
 								</Form.Item>
 							</Show>
@@ -238,13 +226,13 @@ function SignUpPage() {
 							<Form.Item
 								control={control}
 								name="password"
-								className="gap-1 font-roboto md:text-[20px]"
+								className="gap-1 font-roboto font-medium"
 							>
-								<Form.Label className="font-medium">Password</Form.Label>
+								<Form.Label className="md:text-[20px]">Password</Form.Label>
 
 								<Form.InputGroup
 									className="h-[48px] rounded-[8px] border-[1.4px] border-medinfo-primary-main
-										px-4 py-3 md:h-[64px] md:px-4 md:py-5"
+										px-4 py-3 md:h-[64px] md:py-5"
 								>
 									<Form.InputLeftItem>
 										<IconBox icon="mynaui:lock-password" className="size-5 md:size-6" />
@@ -253,7 +241,7 @@ function SignUpPage() {
 									<Form.Input
 										type="password"
 										placeholder="enter password"
-										className="border-none p-0 font-medium placeholder:text-medinfo-dark-4
+										className="border-none placeholder:text-medinfo-dark-4
 											focus-visible:ring-transparent md:text-base"
 									/>
 								</Form.InputGroup>
@@ -262,13 +250,13 @@ function SignUpPage() {
 							<Form.Item
 								control={control}
 								name="confirmPassword"
-								className="gap-1 font-roboto md:text-[20px]"
+								className="gap-1 font-roboto font-medium"
 							>
-								<Form.Label className="font-medium">Confirm password</Form.Label>
+								<Form.Label className="md:text-[20px]">Confirm password</Form.Label>
 
 								<Form.InputGroup
 									className="h-[48px] rounded-[8px] border-[1.4px] border-medinfo-primary-main
-										px-4 py-3 md:h-[64px] md:px-4 md:py-5"
+										px-4 py-3 md:h-[64px] md:py-5"
 								>
 									<Form.InputLeftItem>
 										<IconBox icon="mynaui:lock-password" className="size-5 md:size-6" />
@@ -277,7 +265,7 @@ function SignUpPage() {
 									<Form.Input
 										type="password"
 										placeholder="enter password"
-										className="border-none p-0 font-medium placeholder:text-medinfo-dark-4
+										className="border-none placeholder:text-medinfo-dark-4
 											focus-visible:ring-transparent md:text-base"
 									/>
 								</Form.InputGroup>
@@ -306,9 +294,8 @@ function SignUpPage() {
 
 								<Button type="submit">Sign Up</Button>
 
-								<div className="space-y-2 text-center">
+								<div className="grid justify-items-center gap-2 text-center">
 									<NavLink
-										type="Navbar"
 										href={{
 											query: { type: type === "doctor" ? "patient" : "doctor" },
 										}}

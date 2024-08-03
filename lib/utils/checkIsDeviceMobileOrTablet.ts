@@ -17,14 +17,12 @@ const checkIsDeviceMobileOrTablet = (): DeviceCheckReturnType => {
 			return { isMobileOrTablet: navigator.maxTouchPoints > 0 };
 		}
 
-		case "userAgentData" in navigator &&
-			(navigator.userAgentData as { mobile: boolean }).mobile: {
+		case "userAgentData" in navigator && (navigator.userAgentData as { mobile: boolean }).mobile: {
 			return { isMobileOrTablet: true };
 		}
 
 		default: {
-			const mobileDeviceRegex =
-				/android|webos|iphone|ipad|ipod|blackberry|mobi|iemobile|opera mini/i;
+			const mobileDeviceRegex = /android|webos|iphone|ipad|ipod|blackberry|mobi|iemobile|opera mini/i;
 
 			return { isMobileOrTablet: mobileDeviceRegex.test(navigator.userAgent) };
 		}

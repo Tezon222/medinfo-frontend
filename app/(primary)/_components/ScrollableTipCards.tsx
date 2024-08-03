@@ -1,30 +1,33 @@
 "use client";
 
-import { IconBox } from "@/components/common";
+import { IconBox, getElementList } from "@/components/common";
 import { Card } from "@/components/ui";
-import { useDragScroll, useElementList } from "@/lib/hooks";
+import { useDragScroll } from "@/lib/hooks";
 import { cnJoin } from "@/lib/utils/cn";
 import { tipPlaceHolder } from "@/public/assets/images/landing-page";
 import Image from "next/image";
 import Link from "next/link";
 
 function ScrollableTipCards() {
-	const [CardList] = useElementList();
+	const [CardList] = getElementList();
 
 	const { dragScrollProps, dragContainerClasses, dragItemClasses } = useDragScroll<HTMLUListElement>();
 
 	return (
 		<CardList
 			{...dragScrollProps}
-			className={cnJoin("mt-6 gap-5 [align-items:safe_center] md:mt-14", dragContainerClasses)}
+			className={cnJoin(
+				"mt-6 select-none gap-5 [align-items:safe_center] md:mt-14",
+				dragContainerClasses
+			)}
 			each={[...Array(4).keys()]}
 			render={(item) => (
 				<Card
 					as="li"
 					key={item}
 					className={cnJoin(
-						`w-[161px] shrink-0 space-y-3 rounded-[16px] border-[1.4px] border-medinfo-light-1
-						pb-3 md:w-[276px]`,
+						`w-[161px] shrink-0 space-y-3 rounded-[16px] border-[1.4px] border-medinfo-light-1 pb-3
+						md:w-[276px]`,
 						dragItemClasses
 					)}
 				>
