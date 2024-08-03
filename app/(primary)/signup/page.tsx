@@ -1,6 +1,7 @@
 "use client";
 
 import { IconBox, Logo, NavLink, Show } from "@/components/common";
+import { Main } from "../_components";
 import { Button, Form, Select } from "@/components/ui";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
@@ -27,7 +28,7 @@ function SignUpPage() {
 	const type = useSearchParams().get("type") as "doctor" | "patient" | null;
 
 	return (
-		<main className="px-6 py-14 md:w-full md:px-[100px] md:py-[92px]">
+		<Main className="md:w-full">
 			<div
 				className="rounded-[16px] border-[1.4px] border-medinfo-light-2
 					shadow-[0_0_0_2px_hsl(0,0%,0%,0.25)] md:flex"
@@ -338,7 +339,7 @@ function SignUpPage() {
 					</Button>
 				</section>
 			</div>
-		</main>
+		</Main>
 	);
 }
 

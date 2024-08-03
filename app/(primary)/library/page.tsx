@@ -5,6 +5,7 @@ import { SearchIcon } from "@/components/icons";
 import { DropdownMenu } from "@/components/ui";
 import { cnJoin } from "@/lib/utils/cn";
 import { useState } from "react";
+import { Main } from "../_components";
 import { TipCard } from "./TipCard";
 
 function LibraryPage() {
@@ -12,10 +13,7 @@ function LibraryPage() {
 	const [CardList] = getElementList("base");
 
 	return (
-		<main
-			className="flex w-full flex-col gap-6 px-6 py-14 max-lg:max-w-[400px] lg:gap-9 lg:px-[100px]
-				lg:py-[92px]"
-		>
+		<Main className="flex w-full flex-col gap-6 max-lg:max-w-[400px] lg:gap-9">
 			<section className="grid gap-3 text-center lg:gap-6">
 				<h1 className="text-[22px] font-medium text-medinfo-primary-darker lg:text-[48px] lg:font-bold">
 					Lorem ipsum dolor sit amet consectetur
@@ -79,13 +77,13 @@ function LibraryPage() {
 						border-medinfo-primary-main bg-white px-4 focus-within:ring-2
 						focus-within:ring-medinfo-primary-lighter focus-visible:outline-none lg:w-[500px]"
 				>
-					<SearchIcon type="green" className="size-5 shrink-0" />
+					<SearchIcon type="green" className="size-5 shrink-0 lg:size-6" />
 
 					<input
 						type="search"
 						placeholder="search..."
 						className="w-full font-roboto text-sm font-medium outline-none placeholder:font-medium
-							placeholder:text-medinfo-dark-4"
+							placeholder:text-medinfo-dark-4 md:text-base"
 					/>
 				</form>
 			</section>
@@ -107,7 +105,7 @@ function LibraryPage() {
 					More results ...(190)
 				</p>
 			</section>
-		</main>
+		</Main>
 	);
 }
 
