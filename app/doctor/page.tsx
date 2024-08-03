@@ -6,7 +6,7 @@ import PatientIcon from "@/components/icons/PatientIcon";
 function DoctorPage() {
 	return (
 		<div className="p-[40px]">
-			<div className="flex max-h-[402px] w-full gap-[40px]">
+			<div className="flex max-h-[402px] w-full flex-col gap-[40px] lg:flex-row">
 				<div className="w-full max-w-[338px] space-y-[27px]">
 					<div className="flex gap-[16px] rounded-[16px] bg-white p-[28px] shadow-md">
 						<div className="rounded-[8px] bg-[#F0FDF6] p-[8px]">
@@ -48,14 +48,14 @@ function DoctorPage() {
 					<div>{/* <Image src={ChartImage} height={} alt="chart"/> */}</div>
 				</div>
 			</div>
-			<div className="mt-[32px] flex gap-[40px]">
+			<div className="mt-[32px] flex flex-col gap-[40px] lg:flex-row">
 				<div className="w-full rounded-[16px] bg-white p-[32px] shadow-md">
-					<div className="flex items-center justify-between">
-						<h2 className="text-[22px] font-medium">Today’s appointment</h2>
+					<div className="flex flex-col items-start lg:flex-row lg:items-center lg:justify-between">
+						<h2 className="text-[18px] font-medium lg:text-[22px]">Today’s appointment</h2>
 						<p className="text-[14px] font-normal">18th Febraury, 2023</p>
 					</div>
 					<div className="mt-[12px] flex items-center gap-[16px]">
-						<p className="text-[20px] font-medium">See all</p>
+						<p className="font-medium lg:text-[20px]">See all</p>
 						<NextIcon />
 					</div>
 					<div className="mt-[24px] space-y-[12px]">
@@ -110,10 +110,10 @@ function DoctorPage() {
 				</div>
 				<div className="w-full rounded-[16px] bg-white p-[32px] shadow-md">
 					<div className="flex items-center justify-between">
-						<h2 className="text-[22px] font-medium">Appointment requests</h2>
+						<h2 className="text-[18px] font-medium lg:text-[22px]">Appointment requests</h2>
 					</div>
 					<div className="mt-[12px] flex items-center gap-[16px]">
-						<p className="text-[20px] font-medium">See all</p>
+						<p className="font-medium lg:text-[20px]">See all</p>
 						<NextIcon />
 					</div>
 					<div className="mt-[24px] space-y-[12px]">
