@@ -7,7 +7,7 @@ import { Accordion, Button } from "@/components/ui";
 import { cnJoin } from "@/lib/utils/cn";
 import { feature1, feature2, feature3, hero } from "@/public/assets/images/landing-page";
 import Image from "next/image";
-import { ScrollableTipCards } from "./_components";
+import { Main, ScrollableTipCards } from "./_components";
 
 const coreServices = [
 	{ imageSrc: feature1 as string, description: "SubSpecialists" },
@@ -63,10 +63,7 @@ function HomePage() {
 	const [FAQList] = getElementList();
 
 	return (
-		<main
-			className="flex w-full flex-col gap-14 px-6 py-14 max-md:max-w-[400px] md:gap-[92px] md:px-[70px]
-				md:py-[92px] lg:px-[100px]"
-		>
+		<Main className="flex w-full flex-col gap-14 max-md:max-w-[400px] md:gap-[92px]">
 			<section className="flex flex-col items-center md:flex-row-reverse md:gap-[67px]">
 				<div className="flex flex-col items-center max-md:text-center md:items-start">
 					<h1
@@ -167,7 +164,7 @@ function HomePage() {
 
 				<FeatureList
 					className="mt-12 grid grid-cols-2 justify-center gap-x-5 gap-y-10 text-center md:mt-[88px]
-						md:grid-cols-[repeat(4,_minmax(161px,248px))] md:gap-x-[28px]"
+						md:grid-cols-[repeat(4,_minmax(161px,248px))] md:justify-between md:gap-x-[28px]"
 					each={features}
 					render={(feature) => (
 						<li
@@ -272,7 +269,7 @@ function HomePage() {
 					/>
 				</Accordion.Root>
 			</section>
-		</main>
+		</Main>
 	);
 }
 

@@ -5,6 +5,7 @@ import { Button, Form } from "@/components/ui";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { useForm } from "react-hook-form";
+import { Main } from "../_components";
 
 function SignInPage() {
 	const methods = useForm({
@@ -19,7 +20,7 @@ function SignInPage() {
 	const type = useSearchParams().get("type") as "doctor" | "patient" | null;
 
 	return (
-		<main className="px-6 py-14 md:w-full md:px-[100px] md:py-[92px]">
+		<Main className="md:w-full">
 			<div
 				className="rounded-[16px] border-[1.4px] border-medinfo-light-2
 					shadow-[0_0_0_2px_hsl(0,0%,0%,0.25)] md:flex"
@@ -113,6 +114,7 @@ function SignInPage() {
 
 								<div className="flex flex-col gap-2 text-center">
 									<NavLink
+										transitionType="Regular"
 										href={{
 											query: { type: type === "doctor" ? "patient" : "doctor" },
 										}}
@@ -123,7 +125,11 @@ function SignInPage() {
 
 									<p className="md:hidden">
 										Don't have an account?{" "}
-										<NavLink href="/signup" className="text-medinfo-primary-main">
+										<NavLink
+											transitionType="Regular"
+											href="/signup"
+											className="text-medinfo-primary-main"
+										>
 											Sign up
 										</NavLink>
 									</p>
@@ -153,7 +159,7 @@ function SignInPage() {
 					</Button>
 				</section>
 			</div>
-		</main>
+		</Main>
 	);
 }
 
