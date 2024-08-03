@@ -1,11 +1,11 @@
 "use client";
 
 import { IconBox, Logo, NavLink, Show } from "@/components/common";
-import { Main } from "../_components";
 import { Button, Form, Select } from "@/components/ui";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { useForm } from "react-hook-form";
+import { Main } from "../_components";
 import DropZoneInput from "./DropZoneInput";
 
 function SignUpPage() {
@@ -297,6 +297,7 @@ function SignUpPage() {
 
 								<div className="grid justify-items-center gap-2 text-center">
 									<NavLink
+										transitionType="Regular"
 										href={{
 											query: { type: type === "doctor" ? "patient" : "doctor" },
 										}}
@@ -307,7 +308,11 @@ function SignUpPage() {
 
 									<p className="md:hidden">
 										Already have an account?{" "}
-										<NavLink href="/signin" className="text-medinfo-primary-main">
+										<NavLink
+											transitionType="Regular"
+											href="/signin"
+											className="text-medinfo-primary-main"
+										>
 											Sign in
 										</NavLink>
 									</p>

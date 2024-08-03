@@ -114,6 +114,7 @@ function SignInPage() {
 
 								<div className="flex flex-col gap-2 text-center">
 									<NavLink
+										transitionType="Regular"
 										href={{
 											query: { type: type === "doctor" ? "patient" : "doctor" },
 										}}
@@ -124,7 +125,11 @@ function SignInPage() {
 
 									<p className="md:hidden">
 										Don't have an account?{" "}
-										<NavLink href="/signup" className="text-medinfo-primary-main">
+										<NavLink
+											transitionType="Regular"
+											href="/signup"
+											className="text-medinfo-primary-main"
+										>
 											Sign up
 										</NavLink>
 									</p>
