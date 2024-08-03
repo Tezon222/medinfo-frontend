@@ -13,7 +13,7 @@ function LibraryPage() {
 	const [CardList] = getElementList("base");
 
 	return (
-		<Main className="flex w-full flex-col gap-6 max-lg:max-w-[400px] lg:gap-9">
+		<Main className="flex w-full flex-col gap-6 max-lg:max-w-[400px] md:px-6 lg:gap-9 lg:px-[100px]">
 			<section className="grid gap-3 text-center lg:gap-6">
 				<h1 className="text-[22px] font-medium text-medinfo-primary-darker lg:text-[48px] lg:font-bold">
 					Lorem ipsum dolor sit amet consectetur
