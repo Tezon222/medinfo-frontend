@@ -5,6 +5,7 @@ import { SearchIcon } from "@/components/icons";
 import { DropdownMenu } from "@/components/ui";
 import { cnJoin } from "@/lib/utils/cn";
 import { useState } from "react";
+import { Main } from "../_components";
 import { TipCard } from "./TipCard";
 
 function LibraryPage() {
@@ -12,28 +13,25 @@ function LibraryPage() {
 	const [CardList] = getElementList("base");
 
 	return (
-		<main
-			className="flex w-full flex-col gap-6 px-6 py-14 max-md:max-w-[400px] md:gap-[92px] md:px-[70px]
-				md:py-[92px] lg:px-[100px]"
-		>
-			<section className="grid gap-3 text-center">
-				<h1 className="text-[22px] font-medium text-medinfo-primary-darker">
+		<Main className="flex w-full flex-col gap-6 max-lg:max-w-[400px] md:px-6 lg:gap-9 lg:px-[100px]">
+			<section className="grid gap-3 text-center lg:gap-6">
+				<h1 className="text-[22px] font-medium text-medinfo-primary-darker lg:text-[48px] lg:font-bold">
 					Lorem ipsum dolor sit amet consectetur
 				</h1>
 
-				<p className="text-sm">
+				<p className="mx-auto max-w-[747px] text-sm lg:text-[18px]">
 					Lorem ipsum dolor sit amet consectetur. Massa nec imperdiet neque ut. Lobortis in phasellus
 					sed mattis tincidunt eget diam pharetra. Est lacus faucibus scelerisque nunc interdum
 					tincidunt.
 				</p>
 			</section>
 
-			<section className="flex h-[48px] justify-center gap-5">
+			<section className="flex h-[48px] justify-center gap-5 lg:h-[64px] lg:gap-8">
 				<DropdownMenu.Root>
 					<DropdownMenu.Trigger
 						className="group flex h-full w-[116px] items-center justify-between gap-2 rounded-[8px]
 							border-[1.4px] border-medinfo-primary-main px-4 font-medium
-							data-[placeholder]:text-medinfo-dark-4"
+							data-[placeholder]:text-medinfo-dark-4 lg:w-[220px]"
 					>
 						<p className="text-sm font-medium md:text-base">{filter}</p>
 
@@ -77,21 +75,24 @@ function LibraryPage() {
 				<form
 					className="flex h-full items-center gap-[18px] rounded-lg border-[1.4px]
 						border-medinfo-primary-main bg-white px-4 focus-within:ring-2
-						focus-within:ring-medinfo-primary-lighter focus-visible:outline-none"
+						focus-within:ring-medinfo-primary-lighter focus-visible:outline-none lg:w-[500px]"
 				>
-					<SearchIcon type="green" className="size-5 shrink-0" />
+					<SearchIcon type="green" className="size-5 shrink-0 lg:size-6" />
 
 					<input
 						type="search"
 						placeholder="search..."
 						className="w-full font-roboto text-sm font-medium outline-none placeholder:font-medium
-							placeholder:text-medinfo-dark-4"
+							placeholder:text-medinfo-dark-4 md:text-base"
 					/>
 				</form>
 			</section>
 
 			<section
-				className={cnJoin("grid w-full gap-y-6", filter === "grid" && "grid-cols-2 gap-x-[16px]")}
+				className={cnJoin(
+					"grid w-full gap-y-6 lg:gap-y-12",
+					filter === "grid" && "auto-rows-[225px] grid-cols-2 gap-x-4 lg:auto-rows-[400px] lg:gap-x-7"
+				)}
 			>
 				<CardList
 					each={[...Array(6).keys()]}
@@ -100,9 +101,11 @@ function LibraryPage() {
 			</section>
 
 			<section>
-				<p className="text-center text-medinfo-primary-main">More results ...(190)</p>
+				<p className="text-center text-medinfo-primary-main lg:text-[20px] lg:font-medium">
+					More results ...(190)
+				</p>
 			</section>
-		</main>
+		</Main>
 	);
 }
 

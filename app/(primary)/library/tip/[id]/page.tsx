@@ -1,24 +1,39 @@
+import { Main } from "@/app/(primary)/_components";
 import libraryPlaceholder from "@/public/assets/images/library-details.svg";
 import Image from "next/image";
 import { AlternateTipCard } from "../../TipCard";
 
 const TipDetailsPage = () => {
 	return (
-		<main className="flex w-full flex-col items-start px-6 py-14">
-			<section>
+		<Main className="flex w-full flex-col items-start">
+			<section className="lg:flex lg:gap-16">
 				<Image
-					className="size-[272px]"
+					className="size-[272px] lg:size-[460px]"
 					src={libraryPlaceholder as string}
 					alt=""
 					priority={true}
 					width={272}
 					height={272}
 				/>
+
+				<section
+					id="Ads"
+					className="hidden max-h-[460px] overflow-hidden lg:flex lg:flex-col lg:gap-2"
+				>
+					<AlternateTipCard type="list" linkToAd="https://www.google.com" />
+					<AlternateTipCard type="list" linkToAd="https://www.google.com" />
+					<AlternateTipCard type="list" linkToAd="https://www.google.com" />
+				</section>
 			</section>
 
-			<section className="mt-5 flex flex-col gap-5">
-				<h1 className="text-[32px] font-semibold text-medinfo-primary-darker">Title</h1>
-				<p className="">
+			<section className="mt-5 flex flex-col gap-5 lg:mt-10">
+				<h1
+					className="text-[32px] font-semibold text-medinfo-primary-darker lg:text-[52px] lg:font-bold"
+				>
+					Title
+				</h1>
+
+				<p className="text-[18px]">
 					Lorem ipsum dolor sit amet consectetur. Quis consectetur vel ultrices non. Donec nam dictum
 					volutpat quis a amet arcu convallis arcu. Augue id massa dui elit. Malesuada et tortor
 					vulputate dolor quis euismod lectus velit. Laoreet molestie auctor cras sed ipsum erat eget
@@ -62,17 +77,24 @@ const TipDetailsPage = () => {
 				</p>
 			</section>
 
-			<section className="mt-14 flex flex-col gap-2">
-				<AlternateTipCard type="list" id={1} />
-				<AlternateTipCard type="list" id={1} />
-				<AlternateTipCard type="list" id={1} />
+			<section id="Ads" className="mt-14 flex flex-col gap-2 lg:hidden">
+				<AlternateTipCard type="list" linkToAd="https://www.google.com" />
+				<AlternateTipCard type="list" linkToAd="https://www.google.com" />
+				<AlternateTipCard type="list" linkToAd="https://www.google.com" />
 			</section>
 
-			<section className="mt-14 grid grid-cols-2 gap-x-5">
-				<AlternateTipCard type="grid" id={1} />
-				<AlternateTipCard type="grid" id={1} />
+			<section id="Related Posts" className="mt-14 w-full lg:mt-[92px]">
+				<h2 className="text-[48px] font-bold text-medinfo-primary-darker max-lg:hidden">
+					Related Posts
+				</h2>
+
+				<div className="flex justify-between gap-5 lg:mt-10">
+					<AlternateTipCard type="grid" id={1} />
+					<AlternateTipCard type="grid" id={1} />
+					<AlternateTipCard type="grid" id={1} />
+				</div>
 			</section>
-		</main>
+		</Main>
 	);
 };
 export default TipDetailsPage;
