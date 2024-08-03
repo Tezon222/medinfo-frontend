@@ -27,7 +27,7 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
 								<EmojiHandIcon />
 							</span>
 						</div>
-						<div className="flex items-center gap-2">
+						<div className="flex items-center gap-[12px]">
 							<LogoutIcon />
 							<h1 className="text-[18px] text-[#323232]">Log out</h1>
 						</div>
