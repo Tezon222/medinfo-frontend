@@ -10,16 +10,17 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<div className="flex h-full lg:bg-medinfo-light-4">
 			<aside
-				className="sticky top-0 hidden h-[92%] w-[220px] shrink-0 self-start bg-white py-[32px]
-					shadow-md lg:block"
+				className="hidden py-8 lg:sticky lg:top-0 lg:flex lg:h-screen lg:max-h-[832px]
+					lg:w-[220px] lg:shrink-0 lg:flex-col lg:gap-[48px] lg:bg-white lg:shadow-md"
 			>
 				<Logo className="mx-auto" />
-				<div className="flex h-full flex-col justify-between py-6">
+
+				<div className="flex h-full flex-col justify-between">
 					<Sidebar />
 					<div className="px-6">
 						<hr className="w-full" />
 					</div>
-					<div className="flex flex-col gap-[32px] px-6">
+					<div className="flex flex-col gap-8 px-6">
 						<div className="flex items-center gap-[2px]">
 							<h1 className="text-[18px]">Hello, John</h1>
 							<span>

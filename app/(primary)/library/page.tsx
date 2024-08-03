@@ -12,7 +12,10 @@ function LibraryPage() {
 	const [CardList] = getElementList("base");
 
 	return (
-		<main className="flex max-w-[400px] flex-col justify-center gap-6 px-6 py-14">
+		<main
+			className="flex w-full flex-col gap-6 px-6 py-14 max-md:max-w-[400px] md:gap-[92px] md:px-[70px]
+				md:py-[92px] lg:px-[100px]"
+		>
 			<section className="grid gap-3 text-center">
 				<h1 className="text-[22px] font-medium text-medinfo-primary-darker">
 					Lorem ipsum dolor sit amet consectetur
