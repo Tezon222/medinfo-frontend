@@ -47,7 +47,7 @@ function LibraryPage() {
 					>
 						<DropdownMenu.RadioGroup
 							value={filter}
-							onValueChange={(value) => setFilter(value as typeof filter)}
+							onValueChange={(value: string) => setFilter(value as typeof filter)}
 						>
 							<DropdownMenu.RadioItem
 								value="grid"
