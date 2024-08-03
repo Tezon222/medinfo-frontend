@@ -164,7 +164,7 @@ function HomePage() {
 
 				<FeatureList
 					className="mt-12 grid grid-cols-2 justify-center gap-x-5 gap-y-10 text-center md:mt-[88px]
-						md:grid-cols-[repeat(4,_minmax(161px,248px))] md:gap-x-[28px]"
+						md:grid-cols-[repeat(4,_minmax(161px,248px))] md:justify-between md:gap-x-[28px]"
 					each={features}
 					render={(feature) => (
 						<li
