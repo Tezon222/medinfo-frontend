@@ -2,7 +2,7 @@ import { SearchIcon } from "@/components/icons";
 
 function page() {
 	return (
-		<div className="-z-10 mt-[56px] px-[24px] lg:mt-0 lg:p-[40px]">
+		<div className="-z-10 mt-[56px] px-[24px] lg:z-10 lg:mt-0 lg:p-[40px]">
 			<div className="flex h-[680px] gap-[28px]">
 				<div
 					className="w-full rounded-[16px] border border-solid border-medinfo-primary-lighter bg-white

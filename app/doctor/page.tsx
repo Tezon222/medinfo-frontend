@@ -7,7 +7,7 @@ function DoctorPage() {
 	return (
 		<div className="p-[24px] lg:p-[40px]">
 			<div className="flex max-h-[402px] w-full flex-col gap-[40px] lg:flex-row">
-				<div className="w-full max-w-[338px] space-y-[27px]">
+				<div className="w-full space-y-[27px] lg:max-w-[338px]">
 					<div className="flex gap-[16px] rounded-[16px] bg-white p-[28px] shadow-md">
 						<div className="rounded-[8px] bg-[#F0FDF6] p-[8px]">
 							<DollarSignIcon />
