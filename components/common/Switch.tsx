@@ -1,45 +1,40 @@
 "use client";
 
-import { useGetSlot } from "@/lib/hooks";
-import { Children, useMemo } from "react";
+import { isArray } from "@/lib/type-helpers";
+import { getSlotElement } from "@/lib/utils/getSlotElement";
 
-type ValidSwitchComponentType = React.ReactElement<SwitchCaseProps, "">;
+type ValidSwitchComponentType = React.ReactElement<SwitchMatchProps>;
 
-type SwitchProps<TCondition = unknown> = {
+type SwitchProps<TCondition> = {
 	condition?: TCondition;
 	children: ValidSwitchComponentType | ValidSwitchComponentType[];
 };
 
-type SwitchCaseProps<TWhen = unknown> = {
+type SwitchMatchProps<TWhen = boolean> = {
 	when: TWhen;
 	children: React.ReactNode;
 };
 
-function Switch<TCondition>(props: SwitchProps<TCondition>) {
-	const { children, condition = Symbol.for("no-condition") as never } = props;
+function Switch<TCondition = true>(props: SwitchProps<TCondition>) {
+	const { children, condition = true } = props;
 
-	const defaultCase = useGetSlot(children, Default, {
+	const defaultCase = getSlotElement(children, Default, {
 		throwOnMultipleSlotMatch: true,
 		errorMessage: "Only one <Switch.Default> component is allowed",
 	});
 
-	const matchedCase = useMemo(() => {
-		const casesArray = Children.toArray(children) as Extract<SwitchProps["children"], unknown[]>;
+	const childrenCasesArray = isArray(children) ? children : [children];
 
-		// == Using a symbol to represent the case where no condition is set, and in such case only find matching child via the truthiness of the "when" prop
-		return condition === Symbol.for("no-condition")
-			? casesArray.find((child) => child.props.when)
-			: casesArray.find((child) => child.props.when === condition);
-	}, [children, condition]);
+	const matchedCase = childrenCasesArray.find((child) => child.props.when === condition);
 
 	return matchedCase ?? defaultCase;
 }
 
-export function Match<TWhen>({ children }: SwitchCaseProps<TWhen>) {
+export function Match<TWhen>({ children }: SwitchMatchProps<TWhen>) {
 	return children;
 }
 
-export function Default({ children }: Pick<SwitchCaseProps, "children">) {
+export function Default({ children }: Pick<SwitchMatchProps, "children">) {
 	return children;
 }
 Default.slot = Symbol.for("fallback");

@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetOtherChildren, useGetSlot } from "@/lib/hooks";
+import { getOtherChildren, getSlotElement } from "@/lib/utils/getSlotElement";
 
 type ShowProps = {
 	when: boolean;
@@ -9,12 +9,12 @@ type ShowProps = {
 };
 
 function Show({ when, children, fallback }: ShowProps) {
-	const fallBackSlot = useGetSlot(children, ShowFallback, {
+	const fallBackSlot = getSlotElement(children, ShowFallback, {
 		throwOnMultipleSlotMatch: true,
 		errorMessage: "Only one <Show.Default> component is allowed",
 	});
 
-	const otherChildren = useGetOtherChildren(children, ShowFallback);
+	const otherChildren = getOtherChildren(children, [ShowFallback]);
 
 	if (fallBackSlot && fallback) {
 		throw new Error(`
