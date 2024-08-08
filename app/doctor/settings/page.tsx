@@ -1,6 +1,8 @@
 function Page() {
 	return (
+
 		<div className="p-[24px] lg:p-[40px]">
+
 			<div className="rounded-[16px] bg-white p-[16px] shadow-md lg:p-[28px]">
 				<div className="space-y-[12px]">
 					<h1 className="text-[18px] font-medium text-medinfo-dark-1 lg:text-[22px]">

@@ -26,6 +26,7 @@ function Page() {
 							<Image src={MessageImage} alt="profile" className="size-[48px]" />
 							<div>
 								<h2 className="text-[20px]">Malaria parasites</h2>
+
 								<p className="font-normal text-medinfo-dark-3">
 									Lorem ipsum dolor sit amet consectetur. Eget vivamus.
 								</p>
@@ -62,9 +63,12 @@ function Page() {
 						</div>
 					</div>
 					<div
+
 						className="flex cursor-pointer flex-col gap-[16px] rounded-[8px] border border-solid
 							border-medinfo-light-1 p-[16px] lg:flex-row lg:justify-between"
 						onClick={() => handleNavigation("Typhoid")}
+
+
 					>
 						<div className="flex gap-[12px]">
 							<Image src={MessageImage} alt="profile" className="size-[48px]" />
@@ -111,6 +115,7 @@ function Page() {
 					>
 						See more
 					</p>
+
 				</div>
 			</div>
 		</div>
