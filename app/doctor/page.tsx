@@ -5,7 +5,7 @@ import PatientIcon from "@/components/icons/PatientIcon";
 
 function DoctorPage() {
 	return (
-		<div className="p-[40px]">
+		<div className="p-[24px] lg:p-[40px]">
 			<div className="flex max-h-[402px] w-full flex-col gap-[40px] lg:flex-row">
 				<div className="w-full max-w-[338px] space-y-[27px]">
 					<div className="flex gap-[16px] rounded-[16px] bg-white p-[28px] shadow-md">

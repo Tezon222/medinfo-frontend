@@ -28,8 +28,8 @@ function ProfilePage() {
 					lg:bg-white lg:p-8"
 			>
 				<div
-					className="relative size-[108px] rounded-full border-[1.4px] border-medinfo-primary-main
-						bg-gray-300 lg:size-[140px]"
+					className="relative -z-10 size-[108px] rounded-full border-[1.4px]
+						border-medinfo-primary-main bg-gray-300 lg:size-[140px]"
 				>
 					<div
 						className="absolute right-0 top-[2px] flex size-[24px] items-center justify-center
