@@ -5,7 +5,7 @@ import { AlternateTipCard } from "../../TipCard";
 
 const TipDetailsPage = () => {
 	return (
-		<Main className="flex w-full flex-col items-start">
+		<Main className="flex w-full flex-col">
 			<section className="lg:flex lg:gap-16">
 				<Image
 					className="size-[272px] lg:size-[460px]"
@@ -18,7 +18,7 @@ const TipDetailsPage = () => {
 
 				<section
 					id="Ads"
-					className="hidden max-h-[460px] overflow-hidden lg:flex lg:flex-col lg:gap-2"
+					className="scrollbar-none hidden max-h-[460px] overflow-auto lg:flex lg:flex-col lg:gap-2"
 				>
 					<AlternateTipCard type="list" linkToAd="https://www.google.com" />
 					<AlternateTipCard type="list" linkToAd="https://www.google.com" />

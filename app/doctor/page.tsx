@@ -61,13 +61,15 @@ function DoctorPage() {
 					<div className="mt-[24px] space-y-[12px]">
 						<div
 							className="flex w-full justify-between rounded-[8px] border border-solid
-								border-[#DAD7CD] px-[20px] py-[16px]"
+								border-medinfo-secondary-main px-[20px] py-[16px]"
 						>
 							<div className="flex gap-[12px]">
 								<div className="size-[56px] rounded-full bg-gray-500"></div>
 								<div className="space-y-[12px]">
-									<h2 className="text-[18px] font-semibold text-[#22342B]">Alex.O</h2>
-									<p className="text-[14px] font-normal text-[#323232]">Men's health</p>
+									<h2 className="text-[18px] font-semibold text-medinfo-primary-darker">
+										Alex.O
+									</h2>
+									<p className="text-[14px] font-normal">Men's health</p>
 								</div>
 							</div>
 							<div>
@@ -77,13 +79,15 @@ function DoctorPage() {
 
 						<div
 							className="flex w-full justify-between rounded-[8px] border border-solid
-								border-[#DAD7CD] px-[20px] py-[16px]"
+								border-medinfo-secondary-main px-[20px] py-[16px]"
 						>
 							<div className="flex gap-[12px]">
 								<div className="size-[56px] rounded-full bg-gray-500"></div>
 								<div className="space-y-[12px]">
-									<h2 className="text-[18px] font-semibold text-[#22342B]">Alex.O</h2>
-									<p className="text-[14px] font-normal text-[#323232]">Men's health</p>
+									<h2 className="text-[18px] font-semibold text-medinfo-primary-darker">
+										Alex.O
+									</h2>
+									<p className="text-[14px] font-normal">Men's health</p>
 								</div>
 							</div>
 							<div>
@@ -93,13 +97,15 @@ function DoctorPage() {
 
 						<div
 							className="flex w-full justify-between rounded-[8px] border border-solid
-								border-[#DAD7CD] px-[20px] py-[16px]"
+								border-medinfo-secondary-main px-[20px] py-[16px]"
 						>
 							<div className="flex gap-[12px]">
 								<div className="size-[56px] rounded-full bg-gray-500"></div>
 								<div className="space-y-[12px]">
-									<h2 className="text-[18px] font-semibold text-[#22342B]">Alex.O</h2>
-									<p className="text-[14px] font-normal text-[#323232]">Men's health</p>
+									<h2 className="text-[18px] font-semibold text-medinfo-primary-darker">
+										Alex.O
+									</h2>
+									<p className="text-[14px] font-normal">Men's health</p>
 								</div>
 							</div>
 							<div>
@@ -119,13 +125,15 @@ function DoctorPage() {
 					<div className="mt-[24px] space-y-[12px]">
 						<div
 							className="flex w-full justify-between rounded-[8px] border border-solid
-								border-[#DAD7CD] px-[20px] py-[16px]"
+								border-medinfo-secondary-main px-[20px] py-[16px]"
 						>
 							<div className="flex gap-[12px]">
 								<div className="size-[56px] rounded-full bg-gray-500"></div>
 								<div className="space-y-[12px]">
-									<h2 className="text-[18px] font-semibold text-[#22342B]">Alex.O</h2>
-									<p className="text-[14px] font-normal text-[#323232]">Men's health</p>
+									<h2 className="text-[18px] font-semibold text-medinfo-primary-darker">
+										Alex.O
+									</h2>
+									<p className="text-[14px] font-normal">Men's health</p>
 								</div>
 							</div>
 							<div>
@@ -135,13 +143,15 @@ function DoctorPage() {
 
 						<div
 							className="flex w-full justify-between rounded-[8px] border border-solid
-								border-[#DAD7CD] px-[20px] py-[16px]"
+								border-medinfo-secondary-main px-[20px] py-[16px]"
 						>
 							<div className="flex gap-[12px]">
 								<div className="size-[56px] rounded-full bg-gray-500"></div>
 								<div className="space-y-[12px]">
-									<h2 className="text-[18px] font-semibold text-[#22342B]">Alex.O</h2>
-									<p className="text-[14px] font-normal text-[#323232]">Men's health</p>
+									<h2 className="text-[18px] font-semibold text-medinfo-primary-darker">
+										Alex.O
+									</h2>
+									<p className="text-[14px] font-normal">Men's health</p>
 								</div>
 							</div>
 							<div>
@@ -151,13 +161,15 @@ function DoctorPage() {
 
 						<div
 							className="flex w-full justify-between rounded-[8px] border border-solid
-								border-[#DAD7CD] px-[20px] py-[16px]"
+								border-medinfo-secondary-main px-[20px] py-[16px]"
 						>
 							<div className="flex gap-[12px]">
 								<div className="size-[56px] rounded-full bg-gray-500"></div>
 								<div className="space-y-[12px]">
-									<h2 className="text-[18px] font-semibold text-[#22342B]">Alex.O</h2>
-									<p className="text-[14px] font-normal text-[#323232]">Men's health</p>
+									<h2 className="text-[18px] font-semibold text-medinfo-primary-darker">
+										Alex.O
+									</h2>
+									<p className="text-[14px] font-normal">Men's health</p>
 								</div>
 							</div>
 							<div>

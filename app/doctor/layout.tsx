@@ -29,7 +29,7 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
 						</div>
 						<div className="flex items-center gap-[12px]">
 							<LogoutIcon fill="" />
-							<h1 className="text-[18px] text-[#323232]">Log out</h1>
+							<h1 className="text-[18px]">Log out</h1>
 						</div>
 					</div>
 				</div>

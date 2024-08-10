@@ -86,8 +86,10 @@ function DropdownMenuItem(
 	);
 }
 
-function DropdownMenuCheckboxItem(props: InferProps<typeof DropdownMenuPrimitive.CheckboxItem>) {
-	const { className, checked, children, ...restOfProps } = props;
+function DropdownMenuCheckboxItem(
+	props: InferProps<typeof DropdownMenuPrimitive.CheckboxItem> & { withIndicator?: boolean }
+) {
+	const { className, checked, children, withIndicator = true, ...restOfProps } = props;
 
 	return (
 		<DropdownMenuPrimitive.CheckboxItem
@@ -100,18 +102,22 @@ function DropdownMenuCheckboxItem(props: InferProps<typeof DropdownMenuPrimitive
 			checked={checked}
 			{...restOfProps}
 		>
-			<span className="absolute left-2 flex size-3.5 items-center justify-center">
-				<DropdownMenuPrimitive.ItemIndicator>
-					<IconBox icon="radix-icons:check" className="size-4" />
-				</DropdownMenuPrimitive.ItemIndicator>
-			</span>
+			{withIndicator && (
+				<span className="absolute left-2 flex size-3.5 items-center justify-center">
+					<DropdownMenuPrimitive.ItemIndicator>
+						<IconBox icon="radix-icons:check" className="size-4" />
+					</DropdownMenuPrimitive.ItemIndicator>
+				</span>
+			)}
 			{children}
 		</DropdownMenuPrimitive.CheckboxItem>
 	);
 }
 
-function DropdownMenuRadioItem(props: InferProps<typeof DropdownMenuPrimitive.RadioItem>) {
-	const { className, children, ...restOfProps } = props;
+function DropdownMenuRadioItem(
+	props: InferProps<typeof DropdownMenuPrimitive.RadioItem> & { withIndicator?: boolean }
+) {
+	const { className, children, withIndicator = true, ...restOfProps } = props;
 
 	return (
 		<DropdownMenuPrimitive.RadioItem
@@ -123,11 +129,13 @@ function DropdownMenuRadioItem(props: InferProps<typeof DropdownMenuPrimitive.Ra
 			)}
 			{...restOfProps}
 		>
-			<span className="absolute left-2 flex size-3.5 items-center justify-center">
-				<DropdownMenuPrimitive.ItemIndicator>
-					<IconBox icon="radix-icons:dot-filled" className="size-4 fill-current" />
-				</DropdownMenuPrimitive.ItemIndicator>
-			</span>
+			{withIndicator && (
+				<span className="absolute left-2 flex size-3.5 items-center justify-center">
+					<DropdownMenuPrimitive.ItemIndicator>
+						<IconBox icon="radix-icons:dot-filled" className="size-4 fill-current" />
+					</DropdownMenuPrimitive.ItemIndicator>
+				</span>
+			)}
 
 			{children}
 		</DropdownMenuPrimitive.RadioItem>

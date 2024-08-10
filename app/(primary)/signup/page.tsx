@@ -64,8 +64,7 @@ function SignUpPage() {
 									<Form.Input
 										type="text"
 										placeholder="enter first name"
-										className="border-none placeholder:text-medinfo-dark-4
-											focus-visible:ring-transparent md:text-base"
+										className="placeholder:text-medinfo-dark-4 md:text-base"
 									/>
 								</Form.InputGroup>
 							</Form.Item>
@@ -88,8 +87,7 @@ function SignUpPage() {
 									<Form.Input
 										type="text"
 										placeholder="enter last name"
-										className="border-none placeholder:text-medinfo-dark-4
-											focus-visible:ring-transparent md:text-base"
+										className="placeholder:text-medinfo-dark-4 md:text-base"
 									/>
 								</Form.InputGroup>
 							</Form.Item>
@@ -120,10 +118,10 @@ function SignUpPage() {
 												classNames={{
 													base: `border-[1.4px] border-medinfo-primary-main bg-white/90
 													backdrop-blur-lg`,
-													viewport: "gap-1",
 												}}
 											>
 												<Select.Item
+													withIndicator={false}
 													value="Nigeria"
 													className="h-[48px] bg-medinfo-light-3 font-medium
 														text-medinfo-dark-4 focus:bg-medinfo-light-1
@@ -133,6 +131,7 @@ function SignUpPage() {
 													Nigeria
 												</Select.Item>
 												<Select.Item
+													withIndicator={false}
 													value="Ghana"
 													className="h-[48px] bg-medinfo-light-3 font-medium
 														text-medinfo-dark-4 focus:bg-medinfo-light-1
@@ -178,10 +177,10 @@ function SignUpPage() {
 													classNames={{
 														base: `border-[1.4px] border-medinfo-primary-main bg-white/90 p-0
 														backdrop-blur-lg`,
-														viewport: "gap-1",
 													}}
 												>
 													<Select.Item
+														withIndicator={false}
 														value="steeze"
 														className="h-[48px] bg-medinfo-light-3 font-medium
 															text-medinfo-dark-4 focus:bg-medinfo-light-1
@@ -192,6 +191,7 @@ function SignUpPage() {
 														Steeze
 													</Select.Item>
 													<Select.Item
+														withIndicator={false}
 														value="cooking"
 														className="h-[48px] bg-medinfo-light-3 font-medium
 															text-medinfo-dark-4 focus:bg-medinfo-light-1
@@ -242,8 +242,7 @@ function SignUpPage() {
 									<Form.Input
 										type="password"
 										placeholder="enter password"
-										className="border-none placeholder:text-medinfo-dark-4
-											focus-visible:ring-transparent md:text-base"
+										className="placeholder:text-medinfo-dark-4 md:text-base"
 									/>
 								</Form.InputGroup>
 							</Form.Item>
@@ -266,8 +265,7 @@ function SignUpPage() {
 									<Form.Input
 										type="password"
 										placeholder="enter password"
-										className="border-none placeholder:text-medinfo-dark-4
-											focus-visible:ring-transparent md:text-base"
+										className="placeholder:text-medinfo-dark-4 md:text-base"
 									/>
 								</Form.InputGroup>
 							</Form.Item>

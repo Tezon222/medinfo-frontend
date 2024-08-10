@@ -52,8 +52,7 @@ function SignInPage() {
 									<Form.Input
 										type="email"
 										placeholder="enter email"
-										className="border-none placeholder:text-medinfo-dark-4
-											focus-visible:ring-transparent md:text-base"
+										className="placeholder:text-medinfo-dark-4 md:text-base"
 									/>
 								</Form.InputGroup>
 							</Form.Item>
@@ -76,8 +75,7 @@ function SignInPage() {
 									<Form.Input
 										type="password"
 										placeholder="enter password"
-										className="border-none placeholder:text-medinfo-dark-4
-											focus-visible:ring-transparent md:text-base"
+										className="placeholder:text-medinfo-dark-4 md:text-base"
 									/>
 								</Form.InputGroup>
 

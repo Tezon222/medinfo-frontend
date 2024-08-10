@@ -115,8 +115,8 @@ function SelectLabel(props: InferProps<typeof SelectPrimitive.Label>) {
 	);
 }
 
-function SelectItem(props: InferProps<typeof SelectPrimitive.Item>) {
-	const { className, children, ...restOfProps } = props;
+function SelectItem(props: InferProps<typeof SelectPrimitive.Item> & { withIndicator?: boolean }) {
+	const { className, children, withIndicator = true, ...restOfProps } = props;
 
 	return (
 		<SelectPrimitive.Item
@@ -128,11 +128,13 @@ function SelectItem(props: InferProps<typeof SelectPrimitive.Item>) {
 			)}
 			{...restOfProps}
 		>
-			<span className="absolute left-2 flex size-3.5 items-center justify-center">
-				<SelectPrimitive.ItemIndicator>
-					<IconBox icon="lucide:check" className="size-[14px]" />
-				</SelectPrimitive.ItemIndicator>
-			</span>
+			{withIndicator && (
+				<span className="absolute left-2 flex size-3.5 items-center justify-center">
+					<SelectPrimitive.ItemIndicator>
+						<IconBox icon="lucide:check" className="size-[14px]" />
+					</SelectPrimitive.ItemIndicator>
+				</span>
+			)}
 
 			<SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
 		</SelectPrimitive.Item>

@@ -1,12 +1,12 @@
 "use client";
 
-import { HamburgerIcon, NotificationIcon, SearchIcon, XIcon } from "@/components/icons";
-import { usePathname } from "next/navigation";
-import { menuItems } from "./SidebarLinks";
 import { Logo } from "@/components/common";
+import { HamburgerIcon, NotificationIcon, SearchIcon, XIcon } from "@/components/icons";
 import { Button } from "@/components/ui";
 import { useToggle } from "@/lib/hooks";
+import { usePathname } from "next/navigation";
 import MobileNavigation from "./MobileNavigation";
+import { menuItems } from "./SidebarLinks";
 
 const Header = () => {
 	const pathName = usePathname();
@@ -27,12 +27,12 @@ const Header = () => {
 						type="text"
 						placeholder="search"
 						className="w-[400px] rounded-[8px] border border-medinfo-primary-main px-12 py-2
-							text-[#414141]"
+							text-medinfo-body-color"
 					/>
 				</div>
 				<div className="flex items-center space-x-[40px]">
 					<NotificationIcon />
-					<div className="size-[40px] rounded-full bg-gray-500"></div>
+					<div className="size-[40px] rounded-full bg-gray-300"></div>
 				</div>
 			</header>
 			{/* mobile view  */}
