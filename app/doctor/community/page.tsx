@@ -63,12 +63,9 @@ function Page() {
 						</div>
 					</div>
 					<div
-
 						className="flex cursor-pointer flex-col gap-[16px] rounded-[8px] border border-solid
 							border-medinfo-light-1 p-[16px] lg:flex-row lg:justify-between"
 						onClick={() => handleNavigation("Typhoid")}
-
-
 					>
 						<div className="flex gap-[12px]">
 							<Image src={MessageImage} alt="profile" className="size-[48px]" />
@@ -115,7 +112,6 @@ function Page() {
 					>
 						See more
 					</p>
-
 				</div>
 			</div>
 		</div>

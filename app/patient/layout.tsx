@@ -6,7 +6,6 @@ import LogoutIcon from "@/components/icons/LogoutIcon";
 import Sidebar from "../(dashboard)/_patientcomponents/Sidebar";
 import Header from "../(dashboard)/_patientcomponents/Header";
 
-
 function DashboardLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<div className="flex h-full lg:bg-medinfo-light-4">

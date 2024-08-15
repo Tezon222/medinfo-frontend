@@ -1,6 +1,5 @@
 "use client";
 
-
 import { HamburgerIcon, NotificationIcon, SearchIcon, XIcon } from "@/components/icons";
 import { usePathname } from "next/navigation";
 import { menuItems } from "./SidebarLinks";
@@ -8,7 +7,6 @@ import { Logo } from "@/components/common";
 import { Button } from "@/components/ui";
 import { useToggle } from "@/lib/hooks";
 import MobileNavigation from "./MobileNavigation";
-
 
 const Header = () => {
 	const pathName = usePathname();
@@ -20,11 +18,9 @@ const Header = () => {
 		<>
 			{/* desktop view */}
 			<header
-
 				className="sticky top-0 z-10 hidden items-center justify-between bg-white px-[40px] py-[16px]
 					shadow-md lg:flex"
 			>
-
 				<div className="relative items-center space-x-4">
 					<SearchIcon type="green" className="absolute left-8 top-2" />
 					<input
@@ -43,7 +39,6 @@ const Header = () => {
 			<header
 				className="sticky top-0 z-10 flex items-center justify-between bg-white px-[24px] py-[17px]
 					shadow-md lg:hidden"
-
 			>
 				<Logo className="h-[46px] w-[60px]" />
 				<div className="text-[18px] font-semibold">{activeTitle}</div>
@@ -54,7 +49,6 @@ const Header = () => {
 						{isNavShow ? <XIcon /> : <HamburgerIcon />}
 					</Button>
 					<MobileNavigation isNavShow={isNavShow} toggleNavShow={toggleNavShow} />
-
 				</div>
 			</header>
 		</>
