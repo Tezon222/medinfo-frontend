@@ -49,7 +49,7 @@ function DoctorPage() {
 				</div>
 			</div>
 			<div className="mt-[32px] flex flex-col gap-[40px] lg:flex-row">
-				<div className="w-full rounded-[16px] bg-white p-[32px] shadow-md">
+				<div className="w-full rounded-[16px] bg-white p-[16px] shadow-md lg:p-[32px]">
 					<div className="flex flex-col items-start lg:flex-row lg:items-center lg:justify-between">
 						<h2 className="text-[18px] font-medium lg:text-[22px]">Today’s appointment</h2>
 						<p className="text-[14px] font-normal">18th Febraury, 2023</p>
@@ -108,7 +108,7 @@ function DoctorPage() {
 						</div>
 					</div>
 				</div>
-				<div className="w-full rounded-[16px] bg-white p-[32px] shadow-md">
+				<div className="w-full rounded-[16px] bg-white p-[16px] shadow-md lg:p-[32px]">
 					<div className="flex items-center justify-between">
 						<h2 className="text-[18px] font-medium lg:text-[22px]">Appointment requests</h2>
 					</div>

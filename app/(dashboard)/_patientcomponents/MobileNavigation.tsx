@@ -33,13 +33,13 @@ function MobileNavigation(props: MobileNavProps) {
 			<Logo type="footer" className="h-[46px] w-[60px]" />
 
 			<nav className="mt-[32px] flex flex-col justify-start gap-5 text-nowrap font-medium lg:text-[22px]">
-				<NavLink transitionType="Navbar" href="/doctor" className="flex items-center gap-[16px]">
+				<NavLink transitionType="Navbar" href="/patient" className="flex items-center gap-[16px]">
 					<DashboardIcon className="fill-white" />
 					Dashboard
 				</NavLink>
 				<NavLink
 					transitionType="Navbar"
-					href="/doctor/messages"
+					href="/patient/messages"
 					className="flex items-center gap-[16px]"
 				>
 					<MessageIcon className="fill-white" />
@@ -47,7 +47,7 @@ function MobileNavigation(props: MobileNavProps) {
 				</NavLink>
 				<NavLink
 					transitionType="Navbar"
-					href="/doctor/community"
+					href="/patient/community"
 					className="flex items-center gap-[16px]"
 				>
 					<CommunityIcon className="fill-white" />
@@ -55,7 +55,7 @@ function MobileNavigation(props: MobileNavProps) {
 				</NavLink>
 				<NavLink
 					transitionType="Navbar"
-					href="/doctor/profile"
+					href="/patient/profile"
 					className="flex items-center gap-[16px]"
 				>
 					<ProfileIcon className="fill-white" />
@@ -63,7 +63,7 @@ function MobileNavigation(props: MobileNavProps) {
 				</NavLink>
 				<NavLink
 					transitionType="Navbar"
-					href="/doctor/settings"
+					href="/patient/settings"
 					className="flex items-center gap-[16px]"
 				>
 					<SettingsIcon className="fill-white" />

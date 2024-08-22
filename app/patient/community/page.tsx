@@ -5,6 +5,7 @@ import Image from "next/image";
 import MessageImage from "@/public/assets/images/message.png";
 import ViewIcon from "@/components/icons/ViewIcon";
 import CommentIcon from "@/components/icons/CommentIcon";
+import { Button } from "@/components/ui";
 
 function Page() {
 	const router = useRouter();
@@ -15,8 +16,11 @@ function Page() {
 
 	return (
 		<div className="px-[28px] py-[56px] lg:p-[40px]">
-			<div className="gap-[32px] rounded-[16px] bg-white p-[16px] shadow-md lg:p-[32px]">
-				<div className="space-y-[12px] lg:w-full lg:max-w-[661.8px]">
+			<div
+				className="flex flex-col-reverse justify-between rounded-[16px] bg-white p-[16px] shadow-md
+					lg:flex-row lg:p-[32px]"
+			>
+				<div className="mt-[32px] space-y-[12px] lg:mt-0 lg:w-full lg:max-w-[661.8px]">
 					<div
 						className="flex cursor-pointer flex-col gap-[16px] rounded-[8px] border border-solid
 							border-medinfo-light-1 p-[16px] lg:flex-row lg:justify-between"
@@ -112,6 +116,14 @@ function Page() {
 						See more
 					</p>
 				</div>
+
+				<Button
+					theme="primary"
+					className="h-[48px] w-full max-w-[163px] flex-1 py-[8px] font-medium lg:h-[64px]
+						lg:max-w-[203px] lg:text-[20px]"
+				>
+					+ New topic
+				</Button>
 			</div>
 		</div>
 	);
