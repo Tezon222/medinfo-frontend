@@ -12,16 +12,18 @@ import {
 	type ControllerProps,
 	type ControllerRenderProps,
 	type FieldPath,
-	type FieldValues,
+	type FormState,
 	FormProvider as HookFormProvider,
 	type UseFormReturn,
 	type UseFormStateReturn,
+	useFormState,
 	useFormContext as useHookFormContext,
 } from "react-hook-form";
 import { IconBox, Show, getElementList } from "../common";
 import { loadIcons } from "../common/IconBox";
 import Button from "./button";
-import InputPrimitive, { type InputProps } from "./input";
+
+type FieldValues = Record<string, unknown>;
 
 type FormRootProps<TValues extends FieldValues> = React.ComponentPropsWithoutRef<"form"> & {
 	methods: UseFormReturn<TValues>;
@@ -30,7 +32,7 @@ type FormRootProps<TValues extends FieldValues> = React.ComponentPropsWithoutRef
 
 type ContextValue = {
 	name: string;
-	id: string;
+	uniqueId: string;
 };
 
 const [FormItemProvider, useFormItemContext] = createCustomContext<ContextValue>({
@@ -72,7 +74,7 @@ function FormItem<TControl, TFieldValues extends FieldValues = FieldValues>(
 	const uniqueId = useId();
 
 	const value = useMemo(
-		() => ({ name: String(name), id: `${String(name)}-(${uniqueId})` }),
+		() => ({ name: String(name), uniqueId: `${String(name)}-(${uniqueId})` }),
 		[name, uniqueId]
 	);
 
@@ -84,10 +86,10 @@ function FormItem<TControl, TFieldValues extends FieldValues = FieldValues>(
 }
 
 function FormLabel({ children, className }: { children: string; className?: string }) {
-	const { id } = useFormItemContext();
+	const { uniqueId } = useFormItemContext();
 
 	return (
-		<label htmlFor={id} className={className}>
+		<label htmlFor={uniqueId} className={className}>
 			{children}
 		</label>
 	);
@@ -138,39 +140,77 @@ function FormInputRightItem<TElement extends React.ElementType = "span">(
 }
 FormInputRightItem.slot = Symbol.for("rightItem");
 
-function FormInput<TType extends React.HTMLInputTypeAttribute | "textarea">(
-	props: Omit<InputProps<TType>, "id" | "name"> & {
-		errorClassName?: string;
+export type FormInputPrimitiveProps<TFieldValues extends FieldValues = FieldValues> =
+	React.ComponentPropsWithRef<"input"> & {
 		withEyeIcon?: boolean;
 		classNames?: { inputGroup?: string; input?: string };
-	}
+		name?: keyof TFieldValues;
+		errorClassName?: string;
+	} & (
+			| { control: Control<TFieldValues>; formState?: never }
+			| { formState?: FormState<TFieldValues>; control?: never }
+		);
+
+const inputTypesWithoutFullWith = new Set<React.HTMLInputTypeAttribute>(["checkbox", "radio"]);
+
+function FormInputPrimitive<TFieldValues extends FieldValues>(
+	props: FormInputPrimitiveProps<TFieldValues>
 ) {
-	const { id, name } = useFormItemContext();
-	const { register, formState } = useHookFormContext();
+	const {
+		className,
+		classNames,
+		errorClassName,
+		ref,
+		id: idPrimitive,
+		name: namePrimitive,
+		type = "text",
+		withEyeIcon = true,
+		control,
+		formState,
+		...restOfProps
+	} = props;
+
+	const contextValues = useFormItemContext();
+
+	const name = namePrimitive ?? contextValues.name;
+
+	const id = idPrimitive ?? contextValues.uniqueId;
+
+	const getFormState = (control ? useFormState : () => formState) as typeof useFormState;
+
+	const { errors } = (getFormState({ control }) as UseFormStateReturn<TFieldValues> | undefined) ?? {};
 
 	const [isPasswordVisible, toggleVisibility] = useToggle(false);
 
-	const { className, classNames, errorClassName, ref, type, withEyeIcon = true, ...restOfProps } = props;
-
 	const shouldHaveEyeIcon = withEyeIcon && type === "password";
 
-	const Element = shouldHaveEyeIcon ? FormInputGroup : ReactFragment;
+	const WrapperElement = shouldHaveEyeIcon ? FormInputGroup : ReactFragment;
 
-	// FIXME - Had to do this unsafe type coercion to shut TS up about props mismatch for now, figure out a better solution later
-	const InputPrimitiveCoerced = InputPrimitive as unknown as string;
+	const WrapperElementProps = shouldHaveEyeIcon && {
+		className: cnMerge("w-full", classNames?.inputGroup),
+	};
+
+	useEffect(() => {
+		loadIcons([
+			"material-symbols:visibility-outline-rounded",
+			"material-symbols:visibility-off-outline-rounded",
+		]);
+	}, []);
 
 	return (
-		<Element {...(shouldHaveEyeIcon && { className: cnMerge("w-full", classNames?.inputGroup) })}>
-			<InputPrimitiveCoerced
+		<WrapperElement {...WrapperElementProps}>
+			<input
 				id={id}
+				name={name}
 				type={type === "password" && isPasswordVisible ? "text" : type}
 				className={cnMerge(
-					name && formState.errors[name] && errorClassName,
+					!inputTypesWithoutFullWith.has(type) && "flex w-full",
+					`text-sm file:border-0 file:bg-transparent placeholder:text-shadcn-muted-foreground
+					focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50`,
 					className,
-					classNames?.input
+					classNames?.input,
+					name && errors?.[name] && errorClassName
 				)}
-				{...(Boolean(name) && register(name))}
-				{...(Boolean(ref) && { ref })}
 				{...restOfProps}
 			/>
 
@@ -180,12 +220,6 @@ function FormInput<TType extends React.HTMLInputTypeAttribute | "textarea">(
 					unstyled={true}
 					onClick={toggleVisibility}
 					className="size-5 shrink-0 lg:size-6"
-					onLoad={() => {
-						loadIcons([
-							"material-symbols:visibility-outline-rounded",
-							"material-symbols:visibility-off-outline-rounded",
-						]);
-					}}
 				>
 					<IconBox
 						icon={
@@ -197,23 +231,106 @@ function FormInput<TType extends React.HTMLInputTypeAttribute | "textarea">(
 					/>
 				</FormInputRightItem>
 			</Show>
-		</Element>
+		</WrapperElement>
+	);
+}
+
+function FormInput(props: Omit<FormInputPrimitiveProps, "id" | "name" | "formState" | "control">) {
+	const { name } = useFormItemContext();
+	const { register, formState } = useHookFormContext();
+
+	const { ref, ...restOfProps } = props;
+
+	return (
+		<FormInputPrimitive
+			name={name}
+			formState={formState}
+			{...(Boolean(name) && register(name))}
+			{...(Boolean(ref) && { ref })}
+			{...restOfProps}
+		/>
 	);
 }
 FormInput.slot = Symbol.for("input");
 
-type FormControllerProps<TFieldValue> = Omit<
+type FormTextAreaPrimitiveProps<TFieldValues extends FieldValues = FieldValues> =
+	React.ComponentPropsWithRef<"textarea"> & {
+		name?: keyof TFieldValues;
+		errorClassName?: string;
+	} & (
+			| { control: Control<TFieldValues>; formState?: never }
+			| { formState?: FormState<TFieldValues>; control?: never }
+		);
+
+function FormTextAreaPrimitive<TFieldValues extends FieldValues>(
+	props: FormTextAreaPrimitiveProps<TFieldValues>
+) {
+	const {
+		className,
+		errorClassName,
+		ref,
+		id: idPrimitive,
+		name: namePrimitive,
+		control,
+		formState,
+		...restOfProps
+	} = props;
+
+	const contextValues = useFormItemContext();
+
+	const name = namePrimitive ?? contextValues.name;
+
+	const id = idPrimitive ?? contextValues.uniqueId;
+
+	const getFormState = (control ? useFormState : () => formState) as typeof useFormState;
+
+	const { errors } = (getFormState({ control }) as UseFormStateReturn<TFieldValues> | undefined) ?? {};
+
+	return (
+		<textarea
+			id={id}
+			name={name}
+			className={cnMerge(
+				`w-full text-sm placeholder:text-shadcn-muted-foreground focus-visible:outline-none
+				disabled:cursor-not-allowed disabled:opacity-50`,
+				className,
+				name && errors?.[name] && errorClassName
+			)}
+			{...restOfProps}
+		/>
+	);
+}
+
+function FormTextArea(props: Omit<FormTextAreaPrimitiveProps, "id" | "name" | "formState" | "control">) {
+	const { name } = useFormItemContext();
+
+	const { register, formState } = useHookFormContext();
+
+	const { ref, ...restOfProps } = props;
+
+	return (
+		<FormTextAreaPrimitive
+			name={name}
+			formState={formState}
+			{...(Boolean(name) && register(name))}
+			{...(Boolean(ref) && { ref })}
+			{...restOfProps}
+		/>
+	);
+}
+
+type FormControllerProps<TFieldValues> = Omit<
 	ControllerProps<FieldValues, FieldPath<FieldValues>>,
 	"name" | "control" | "render"
 > & {
 	render: (props: {
-		field: Omit<ControllerRenderProps, "value"> & { value: TFieldValue };
+		field: Omit<ControllerRenderProps, "value"> & { value: TFieldValues };
 		fieldState: ControllerFieldState;
 		formState: UseFormStateReturn<FieldValues>;
 	}) => React.ReactElement;
 };
 
-function FormController<TFieldValue = never>(props: FormControllerProps<TFieldValue>) {
+function FormController<TFieldValues = never>(props: FormControllerProps<TFieldValues>) {
 	const { control } = useHookFormContext<FieldValues, FieldPath<FieldValues>>();
 	const { name } = useFormItemContext();
 
@@ -316,13 +433,27 @@ function FormErrorMessage<TControl, TFieldValues extends FieldValues = FieldValu
 }
 
 export const Root = FormRoot;
+
 export const Item = FormItem;
+
 export const Label = FormLabel;
+
 export const ErrorMessage = FormErrorMessage;
+
 export const Input = FormInput;
+
+export const InputPrimitive = FormInputPrimitive;
+
 export const InputGroup = FormInputGroup;
+
 export const InputLeftItem = FormInputLeftItem;
+
 export const InputRightItem = FormInputRightItem;
+
+export const TextAreaPrimitive = FormTextAreaPrimitive;
+
+export const TextArea = FormTextArea;
+
 export const Controller = FormController;
-// eslint-disable-next-line unicorn/prefer-export-from
-export { ControllerPrimitive };
+
+export { Controller as ControllerPrimitive } from "react-hook-form";

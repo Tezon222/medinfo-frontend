@@ -6,7 +6,7 @@ import { cnMerge } from "@/lib/utils/cn";
 import { handleFileValidation } from "@/lib/utils/handleFileValidation";
 import type { ChangeEvent, DragEvent } from "react";
 import { toast } from "sonner";
-import Input from "./input";
+import { InputPrimitive } from "./form";
 
 type InputProps = Omit<React.ComponentPropsWithRef<"input">, "className" | "onDrop"> & {
 	classNames?: { base?: string; input?: string; activeDragState?: string };
@@ -116,7 +116,7 @@ function DropZone(props: DropZoneProps & InputProps) {
 				isDragging && ["opacity-60", classNames?.activeDragState]
 			)}
 		>
-			<Input
+			<InputPrimitive
 				className={cnMerge("absolute inset-0 cursor-pointer opacity-0", classNames?.input)}
 				type="file"
 				{...(allowedFileTypes && { accept: allowedFileTypes.join(", ") })}

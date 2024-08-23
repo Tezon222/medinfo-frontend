@@ -80,7 +80,7 @@ function SignInPage() {
 								</Form.InputGroup>
 
 								<NavLink
-									href="#forgot"
+									href="/forgot-password"
 									className="mt-1 self-end font-work-sans text-medinfo-primary-main"
 								>
 									Forgot password?

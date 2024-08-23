@@ -194,7 +194,10 @@ const eslintConfigArray = [
 				},
 			],
 			"@typescript-eslint/no-import-type-side-effects": "error",
-			"@typescript-eslint/no-unused-vars": ["warn", { ignoreRestSiblings: true }],
+			"@typescript-eslint/no-unused-vars": [
+				"warn",
+				{ ignoreRestSiblings: true, argsIgnorePattern: "^_" },
+			],
 			"@typescript-eslint/array-type": ["error", { default: "array-simple" }],
 			"@typescript-eslint/consistent-type-definitions": ["error", "type"],
 			"@typescript-eslint/member-ordering": "error",
