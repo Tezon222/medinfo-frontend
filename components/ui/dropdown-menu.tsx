@@ -30,7 +30,7 @@ function DropdownMenuSubContent(props: InferProps<typeof DropdownMenuPrimitive.S
 	return (
 		<DropdownMenuPrimitive.SubContent
 			className={cnMerge(
-				`z-50 min-w-[8rem] overflow-hidden rounded-md border bg-shadcn-popover p-1
+				`z-50 min-w-32 overflow-hidden rounded-md border bg-shadcn-popover p-1
 				text-shadcn-popover-foreground shadow-lg data-[state=open]:animate-in
 				data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0
 				data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95
@@ -51,7 +51,7 @@ function DropdownMenuContent(props: InferProps<typeof DropdownMenuPrimitive.Cont
 			<DropdownMenuPrimitive.Content
 				sideOffset={sideOffset}
 				className={cnMerge(
-					`z-50 min-w-[8rem] overflow-hidden rounded-md border bg-shadcn-popover p-1
+					`z-50 min-w-32 overflow-hidden rounded-md border bg-shadcn-popover p-1
 					text-shadcn-popover-foreground shadow-md`,
 					`data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0
 					data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95

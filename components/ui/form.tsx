@@ -408,10 +408,10 @@ function FormErrorMessage<TControl, TFieldValues extends FieldValues = FieldValu
 				render={(messageItem, index) => (
 					<p
 						className={cnMerge(
-							"ml-[1.5rem] list-item",
+							"ml-[15px] list-item",
 							paragraphClasses,
 							className,
-							index === 0 && "mt-[0.4rem]"
+							index === 0 && "mt-1"
 						)}
 					>
 						*{messageItem}

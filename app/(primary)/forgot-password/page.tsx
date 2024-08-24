@@ -11,8 +11,6 @@ function ForgotPasswordPage() {
 					<h1 className="text-[22px] font-medium text-medinfo-primary-darker">Forgot Password</h1>
 					<p className="text-medinfo-dark-4">Select an option to send a link reset password</p>
 				</div>
-
-				<form></form>
 			</section>
 		</Main>
 	);

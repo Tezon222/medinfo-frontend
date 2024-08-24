@@ -1,6 +1,6 @@
 "use client";
 
-import type { InferProps } from "@/lib/type-helpers/global-type-helpers";
+import type { InferProps } from "@/lib/type-helpers/global";
 import { cnMerge } from "@/lib/utils/cn";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { isValidElement } from "react";

@@ -56,7 +56,7 @@ function page() {
 				<div
 					className="hidden w-full rounded-[16px] border border-solid border-medinfo-primary-lighter
 						bg-white lg:flex"
-				></div>
+				/>
 			</div>
 		</div>
 	);
