@@ -18,7 +18,6 @@ function Page() {
 		{ id: 5, title: "Children's car" },
 		{ id: 6, title: "Children's car" },
 		{ id: 7, title: "Children's car" },
-
 	];
 
 	const cardData = [
