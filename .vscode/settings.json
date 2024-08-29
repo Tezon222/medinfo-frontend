@@ -15,5 +15,6 @@
 	},
 
 	"tailwindCSS.rootFontSize": 16,
-	"cSpell.words": ["medinfo"]
+	"cSpell.words": ["medinfo"],
+	"openctx.enable": false
 }

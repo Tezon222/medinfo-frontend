@@ -7,7 +7,8 @@ import { Accordion, Button } from "@/components/ui";
 import { cnJoin } from "@/lib/utils/cn";
 import { feature1, feature2, feature3, hero } from "@/public/assets/images/landing-page";
 import Image from "next/image";
-import { Main, ScrollableTipCards } from "./_components";
+import { Main } from "./_components";
+import ScrollableTipCards from "./daily-tips/ScrollableTipCards";
 
 const coreServices = [
 	{ imageSrc: feature1 as string, description: "SubSpecialists" },

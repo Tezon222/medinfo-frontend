@@ -13,11 +13,7 @@ function page() {
 							border-medinfo-primary-lighter px-[16px] py-[14px] lg:w-[251px]"
 					>
 						<SearchIcon type="green" className="absolute left-4 top-4" />
-						<input
-							type="text"
-							placeholder="search for a chat"
-							className="bg-none pl-[16px] text-[#414141]"
-						/>
+						<input type="text" placeholder="search for a chat" className="bg-none pl-[16px]" />
 					</div>
 					<div className="mt-[20px]">
 						<div className="flex justify-between border border-solid p-[11px]">

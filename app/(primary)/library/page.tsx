@@ -51,6 +51,7 @@ function LibraryPage() {
 							onValueChange={(value: string) => setFilter(value as typeof filter)}
 						>
 							<DropdownMenu.RadioItem
+								withIndicator={false}
 								value="grid"
 								className="h-[48px] bg-medinfo-light-3 font-medium text-medinfo-dark-4
 									focus:text-base focus:text-medinfo-body-color
@@ -60,6 +61,7 @@ function LibraryPage() {
 								grid
 							</DropdownMenu.RadioItem>
 							<DropdownMenu.RadioItem
+								withIndicator={false}
 								value="list"
 								className="h-[48px] bg-medinfo-light-3 font-medium text-medinfo-dark-4
 									focus:text-base focus:text-medinfo-body-color

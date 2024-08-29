@@ -1,9 +1,10 @@
 "use client";
 
-import { createCustomContext, useGetSlot, useToggle } from "@/lib/hooks";
+import { createCustomContext, useToggle } from "@/lib/hooks";
 import type { PolymorphicPropsWithRef } from "@/lib/type-helpers";
 import { cnMerge } from "@/lib/utils/cn";
-import React, { useEffect, useId, useMemo, useRef } from "react";
+import { getSlotElement } from "@/lib/utils/getSlotElement";
+import { Fragment as ReactFragment, useEffect, useId, useMemo, useRef } from "react";
 import {
 	type Control,
 	type ControllerFieldState,
@@ -18,6 +19,7 @@ import {
 	useFormContext as useHookFormContext,
 } from "react-hook-form";
 import { IconBox, Show, getElementList } from "../common";
+import { loadIcons } from "../common/IconBox";
 import Button from "./button";
 import InputPrimitive, { type InputProps } from "./input";
 
@@ -25,33 +27,6 @@ type FormRootProps<TValues extends FieldValues> = React.ComponentPropsWithoutRef
 	methods: UseFormReturn<TValues>;
 	children: React.ReactNode;
 };
-
-type FormItemProps<TControl, TFieldValues extends FieldValues> =
-	TControl extends Control<infer TValues>
-		? {
-				name: keyof TValues;
-				children: React.ReactNode;
-				className?: string;
-			}
-		: {
-				control?: Control<TFieldValues>;
-				name: keyof TFieldValues;
-				children: React.ReactNode;
-				className?: string;
-			};
-
-type FormErrorMessageProps<TValues extends FieldValues> =
-	| {
-			type: "regular";
-			control: Control<TValues>; // == Here for type inference of errorField prop
-			errorField: keyof TValues;
-			className?: string;
-	  }
-	| {
-			type: "root";
-			className?: string;
-			errorField: string;
-	  };
 
 type ContextValue = {
 	name: string;
@@ -74,6 +49,20 @@ function FormRoot<TValues extends FieldValues>(props: FormRootProps<TValues>) {
 		</HookFormProvider>
 	);
 }
+
+type FormItemProps<TControl, TFieldValues extends FieldValues> =
+	TControl extends Control<infer TValues>
+		? {
+				name: keyof TValues;
+				children: React.ReactNode;
+				className?: string;
+			}
+		: {
+				control?: Control<TFieldValues>;
+				name: keyof TFieldValues;
+				children: React.ReactNode;
+				className?: string;
+			};
 
 function FormItem<TControl, TFieldValues extends FieldValues = FieldValues>(
 	props: FormItemProps<TControl, TFieldValues>
@@ -106,9 +95,9 @@ function FormLabel({ children, className }: { children: string; className?: stri
 
 function FormInputGroup(props: React.ComponentPropsWithRef<"div"> & { displayOtherChildren?: boolean }) {
 	const { children, className, displayOtherChildren, ...restOfProps } = props;
-	const InputSlot = useGetSlot(children, FormInput);
-	const LeftItemSlot = useGetSlot(children, FormInputLeftItem);
-	const RightItemSlot = useGetSlot(children, FormInputRightItem);
+	const InputSlot = getSlotElement(children, FormInput);
+	const LeftItemSlot = getSlotElement(children, FormInputLeftItem);
+	const RightItemSlot = getSlotElement(children, FormInputRightItem);
 
 	return (
 		<div className={cnMerge("flex items-center justify-between gap-4", className)} {...restOfProps}>
@@ -165,7 +154,7 @@ function FormInput<TType extends React.HTMLInputTypeAttribute | "textarea">(
 
 	const shouldHaveEyeIcon = withEyeIcon && type === "password";
 
-	const Element = shouldHaveEyeIcon ? FormInputGroup : React.Fragment;
+	const Element = shouldHaveEyeIcon ? FormInputGroup : ReactFragment;
 
 	// FIXME - Had to do this unsafe type coercion to shut TS up about props mismatch for now, figure out a better solution later
 	const InputPrimitiveCoerced = InputPrimitive as unknown as string;
@@ -191,6 +180,12 @@ function FormInput<TType extends React.HTMLInputTypeAttribute | "textarea">(
 					unstyled={true}
 					onClick={toggleVisibility}
 					className="size-5 shrink-0 lg:size-6"
+					onLoad={() => {
+						loadIcons([
+							"material-symbols:visibility-outline-rounded",
+							"material-symbols:visibility-off-outline-rounded",
+						]);
+					}}
 				>
 					<IconBox
 						icon={
@@ -207,18 +202,18 @@ function FormInput<TType extends React.HTMLInputTypeAttribute | "textarea">(
 }
 FormInput.slot = Symbol.for("input");
 
-type FormControllerProps = Omit<
+type FormControllerProps<TFieldValue> = Omit<
 	ControllerProps<FieldValues, FieldPath<FieldValues>>,
 	"name" | "control" | "render"
 > & {
 	render: (props: {
-		field: Omit<ControllerRenderProps, "value"> & { value: never };
+		field: Omit<ControllerRenderProps, "value"> & { value: TFieldValue };
 		fieldState: ControllerFieldState;
 		formState: UseFormStateReturn<FieldValues>;
 	}) => React.ReactElement;
 };
 
-function FormController(props: FormControllerProps) {
+function FormController<TFieldValue = never>(props: FormControllerProps<TFieldValue>) {
 	const { control } = useHookFormContext<FieldValues, FieldPath<FieldValues>>();
 	const { name } = useFormItemContext();
 
@@ -227,7 +222,28 @@ function FormController(props: FormControllerProps) {
 	);
 }
 
-function FormErrorMessage<TStepData extends FieldValues>(props: FormErrorMessageProps<TStepData>) {
+type FormErrorMessageProps<TControl, TFieldValues extends FieldValues> =
+	| (TControl extends Control<infer TValues>
+			? {
+					type: "regular";
+					errorField: keyof TValues;
+					className?: string;
+				}
+			: {
+					type: "regular";
+					control?: Control<TFieldValues>; // == Here for type inference of errorField prop
+					errorField: keyof TFieldValues;
+					className?: string;
+				})
+	| {
+			type: "root";
+			className?: string;
+			errorField: string;
+	  };
+
+function FormErrorMessage<TControl, TFieldValues extends FieldValues = FieldValues>(
+	props: FormErrorMessageProps<TControl, TFieldValues>
+) {
 	const { className, errorField, type } = props;
 
 	const { formState } = useHookFormContext();

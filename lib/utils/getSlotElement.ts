@@ -1,4 +1,4 @@
-import React, { Children, isValidElement, useMemo } from "react";
+import { Children, isValidElement } from "react";
 import { isArray } from "../type-helpers/typeof";
 
 type Noop = () => void;
@@ -27,13 +27,19 @@ export const isSlotElement = <TProps>(
 	return child.type.toString() === SlotWrapper.toString();
 };
 
+// Check if the child is a Slot element by matching any in the SlotWrapperArray
+export const isSlotElementMultiple = <TProps>(
+	child: React.ReactNode,
+	SlotWrapperArray: Array<React.ComponentType<TProps>>
+) => SlotWrapperArray.some((slotWrapper) => isSlotElement(child, slotWrapper));
+
 type UseSlotOptions = {
 	throwOnMultipleSlotMatch?: boolean;
 	errorMessage?: string;
 	ChildrenHelper?: typeof Children;
 };
 
-export const getSlot = <TProps>(
+export const getSlotElement = <TProps>(
 	children: React.ReactNode,
 	SlotWrapper: React.ComponentType<TProps>,
 	options: UseSlotOptions = {}
@@ -63,29 +69,8 @@ export const getOtherChildren = <TProps>(
 	const childrenArray = isArray<React.ReactNode>(children) ? children : [children];
 
 	const otherChildren = isArray(SlotWrapperOrWrappers)
-		? childrenArray.filter((child) =>
-				SlotWrapperOrWrappers.some((slotWrapper) => !isSlotElement(child, slotWrapper))
-			)
+		? childrenArray.filter((child) => !isSlotElementMultiple(child, SlotWrapperOrWrappers))
 		: childrenArray.filter((child) => !isSlotElement(child, SlotWrapperOrWrappers));
-
-	return otherChildren;
-};
-
-export const useGetSlot = <TProps>(
-	children: React.ReactNode,
-	SlotWrapper: React.ComponentType<TProps>,
-	options?: UseSlotOptions
-) => {
-	const Slot = useMemo(() => getSlot(children, SlotWrapper, options), [children, SlotWrapper, options]);
-
-	return Slot;
-};
-
-export const useGetOtherChildren = <TProps>(
-	children: React.ReactNode,
-	SlotWrappers: React.ComponentType<TProps> | Array<React.ComponentType<TProps>>
-) => {
-	const otherChildren = useMemo(() => getOtherChildren(children, SlotWrappers), [children, SlotWrappers]);
 
 	return otherChildren;
 };

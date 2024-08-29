@@ -69,7 +69,7 @@ export function TipCard({ type, id }: TipCardProps) {
 				)}
 
 				<NavLink
-					href={`tip/${id}`}
+					href={`/library/tip/${id}`}
 					className="inline-flex w-fit items-center gap-[14px] text-medinfo-primary-main lg:gap-4
 						lg:text-[20px] lg:font-medium"
 				>

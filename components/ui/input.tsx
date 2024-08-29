@@ -6,8 +6,10 @@ export type InputProps<TType extends React.HTMLInputTypeAttribute | "textarea"> 
 	? React.ComponentPropsWithRef<"textarea"> & { type?: TType }
 	: Omit<React.ComponentPropsWithRef<"input">, "type"> & { type?: TType };
 
+const inputTypesWithoutFullWith = new Set<React.HTMLInputTypeAttribute>(["checkbox", "radio"]);
+
 function Input<TType extends React.HTMLInputTypeAttribute | "textarea">(props: InputProps<TType>) {
-	const { className, type, ...restOfProps } = props;
+	const { className, type = "text", ...restOfProps } = props;
 
 	const Element = (type === "textarea" ? "textarea" : "input") as string;
 
@@ -15,9 +17,9 @@ function Input<TType extends React.HTMLInputTypeAttribute | "textarea">(props: I
 		<Element
 			type={type}
 			className={cnMerge(
-				`flex w-full rounded-md border border-shadcn-input text-sm file:border-0 file:bg-transparent
-				placeholder:text-shadcn-muted-foreground focus-visible:outline-none focus-visible:ring-2
-				focus-visible:ring-shadcn-ring disabled:cursor-not-allowed disabled:opacity-50`,
+				!inputTypesWithoutFullWith.has(type) && "flex w-full",
+				`text-sm file:border-0 file:bg-transparent placeholder:text-shadcn-muted-foreground
+				focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50`,
 				className
 			)}
 			{...restOfProps}
