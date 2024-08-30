@@ -283,34 +283,34 @@ const eslintConfigArray = augumentedTypegen([
 	// 				order: "asc",
 	// 			},
 	// 		],
-	// 		"perfectionist/sort-intersection-types": [
-	// 			"warn",
-	// 			{
-	// 				type: "alphabetical",
-	// 				order: "asc",
-	// 			},
-	// 		],
-	// 		"perfectionist/sort-svelte-attributes": [
-	// 			"warn",
-	// 			{
-	// 				type: "alphabetical",
-	// 				order: "asc",
-	// 			},
-	// 		],
-	// 		"perfectionist/sort-astro-attributes": [
-	// 			"warn",
-	// 			{
-	// 				type: "alphabetical",
-	// 				order: "asc",
-	// 			},
-	// 		],
-	// 		"perfectionist/sort-vue-attributes": [
-	// 			"warn",
-	// 			{
-	// 				type: "alphabetical",
-	// 				order: "asc",
-	// 			},
-	// 		],
+	// 		// "perfectionist/sort-intersection-types": [
+	// 		// 	"warn",
+	// 		// 	{
+	// 		// 		type: "alphabetical",
+	// 		// 		order: "asc",
+	// 		// 	},
+	// 		// ],
+	// 		// "perfectionist/sort-svelte-attributes": [
+	// 		// 	"warn",
+	// 		// 	{
+	// 		// 		type: "alphabetical",
+	// 		// 		order: "asc",
+	// 		// 	},
+	// 		// ],
+	// 		// "perfectionist/sort-astro-attributes": [
+	// 		// 	"warn",
+	// 		// 	{
+	// 		// 		type: "alphabetical",
+	// 		// 		order: "asc",
+	// 		// 	},
+	// 		// ],
+	// 		// "perfectionist/sort-vue-attributes": [
+	// 		// 	"warn",
+	// 		// 	{
+	// 		// 		type: "alphabetical",
+	// 		// 		order: "asc",
+	// 		// 	},
+	// 		// ],
 	// 		"perfectionist/sort-array-includes": [
 	// 			"warn",
 	// 			{
@@ -325,13 +325,13 @@ const eslintConfigArray = augumentedTypegen([
 	// 				order: "asc",
 	// 			},
 	// 		],
-	// 		"perfectionist/sort-union-types": [
-	// 			"warn",
-	// 			{
-	// 				type: "alphabetical",
-	// 				order: "asc",
-	// 			},
-	// 		],
+	// 		// "perfectionist/sort-union-types": [
+	// 		// 	"warn",
+	// 		// 	{
+	// 		// 		type: "alphabetical",
+	// 		// 		order: "asc",
+	// 		// 	},
+	// 		// ],
 	// 		"perfectionist/sort-switch-case": [
 	// 			"warn",
 	// 			{
@@ -346,13 +346,13 @@ const eslintConfigArray = augumentedTypegen([
 	// 				order: "asc",
 	// 			},
 	// 		],
-	// 		"perfectionist/sort-jsx-props": [
-	// 			"warn",
-	// 			{
-	// 				type: "alphabetical",
-	// 				order: "asc",
-	// 			},
-	// 		],
+	// 		// "perfectionist/sort-jsx-props": [
+	// 		// 	"warn",
+	// 		// 	{
+	// 		// 		type: "alphabetical",
+	// 		// 		order: "asc",
+	// 		// 	},
+	// 		// ],
 	// 		"perfectionist/sort-classes": [
 	// 			"warn",
 	// 			{

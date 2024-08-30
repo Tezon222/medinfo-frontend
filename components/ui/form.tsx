@@ -3,7 +3,7 @@
 import { createCustomContext, useToggle } from "@/lib/hooks";
 import type { PolymorphicPropsWithRef } from "@/lib/type-helpers";
 import { cnMerge } from "@/lib/utils/cn";
-import { getSlotElement } from "@/lib/utils/getSlotElement";
+import { getOtherChildren, getSlotElement } from "@/lib/utils/getSlotElement";
 import { Fragment as ReactFragment, useEffect, useId, useMemo, useRef } from "react";
 import {
 	type Control,
@@ -20,7 +20,6 @@ import {
 	useFormContext as useHookFormContext,
 } from "react-hook-form";
 import { IconBox, Show, getElementList } from "../common";
-import { loadIcons } from "../common/IconBox";
 import Button from "./button";
 
 type FieldValues = Record<string, unknown>;
@@ -95,20 +94,22 @@ function FormLabel({ children, className }: { children: string; className?: stri
 	);
 }
 
-function FormInputGroup(props: React.ComponentPropsWithRef<"div"> & { displayOtherChildren?: boolean }) {
-	const { children, className, displayOtherChildren, ...restOfProps } = props;
-	const InputSlot = getSlotElement(children, FormInput);
+function FormInputGroup(props: React.ComponentPropsWithRef<"div">) {
+	const { children, className, ...restOfProps } = props;
 	const LeftItemSlot = getSlotElement(children, FormInputLeftItem);
 	const RightItemSlot = getSlotElement(children, FormInputRightItem);
 
+	const otherChildren = getOtherChildren(children, [FormInputLeftItem, FormInputRightItem]);
+
 	return (
-		<div className={cnMerge("flex items-center justify-between gap-4", className)} {...restOfProps}>
+		<div className={cnMerge("flex items-center justify-between", className)} {...restOfProps}>
 			{LeftItemSlot}
-			{!displayOtherChildren ? (InputSlot ?? children) : children}
+			{otherChildren}
 			{RightItemSlot}
 		</div>
 	);
 }
+
 type FormSideItemProps = {
 	children?: React.ReactNode;
 	className?: string;
@@ -120,7 +121,7 @@ function FormInputLeftItem<TElement extends React.ElementType = "span">(
 	const { children, className, ...restOfProps } = props;
 
 	return (
-		<span className={cnMerge("inline-block", className)} {...restOfProps}>
+		<span className={cnMerge("inline-flex items-center justify-center", className)} {...restOfProps}>
 			{children}
 		</span>
 	);
@@ -133,23 +134,25 @@ function FormInputRightItem<TElement extends React.ElementType = "span">(
 	const { as: Element = "span", children, className, ...restOfProps } = props;
 
 	return (
-		<Element className={cnMerge("inline-block", className)} {...restOfProps}>
+		<Element className={cnMerge("inline-flex items-center justify-center", className)} {...restOfProps}>
 			{children}
 		</Element>
 	);
 }
 FormInputRightItem.slot = Symbol.for("rightItem");
 
-export type FormInputPrimitiveProps<TFieldValues extends FieldValues = FieldValues> =
-	React.ComponentPropsWithRef<"input"> & {
-		withEyeIcon?: boolean;
-		classNames?: { inputGroup?: string; input?: string };
-		name?: keyof TFieldValues;
-		errorClassName?: string;
-	} & (
-			| { control: Control<TFieldValues>; formState?: never }
-			| { formState?: FormState<TFieldValues>; control?: never }
-		);
+export type FormInputPrimitiveProps<TFieldValues extends FieldValues = FieldValues> = Omit<
+	React.ComponentPropsWithRef<"input">,
+	"children"
+> & {
+	withEyeIcon?: boolean;
+	classNames?: { inputGroup?: string; input?: string };
+	name?: keyof TFieldValues;
+	errorClassName?: string;
+} & (
+		| { control: Control<TFieldValues>; formState?: never }
+		| { control?: never; formState?: FormState<TFieldValues> }
+	);
 
 const inputTypesWithoutFullWith = new Set<React.HTMLInputTypeAttribute>(["checkbox", "radio"]);
 
@@ -190,13 +193,6 @@ function FormInputPrimitive<TFieldValues extends FieldValues>(
 		className: cnMerge("w-full", classNames?.inputGroup),
 	};
 
-	useEffect(() => {
-		loadIcons([
-			"material-symbols:visibility-outline-rounded",
-			"material-symbols:visibility-off-outline-rounded",
-		]);
-	}, []);
-
 	return (
 		<WrapperElement {...WrapperElementProps}>
 			<input
@@ -213,7 +209,6 @@ function FormInputPrimitive<TFieldValues extends FieldValues>(
 				)}
 				{...restOfProps}
 			/>
-
 			<Show when={shouldHaveEyeIcon}>
 				<FormInputRightItem
 					as={Button}
@@ -221,14 +216,11 @@ function FormInputPrimitive<TFieldValues extends FieldValues>(
 					onClick={toggleVisibility}
 					className="size-5 shrink-0 lg:size-6"
 				>
-					<IconBox
-						icon={
-							isPasswordVisible
-								? "material-symbols:visibility-outline-rounded"
-								: "material-symbols:visibility-off-outline-rounded"
-						}
-						className="size-full"
-					/>
+					{isPasswordVisible ? (
+						<IconBox icon="material-symbols:visibility-off-outline-rounded" className="size-full" />
+					) : (
+						<IconBox icon="material-symbols:visibility-outline-rounded" className="size-full" />
+					)}
 				</FormInputRightItem>
 			</Show>
 		</WrapperElement>
@@ -251,7 +243,6 @@ function FormInput(props: Omit<FormInputPrimitiveProps, "id" | "name" | "formSta
 		/>
 	);
 }
-FormInput.slot = Symbol.for("input");
 
 type FormTextAreaPrimitiveProps<TFieldValues extends FieldValues = FieldValues> =
 	React.ComponentPropsWithRef<"textarea"> & {

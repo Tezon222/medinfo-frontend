@@ -1,5 +1,5 @@
 import { useCallback, useLayoutEffect, useRef } from "react";
-import type { CallbackFn } from "../type-helpers"
+import type { CallbackFn } from "../type-helpers";
 
 const useCallbackRef = <TParams, TResult = unknown>(callbackFn: CallbackFn<TParams, TResult>) => {
 	const callbackRef = useRef(callbackFn);

@@ -12,7 +12,7 @@ export const isSlotElement = <TProps>(
 		return false;
 	}
 
-	if ((child.type as WithSlot).slot && (child.type as WithSlot).slot === (SlotWrapper as WithSlot).slot) {
+	if ((child.type as WithSlot).slot === (SlotWrapper as WithSlot).slot) {
 		return true;
 	}
 
@@ -27,13 +27,7 @@ export const isSlotElement = <TProps>(
 	return child.type.toString() === SlotWrapper.toString();
 };
 
-// Check if the child is a Slot element by matching any in the SlotWrapperArray
-export const isSlotElementMultiple = <TProps>(
-	child: React.ReactNode,
-	SlotWrapperArray: Array<React.ComponentType<TProps>>
-) => SlotWrapperArray.some((slotWrapper) => isSlotElement(child, slotWrapper));
-
-type UseSlotOptions = {
+type SlotOptions = {
 	throwOnMultipleSlotMatch?: boolean;
 	errorMessage?: string;
 	ChildrenHelper?: typeof Children;
@@ -42,7 +36,7 @@ type UseSlotOptions = {
 export const getSlotElement = <TProps>(
 	children: React.ReactNode,
 	SlotWrapper: React.ComponentType<TProps>,
-	options: UseSlotOptions = {}
+	options: SlotOptions = {}
 ) => {
 	const {
 		throwOnMultipleSlotMatch = false,
@@ -62,6 +56,12 @@ export const getSlotElement = <TProps>(
 	return (isArray(Slot) ? Slot[0] : Slot) as React.ReactElement<TProps> | undefined;
 };
 
+export const isSlotElementMultiple = <TProps>(
+	child: React.ReactNode,
+	SlotWrapperArray: Array<React.ComponentType<TProps>>
+) => SlotWrapperArray.some((slotWrapper) => isSlotElement(child, slotWrapper));
+
+// Check if the child is a Slot element by matching any in the SlotWrapperArray
 export const getOtherChildren = <TProps>(
 	children: React.ReactNode,
 	SlotWrapperOrWrappers: React.ComponentType<TProps> | Array<React.ComponentType<TProps>>

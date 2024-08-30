@@ -19,7 +19,7 @@ const mergeProps = (slotProps: UnknownProps, childProps: UnknownProps) => {
 			overrideProps[propName] = [slotPropValue, childPropValue].filter(Boolean).join(" ");
 		}
 
-		const isHandler = /^on[A-Z]/.test(propName);
+		const isHandler = propName.startsWith("on");
 
 		if (!isHandler) continue;
 
