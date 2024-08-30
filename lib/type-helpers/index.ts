@@ -1,3 +1,3 @@
-export * from "./global-type-helpers";
-export * from "./polymorphism-helper";
+export * from "./global";
+export * from "./polymorphism";
 export * from "./typeof";

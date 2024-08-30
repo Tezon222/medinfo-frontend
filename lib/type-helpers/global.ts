@@ -15,3 +15,5 @@ export type InferProps<TComponent extends React.ElementType | HTMLElement> =
 		: React.HTMLAttributes<TComponent>;
 
 export type SelectorFn<TStore, TResult> = (state: TStore) => TResult;
+
+export type NonEmptyArray<TArrayItem> = [TArrayItem, ...TArrayItem[]];

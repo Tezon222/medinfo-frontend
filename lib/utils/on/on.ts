@@ -1,59 +1,51 @@
 import { isArray, isString } from "../../type-helpers/typeof";
-import type { AddEventParams, ON, RegisterConfig } from "./on.types";
+import type {
+	AddEventParams,
+	ElementOrSelectorArray,
+	ElementOrSelectorSingle,
+	ElementOrSelectorSingleOrArray,
+	ON,
+	RegisterConfig,
+} from "./types";
 
-const registerSingle = (element: unknown, config: RegisterConfig) => {
-	const { type, event, listener, options } = config;
+type UnknownFn = (...args: unknown[]) => void;
+
+const registerSingle = (element: ElementOrSelectorSingle<null>, config: RegisterConfig) => {
+	const { event, listener, options, type } = config;
 
 	const actionType = type === "add" ? "addEventListener" : "removeEventListener";
 
-	if (!element) {
-		console.error("Element is undefined, null or is an invalid selector");
+	if (element == null) {
+		console.error("Element is either undefined or null");
 		return;
 	}
 
 	if (isString(element)) {
 		const nodeList = document.querySelectorAll<HTMLElement>(element);
 
-		nodeList.forEach((node) => node[actionType](event, listener as never, options));
+		nodeList.forEach((node) => node[actionType](event, listener as UnknownFn, options));
 
 		return;
 	}
 
-	(element as HTMLElement)[actionType](event, listener as never, options);
+	element[actionType](event, listener as UnknownFn, options);
 };
 
-const registerMultiple = (elementArray: unknown[], config: RegisterConfig) => {
-	const { type, event, listener, options } = config;
-
-	const actionType = type === "add" ? "addEventListener" : "removeEventListener";
-
+const registerMultiple = (elementArray: ElementOrSelectorArray<null>, config: RegisterConfig) => {
 	if (elementArray.length === 0) {
 		console.error("ElementArray is empty!");
 		return;
 	}
 
 	for (const element of elementArray) {
-		if (!element) {
-			console.error("Element is undefined, null or is an invalid selector!");
-
-			continue;
-		}
-
-		if (isString(element)) {
-			const nodeList = document.querySelectorAll<HTMLElement>(element);
-
-			nodeList.forEach((node) => node[actionType](event, listener as never, options));
-
-			continue;
-		}
-
-		(element as HTMLElement)[actionType](event, listener as never, options);
+		registerSingle(element, config);
 	}
 };
 
-const register = (element: AddEventParams["1"], config: RegisterConfig) => {
+const register = (element: ElementOrSelectorSingleOrArray<null>, config: RegisterConfig) => {
 	if (isArray(element)) {
 		registerMultiple(element, config);
+
 		return;
 	}
 
@@ -63,16 +55,16 @@ const register = (element: AddEventParams["1"], config: RegisterConfig) => {
 const on: ON = (...params: AddEventParams) => {
 	const [event, element, listener, options] = params;
 
-	const boundListener = () => (listener as (...args: unknown[]) => void).call(element, event, cleanup);
+	const boundListener = () => (listener as UnknownFn).apply(element, [event, cleanup]);
 
 	const attach = () => {
-		register(element, { type: "add", event, listener: boundListener, options });
+		register(element, { event, listener: boundListener, options, type: "add" });
 
 		return cleanup;
 	};
 
 	const cleanup = () => {
-		register(element, { type: "remove", event, listener: boundListener, options });
+		register(element, { event, listener: boundListener, options, type: "remove" });
 
 		return attach;
 	};

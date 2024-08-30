@@ -64,7 +64,7 @@ function DoctorPage() {
 								border-medinfo-secondary-main px-[20px] py-[16px]"
 						>
 							<div className="flex gap-[12px]">
-								<div className="size-[56px] rounded-full bg-gray-500"></div>
+								<div className="size-[56px] rounded-full bg-gray-500" />
 								<div className="space-y-[12px]">
 									<h2 className="text-[18px] font-semibold text-medinfo-primary-darker">
 										Alex.O
@@ -82,7 +82,7 @@ function DoctorPage() {
 								border-medinfo-secondary-main px-[20px] py-[16px]"
 						>
 							<div className="flex gap-[12px]">
-								<div className="size-[56px] rounded-full bg-gray-500"></div>
+								<div className="size-[56px] rounded-full bg-gray-500" />
 								<div className="space-y-[12px]">
 									<h2 className="text-[18px] font-semibold text-medinfo-primary-darker">
 										Alex.O
@@ -100,7 +100,7 @@ function DoctorPage() {
 								border-medinfo-secondary-main px-[20px] py-[16px]"
 						>
 							<div className="flex gap-[12px]">
-								<div className="size-[56px] rounded-full bg-gray-500"></div>
+								<div className="size-[56px] rounded-full bg-gray-500" />
 								<div className="space-y-[12px]">
 									<h2 className="text-[18px] font-semibold text-medinfo-primary-darker">
 										Alex.O
@@ -128,7 +128,7 @@ function DoctorPage() {
 								border-medinfo-secondary-main px-[20px] py-[16px]"
 						>
 							<div className="flex gap-[12px]">
-								<div className="size-[56px] rounded-full bg-gray-500"></div>
+								<div className="size-[56px] rounded-full bg-gray-500" />
 								<div className="space-y-[12px]">
 									<h2 className="text-[18px] font-semibold text-medinfo-primary-darker">
 										Alex.O
@@ -146,7 +146,7 @@ function DoctorPage() {
 								border-medinfo-secondary-main px-[20px] py-[16px]"
 						>
 							<div className="flex gap-[12px]">
-								<div className="size-[56px] rounded-full bg-gray-500"></div>
+								<div className="size-[56px] rounded-full bg-gray-500" />
 								<div className="space-y-[12px]">
 									<h2 className="text-[18px] font-semibold text-medinfo-primary-darker">
 										Alex.O
@@ -164,7 +164,7 @@ function DoctorPage() {
 								border-medinfo-secondary-main px-[20px] py-[16px]"
 						>
 							<div className="flex gap-[12px]">
-								<div className="size-[56px] rounded-full bg-gray-500"></div>
+								<div className="size-[56px] rounded-full bg-gray-500" />
 								<div className="space-y-[12px]">
 									<h2 className="text-[18px] font-semibold text-medinfo-primary-darker">
 										Alex.O

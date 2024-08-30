@@ -125,8 +125,8 @@ function ProfilePage() {
 						className="gap-1 font-roboto font-medium"
 					>
 						<Form.Label className="md:text-[20px]">Bio</Form.Label>
-						<Form.Input
-							type="textarea"
+
+						<Form.TextArea
 							className="h-[163px] rounded-[8px] border-[1.4px] border-medinfo-primary-main px-4
 								py-5 placeholder:text-medinfo-dark-4 md:h-[159px] md:text-base"
 						/>

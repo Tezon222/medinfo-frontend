@@ -6,5 +6,5 @@
 	},
 
 	"include": ["../**/*"],
-	"exclude": ["node_modules", ".next"]
+	"exclude": ["../node_modules", "../.next", "../eslint-typegen.d.ts"]
 }

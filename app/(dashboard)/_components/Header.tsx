@@ -33,7 +33,7 @@ const Header = () => {
 				</div>
 				<div className="flex items-center space-x-[40px]">
 					<NotificationIcon />
-					<div className="size-[40px] rounded-full bg-gray-300"></div>
+					<div className="size-[40px] rounded-full bg-gray-300" />
 				</div>
 			</header>
 			{/* mobile view  */}
