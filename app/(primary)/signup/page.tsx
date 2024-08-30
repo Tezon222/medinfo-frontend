@@ -81,7 +81,7 @@ function SignUpPage() {
 										border-medinfo-primary-main px-4 py-3 md:h-[64px] md:py-5"
 								>
 									<Form.InputLeftItem className="size-5 md:size-6">
-										<IconBox icon="majesticons:user-line" className="size-full"/>
+										<IconBox icon="majesticons:user-line" className="size-full" />
 									</Form.InputLeftItem>
 
 									<Form.Input
