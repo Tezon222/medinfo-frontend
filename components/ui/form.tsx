@@ -44,7 +44,7 @@ function FormRoot<TValues extends FieldValues>(props: FormRootProps<TValues>) {
 
 	return (
 		<HookFormProvider {...methods}>
-			<form className={cnMerge("flex flex-col", className)} {...restOfProps}>
+			<form className={cnMerge("flex flex-col", className)} method="POST" {...restOfProps}>
 				{children}
 			</form>
 		</HookFormProvider>
