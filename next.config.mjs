@@ -2,6 +2,9 @@
 
 const nextConfig = {
 	reactStrictMode: true,
+	devIndicators: {
+		appIsrStatus: false,
+	},
 	eslint: {
 		ignoreDuringBuilds: true,
 	},
