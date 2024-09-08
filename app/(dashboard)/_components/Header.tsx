@@ -3,7 +3,7 @@
 import { Logo } from "@/components/common";
 import { HamburgerIcon, NotificationIcon, SearchIcon, XIcon } from "@/components/icons";
 import { Button } from "@/components/ui";
-import { useToggle } from "@/lib/hooks";
+import { useToggle } from "@zayne-labs/toolkit/react";
 import { usePathname } from "next/navigation";
 import MobileNavigation from "./MobileNavigation";
 import { menuItems } from "./SidebarLinks";

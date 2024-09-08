@@ -1,4 +1,4 @@
-import { isObject } from "@/lib/type-helpers/typeof";
+import { isObject } from "@zayne-labs/toolkit/type-helpers";
 
 export type UnknownProps = Record<string, unknown>;
 

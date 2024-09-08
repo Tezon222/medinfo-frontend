@@ -105,6 +105,7 @@ const tailwindConfig = withTV({
 
 	plugins: [
 		animationPlugin,
+		// eslint-disable-next-line @typescript-eslint/unbound-method
 		plugin(({ addComponents }) => {
 			const scrollNone = {
 				".scrollbar-none": {
