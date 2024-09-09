@@ -32,6 +32,7 @@ const eslintConfigArray = augumentedTypegen([
 		ignores: [
 			"dist/**",
 			"build/**",
+			".next/**",
 			"eslint-typegen.d.ts",
 			"config/eslint-config-types/**",
 			"eslint.config.mjs",
@@ -49,8 +50,12 @@ const eslintConfigArray = augumentedTypegen([
 			},
 
 			parser: tsEslint.parser,
+
 			parserOptions: {
-				project: "config/tsconfig.eslint.json",
+				projectService: {
+					allowDefaultProject: ["*.js", "*.mjs"],
+					defaultProject: "tsconfig.json",
+				},
 				tsconfigRootDir: import.meta.dirname,
 			},
 
