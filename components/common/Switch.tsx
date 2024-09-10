@@ -1,7 +1,7 @@
 "use client";
 
-import { isArray } from "@/lib/type-helpers";
-import { getSlotElement } from "@/lib/utils/getSlotElement";
+import { getSlotElement } from "@zayne-labs/toolkit/react";
+import { isArray } from "@zayne-labs/toolkit/type-helpers";
 
 type ValidSwitchComponentType = React.ReactElement<SwitchMatchProps>;
 

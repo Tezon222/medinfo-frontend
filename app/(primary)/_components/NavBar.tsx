@@ -3,8 +3,8 @@
 import { Logo, NavLink, ProgressBar } from "@/components/common";
 import { HamburgerIcon, SearchIcon, XIcon } from "@/components/icons";
 import { Button } from "@/components/ui";
-import { useToggle } from "@/lib/hooks";
 import { cnMerge } from "@/lib/utils/cn";
+import { useToggle } from "@zayne-labs/toolkit/react";
 
 function NavBar() {
 	const [isNavShow, toggleNavShow] = useToggle(false);

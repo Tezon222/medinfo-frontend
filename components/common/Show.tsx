@@ -1,6 +1,6 @@
 "use client";
 
-import { getOtherChildren, getSlotElement } from "@/lib/utils/getSlotElement";
+import { getOtherChildren, getSlotElement } from "@zayne-labs/toolkit/react";
 
 type ShowProps = {
 	when: boolean;

@@ -4,7 +4,11 @@ import animationPlugin from "tailwindcss-animate";
 import plugin from "tailwindcss/plugin";
 
 const tailwindConfig = withTV({
-	content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./lib/hooks/useDragScroll.ts"],
+	content: [
+		"./app/**/*.{ts,tsx}",
+		"./components/**/*.{ts,tsx}",
+		"./node_modules/@zayne-labs/toolkit/dist/esm-min/react/index.js",
+	],
 
 	theme: {
 		screens: {
@@ -105,6 +109,7 @@ const tailwindConfig = withTV({
 
 	plugins: [
 		animationPlugin,
+		// eslint-disable-next-line @typescript-eslint/unbound-method
 		plugin(({ addComponents }) => {
 			const scrollNone = {
 				".scrollbar-none": {

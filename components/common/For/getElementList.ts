@@ -1,4 +1,4 @@
-import { For } from "@/components/common";
+import * as For from "./For";
 
 function getElementList(type: "base"): [typeof For.Base];
 function getElementList(type?: "withWrapper"): [typeof For.List];
