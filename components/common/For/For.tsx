@@ -1,4 +1,4 @@
-import type { PolymorphicPropsWithRef } from "@/lib/type-helpers/polymorphism";
+import type { PolymorphicPropsWithRef } from "@zayne-labs/toolkit/type-helpers";
 
 // prettier-ignore
 type RenderPropFn<TArrayItem> = (
@@ -25,18 +25,16 @@ function ForBase<TArrayItem>(props: ForProps<TArrayItem>) {
 	const { each, render, children } = props;
 
 	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-	if (each == null) {
-		return [];
+	if (each == null || each.length === 0) {
+		return null;
 	}
 
-	const JSXElementList = each.map((...params) => {
-		const coercedParams = params as Parameters<RenderPropFn<TArrayItem>>;
-
+	const JSXElementList = each.map((...params: Parameters<RenderPropFn<TArrayItem>>) => {
 		if (typeof children === "function") {
-			return children(...coercedParams);
+			return children(...params);
 		}
 
-		return render(...coercedParams);
+		return render(...params);
 	});
 
 	return JSXElementList;
@@ -46,6 +44,11 @@ function ForList<TArrayItem, TElement extends React.ElementType = "ul">(
 	props: PolymorphicPropsWithRef<TElement, ForProps<TArrayItem> & { className?: string }>
 ) {
 	const { each, render, children, as: ListContainer = "ul", className, ...restOfListProps } = props;
+
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+	if (each == null || each.length === 0) {
+		return null;
+	}
 
 	return (
 		<ListContainer className={className} {...restOfListProps}>

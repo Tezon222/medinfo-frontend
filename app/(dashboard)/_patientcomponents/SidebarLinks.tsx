@@ -7,7 +7,7 @@ import SettingsIcon from "@/components/icons/SettingsIcon";
 type MenuItem = {
 	href: string;
 	title: string;
-	icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
+	icon: (props: React.SVGProps<SVGSVGElement>) => React.JSX.Element;
 };
 
 export const menuItems: MenuItem[] = [

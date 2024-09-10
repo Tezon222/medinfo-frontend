@@ -1,7 +1,5 @@
-import type { SelectorFn } from "@/lib/type-helpers";
-import { isObject } from "@/lib/type-helpers/typeof";
-import { isBrowser } from "@/lib/utils/constants";
-import { on } from "@/lib/utils/on";
+import { isBrowser, on } from "@zayne-labs/toolkit";
+import { type SelectorFn, isObject } from "@zayne-labs/toolkit/type-helpers";
 import { type StateCreator, create } from "zustand";
 import { persist } from "zustand/middleware";
 import { useShallow } from "zustand/react/shallow";
@@ -22,7 +20,7 @@ const prefersDarkMode = () => isBrowser() && window.matchMedia("(prefers-color-s
 const themeStoreObjectFn: StateCreator<ThemeStore> = (set, get) => ({
 	theme: prefersDarkMode() ? "dark" : "light",
 
-	isDarkMode: Boolean(prefersDarkMode()),
+	isDarkMode: true,
 
 	actions: {
 		toggleTheme: () => {

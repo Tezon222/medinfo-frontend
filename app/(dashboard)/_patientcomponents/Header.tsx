@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { menuItems } from "./SidebarLinks";
 import { Logo } from "@/components/common";
 import { Button } from "@/components/ui";
-import { useToggle } from "@/lib/hooks";
+import { useToggle } from "@zayne-labs/toolkit/react";
 import MobileNavigation from "./MobileNavigation";
 
 const Header = () => {
@@ -33,7 +33,7 @@ const Header = () => {
 				</div>
 				<div className="flex items-center space-x-[40px]">
 					<NotificationIcon />
-					<div className="size-[40px] rounded-full bg-gray-500"></div>
+					<div className="size-[40px] rounded-full bg-gray-500" />
 				</div>
 			</header>
 			{/* mobile view  */}

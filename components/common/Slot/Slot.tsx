@@ -1,4 +1,4 @@
-import { isArray } from "@/lib/type-helpers";
+import { isArray } from "@zayne-labs/toolkit/type-helpers";
 import { Children, cloneElement, isValidElement } from "react";
 import SlotClone from "./SlotClone";
 

@@ -1,6 +1,6 @@
 "use client";
 
-import type { Prettify } from "@/lib/type-helpers/global";
+import type { Prettify } from "@zayne-labs/toolkit/type-helpers";
 import { type VariantProps, tv } from "tailwind-variants";
 import { Slot } from "../common";
 
