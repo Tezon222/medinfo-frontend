@@ -9,7 +9,14 @@ const nextConfig = {
 		ignoreDuringBuilds: true,
 	},
 	images: {
-		remotePatterns: [{ protocol: "https", hostname: "health.gov", port: "", pathname: "/**" }],
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "health.gov",
+				port: "",
+				pathname: "/**",
+			},
+		],
 	},
 };
 
