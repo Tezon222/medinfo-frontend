@@ -17,6 +17,9 @@ importers:
       '@radix-ui/react-select':
         specifier: ^2.1.1
         version: 2.1.1(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@19.0.0-rc-a03254bc-20240905(react@19.0.0-rc-a03254bc-20240905))(react@19.0.0-rc-a03254bc-20240905)
+      '@zayne-labs/callapi':
+        specifier: ^0.7.7
+        version: 0.7.7
       '@zayne-labs/toolkit':
         specifier: ^0.1.2
         version: 0.1.2(@types/react@18.3.5)(react@19.0.0-rc-a03254bc-20240905)(sonner@1.5.0(react-dom@19.0.0-rc-a03254bc-20240905(react@19.0.0-rc-a03254bc-20240905))(react@19.0.0-rc-a03254bc-20240905))
@@ -901,6 +904,10 @@ packages:
   '@typescript-eslint/visitor-keys@8.4.0':
     resolution: {integrity: sha512-zTQD6WLNTre1hj5wp09nBIDiOc2U5r/qmzo7wxPn4ZgAjHql09EofqhF9WF+fZHzL5aCyaIpPcT2hyxl73kr9A==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@zayne-labs/callapi@0.7.7':
+    resolution: {integrity: sha512-vsoIsaHp0isj4SlwSsx7KgqdsDrjT1Rzz1BBZBL2fhLNAU2i/gdJfBZ0TcM9kQIxjWoYOXGaM9nYahjslaavQA==}
+    engines: {node: '>=18.17.x'}
 
   '@zayne-labs/toolkit@0.1.2':
     resolution: {integrity: sha512-A7u9cSNkGp70w1NMCKUIUxe4t0gM9Hc3HDa36k5UT12NjC/CwLNEAnJIRXQlce0yoAsZ95VFV06t7de5IJ38HA==}
@@ -3224,6 +3231,8 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 8.4.0
       eslint-visitor-keys: 3.4.3
+
+  '@zayne-labs/callapi@0.7.7': {}
 
   '@zayne-labs/toolkit@0.1.2(@types/react@18.3.5)(react@19.0.0-rc-a03254bc-20240905)(sonner@1.5.0(react-dom@19.0.0-rc-a03254bc-20240905(react@19.0.0-rc-a03254bc-20240905))(react@19.0.0-rc-a03254bc-20240905))':
     optionalDependencies:

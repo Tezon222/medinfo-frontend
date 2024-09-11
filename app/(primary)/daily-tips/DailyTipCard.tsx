@@ -1,15 +1,16 @@
 import { IconBox, NavLink } from "@/components/common";
 import { Card } from "@/components/ui";
 import { cnMerge } from "@/lib/utils/cn";
-import { tipPlaceHolder } from "@/public/assets/images/landing-page";
 import Image from "next/image";
 
 export type DailyTipCardProps = {
-	id: number;
+	id: string;
 	className?: string;
+	imageUrl: string;
+	title: string;
 };
 
-function DailyTipCard({ className, id }: DailyTipCardProps) {
+function DailyTipCard({ className, id, imageUrl, title }: DailyTipCardProps) {
 	return (
 		<Card
 			as="li"
@@ -22,7 +23,7 @@ function DailyTipCard({ className, id }: DailyTipCardProps) {
 			<Card.Header className="min-h-[117px] md:max-h-[176px]">
 				<Image
 					className="max-h-full rounded-t-[16px] object-cover"
-					src={tipPlaceHolder as string}
+					src={imageUrl}
 					alt=""
 					draggable={false}
 					width={161}
@@ -30,7 +31,7 @@ function DailyTipCard({ className, id }: DailyTipCardProps) {
 				/>
 			</Card.Header>
 
-			<Card.Content className="px-3">Lorem ipsum dolor sit amet consectetur.</Card.Content>
+			<Card.Content className="px-3">{title}</Card.Content>
 
 			<Card.Footer className="px-3" asChild={true}>
 				<NavLink href={`/daily-tips/${id}`} className="flex items-center gap-4">

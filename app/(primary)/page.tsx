@@ -62,7 +62,6 @@ function HomePage() {
 	const [FeatureList] = getElementList();
 	const [AdvantageList] = getElementList();
 	const [FAQList] = getElementList();
-
 	return (
 		<Main className="flex w-full flex-col gap-14 max-md:max-w-[400px] md:gap-[92px]">
 			<section className="flex flex-col items-center md:flex-row-reverse md:gap-[67px]">

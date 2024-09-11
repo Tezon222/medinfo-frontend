@@ -8,6 +8,9 @@ const nextConfig = {
 	eslint: {
 		ignoreDuringBuilds: true,
 	},
+	images: {
+		remotePatterns: [{ protocol: "https", hostname: "health.gov", port: "", pathname: "/**" }],
+	},
 };
 
 export default nextConfig;
