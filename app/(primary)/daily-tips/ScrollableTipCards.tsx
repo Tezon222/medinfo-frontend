@@ -2,36 +2,38 @@
 
 import { getElementList } from "@/components/common";
 import { cnJoin } from "@/lib/utils/cn";
+import { fetchAllTips } from "@/lib/utils/fetchTips";
 import { useDragScroll } from "@zayne-labs/toolkit/react";
+import { use } from "react";
 import DailyTipCard from "./DailyTipCard";
-import { useEffect, useState } from "react";
-import { callBackendApi } from "@/lib/utils/callBackendApi";
 
 function ScrollableTipCards() {
 	const [CardList] = getElementList();
 
 	const { dragScrollProps, dragContainerClasses, dragItemClasses } = useDragScroll<HTMLUListElement>();
-	const [diseases, setDiseases] = useState<Array<{ id: string; title: string; imageUrl: string }>>([]);
 
-	useEffect(() => {
-		const getDiseases = async () => {
-			const { data } = await callBackendApi<{
-				data: Array<{ id: string; title: string; imageUrl: string }>;
-			}>("/dailyTips/tips");
-			setDiseases(data?.data ?? []);
-		};
-		void getDiseases();
-	}, []);
+	const { data, error } = use(fetchAllTips());
+
+	if (error) {
+		console.error(error.errorData);
+		return null;
+	}
+
+	const { data: tips } = data;
+
 	return (
 		<CardList
 			{...dragScrollProps}
-			className={cnJoin(
-				"mt-6 select-none gap-5 [align-items:safe_center] md:mt-14 md:justify-between",
-				dragContainerClasses
-			)}
-			each={diseases}
-			render={({ id, imageUrl, title }) => (
-				<DailyTipCard key={id} id={id} imageUrl={imageUrl} title={title} className={dragItemClasses} />
+			className={cnJoin("mt-6 select-none gap-5 md:mt-14 md:justify-between", dragContainerClasses)}
+			each={tips}
+			render={(tip) => (
+				<DailyTipCard
+					key={tip.id}
+					id={tip.id}
+					imageUrl={tip.imageUrl}
+					title={tip.title}
+					className={dragItemClasses}
+				/>
 			)}
 		/>
 	);

@@ -20,9 +20,9 @@ function DailyTipCard({ className, id, imageUrl, title }: DailyTipCardProps) {
 				className
 			)}
 		>
-			<Card.Header className="min-h-[117px] md:max-h-[176px]">
+			<Card.Header className="h-[117px] md:h-[176px]">
 				<Image
-					className="max-h-full rounded-t-[16px] object-cover"
+					className="h-full rounded-t-[16px] object-cover"
 					src={imageUrl}
 					alt=""
 					draggable={false}
@@ -31,7 +31,7 @@ function DailyTipCard({ className, id, imageUrl, title }: DailyTipCardProps) {
 				/>
 			</Card.Header>
 
-			<Card.Content className="px-3">{title}</Card.Content>
+			<Card.Content className="grow px-3">{title}</Card.Content>
 
 			<Card.Footer className="px-3" asChild={true}>
 				<NavLink href={`/daily-tips/${id}`} className="flex items-center gap-4">

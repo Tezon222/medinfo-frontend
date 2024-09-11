@@ -25,8 +25,11 @@ function ForBase<TArrayItem>(props: ForProps<TArrayItem>) {
 	const { each, render, children } = props;
 
 	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-	if (each == null || each.length === 0) {
+	if (each == null) {
 		return null;
+	}
+	if (each.length === 0) {
+		return each;
 	}
 
 	const JSXElementList = each.map((...params: Parameters<RenderPropFn<TArrayItem>>) => {
@@ -43,19 +46,20 @@ function ForBase<TArrayItem>(props: ForProps<TArrayItem>) {
 function ForList<TArrayItem, TElement extends React.ElementType = "ul">(
 	props: PolymorphicPropsWithRef<TElement, ForProps<TArrayItem> & { className?: string }>
 ) {
-	const { each, render, children, as: ListContainer = "ul", className, ...restOfListProps } = props;
+	const { each, render, ref, children, as: ListContainer = "ul", className, ...restOfListProps } = props;
 
 	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-	if (each == null || each.length === 0) {
+	if (each == null) {
 		return null;
 	}
 
 	return (
-		<ListContainer className={className} {...restOfListProps}>
+		<ListContainer ref={ref} className={className} {...restOfListProps}>
 			<ForBase {...({ each, render, children } as ForProps<TArrayItem>)} />
 		</ListContainer>
 	);
 }
 
 export const Base = ForBase;
+
 export const List = ForList;

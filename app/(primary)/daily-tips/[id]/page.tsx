@@ -1,19 +1,29 @@
-import tipExpanded from "@/public/assets/images/tip-expanded.svg";
+"use client";
+
+import { fetchSingleTip } from "@/lib/utils/fetchTips";
 import Image from "next/image";
+import { use } from "react";
 import { Main } from "../../_components";
 import ScrollableTipCards from "../ScrollableTipCards";
 
-function TipExpandedPage() {
+function TipExpandedPage({ params }: { params: { id: string } }) {
+	const { data, error } = use(fetchSingleTip(params.id));
+
+	if (error) {
+		console.error(error.errorData);
+		return null;
+	}
+
 	return (
 		<Main className="flex w-full flex-col max-md:max-w-[400px]">
 			<section className="h-[190px] w-[297px] lg:h-[410px] lg:w-[644px]">
 				<Image
-					src={tipExpanded as string}
+					src={data.imageUrl}
 					className="size-full"
 					priority={true}
 					width={297}
 					height={190}
-					alt="Tip Expanded"
+					alt={data.imageAlt}
 				/>
 			</section>
 
