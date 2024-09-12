@@ -33,7 +33,6 @@ const FAQs = [
 	},
 ];
 
-
 function AccordionComponent() {
 	const [FAQList] = getElementList();
 
