@@ -1,5 +1,3 @@
-"use client";
-
 import { IconBox, NavLink, getElementList } from "@/components/common";
 import { ChevronDownIcon } from "@/components/icons";
 // FIXME - Change accordions component to another suitable one and then remove use client from this page`
@@ -62,6 +60,7 @@ function HomePage() {
 	const [FeatureList] = getElementList();
 	const [AdvantageList] = getElementList();
 	const [FAQList] = getElementList();
+
 	return (
 		<Main className="flex w-full flex-col gap-14 max-md:max-w-[400px] md:gap-[92px]">
 			<section className="flex flex-col items-center md:flex-row-reverse md:gap-[67px]">

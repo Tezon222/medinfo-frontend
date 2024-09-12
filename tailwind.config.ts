@@ -1,3 +1,4 @@
+import typographyPlugin from "@tailwindcss/typography";
 import { withTV } from "tailwind-variants/transformer";
 import type { Config } from "tailwindcss";
 import animationPlugin from "tailwindcss-animate";
@@ -108,6 +109,7 @@ const tailwindConfig = withTV({
 	},
 
 	plugins: [
+		typographyPlugin,
 		animationPlugin,
 		// eslint-disable-next-line @typescript-eslint/unbound-method
 		plugin(({ addComponents }) => {

@@ -1,25 +1,27 @@
-"use client";
-
-import { fetchSingleTip } from "@/lib/utils/fetchTips";
+import { getElementList } from "@/components/common";
+import type { SingleTip } from "@/lib/types";
+import { callBackendApi } from "@/lib/utils/callBackendApi";
 import Image from "next/image";
-import { use } from "react";
 import { Main } from "../../_components";
+import { HealthFinderLogo } from "../DailyTipCard";
 import ScrollableTipCards from "../ScrollableTipCards";
 
-function TipExpandedPage({ params }: { params: { id: string } }) {
-	const { data, error } = use(fetchSingleTip(params.id));
+async function TipExpandedPage({ params }: { params: { id: string } }) {
+	const { data, error } = await callBackendApi<SingleTip>(`/dailyTips/tip/${params.id}`);
 
 	if (error) {
 		console.error(error.errorData);
 		return null;
 	}
 
+	const [ArticleList] = getElementList();
+
 	return (
 		<Main className="flex w-full flex-col max-md:max-w-[400px]">
 			<section className="h-[190px] w-[297px] lg:h-[410px] lg:w-[644px]">
 				<Image
 					src={data.imageUrl}
-					className="size-full"
+					className="size-full rounded-br-[16px] rounded-tl-[16px]"
 					priority={true}
 					width={297}
 					height={190}
@@ -29,42 +31,30 @@ function TipExpandedPage({ params }: { params: { id: string } }) {
 
 			<section className="mt-8 flex flex-col gap-6 lg:mt-10 lg:gap-8">
 				<h1 className="text-[32px] font-bold text-medinfo-primary-main lg:text-[60px]">
-					Lice Spread Through Head-to-Head Contact
+					{data.mainTitle}
 				</h1>
 
-				<article className="flex flex-col gap-8 lg:flex-row lg:gap-[92px]">
-					<div className="flex flex-col gap-4 lg:min-w-[616px] lg:gap-7">
-						<h4
-							className="text-[18px] font-medium text-medinfo-primary-main lg:text-[24px]
-								lg:font-semibold"
-						>
-							Did You Know?
-						</h4>
-						<p>
-							Lorem ipsum dolor sit amet consectetur. Ornare enim scelerisque enim fusce quam.
-							Senectus pulvinar porttitor nec mauris neque faucibus amet ut. Egestas at libero
-							egestas interdum malesuada. Eu nunc nascetur pharetra scelerisque cursus. Lectus vel
-							lorem phasellus sit imperdiet eros. Senectus vitae sodales netus pellentesque duis
-							adipiscing cursus.
-						</p>
-					</div>
+				<ArticleList
+					as="article"
+					className="flex flex-col gap-8 lg:gap-[64px]"
+					each={data.mainBody}
+					render={(item) => (
+						<div className="flex flex-col gap-4 lg:min-w-[616px] lg:gap-7">
+							<h4 className="text-[20px] font-semibold text-medinfo-primary-main lg:text-[24px]">
+								{item.Title}
+							</h4>
 
-					<div className="flex flex-col gap-4 lg:gap-7">
-						<h4
-							className="text-[18px] font-medium text-medinfo-primary-main lg:text-[24px]
-								lg:font-semibold"
-						>
-							Preventive Measures
-						</h4>
-						<p>
-							Lorem ipsum dolor sit amet consectetur. Ornare enim scelerisque enim fusce quam.
-							Senectus pulvinar porttitor nec mauris neque faucibus amet ut. Egestas at libero
-							egestas interdum malesuada. Eu nunc nascetur pharetra scelerisque cursus. Lectus vel
-							lorem phasellus sit imperdiet eros. Senectus vitae sodales netus pellentesque duis
-							adipiscing cursus.
-						</p>
-					</div>
-				</article>
+							{/* eslint-disable-next-line @eslint-react/dom/no-dangerously-set-innerhtml */}
+							<div
+								className="prose max-w-[80ch] [&>h4]:text-[18px] [&>h4]:font-medium
+									[&>h4]:text-medinfo-primary-main [&>p]:text-pretty"
+								dangerouslySetInnerHTML={{ __html: item.Content }}
+							/>
+						</div>
+					)}
+				/>
+
+				<HealthFinderLogo lastUpdated={data.lastUpdated} />
 			</section>
 
 			<section className="mt-14 flex flex-col items-center lg:mt-[92px]">

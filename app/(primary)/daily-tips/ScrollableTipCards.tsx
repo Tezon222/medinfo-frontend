@@ -1,42 +1,16 @@
-"use client";
+import type { TipsArrayType } from "@/lib/types";
+import { callBackendApi } from "@/lib/utils/callBackendApi";
+import { TipsCardList } from "./DailyTipCard";
 
-import { getElementList } from "@/components/common";
-import { cnJoin } from "@/lib/utils/cn";
-import { fetchAllTips } from "@/lib/utils/fetchTips";
-import { useDragScroll } from "@zayne-labs/toolkit/react";
-import { use } from "react";
-import DailyTipCard from "./DailyTipCard";
-
-function ScrollableTipCards() {
-	const [CardList] = getElementList();
-
-	const { dragScrollProps, dragContainerClasses, dragItemClasses } = useDragScroll<HTMLUListElement>();
-
-	const { data, error } = use(fetchAllTips());
+async function ScrollableTipCards() {
+	const { data, error } = await callBackendApi<{ data: TipsArrayType }>("/dailyTips/tips");
 
 	if (error) {
 		console.error(error.errorData);
 		return null;
 	}
 
-	const { data: tips } = data;
-
-	return (
-		<CardList
-			{...dragScrollProps}
-			className={cnJoin("mt-6 select-none gap-5 md:mt-14 md:justify-between", dragContainerClasses)}
-			each={tips}
-			render={(tip) => (
-				<DailyTipCard
-					key={tip.id}
-					id={tip.id}
-					imageUrl={tip.imageUrl}
-					title={tip.title}
-					className={dragItemClasses}
-				/>
-			)}
-		/>
-	);
+	return <TipsCardList tips={data.data} />;
 }
 
 export default ScrollableTipCards;
