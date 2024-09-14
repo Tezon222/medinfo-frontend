@@ -7,6 +7,7 @@ const BACKEND_URL = assertENV(
 );
 
 const callBackendApi = callApi.create({
+	cache: "no-store",
 	baseURL: BACKEND_URL,
 });
 

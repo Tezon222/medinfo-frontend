@@ -7,22 +7,52 @@ import { AccordionComponent, Main } from "./_components";
 import ScrollableTipCards from "./daily-tips/ScrollableTipCards";
 
 const coreServices = [
-	{ imageSrc: feature1 as string, description: "SubSpecialists" },
-	{ imageSrc: feature2 as string, description: "Open source library" },
-	{ imageSrc: feature3 as string, description: "Virtual consultancy" },
+	{
+		imageSrc: feature1 as string,
+		title: "SubSpecialists",
+		description:
+			"Connect with certified sub-specialists across various medical fields for expert guidance tailored to your specific health needs.",
+	},
+	{
+		imageSrc: feature2 as string,
+		title: "Open source library",
+		description:
+			"Access a rich, user-friendly library of health information covering a wide range of conditions, symptoms, and treatments—all for free.",
+	},
+	{
+		imageSrc: feature3 as string,
+		title: "Virtual consultancy",
+		description:
+			"Get personalized medical advice from experienced healthcare professionals through our secure and convenient virtual consultation service.",
+	},
 ];
 
 const features = [
-	{ icon: "ic:sharp-access-time", description: "Efficient and user-friendly" },
-	{ icon: "fluent:access-time-24-regular", description: "Accessible consultations" },
-	{ icon: "mynaui:lock-password", description: "Ensured confidentiality" },
-	{ icon: "mage:book-text", description: "Open library" },
+	{ icon: "ic:sharp-access-time", title: "Efficient and user-friendly" },
+	{ icon: "fluent:access-time-24-regular", title: "Accessible consultations" },
+	{ icon: "mynaui:lock-password", title: "Ensured confidentiality" },
+	{ icon: "mage:book-text", title: "Open library" },
 ];
 
 const advantages = [
-	{ icon: "mage:book-text", title: "24/7 availability" },
-	{ icon: "solar:user-check-rounded-outline", title: "Remote visitation" },
-	{ icon: "tabler:calendar-check", title: "Zero appointments" },
+	{
+		icon: "mage:book-text",
+		title: "24/7 availability",
+		description:
+			"Get access to trusted healthcare information and professional support anytime, day or night, at your convenience.",
+	},
+	{
+		icon: "solar:user-check-rounded-outline",
+		title: "Remote visitation",
+		description:
+			"Consult with doctors from the comfort of your home, eliminating the need for travel or in-person visits.",
+	},
+	{
+		icon: "tabler:calendar-check",
+		title: "Zero appointments",
+		description:
+			"Experience quick and easy scheduling with minimal wait times, ensuring you get the help you need when you need it.",
+	},
 ];
 
 function HomePage() {
@@ -44,11 +74,12 @@ function HomePage() {
 					</h1>
 
 					<p className="mt-[15px] md:text-[18px] md:leading-[26px]">
-						Lorem ipsum dolor sit amet consectetur. Amet nunc bibendum vitae pretium ultrices
-						pulvinar lacus ultrices. A id fermentum aliquet facilisi consequat tortor. Est donec
-						tincidunt diam sit. Arcu ut platea ac purus. Tincidunt faucibus tristique interdum
-						pharetra cras duis mauris. Viverra a placerat maecenas felis tristique lectus erat.
-						Tempus nec vel euismod amet cras.
+						Getting the right health information shouldn’t be complicated, and talking to a doctor
+						shouldn’t feel like a big task. That’s why we’ve made it easy for you to access reliable
+						knowledge and chat with some of the best doctors in the field. Whether you have a simple
+						question or need guidance on something more serious, we’re here to connect you with
+						professionals who are ready to help—no stress, no barriers. It's healthcare made simple,
+						just the way it should be.
 					</p>
 					<Button asChild={true} className="mt-6">
 						<NavLink href={{ pathname: "/signup", query: { type: "patient" } }}>Join Us</NavLink>
@@ -88,7 +119,7 @@ function HomePage() {
 						md:justify-between md:gap-[28px]"
 					each={coreServices}
 					render={(coreService, index) => (
-						<li key={coreService.description} className="group">
+						<li key={coreService.title} className="group">
 							<div className="relative">
 								<Image
 									className={cnJoin(
@@ -106,8 +137,7 @@ function HomePage() {
 										bg-medinfo-primary-main p-7 font-normal text-white opacity-0
 										[transition:opacity_300ms_ease] group-hover:opacity-100 md:text-[18px]"
 								>
-									Lorem ipsum dolor sit amet consectetur. Malesuada viverra neque euismod amet
-									vel. Erat id sed at praesent sagittis porttitor. Cras quisque lacinia.
+									{coreService.description}
 								</span>
 							</div>
 
@@ -115,7 +145,7 @@ function HomePage() {
 								className="mt-4 text-[22px] font-medium [transition:opacity_300ms_ease]
 									group-hover:opacity-0 md:text-[24px] md:font-semibold"
 							>
-								{coreService.description}
+								{coreService.title}
 							</p>
 						</li>
 					)}
@@ -136,7 +166,7 @@ function HomePage() {
 					each={features}
 					render={(feature) => (
 						<li
-							key={feature.description}
+							key={feature.title}
 							className="relative flex flex-col items-center justify-center rounded-[16px] border
 								border-medinfo-primary-main px-[3.5px] py-[54px] text-medinfo-primary-main
 								md:px-[47px] md:py-[67px]"
@@ -147,7 +177,7 @@ function HomePage() {
 							>
 								<IconBox icon={feature.icon} />
 							</span>
-							<p className="md:text-[20px]">{feature.description}</p>
+							<p className="md:text-[20px]">{feature.title}</p>
 						</li>
 					)}
 				/>
@@ -174,7 +204,7 @@ function HomePage() {
 							<h3 className="mt-5 text-[24px] font-semibold text-medinfo-primary-main">
 								{advantage.title}
 							</h3>
-							<p className="mt-3">Lorem ipsum dolor sit amet consectetur. Placerat cras id.</p>
+							<p className="mt-3">{advantage.description}</p>
 						</li>
 					)}
 				/>

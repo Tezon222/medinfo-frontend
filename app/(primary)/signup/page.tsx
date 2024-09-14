@@ -2,7 +2,7 @@
 
 import { IconBox, Logo, NavLink, Show } from "@/components/common";
 import { Button, Form, Select } from "@/components/ui";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { Main } from "../_components";
@@ -26,6 +26,8 @@ function SignUpPage() {
 	const { control } = methods;
 
 	const type = useSearchParams().get("type") as "doctor" | "patient" | null;
+
+	const router = useRouter();
 
 	return (
 		<Main className="md:w-full">
@@ -271,11 +273,18 @@ function SignUpPage() {
 							</Form.Item>
 
 							<article className="flex flex-col items-center gap-[14px] md:mt-[14px] md:gap-7">
-								<Show when={type !== "doctor"}>
+								<Show when={type === "patient"}>
 									<p className="font-roboto text-medinfo-dark-4 md:text-[20px]">Or</p>
 
 									<div className="flex gap-8">
-										<Button size="icon" theme="secondary" className="rounded-[8px]">
+										<Button
+											size="icon"
+											theme="secondary"
+											className="rounded-[8px]"
+											onClick={() =>
+												router.push("https://medinfo-backend-xie7.onrender.com/auth/google")
+											}
+										>
 											<IconBox
 												icon="icon-park-outline:google"
 												className="size-[18px] lg:size-6"
