@@ -7,29 +7,29 @@ import { Accordion } from "@/components/ui";
 
 const FAQs = [
 	{
-		question: "Question 1",
+		question: "What is MedInfo Nigeria?",
 		answer:
-			"Lorem ipsum dolor sit amet consectetur. Proin tortor tortor varius tincidunt in commodo sagittis quam. Neque eget non urna pellentesque erat. Dui mus integer vitae cras libero dapibus adipiscing. Gravida ultrices tempor.",
+			"MedInfo Nigeria is an online platform that provides access to reliable health information and connects users with certified doctors for consultations.",
 	},
 	{
-		question: "Question 2",
+		question: "Is the platform free to use?",
 		answer:
-			"Lorem ipsum dolor sit amet consectetur. Proin tortor tortor varius tincidunt in commodo sagittis quam. Neque eget non urna pellentesque erat. Dui mus integer vitae cras libero dapibus adipiscing",
+			"Yes, accessing our health information library is free. However, consultations with healthcare professionals may require payment.",
 	},
 	{
-		question: "Question 3",
+		question: "How do I consult a doctor?",
 		answer:
-			"Lorem ipsum dolor sit amet consectetur. Proin tortor torto tincidunt in commodo sagittis quam. Neque eget non urna pellentesque erat. Dui mus integer vitae cras libero dapibus adipiscing. Gravida ultrices tempor.",
+			"Simply sign up, select a specialist or sub-specialist, and book a virtual consultation through our platform.",
 	},
 	{
-		question: "Question 4",
+		question: "Can I use MedInfo Nigeria at any time?",
 		answer:
-			"Lorem ipsum dolor sit ame Proin tortor tortor varius tincidunt in commodo sagittis quam. Neque eget non urna pellentesque erat. Dui mus integer vitae cras libero dapibus adipiscing",
+			"Absolutely! Our platform is available 24/7, so you can access health information or consult a doctor whenever you need.",
 	},
 	{
-		question: "Question 5",
+		question: "Are the doctors on the platform certified?",
 		answer:
-			"Lorem ipsum dolor sit amet consectetur tortor tortor varius tincidunt in commodo sagittis quam. Neque eget non urna pellentesque erat. Dui mus integer vitae cras libero dapibus adipiscing. Gravida ultrices tempor.",
+			"Yes, all doctors and healthcare professionals on MedInfo Nigeria are verified and certified to ensure you receive trustworthy advice.",
 	},
 ];
 

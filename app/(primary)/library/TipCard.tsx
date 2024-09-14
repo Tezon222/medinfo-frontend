@@ -1,17 +1,17 @@
-"use client";
-
-import { IconBox, NavLink } from "@/components/common";
+import { IconBox, NavLink, getElementList } from "@/components/common";
 import { Button, Card } from "@/components/ui";
+import type { Disease, DiseasesResponse } from "@/lib/types";
+import { callBackendApi } from "@/lib/utils/callBackendApi";
 import { cnJoin } from "@/lib/utils/cn";
-import libraryPlaceholder from "@/public/assets/images/library.svg";
+import { tipPlaceHolder } from "@/public/assets/images/landing-page";
 import Image from "next/image";
 
 export type TipCardProps = {
 	type: "list" | "grid";
-	id: number;
+	disease: Disease;
 };
 
-export function TipCard({ type, id }: TipCardProps) {
+export function TipCard({ type, disease }: TipCardProps) {
 	return (
 		<Card
 			className={cnJoin(
@@ -24,10 +24,11 @@ export function TipCard({ type, id }: TipCardProps) {
 				<Image
 					className={cnJoin(
 						"object-cover",
-						type === "grid" && "h-full rounded-[7px] lg:max-w-[368px] lg:rounded-[16px]",
+						type === "grid" &&
+							"h-[176px] rounded-[7px] lg:h-[400px] lg:max-w-[368px] lg:rounded-[16px]",
 						type === "list" && "size-[68px] rounded-[4px] lg:size-[202px] lg:rounded-[12px]"
 					)}
-					src={libraryPlaceholder as string}
+					src={disease.Image}
 					alt=""
 					priority={true}
 					width={type === "grid" ? 161 : 68}
@@ -49,27 +50,27 @@ export function TipCard({ type, id }: TipCardProps) {
 						className={cnJoin(
 							"text-[18px] text-medinfo-primary-main",
 							type === "grid" && "font-medium lg:text-[22px]",
-							type === "list" && "text-[32px] lg:font-bold"
+							type === "list" && "lg:text-[32px] lg:font-bold"
 						)}
 					>
-						Title
+						{disease.Disease}
 					</h4>
 
 					{type === "list" && (
 						<p className="mt-[16px] hidden text-sm text-medinfo-dark-1 lg:block">
-							A condition in which your blood sugar level is lower than normal
+							{disease.Description}
 						</p>
 					)}
 				</div>
 
 				{type === "grid" && (
 					<p className="hidden text-sm text-medinfo-dark-1 lg:block">
-						A condition in which your blood sugar level is lower than normal
+						{disease.Description.slice(0, 40)}...
 					</p>
 				)}
 
 				<NavLink
-					href={`/library/tip/${id}`}
+					href={`/library/disease/${disease.Disease}`}
 					className="inline-flex w-fit items-center gap-[14px] text-medinfo-primary-main lg:gap-4
 						lg:text-[20px] lg:font-medium"
 				>
@@ -85,16 +86,16 @@ type AlternateTipCardProps =
 	| {
 			type: "list";
 			linkToAd: string;
-			id?: null;
+			disease?: null;
 	  }
 	| {
 			type: "grid";
-			id: number;
+			disease: Disease;
 			linkToAd?: null;
 	  };
 
 export function AlternateTipCard(props: AlternateTipCardProps) {
-	const { type, id, linkToAd } = props;
+	const { type, disease, linkToAd } = props;
 
 	return (
 		<Card
@@ -112,7 +113,7 @@ export function AlternateTipCard(props: AlternateTipCardProps) {
 						type === "grid" && "h-[132px] rounded-[7.5px] lg:h-[280px] lg:rounded-[16px]",
 						type === "list" && "size-[92px] rounded-[6px] lg:size-[120px] lg:rounded-[8px]"
 					)}
-					src={libraryPlaceholder as string}
+					src={type === "grid" ? disease.Image : (tipPlaceHolder as string)}
 					alt=""
 					priority={true}
 					width={type === "grid" ? 161 : 92}
@@ -135,7 +136,7 @@ export function AlternateTipCard(props: AlternateTipCardProps) {
 							type === "grid" && "text-medinfo-dark-1 lg:text-[32px] lg:font-semibold"
 						)}
 					>
-						Title 1
+						{type === "grid" ? disease.Disease : "Potential Advertisement"}
 					</h4>
 
 					{type === "list" && (
@@ -152,7 +153,9 @@ export function AlternateTipCard(props: AlternateTipCardProps) {
 						type === "grid" && "text-medinfo-body-color lg:text-[18px] lg:leading-[26px]"
 					)}
 				>
-					Lorem ipsum dolor sit amet consectetur. Et a diam adipiscing.
+					{type === "grid"
+						? `${disease.Description.slice(0, 40)}...`
+						: "Lorem ipsum dolor sit amet consectetur. Et a diam adipiscing."}
 				</p>
 
 				{type === "list" ? (
@@ -161,7 +164,7 @@ export function AlternateTipCard(props: AlternateTipCardProps) {
 					</a>
 				) : (
 					<NavLink
-						href={`/library/tip/${id}`}
+						href={`/library/disease/${disease.Disease}`}
 						className="inline-flex w-fit items-center gap-[14px] text-medinfo-primary-main lg:gap-4
 							lg:text-[20px]"
 					>
@@ -171,5 +174,29 @@ export function AlternateTipCard(props: AlternateTipCardProps) {
 				)}
 			</Card.Content>
 		</Card>
+	);
+}
+
+export async function AlternateTipCardList() {
+	const [CardList] = getElementList();
+
+	const { data, error } = await callBackendApi<DiseasesResponse>("/diseases/allDiseases", {
+		query: {
+			limit: 3,
+		},
+	});
+
+	if (error) {
+		console.error(error.errorData);
+		return null;
+	}
+
+	return (
+		<CardList
+			as="div"
+			className="flex justify-between gap-5 lg:mt-10"
+			each={data.diseases}
+			render={(disease) => <AlternateTipCard type="grid" disease={disease} />}
+		/>
 	);
 }
