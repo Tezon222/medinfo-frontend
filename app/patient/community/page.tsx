@@ -6,6 +6,7 @@ import MessageImage from "@/public/assets/images/message.png";
 import ViewIcon from "@/components/icons/ViewIcon";
 import CommentIcon from "@/components/icons/CommentIcon";
 import { Button } from "@/components/ui";
+import Link from "next/link";
 
 function Page() {
 	const router = useRouter();
@@ -117,13 +118,15 @@ function Page() {
 					</p>
 				</div>
 
-				<Button
-					theme="primary"
-					className="h-[48px] w-full max-w-[163px] flex-1 py-[8px] font-medium lg:h-[64px]
-						lg:max-w-[203px] lg:text-[20px]"
-				>
-					+ New topic
-				</Button>
+				<Link href="/patient/community/topic">
+					<Button
+						theme="primary"
+						className="h-[48px] w-full max-w-[163px] flex-1 py-[8px] font-medium lg:h-[64px]
+							lg:max-w-[203px] lg:text-[20px]"
+					>
+						+ New topic
+					</Button>
+				</Link>
 			</div>
 		</div>
 	);
