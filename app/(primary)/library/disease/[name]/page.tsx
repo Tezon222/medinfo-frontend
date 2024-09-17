@@ -1,20 +1,23 @@
 import { Main } from "@/app/(primary)/_components";
 import { getElementList } from "@/components/common";
-import type { SingleDisease } from "@/lib/types";
+import type { DiseasesResponse, SingleDisease } from "@/lib/types";
 import { callBackendApi } from "@/lib/utils/callBackendApi";
 import Image from "next/image";
-import { AlternateTipCard, AlternateTipCardList } from "../../TipCard";
+import { AlternateDiseaseCard, ScrollableAlternateDiseaseCards } from "../../DiseaseCard";
 
 async function TipDetailsPage({ params }: { params: { name: string } }) {
-	const { data, error } = await callBackendApi<SingleDisease>("/diseases/oneDisease", {
-		query: {
-			name: params.name,
-		},
-	});
+	const [oneDisease, allDiseases] = await Promise.all([
+		callBackendApi<SingleDisease>("/diseases/oneDisease", { query: params }),
+		callBackendApi<DiseasesResponse>("/diseases/allDiseases", { query: { limit: 3 } }),
+	]);
 
-	if (error) {
-		console.error(error.errorData);
+	if (oneDisease.error) {
+		console.error(oneDisease.error.errorData);
 		return null;
+	}
+
+	if (allDiseases.error) {
+		console.error(allDiseases.error.errorData);
 	}
 
 	const [List] = getElementList();
@@ -24,7 +27,7 @@ async function TipDetailsPage({ params }: { params: { name: string } }) {
 			<section className="lg:flex lg:gap-16">
 				<Image
 					className="size-[272px] rounded-br-[16px] rounded-tl-[16px] lg:size-[460px]"
-					src={data.Image}
+					src={oneDisease.data.Image}
 					alt=""
 					priority={true}
 					width={272}
@@ -35,9 +38,9 @@ async function TipDetailsPage({ params }: { params: { name: string } }) {
 					id="Ads"
 					className="scrollbar-none hidden max-h-[460px] overflow-auto lg:flex lg:flex-col lg:gap-2"
 				>
-					<AlternateTipCard type="list" linkToAd="https://www.google.com" />
-					<AlternateTipCard type="list" linkToAd="https://www.google.com" />
-					<AlternateTipCard type="list" linkToAd="https://www.google.com" />
+					<AlternateDiseaseCard type="list" linkToAd="https://www.google.com" />
+					<AlternateDiseaseCard type="list" linkToAd="https://www.google.com" />
+					<AlternateDiseaseCard type="list" linkToAd="https://www.google.com" />
 				</section>
 			</section>
 
@@ -45,17 +48,17 @@ async function TipDetailsPage({ params }: { params: { name: string } }) {
 				<h1
 					className="text-[32px] font-semibold text-medinfo-primary-darker lg:text-[52px] lg:font-bold"
 				>
-					{data.Disease}
+					{oneDisease.data.Disease}
 				</h1>
 
-				<p className="text-[18px]">{data.Description}</p>
+				<p className="text-[18px]">{oneDisease.data.Description}</p>
 
 				<article>
 					<h4>Symptoms</h4>
 					<List
 						as="ul"
 						className="pl-12"
-						each={data.Symptoms}
+						each={oneDisease.data.Symptoms}
 						render={(symptom) => <li className="list-['-_']">{symptom}</li>}
 					/>
 				</article>
@@ -65,16 +68,16 @@ async function TipDetailsPage({ params }: { params: { name: string } }) {
 					<List
 						as="ul"
 						className="pl-12"
-						each={data.Precautions}
+						each={oneDisease.data.Precautions}
 						render={(precaution) => <li className="list-['-_']">{precaution}</li>}
 					/>
 				</article>
 			</section>
 
 			<section id="Ads" className="mt-14 flex flex-col gap-2 lg:hidden">
-				<AlternateTipCard type="list" linkToAd="https://www.google.com" />
-				<AlternateTipCard type="list" linkToAd="https://www.google.com" />
-				<AlternateTipCard type="list" linkToAd="https://www.google.com" />
+				<AlternateDiseaseCard type="list" linkToAd="https://www.google.com" />
+				<AlternateDiseaseCard type="list" linkToAd="https://www.google.com" />
+				<AlternateDiseaseCard type="list" linkToAd="https://www.google.com" />
 			</section>
 
 			<section id="Related Posts" className="mt-14 w-full lg:mt-[92px]">
@@ -82,7 +85,7 @@ async function TipDetailsPage({ params }: { params: { name: string } }) {
 					Related Posts
 				</h2>
 
-				<AlternateTipCardList />
+				{allDiseases.data && <ScrollableAlternateDiseaseCards diseases={allDiseases.data.diseases} />}
 			</section>
 		</Main>
 	);

@@ -6,9 +6,9 @@ import { DropdownMenu } from "@/components/ui";
 import type { DiseasesResponse } from "@/lib/types";
 import { cnJoin } from "@/lib/utils/cn";
 import { useState } from "react";
-import { TipCard } from "./TipCard";
+import { DiseaseCard } from "./DiseaseCard";
 
-function Filter({ diseases }: { diseases: DiseasesResponse["diseases"] }) {
+function LibraryFilter({ diseases }: { diseases: DiseasesResponse["diseases"] }) {
 	const [filter, setFilter] = useState<"list" | "grid">("grid");
 	const [CardList] = getElementList();
 
@@ -78,16 +78,18 @@ function Filter({ diseases }: { diseases: DiseasesResponse["diseases"] }) {
 				</form>
 			</section>
 
-			<CardList
-				as="section"
-				className={cnJoin(
-					"grid w-full gap-y-6 lg:gap-y-12",
-					filter === "grid" && "auto-rows-[225px] grid-cols-2 gap-x-4 lg:auto-rows-[400px] lg:gap-x-7"
-				)}
-				each={diseases}
-				render={(disease, index) => <TipCard key={index} type={filter} disease={disease} />}
-			/>
+			<section>
+				<CardList
+					className={cnJoin(
+						"grid w-full gap-y-6 lg:gap-y-12",
+						filter === "grid" &&
+							"auto-rows-[225px] grid-cols-2 gap-x-4 lg:auto-rows-[400px] lg:gap-x-7"
+					)}
+					each={diseases}
+					render={(disease, index) => <DiseaseCard key={index} type={filter} disease={disease} />}
+				/>
+			</section>
 		</>
 	);
 }
-export default Filter;
+export default LibraryFilter;

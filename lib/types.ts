@@ -1,5 +1,3 @@
-export type TipsArrayType = Array<{ id: string; title: string; imageUrl: string }>;
-
 export type SingleTip = {
 	imageAlt: string;
 	mainTitle: string;
@@ -10,6 +8,10 @@ export type SingleTip = {
 		Description: string;
 		Content: string;
 	}>;
+};
+
+export type TipsResponse = {
+	data: Array<{ id: string; title: string; imageUrl: string }>;
 };
 
 export type Disease = {

@@ -1,19 +1,22 @@
+"use client";
+
 import { IconBox, NavLink, getElementList } from "@/components/common";
 import { Button, Card } from "@/components/ui";
 import type { Disease, DiseasesResponse } from "@/lib/types";
-import { callBackendApi } from "@/lib/utils/callBackendApi";
-import { cnJoin } from "@/lib/utils/cn";
+import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { tipPlaceHolder } from "@/public/assets/images/landing-page";
+import { useDragScroll } from "@zayne-labs/toolkit/react";
 import Image from "next/image";
 
-export type TipCardProps = {
+export type DiseaseCardProps = {
 	type: "list" | "grid";
 	disease: Disease;
 };
 
-export function TipCard({ type, disease }: TipCardProps) {
+export function DiseaseCard({ type, disease }: DiseaseCardProps) {
 	return (
 		<Card
+			as="li"
 			className={cnJoin(
 				type === "grid" && "relative h-full max-lg:max-h-[176px]",
 				type === "list" &&
@@ -82,28 +85,32 @@ export function TipCard({ type, disease }: TipCardProps) {
 	);
 }
 
-type AlternateTipCardProps =
+type AlternateDiseaseCardProps =
 	| {
 			type: "list";
 			linkToAd: string;
+			className?: string;
 			disease?: null;
 	  }
 	| {
 			type: "grid";
 			disease: Disease;
+			className?: string;
 			linkToAd?: null;
 	  };
 
-export function AlternateTipCard(props: AlternateTipCardProps) {
-	const { type, disease, linkToAd } = props;
+export function AlternateDiseaseCard(props: AlternateDiseaseCardProps) {
+	const { type, disease, linkToAd, className } = props;
 
 	return (
 		<Card
+			as="li"
 			className={cnJoin(
-				type === "grid" && "max-w-[161px] lg:max-w-[340px]",
+				type === "grid" && "flex max-w-[161px] shrink-0 flex-col lg:max-w-[340px]",
 				type === "list" &&
-					`flex items-center gap-4 rounded-[16px] bg-medinfo-secondary-subtle p-3
-					shadow-[0_4px_4px_hsl(0,0%,0%,0.12)] lg:p-6`
+					`flex gap-4 rounded-[16px] bg-medinfo-secondary-subtle p-3
+					shadow-[0_4px_4px_hsl(0,0%,0%,0.12)] lg:p-6`,
+				className
 			)}
 		>
 			<Card.Header>
@@ -123,7 +130,7 @@ export function AlternateTipCard(props: AlternateTipCardProps) {
 
 			<Card.Content
 				className={cnJoin(
-					"flex flex-col justify-between",
+					"flex h-full flex-col justify-between",
 					type === "list" && "max-w-[210px] gap-1 lg:max-w-[552px]",
 					type === "grid" && "mt-5 gap-2 rounded-[16px] lg:gap-4"
 				)}
@@ -158,11 +165,13 @@ export function AlternateTipCard(props: AlternateTipCardProps) {
 						: "Lorem ipsum dolor sit amet consectetur. Et a diam adipiscing."}
 				</p>
 
-				{type === "list" ? (
+				{type === "list" && (
 					<a href={linkToAd} className="w-fit">
 						<IconBox icon="akar-icons:link-out" className="size-5 lg:size-6" />
 					</a>
-				) : (
+				)}
+
+				{type === "grid" && (
 					<NavLink
 						href={`/library/disease/${disease.Disease}`}
 						className="inline-flex w-fit items-center gap-[14px] text-medinfo-primary-main lg:gap-4
@@ -177,26 +186,18 @@ export function AlternateTipCard(props: AlternateTipCardProps) {
 	);
 }
 
-export async function AlternateTipCardList() {
+export function ScrollableAlternateDiseaseCards({ diseases }: { diseases: DiseasesResponse["diseases"] }) {
+	const { dragScrollProps, dragContainerClasses, dragItemClasses } = useDragScroll<HTMLUListElement>();
 	const [CardList] = getElementList();
-
-	const { data, error } = await callBackendApi<DiseasesResponse>("/diseases/allDiseases", {
-		query: {
-			limit: 3,
-		},
-	});
-
-	if (error) {
-		console.error(error.errorData);
-		return null;
-	}
 
 	return (
 		<CardList
-			as="div"
-			className="flex justify-between gap-5 lg:mt-10"
-			each={data.diseases}
-			render={(disease) => <AlternateTipCard type="grid" disease={disease} />}
+			{...dragScrollProps}
+			className={cnMerge("flex justify-between gap-5 lg:mt-10", dragContainerClasses)}
+			each={diseases}
+			render={(disease, index) => (
+				<AlternateDiseaseCard key={index} type="grid" disease={disease} className={dragItemClasses} />
+			)}
 		/>
 	);
 }

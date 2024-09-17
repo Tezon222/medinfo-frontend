@@ -1,10 +1,12 @@
 import { IconBox, NavLink, getElementList } from "@/components/common";
 import { Button } from "@/components/ui";
+import type { TipsResponse } from "@/lib/types";
+import { callBackendApi } from "@/lib/utils/callBackendApi";
 import { cnJoin } from "@/lib/utils/cn";
 import { feature1, feature2, feature3, hero } from "@/public/assets/images/landing-page";
 import Image from "next/image";
 import { AccordionComponent, Main } from "./_components";
-import ScrollableTipCards from "./daily-tips/ScrollableTipCards";
+import { ScrollableTipCards } from "./daily-tips/DailyTipCard";
 
 const coreServices = [
 	{
@@ -55,10 +57,16 @@ const advantages = [
 	},
 ];
 
-function HomePage() {
+async function HomePage() {
 	const [CoreServiceList] = getElementList();
 	const [FeatureList] = getElementList();
 	const [AdvantageList] = getElementList();
+
+	const allTips = await callBackendApi<TipsResponse>("/dailyTips/tips");
+
+	if (allTips.error) {
+		console.error(allTips.error.errorData);
+	}
 
 	return (
 		<Main className="flex w-full flex-col gap-14 max-md:max-w-[400px] md:gap-[92px]">
@@ -218,7 +226,7 @@ function HomePage() {
 					Did you know?
 				</h2>
 
-				<ScrollableTipCards />
+				{allTips.data && <ScrollableTipCards tips={allTips.data.data} />}
 			</section>
 
 			<section>
