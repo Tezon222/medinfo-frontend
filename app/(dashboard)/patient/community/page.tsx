@@ -1,11 +1,11 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import MessageImage from "@/public/assets/images/message.png";
-import ViewIcon from "@/components/icons/ViewIcon";
 import CommentIcon from "@/components/icons/CommentIcon";
+import ViewIcon from "@/components/icons/ViewIcon";
 import { Button } from "@/components/ui";
+import MessageImage from "@/public/assets/images/message.png";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 function Page() {
 	const router = useRouter();
@@ -119,8 +119,8 @@ function Page() {
 
 				<Button
 					theme="primary"
-					className="h-[48px] w-full max-w-[163px] flex-1 py-[8px] font-medium lg:h-[64px]
-						lg:max-w-[203px] lg:text-[20px]"
+					size="large"
+					className="max-w-[163px] flex-1 py-[8px] font-medium lg:max-w-[203px] lg:text-[20px]"
 				>
 					+ New topic
 				</Button>

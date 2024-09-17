@@ -2,7 +2,7 @@
 
 import { IconBox, NavLink, getElementList } from "@/components/common";
 import { Card } from "@/components/ui";
-import type { TipsArrayType } from "@/lib/types";
+import type { TipsResponse } from "@/lib/types";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { useDragScroll } from "@zayne-labs/toolkit/react";
 import Image from "next/image";
@@ -35,7 +35,7 @@ export function DailyTipCard({ className, id, imageUrl, title }: DailyTipCardPro
 				/>
 			</Card.Header>
 
-			<Card.Content className="grow px-3">{title}</Card.Content>
+			<Card.Content className="h-full px-3">{title}</Card.Content>
 
 			<Card.Footer className="px-3" asChild={true}>
 				<NavLink href={`/daily-tips/${id}`} className="flex items-center gap-4">
@@ -47,7 +47,7 @@ export function DailyTipCard({ className, id, imageUrl, title }: DailyTipCardPro
 	);
 }
 
-export function TipsCardList({ tips }: { tips: TipsArrayType }) {
+export function ScrollableTipCards({ tips }: { tips: TipsResponse["data"] }) {
 	const { dragScrollProps, dragContainerClasses, dragItemClasses } = useDragScroll<HTMLUListElement>();
 
 	const [CardList] = getElementList();
@@ -69,29 +69,3 @@ export function TipsCardList({ tips }: { tips: TipsArrayType }) {
 		/>
 	);
 }
-
-export const HealthFinderLogo = ({ lastUpdated }: { lastUpdated: string }) => (
-	<>
-		<div className="mt-7 flex items-center gap-2">
-			<p className="font-roboto text-[18px] font-medium italic text-medinfo-dark-2">Source: </p>
-
-			<a
-				className="inline-block h-auto w-[200px]"
-				href="https://health.gov/myhealthfinder"
-				title="MyHealthfinder"
-			>
-				<Image
-					className="size-full"
-					src="https://health.gov/themes/custom/healthfinder/images/MyHF.svg"
-					alt="MyHealthfinder"
-					width={50}
-					height={50}
-				/>
-			</a>
-		</div>
-
-		<p className="font-roboto text-[18px] font-medium italic text-medinfo-dark-2">
-			Last Updated: {lastUpdated}
-		</p>
-	</>
-);

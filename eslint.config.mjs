@@ -381,7 +381,6 @@ const eslintConfigArray = augumentedTypegen([
 			tailwindcss: {
 				callees: ["tv", "cnMerge", "cn", "cnJoin", "twMerge", "twJoin"],
 				cssFiles: [],
-				config: "./tailwind.config.ts",
 				removeDuplicates: false, // Turned off cuz prettier already handles this via plugin
 			},
 		},
