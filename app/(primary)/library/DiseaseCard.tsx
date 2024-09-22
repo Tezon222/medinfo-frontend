@@ -113,7 +113,7 @@ export function AlternateDiseaseCard(props: AlternateDiseaseCardProps) {
 				className
 			)}
 		>
-			<Card.Header>
+			<Card.Header className={cnJoin(type === "list" && "content-center")}>
 				<Image
 					className={cnJoin(
 						"object-cover",

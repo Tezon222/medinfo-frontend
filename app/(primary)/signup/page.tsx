@@ -302,7 +302,7 @@ function SignUpPage() {
 
 								<Button type="submit">Sign Up</Button>
 
-								<div className="grid justify-items-center gap-2 text-center">
+								<div className="flex flex-col items-center gap-2">
 									<NavLink
 										transitionType="Regular"
 										href={{
