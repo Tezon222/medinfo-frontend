@@ -1,5 +1,6 @@
 {
 	"extends": "@zayne-labs/tsconfig/bundler/next",
+
 	"compilerOptions": {
 		"baseUrl": ".",
 		"paths": {

@@ -110,7 +110,7 @@ function SignInPage() {
 
 								<Button type="submit">Sign In</Button>
 
-								<div className="flex flex-col gap-2 text-center">
+								<div className="flex flex-col items-center gap-2">
 									<NavLink
 										transitionType="Regular"
 										href={{

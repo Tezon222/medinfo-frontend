@@ -36,6 +36,9 @@ const eslintConfigArray = augumentedTypegen([
 			"eslint-typegen.d.ts",
 			"config/eslint-config-types/**",
 			"eslint.config.mjs",
+			"postcss.config.js",
+			"next.config.mjs",
+			"lint-staged.config.mjs",
 		],
 		name: "zayne/defaults/ignores",
 	},
@@ -52,10 +55,7 @@ const eslintConfigArray = augumentedTypegen([
 			parser: tsEslint.parser,
 
 			parserOptions: {
-				projectService: {
-					allowDefaultProject: ["*.js", "*.mjs"],
-					defaultProject: "tsconfig.json",
-				},
+				project: "tsconfig.json",
 				tsconfigRootDir: import.meta.dirname,
 			},
 
