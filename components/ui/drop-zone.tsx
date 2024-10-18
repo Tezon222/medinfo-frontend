@@ -1,3 +1,4 @@
+/* eslint-disable node/no-unsupported-features/node-builtins */
 "use client";
 
 import { cnMerge } from "@/lib/utils/cn";
@@ -17,7 +18,7 @@ export type DropZoneProps =
 
 			allowedFileTypes?: string[];
 
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			// eslint-disable-next-line ts-eslint/no-explicit-any
 			validator?: (...params: any[]) => File[];
 
 			validationRules?: "Option not available since you're using the validator prop";

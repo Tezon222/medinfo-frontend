@@ -1,4 +1,4 @@
-import type { PolymorphicPropsWithRef } from "@zayne-labs/toolkit/type-helpers";
+import type { PolymorphicPropsWithRef } from "@zayne-labs/toolkit/react";
 
 // prettier-ignore
 type RenderPropFn<TArrayItem> = (
@@ -24,7 +24,7 @@ type ForProps<TArrayItem> = ForRenderProps<TArrayItem> & EachProp<TArrayItem>;
 function ForBase<TArrayItem>(props: ForProps<TArrayItem>) {
 	const { each, render, children } = props;
 
-	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+	// eslint-disable-next-line ts-eslint/no-unnecessary-condition
 	if (each == null) {
 		return null;
 	}
@@ -48,7 +48,7 @@ function ForList<TArrayItem, TElement extends React.ElementType = "ul">(
 ) {
 	const { each, render, ref, children, as: ListContainer = "ul", className, ...restOfListProps } = props;
 
-	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+	// eslint-disable-next-line ts-eslint/no-unnecessary-condition
 	if (each == null) {
 		return null;
 	}

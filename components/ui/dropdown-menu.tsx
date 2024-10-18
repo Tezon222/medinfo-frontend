@@ -173,6 +173,7 @@ function DropdownMenuShortcut({ className, ...restOfProps }: React.HTMLAttribute
 	);
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const { Root, Trigger, Group, Portal, Sub, RadioGroup } = DropdownMenuPrimitive;
 export const Content = DropdownMenuContent;
 export const Item = DropdownMenuItem;

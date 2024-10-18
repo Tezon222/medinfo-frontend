@@ -7,7 +7,7 @@ import {
 	getSlotElement,
 	useToggle,
 } from "@zayne-labs/toolkit/react";
-import type { PolymorphicPropsWithRef } from "@zayne-labs/toolkit/type-helpers";
+import type { PolymorphicPropsWithRef } from "@zayne-labs/toolkit/react";
 import { Fragment as ReactFragment, useEffect, useId, useMemo, useRef } from "react";
 import {
 	type Control,
@@ -24,13 +24,12 @@ import {
 	useFormContext as useHookFormContext,
 } from "react-hook-form";
 import { IconBox, Show, getElementList } from "../common";
-import Button from "./button";
 
 type FieldValues = Record<string, unknown>;
 
 type FormRootProps<TValues extends FieldValues> = React.ComponentPropsWithoutRef<"form"> & {
-	methods: UseFormReturn<TValues>;
 	children: React.ReactNode;
+	methods: UseFormReturn<TValues>;
 };
 
 type ContextValue = {
@@ -39,8 +38,8 @@ type ContextValue = {
 };
 
 const [FormItemProvider, useFormItemContext] = createCustomContext<ContextValue>({
-	providerName: "FormItemProvider",
 	hookName: "useFormItemContext",
+	providerName: "FormItemProvider",
 });
 
 function FormRoot<TValues extends FieldValues>(props: FormRootProps<TValues>) {
@@ -48,7 +47,7 @@ function FormRoot<TValues extends FieldValues>(props: FormRootProps<TValues>) {
 
 	return (
 		<HookFormProvider {...methods}>
-			<form className={cnMerge("flex flex-col", className)} method="POST" {...restOfProps}>
+			<form className={cnMerge("flex flex-col", className)} {...restOfProps}>
 				{children}
 			</form>
 		</HookFormProvider>
@@ -58,15 +57,15 @@ function FormRoot<TValues extends FieldValues>(props: FormRootProps<TValues>) {
 type FormItemProps<TControl, TFieldValues extends FieldValues> =
 	TControl extends Control<infer TValues>
 		? {
-				name: keyof TValues;
 				children: React.ReactNode;
 				className?: string;
+				name: keyof TValues;
 			}
 		: {
-				control?: Control<TFieldValues>;
-				name: keyof TFieldValues;
 				children: React.ReactNode;
 				className?: string;
+				control?: Control<TFieldValues>;
+				name: keyof TFieldValues;
 			};
 
 function FormItem<TControl, TFieldValues extends FieldValues = FieldValues>(
@@ -149,10 +148,10 @@ export type FormInputPrimitiveProps<TFieldValues extends FieldValues = FieldValu
 	React.ComponentPropsWithRef<"input">,
 	"children"
 > & {
-	withEyeIcon?: boolean;
-	classNames?: { inputGroup?: string; input?: string };
-	name?: keyof TFieldValues;
+	classNames?: { input?: string; inputGroup?: string };
 	errorClassName?: string;
+	name?: keyof TFieldValues;
+	withEyeIcon?: boolean;
 } & (
 		| { control: Control<TFieldValues>; formState?: never }
 		| { control?: never; formState?: FormState<TFieldValues> }
@@ -166,14 +165,13 @@ function FormInputPrimitive<TFieldValues extends FieldValues>(
 	const {
 		className,
 		classNames,
+		control,
 		errorClassName,
-		ref,
+		formState,
 		id: idPrimitive,
 		name: namePrimitive,
 		type = "text",
 		withEyeIcon = true,
-		control,
-		formState,
 		...restOfProps
 	} = props;
 
@@ -194,7 +192,7 @@ function FormInputPrimitive<TFieldValues extends FieldValues>(
 	const WrapperElement = shouldHaveEyeIcon ? FormInputGroup : ReactFragment;
 
 	const WrapperElementProps = shouldHaveEyeIcon && {
-		className: cnMerge("w-full", classNames?.inputGroup),
+		className: cnMerge("w-full", classNames?.inputGroup, errors?.[name] && errorClassName),
 	};
 
 	return (
@@ -209,14 +207,14 @@ function FormInputPrimitive<TFieldValues extends FieldValues>(
 					focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50`,
 					className,
 					classNames?.input,
-					name && errors?.[name] && errorClassName
+					type !== "password" && errors?.[name] && errorClassName
 				)}
 				{...restOfProps}
 			/>
 			<Show when={shouldHaveEyeIcon}>
 				<FormInputRightItem
-					as={Button}
-					unstyled={true}
+					as="button"
+					type="button"
 					onClick={toggleVisibility}
 					className="size-5 shrink-0 lg:size-6"
 				>
@@ -231,9 +229,9 @@ function FormInputPrimitive<TFieldValues extends FieldValues>(
 	);
 }
 
-function FormInput(props: Omit<FormInputPrimitiveProps, "id" | "name" | "formState" | "control">) {
+function FormInput(props: Omit<FormInputPrimitiveProps, "control" | "formState" | "id" | "name">) {
 	const { name } = useFormItemContext();
-	const { register, formState } = useHookFormContext();
+	const { formState, register } = useHookFormContext();
 
 	const { ref, ...restOfProps } = props;
 
@@ -250,11 +248,11 @@ function FormInput(props: Omit<FormInputPrimitiveProps, "id" | "name" | "formSta
 
 type FormTextAreaPrimitiveProps<TFieldValues extends FieldValues = FieldValues> =
 	React.ComponentPropsWithRef<"textarea"> & {
-		name?: keyof TFieldValues;
 		errorClassName?: string;
+		name?: keyof TFieldValues;
 	} & (
 			| { control: Control<TFieldValues>; formState?: never }
-			| { formState?: FormState<TFieldValues>; control?: never }
+			| { control?: never; formState?: FormState<TFieldValues> }
 		);
 
 function FormTextAreaPrimitive<TFieldValues extends FieldValues>(
@@ -262,12 +260,11 @@ function FormTextAreaPrimitive<TFieldValues extends FieldValues>(
 ) {
 	const {
 		className,
+		control,
 		errorClassName,
-		ref,
+		formState,
 		id: idPrimitive,
 		name: namePrimitive,
-		control,
-		formState,
 		...restOfProps
 	} = props;
 
@@ -296,10 +293,10 @@ function FormTextAreaPrimitive<TFieldValues extends FieldValues>(
 	);
 }
 
-function FormTextArea(props: Omit<FormTextAreaPrimitiveProps, "id" | "name" | "formState" | "control">) {
+function FormTextArea(props: Omit<FormTextAreaPrimitiveProps, "control" | "formState" | "id" | "name">) {
 	const { name } = useFormItemContext();
 
-	const { register, formState } = useHookFormContext();
+	const { formState, register } = useHookFormContext();
 
 	const { ref, ...restOfProps } = props;
 
@@ -316,7 +313,7 @@ function FormTextArea(props: Omit<FormTextAreaPrimitiveProps, "id" | "name" | "f
 
 type FormControllerProps<TFieldValues> = Omit<
 	ControllerProps<FieldValues, FieldPath<FieldValues>>,
-	"name" | "control" | "render"
+	"control" | "name" | "render"
 > & {
 	render: (props: {
 		field: Omit<ControllerRenderProps, "value"> & { value: TFieldValues };
@@ -337,20 +334,20 @@ function FormController<TFieldValues = never>(props: FormControllerProps<TFieldV
 type FormErrorMessageProps<TControl, TFieldValues extends FieldValues> =
 	| (TControl extends Control<infer TValues>
 			? {
-					type: "regular";
-					errorField: keyof TValues;
 					className?: string;
+					errorField: keyof TValues;
+					type: "regular";
 				}
 			: {
-					type: "regular";
+					className?: string;
 					control?: Control<TFieldValues>; // == Here for type inference of errorField prop
 					errorField: keyof TFieldValues;
-					className?: string;
+					type: "regular";
 				})
 	| {
-			type: "root";
 			className?: string;
 			errorField: string;
+			type: "root";
 	  };
 
 function FormErrorMessage<TControl, TFieldValues extends FieldValues = FieldValues>(
@@ -381,35 +378,34 @@ function FormErrorMessage<TControl, TFieldValues extends FieldValues = FieldValu
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [formState.submitCount]);
 
-	const message =
+	const message = (
 		type === "root"
 			? formState.errors.root?.[errorField]?.message
-			: (formState.errors[errorField]?.message as string | undefined);
+			: formState.errors[errorField]?.message
+	) as string | string[];
 
 	if (!message) {
 		return null;
 	}
 
-	const paragraphClasses = "animate-shake pt-[0.3rem] text-[1.1rem] text-error";
-
-	const splitterRegex = /, (?=[A-Z])/;
-
-	const messageArray = message.split(splitterRegex);
+	const errorParagraphClasses = "animate-shake pt-[0.3rem] text-[1.1rem] text-error";
 
 	return (
-		<Show when={splitterRegex.test(message)}>
+		<Show when={Array.isArray(message)}>
 			<ErrorMessageList
-				each={messageArray}
+				each={message as string[]}
 				render={(messageItem, index) => (
 					<p
+						key={messageItem}
 						className={cnMerge(
 							"ml-[15px] list-item",
-							paragraphClasses,
+							errorParagraphClasses,
 							className,
 							index === 0 && "mt-1"
 						)}
 					>
-						*{messageItem}
+						<span>*</span>
+						{messageItem}
 					</p>
 				)}
 			/>
@@ -417,10 +413,11 @@ function FormErrorMessage<TControl, TFieldValues extends FieldValues = FieldValu
 			<Show.Fallback>
 				<p
 					ref={errorParagraphRef}
-					className={cnMerge(paragraphClasses, className)}
+					className={cnMerge(errorParagraphClasses, className)}
 					onAnimationEnd={() => errorParagraphRef.current?.classList.remove("animate-shake")}
 				>
-					*{message}
+					<span>*</span>
+					{message}
 				</p>
 			</Show.Fallback>
 		</Show>

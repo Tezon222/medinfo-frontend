@@ -1,4 +1,4 @@
-import type { PolymorphicPropsWithRef } from "@zayne-labs/toolkit/type-helpers";
+import type { PolymorphicPropsWithRef } from "@zayne-labs/toolkit/react";
 import { Slot } from "../common/Slot";
 
 type CardProps = {

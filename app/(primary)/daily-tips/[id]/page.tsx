@@ -51,7 +51,7 @@ async function TipExpandedPage({ params }: { params: { id: string } }) {
 								{item.Title}
 							</h4>
 
-							{/* eslint-disable-next-line @eslint-react/dom/no-dangerously-set-innerhtml */}
+							{/* eslint-disable-next-line react-dom/no-dangerously-set-innerhtml */}
 							<div
 								className="prose max-w-[80ch] [&>h4]:text-[18px] [&>h4]:font-medium
 									[&>h4]:text-medinfo-primary-main [&>p]:text-pretty"
