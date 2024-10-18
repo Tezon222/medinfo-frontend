@@ -36,4 +36,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 .eslintcache
-eslint-typegen.d.ts

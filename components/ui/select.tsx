@@ -152,6 +152,7 @@ function SelectSeparator(props: InferProps<typeof SelectPrimitive.Separator>) {
 	);
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const { Root, Group, Value } = SelectPrimitive;
 export const Content = SelectContent;
 export const Item = SelectItem;

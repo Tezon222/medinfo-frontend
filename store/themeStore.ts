@@ -14,7 +14,7 @@ type ThemeStore = {
 	};
 };
 
-const prefersDarkMode = () => isBrowser() && window.matchMedia("(prefers-color-scheme: dark)").matches;
+const prefersDarkMode = () => isBrowser() && globalThis.matchMedia("(prefers-color-scheme: dark)").matches;
 
 // Store Object Initialization
 const themeStoreObjectFn: StateCreator<ThemeStore> = (set, get) => ({

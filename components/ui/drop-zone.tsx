@@ -11,13 +11,14 @@ type InputProps = Omit<React.ComponentPropsWithRef<"input">, "className" | "onDr
 	classNames?: { base?: string; input?: string; activeDragState?: string };
 };
 
+/* eslint-disable node/no-unsupported-features/node-builtins */
 export type DropZoneProps =
 	| {
 			existingFiles?: File[];
 
 			allowedFileTypes?: string[];
 
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			// eslint-disable-next-line ts-eslint/no-explicit-any
 			validator?: (...params: any[]) => File[];
 
 			validationRules?: "Option not available since you're using the validator prop";
