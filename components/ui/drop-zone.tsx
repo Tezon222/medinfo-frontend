@@ -1,4 +1,3 @@
-/* eslint-disable node/no-unsupported-features/node-builtins */
 "use client";
 
 import { cnMerge } from "@/lib/utils/cn";
@@ -12,6 +11,7 @@ type InputProps = Omit<React.ComponentPropsWithRef<"input">, "className" | "onDr
 	classNames?: { base?: string; input?: string; activeDragState?: string };
 };
 
+/* eslint-disable node/no-unsupported-features/node-builtins */
 export type DropZoneProps =
 	| {
 			existingFiles?: File[];
