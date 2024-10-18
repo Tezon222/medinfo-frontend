@@ -7,7 +7,7 @@
 		"build": "next build",
 		"dev": "next dev -p 8000 --turbo",
 		"lint:check-types": "tsc --pretty --incremental -p tsconfig.json",
-		"lint:eslint": "eslint --max-warnings 0 --no-warn-ignored --report-unused-disable-directives",
+		"lint:eslint": "eslint . --max-warnings 0 --no-warn-ignored --report-unused-disable-directives",
 		"lint:format": "prettier --cache --write .",
 		"postinstall": "pnpm lint:eslint",
 		"prepare": "husky",

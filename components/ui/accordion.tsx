@@ -65,6 +65,7 @@ function AccordionContent(props: InferProps<typeof AccordionPrimitive.Content>) 
 	);
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const { Root } = AccordionPrimitive;
 export const Item = AccordionItem;
 export const Trigger = AccordionTrigger;

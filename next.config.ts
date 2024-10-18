@@ -25,4 +25,5 @@ const nextConfig = {
 		],
 	},
 } satisfies NextConfig;
+
 export default nextConfig;

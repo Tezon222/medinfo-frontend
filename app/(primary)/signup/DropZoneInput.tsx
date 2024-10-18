@@ -1,3 +1,4 @@
+/* eslint-disable node/no-unsupported-features/node-builtins */
 import { DocumentUploadIcon } from "@/components/icons";
 import { Button, DropZone } from "@/components/ui";
 import type { DropZoneProps } from "@/components/ui/drop-zone";
