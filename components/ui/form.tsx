@@ -1,3 +1,5 @@
+"use client";
+
 import { cnMerge } from "@/lib/utils/cn";
 import {
 	createCustomContext,
