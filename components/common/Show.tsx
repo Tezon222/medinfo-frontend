@@ -3,18 +3,23 @@
 import { getOtherChildren, getSlotElement } from "@zayne-labs/toolkit/react";
 
 type ShowProps = {
-	when: boolean;
 	children: React.ReactNode;
 	fallback?: React.ReactNode;
+	when: boolean;
 };
 
-function Show({ when, children, fallback }: ShowProps) {
+function Show({ children, fallback, when }: ShowProps) {
 	const fallBackSlot = getSlotElement(children, ShowFallback, {
-		throwOnMultipleSlotMatch: true,
 		errorMessage: "Only one <Show.Default> component is allowed",
+		throwOnMultipleSlotMatch: true,
 	});
 
-	const otherChildren = getOtherChildren(children, [ShowFallback]);
+	const contentSlot = getSlotElement(children, ShowContent, {
+		errorMessage: "Only one <Show.Content> component is allowed",
+		throwOnMultipleSlotMatch: true,
+	});
+
+	const otherChildren = getOtherChildren(children, [ShowFallback, ShowContent]);
 
 	if (fallBackSlot && fallback) {
 		throw new Error(`
@@ -23,8 +28,13 @@ function Show({ when, children, fallback }: ShowProps) {
 		`);
 	}
 
-	return when ? otherChildren : (fallBackSlot ?? fallback);
+	return when ? (contentSlot ?? otherChildren) : (fallBackSlot ?? fallback);
 }
+
+function ShowContent({ children }: Pick<ShowProps, "children">) {
+	return children;
+}
+ShowContent.slot = Symbol.for("content");
 
 function ShowFallback({ children }: Pick<ShowProps, "children">) {
 	return children;
@@ -32,5 +42,6 @@ function ShowFallback({ children }: Pick<ShowProps, "children">) {
 ShowFallback.slot = Symbol.for("fallback");
 
 Show.Fallback = ShowFallback;
+Show.Content = ShowContent;
 
 export default Show;

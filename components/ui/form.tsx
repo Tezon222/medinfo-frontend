@@ -162,24 +162,22 @@ const inputTypesWithoutFullWith = new Set<React.HTMLInputTypeAttribute>(["checkb
 function FormInputPrimitive<TFieldValues extends FieldValues>(
 	props: FormInputPrimitiveProps<TFieldValues>
 ) {
+	const contextValues = useFormItemContext();
+
 	const {
 		className,
 		classNames,
 		control,
 		errorClassName,
 		formState,
-		id: idPrimitive,
-		name: namePrimitive,
+		// eslint-disable-next-line react/no-unstable-default-props
+		id = contextValues.uniqueId,
+		// eslint-disable-next-line react/no-unstable-default-props
+		name = contextValues.name,
 		type = "text",
 		withEyeIcon = true,
 		...restOfProps
 	} = props;
-
-	const contextValues = useFormItemContext();
-
-	const name = namePrimitive ?? contextValues.name;
-
-	const id = idPrimitive ?? contextValues.uniqueId;
 
 	const getFormState = (control ? useFormState : () => formState) as typeof useFormState;
 
@@ -229,19 +227,16 @@ function FormInputPrimitive<TFieldValues extends FieldValues>(
 	);
 }
 
-function FormInput(props: Omit<FormInputPrimitiveProps, "control" | "formState" | "id" | "name">) {
+function FormInput(props: Omit<FormInputPrimitiveProps, "control" | "formState" | "id" | "name" | "ref">) {
 	const { name } = useFormItemContext();
 	const { formState, register } = useHookFormContext();
-
-	const { ref, ...restOfProps } = props;
 
 	return (
 		<FormInputPrimitive
 			name={name}
 			formState={formState}
 			{...(Boolean(name) && register(name))}
-			{...(Boolean(ref) && { ref })}
-			{...restOfProps}
+			{...props}
 		/>
 	);
 }
@@ -258,21 +253,19 @@ type FormTextAreaPrimitiveProps<TFieldValues extends FieldValues = FieldValues> 
 function FormTextAreaPrimitive<TFieldValues extends FieldValues>(
 	props: FormTextAreaPrimitiveProps<TFieldValues>
 ) {
+	const contextValues = useFormItemContext();
+
 	const {
 		className,
 		control,
 		errorClassName,
 		formState,
-		id: idPrimitive,
-		name: namePrimitive,
+		// eslint-disable-next-line react/no-unstable-default-props
+		id = contextValues.uniqueId,
+		// eslint-disable-next-line react/no-unstable-default-props
+		name = contextValues.name,
 		...restOfProps
 	} = props;
-
-	const contextValues = useFormItemContext();
-
-	const name = namePrimitive ?? contextValues.name;
-
-	const id = idPrimitive ?? contextValues.uniqueId;
 
 	const getFormState = (control ? useFormState : () => formState) as typeof useFormState;
 
@@ -293,20 +286,19 @@ function FormTextAreaPrimitive<TFieldValues extends FieldValues>(
 	);
 }
 
-function FormTextArea(props: Omit<FormTextAreaPrimitiveProps, "control" | "formState" | "id" | "name">) {
+function FormTextArea(
+	props: Omit<FormTextAreaPrimitiveProps, "control" | "formState" | "id" | "name" | "ref">
+) {
 	const { name } = useFormItemContext();
 
 	const { formState, register } = useHookFormContext();
-
-	const { ref, ...restOfProps } = props;
 
 	return (
 		<FormTextAreaPrimitive
 			name={name}
 			formState={formState}
 			{...(Boolean(name) && register(name))}
-			{...(Boolean(ref) && { ref })}
-			{...restOfProps}
+			{...props}
 		/>
 	);
 }
