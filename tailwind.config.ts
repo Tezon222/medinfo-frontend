@@ -1,6 +1,5 @@
 import typographyPlugin from "@tailwindcss/typography";
 import { withTV } from "tailwind-variants/transformer";
-import type { Config } from "tailwindcss";
 import animationPlugin from "tailwindcss-animate";
 import plugin from "tailwindcss/plugin";
 
@@ -163,6 +162,6 @@ const tailwindConfig = withTV({
 			addComponents([scrollNone, navLinkTransition]);
 		}),
 	],
-}) satisfies Config;
+});
 
 export default tailwindConfig;
