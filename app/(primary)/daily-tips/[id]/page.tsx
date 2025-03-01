@@ -2,6 +2,7 @@ import { Main } from "@/app/(primary)/_components";
 import { type SingleTip, type TipsResponse, callBackendApi } from "@/lib/api/callBackendApi";
 import { getElementList } from "@zayne-labs/ui-react/common/for";
 import Image from "next/image";
+import { Suspense } from "react";
 import { ScrollableTipCards } from "../DailyTipCard";
 import HealthFinderLogo from "../HealthFinderLogo";
 
@@ -9,18 +10,15 @@ async function TipExpandedPage(props: { params: Promise<{ id: string }> }) {
 	// eslint-disable-next-line react/prefer-destructuring-assignment
 	const params = await props.params;
 
-	const [singleTip, allTips] = await Promise.all([
-		callBackendApi<SingleTip>(`/dailyTips/tip/${params.id}`),
-		callBackendApi<TipsResponse>("/dailyTips/tips"),
-	]);
+	const singleTip = await callBackendApi<SingleTip>(`/dailyTips/tip/${params.id}`);
+
+	const tipsResponsePromise = callBackendApi<TipsResponse>("/dailyTips/tips", {
+		resultMode: "allWithoutResponse",
+	});
 
 	if (singleTip.error) {
 		console.error(singleTip.error.errorData);
 		return null;
-	}
-
-	if (allTips.error) {
-		console.error(allTips.error.errorData);
 	}
 
 	const [ArticleList] = getElementList();
@@ -71,7 +69,9 @@ async function TipExpandedPage(props: { params: Promise<{ id: string }> }) {
 					Checkout Other Tips
 				</h2>
 
-				{allTips.data && <ScrollableTipCards tips={allTips.data.data} />}
+				<Suspense>
+					<ScrollableTipCards tipsResponsePromise={tipsResponsePromise} />
+				</Suspense>
 			</section>
 		</Main>
 	);

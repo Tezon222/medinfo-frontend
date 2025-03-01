@@ -16,7 +16,6 @@ const SonnerToaster = (props: ToasterProps) => {
 			position="bottom-right"
 			duration={3000}
 			closeButton={true}
-			pauseWhenPageIsHidden={true}
 			toastOptions={{
 				classNames: {
 					toast: "group toast p-5 max-md:p-4 mx-auto max-md:h-auto max-md:max-w-[284px] group-[.toaster]:bg-shadcn-background group-[.toaster]:text-shadcn-foreground group-[.toaster]:border-shadcn-border group-[.toaster]:shadow-lg",

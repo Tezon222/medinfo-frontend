@@ -6,6 +6,7 @@ import { cnJoin } from "@/lib/utils/cn";
 import { feature1, feature2, feature3, hero } from "@/public/assets/images/landing-page";
 import { getElementList } from "@zayne-labs/ui-react/common/for";
 import Image from "next/image";
+import { Suspense } from "react";
 import { AccordionComponent, Main } from "./_components";
 import { ScrollableTipCards } from "./daily-tips/DailyTipCard";
 
@@ -58,16 +59,14 @@ const advantages = [
 	},
 ];
 
-async function HomePage() {
-	const allTips = await callBackendApi<TipsResponse>("/dailyTips/tips");
+const [CoreServiceList] = getElementList();
+const [FeatureList] = getElementList();
+const [AdvantageList] = getElementList();
 
-	if (allTips.error) {
-		console.error(allTips.error.errorData);
-	}
-
-	const [CoreServiceList] = getElementList();
-	const [FeatureList] = getElementList();
-	const [AdvantageList] = getElementList();
+function HomePage() {
+	const tipsResponsePromise = callBackendApi<TipsResponse>("/dailyTips/tips", {
+		resultMode: "allWithoutResponse",
+	});
 
 	return (
 		<Main className="w-full gap-14 max-md:max-w-[400px] md:gap-[92px]">
@@ -227,7 +226,9 @@ async function HomePage() {
 					Did you know?
 				</h2>
 
-				{allTips.data && <ScrollableTipCards tips={allTips.data.data} />}
+				<Suspense>
+					<ScrollableTipCards tipsResponsePromise={tipsResponsePromise} />
+				</Suspense>
 			</section>
 
 			<section>
