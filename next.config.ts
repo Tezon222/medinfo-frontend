@@ -3,10 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig = {
 	reactStrictMode: true,
 	devIndicators: {
-		appIsrStatus: false,
-	},
-	experimental: {
-		reactOwnerStack: true,
+		position: "bottom-right",
 	},
 	eslint: {
 		ignoreDuringBuilds: true,

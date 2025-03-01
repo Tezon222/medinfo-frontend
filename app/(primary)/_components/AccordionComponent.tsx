@@ -42,7 +42,7 @@ function AccordionComponent() {
 				className="mt-6 grid w-full gap-2 md:mt-14 md:gap-4"
 				each={FAQs}
 				render={(FAQ) => (
-					<Accordion.Item value={FAQ.answer} asChild={true}>
+					<Accordion.Item key={FAQ.question} value={FAQ.answer} asChild={true}>
 						<li key={FAQ.question}>
 							<Accordion.Trigger
 								withDefaultIcon={false}

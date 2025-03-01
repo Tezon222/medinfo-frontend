@@ -2,11 +2,13 @@
 
 import { IconBox, NavLink } from "@/components/common";
 import { Card } from "@/components/ui";
+import type { callBackendApi } from "@/lib/api/callBackendApi";
 import type { TipsResponse } from "@/lib/api/callBackendApi/types";
 import { cnMerge } from "@/lib/utils/cn";
 import { getElementList } from "@zayne-labs/ui-react/common/for";
 import { useDragScroll } from "@zayne-labs/ui-react/drag-scroll";
 import Image from "next/image";
+import { use } from "react";
 
 export type DailyTipCardProps = {
 	id: string;
@@ -48,14 +50,29 @@ export function DailyTipCard({ className, id, imageUrl, title }: DailyTipCardPro
 	);
 }
 
-export function ScrollableTipCards({ tips }: { tips: TipsResponse["data"] }) {
+type ScrollableCardProps = {
+	tipsResponsePromise: ReturnType<typeof callBackendApi<TipsResponse>>;
+};
+
+const [CardList] = getElementList();
+
+export function ScrollableTipCards(props: ScrollableCardProps) {
+	const { tipsResponsePromise } = props;
+
 	const { getItemProps, getRootProps } = useDragScroll<HTMLUListElement>({
 		classNames: {
 			base: "mt-6 select-none gap-5 md:mt-14 md:justify-between",
 		},
 	});
 
-	const [CardList] = getElementList();
+	const tipsResult = use(tipsResponsePromise);
+
+	if (tipsResult.error) {
+		console.error(tipsResult.error.errorData);
+		return null;
+	}
+
+	const tips = tipsResult.data.data;
 
 	return (
 		<CardList
