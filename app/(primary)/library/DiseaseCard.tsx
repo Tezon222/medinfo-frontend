@@ -20,16 +20,16 @@ export function DiseaseCard({ type, disease }: DiseaseCardProps) {
 			as="li"
 			className={cnJoin(
 				type === "grid" && "relative h-full max-lg:max-h-[176px]",
-				type === "list" &&
-					"flex w-full gap-[44px] rounded-[16px] border-2 border-medinfo-primary-main p-6"
+				type === "list"
+					&& "flex w-full gap-[44px] rounded-[16px] border-2 border-medinfo-primary-main p-6"
 			)}
 		>
 			<Card.Header>
 				<Image
 					className={cnJoin(
 						"object-cover",
-						type === "grid" &&
-							"h-[176px] rounded-[7px] lg:h-[400px] lg:max-w-[368px] lg:rounded-[16px]",
+						type === "grid"
+							&& "h-[176px] rounded-[7px] lg:h-[400px] lg:max-w-[368px] lg:rounded-[16px]",
 						type === "list" && "size-[68px] rounded-[4px] lg:size-[202px] lg:rounded-[12px]"
 					)}
 					src={disease.Image}
@@ -43,8 +43,8 @@ export function DiseaseCard({ type, disease }: DiseaseCardProps) {
 			<Card.Content
 				className={cnJoin(
 					"flex flex-col justify-between",
-					type === "grid" &&
-						`absolute bottom-[calc(-95px/2)] right-0 h-[95px] w-fit rounded-[16px] border-2
+					type === "grid"
+						&& `absolute bottom-[calc(-95px/2)] right-0 h-[95px] w-fit rounded-[16px] border-2
 						border-medinfo-primary-main bg-white p-2 lg:bottom-[calc((400px-182px)/2)] lg:h-[182px]
 						lg:max-w-[229px] lg:p-6`
 				)}
@@ -108,8 +108,8 @@ export function AlternateDiseaseCard(props: AlternateDiseaseCardProps) {
 			as="li"
 			className={cnJoin(
 				type === "grid" && "flex max-w-[161px] shrink-0 flex-col lg:max-w-[340px]",
-				type === "list" &&
-					`flex gap-4 rounded-[16px] bg-medinfo-secondary-subtle p-3
+				type === "list"
+					&& `flex gap-4 rounded-[16px] bg-medinfo-secondary-subtle p-3
 					shadow-[0_4px_4px_hsl(0,0%,0%,0.12)] lg:p-6`,
 				className
 			)}
