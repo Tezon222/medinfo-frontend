@@ -1,16 +1,33 @@
-import { createFetchClient } from "@zayne-labs/callapi";
+import { type CallApiParameters, type ResultModeUnion, createFetchClient } from "@zayne-labs/callapi";
 
-import { assertENV } from "@zayne-labs/toolkit/type-helpers";
+const BASE_BACKEND_URL = "https://medinfo-backend-xie7.onrender.com";
 
-const BACKEND_URL = assertENV(
-	process.env.NEXT_PUBLIC_BACKEND_URL,
-	"NEXT_PUBLIC_BACKEND_URL env does not exist"
-);
-
-const callBackendApi = createFetchClient({
-	baseURL: BACKEND_URL,
+export const sharedFetchClient = createFetchClient({
+	baseURL: BASE_BACKEND_URL,
 	dedupeStrategy: "cancel",
 	credentials: "include",
 });
 
-export { callBackendApi };
+export const callBackendApi = <
+	TData = unknown,
+	TError = unknown,
+	TResultMode extends ResultModeUnion = ResultModeUnion,
+>(
+	...args: CallApiParameters<TData, TError, TResultMode>
+) => {
+	const [initUrl, config] = args;
+
+	return sharedFetchClient(initUrl, config);
+};
+
+export const callBackendApiForQuery = <TData = unknown>(
+	...args: CallApiParameters<TData, false | undefined>
+) => {
+	const [initUrl, config] = args;
+
+	return sharedFetchClient(initUrl, {
+		resultMode: "onlySuccessWithException",
+		throwOnError: true,
+		...config,
+	});
+};

@@ -1,23 +1,25 @@
-import { cnJoin } from "@/lib/utils/cn";
+import { cnMerge } from "@/lib/utils/cn";
 import { useId } from "react";
 
 type OverlayProps = {
 	isOpen: boolean;
 	onClose: () => void;
-	"z-index"?: `z-[${number}]`;
+	className?: string;
 };
 
-function Overlay({ isOpen, onClose, "z-index": zIndex = "z-[0]" }: OverlayProps) {
+function Overlay(props: OverlayProps) {
+	const { isOpen, onClose, className } = props;
+
 	const id = useId();
 
 	return (
 		<div
 			id={`Overlay-(${id})`}
 			onClick={onClose}
-			className={cnJoin(
-				`fixed bg-[hsl(0,0%,0%,0.6)] [backdrop-filter:blur(0.4rem)] [inset:0_0_0_auto] lg:hidden
-				${zIndex}`,
-				isOpen ? "w-screen" : "w-0"
+			className={cnMerge(
+				"fixed [inset:0_0_0_auto] bg-[hsl(0,0%,0%,0.6)] [backdrop-filter:blur(0.4rem)] lg:hidden",
+				isOpen ? "w-screen" : "w-0",
+				className
 			)}
 		/>
 	);

@@ -6,6 +6,7 @@ export default zayne({
 		"build/**",
 		".next/**",
 		"eslint.config.mjs",
+		"tailwind.config.ts",
 		"postcss.config.js",
 		"next.config.mjs",
 		"lint-staged.config.mjs",
@@ -13,8 +14,9 @@ export default zayne({
 	react: {
 		nextjs: true,
 	},
-	tailwindcss: true,
+	// tailwindcss: true,
 	perfectionist: false,
+	tanstack: true,
 	typescript: {
 		tsconfigPath: "tsconfig.json",
 	},

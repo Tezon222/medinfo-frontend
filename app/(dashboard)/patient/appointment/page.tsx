@@ -1,20 +1,51 @@
 "use client";
 
-import { IconBox, Show } from "@/components/common";
+import { IconBox, Switch } from "@/components/common";
 import { CloseIcon, GreenSpinnerIcon } from "@/components/icons";
 import { Button, DatePicker, Dialog, Form, Select } from "@/components/ui";
-import { cnMerge } from "@/lib/utils/cn";
+import { useDialogStateContext } from "@/components/ui/dialog";
+import { capitalize } from "@/lib/utils";
+import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { appointmentPlaceholder, doctorAvatar } from "@/public/assets/images/dashboard";
-import { Steps } from "@ark-ui/react/steps";
+import { bookAppointmentQuery, matchDoctorsQuery } from "@/store/react-query/queryFactory";
+import { Steps, useStepsContext } from "@ark-ui/react/steps";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getElementList } from "@zayne-labs/ui-react/common/for";
+import { useRouter } from "next-nprogress-bar";
 import Image from "next/image";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Main } from "../../_components";
 
-const stepperItems = [{ title: "Book appointment" }, { title: "Accept specialist" }];
+const stepperItems = [
+	{
+		title: "Book appointment",
+	},
+	{
+		title: "Accept specialist",
+	},
+];
+
+type AppointmentFormData = {
+	name: string;
+	email: string;
+	dob: string;
+	gender: string;
+	phoneNumber: string;
+	reason: string;
+	dateOfAppointment: string;
+	medicalConditions: string;
+	allergies: string;
+	healthInsurance: string;
+	agreeToPrivacyPolicy: string;
+	allowTeleMedicine: string;
+	allowInfoDisclosure: string;
+	allowEmailOrSMS: string;
+	language: string;
+};
 
 function AppointmentPage() {
-	const methods = useForm({
+	const methods = useForm<AppointmentFormData>({
 		defaultValues: {
 			name: "",
 			email: "",
@@ -22,9 +53,8 @@ function AppointmentPage() {
 			gender: "",
 			dob: "",
 			reason: "",
-			dateTime: "",
-			language: "English",
-			existingConditions: "",
+			dateOfAppointment: "",
+			medicalConditions: "",
 			allergies: "",
 			healthInsurance: "",
 			agreeToPrivacyPolicy: "",
@@ -32,6 +62,15 @@ function AppointmentPage() {
 			allowInfoDisclosure: "",
 			allowEmailOrSMS: "",
 		},
+	});
+
+	const [formData, setFormData] = useState<AppointmentFormData | null>(null);
+
+	const queryClient = useQueryClient();
+
+	const onSubmit = methods.handleSubmit((data) => {
+		setFormData(data);
+		void queryClient.refetchQueries({ queryKey: matchDoctorsQuery({ formData: data }).queryKey });
 	});
 
 	return (
@@ -42,7 +81,7 @@ function AppointmentPage() {
 				</Button>
 			</header>
 
-			<Form.Root methods={methods} onSubmit={(event) => void methods.handleSubmit(() => {})(event)}>
+			<Form.Root methods={methods} onSubmit={(event) => void onSubmit(event)}>
 				<Steps.Root
 					count={stepperItems.length}
 					linear={true}
@@ -73,7 +112,7 @@ function AppointmentPage() {
 						</h2>
 
 						<div className="flex gap-2 md:gap-5">
-							<Form.Item name="info" className="flex-row-reverse items-center gap-2">
+							<Form.Field name="info" className="flex-row-reverse items-center gap-2">
 								<Form.Label className="text-[14px] md:text-base">Use current profile</Form.Label>
 
 								<Form.InputPrimitive
@@ -81,9 +120,9 @@ function AppointmentPage() {
 									value="manual"
 									className="size-5 accent-medinfo-primary-main"
 								/>
-							</Form.Item>
+							</Form.Field>
 
-							<Form.Item name="info" className="flex-row-reverse items-center gap-2">
+							<Form.Field name="info" className="flex-row-reverse items-center gap-2">
 								<Form.Label className="text-[14px] md:text-base">Fill out manually</Form.Label>
 
 								<Form.InputPrimitive
@@ -92,12 +131,12 @@ function AppointmentPage() {
 									value="manual"
 									className="size-5 accent-medinfo-primary-main"
 								/>
-							</Form.Item>
+							</Form.Field>
 						</div>
 
 						<article className="flex flex-col gap-4 md:flex-row md:gap-[92px]">
 							<div className="flex w-full flex-col gap-4">
-								<Form.Item
+								<Form.Field
 									control={methods.control}
 									name="name"
 									className="gap-1 font-roboto font-medium"
@@ -111,9 +150,9 @@ function AppointmentPage() {
 											border-medinfo-primary-main px-4 py-3 placeholder:text-medinfo-dark-4
 											md:h-[64px] md:py-5 md:text-base"
 									/>
-								</Form.Item>
+								</Form.Field>
 
-								<Form.Item
+								<Form.Field
 									control={methods.control}
 									name="email"
 									className="gap-1 font-roboto font-medium"
@@ -127,9 +166,9 @@ function AppointmentPage() {
 											border-medinfo-primary-main px-4 py-3 placeholder:text-medinfo-dark-4
 											md:h-[64px] md:py-5 md:text-base"
 									/>
-								</Form.Item>
+								</Form.Field>
 
-								<Form.Item
+								<Form.Field
 									control={methods.control}
 									name="phoneNumber"
 									className="gap-1 font-roboto font-medium"
@@ -143,18 +182,18 @@ function AppointmentPage() {
 											border-medinfo-primary-main px-4 py-3 placeholder:text-medinfo-dark-4
 											md:h-[64px] md:py-5 md:text-base"
 									/>
-								</Form.Item>
+								</Form.Field>
 							</div>
 
 							<div className="flex w-full flex-col gap-4">
-								<Form.Item
+								<Form.Field
 									control={methods.control}
 									name="gender"
 									className="gap-1 font-roboto font-medium"
 								>
 									<Form.Label className="md:text-[20px]">Gender</Form.Label>
 
-									<Form.Controller
+									<Form.FieldController
 										render={({ field }) => (
 											<Select.Root
 												name={field.name}
@@ -204,16 +243,16 @@ function AppointmentPage() {
 											</Select.Root>
 										)}
 									/>
-								</Form.Item>
+								</Form.Field>
 
-								<Form.Item
+								<Form.Field
 									control={methods.control}
 									name="dob"
 									className="gap-1 font-roboto font-medium"
 								>
 									<Form.Label className="md:text-[20px]">Date of Birth</Form.Label>
 
-									<Form.Controller
+									<Form.FieldController
 										render={({ field }) => (
 											<DatePicker
 												className="h-[48px] gap-4 rounded-[8px] border-[1.4px]
@@ -225,7 +264,7 @@ function AppointmentPage() {
 											/>
 										)}
 									/>
-								</Form.Item>
+								</Form.Field>
 							</div>
 						</article>
 					</section>
@@ -238,30 +277,31 @@ function AppointmentPage() {
 						</h2>
 
 						<article className="flex flex-col gap-4 md:flex-row md:gap-[92px]">
-							<Form.Item
+							<Form.Field
 								control={methods.control}
 								name="reason"
 								className="w-full gap-1 font-roboto font-medium"
 							>
 								<Form.Label className="md:text-[20px]">Reason</Form.Label>
 
-								<Form.TextArea
+								<Form.Input
+									type="textarea"
 									placeholder="tell us your symptoms"
 									className="min-h-[180px] gap-4 rounded-[8px] border-[1.4px]
 										border-medinfo-primary-main px-4 py-3 [field-sizing:content]
 										placeholder:text-medinfo-dark-4 md:py-5 md:text-base"
 								/>
-							</Form.Item>
+							</Form.Field>
 
 							<div className="flex w-full flex-col gap-4">
-								<Form.Item
+								<Form.Field
 									control={methods.control}
-									name="dateTime"
+									name="dateOfAppointment"
 									className="gap-1 font-roboto font-medium"
 								>
 									<Form.Label className="md:text-[20px]">Preferred date & time</Form.Label>
 
-									<Form.Controller
+									<Form.FieldController
 										render={({ field }) => (
 											<DatePicker
 												className="h-[48px] gap-4 rounded-[8px] border-[1.4px]
@@ -273,16 +313,16 @@ function AppointmentPage() {
 											/>
 										)}
 									/>
-								</Form.Item>
+								</Form.Field>
 
-								<Form.Item
+								<Form.Field
 									control={methods.control}
 									name="language"
 									className="gap-1 font-roboto font-medium"
 								>
 									<Form.Label className="text-medinfo-dark-4 md:text-[20px]">Language</Form.Label>
 
-									<Form.Controller
+									<Form.FieldController
 										render={({ field }) => (
 											<Select.Root
 												disabled={true}
@@ -326,7 +366,7 @@ function AppointmentPage() {
 											</Select.Root>
 										)}
 									/>
-								</Form.Item>
+								</Form.Field>
 							</div>
 						</article>
 
@@ -353,39 +393,41 @@ function AppointmentPage() {
 
 						<article className="flex flex-col gap-4">
 							<div className="flex flex-col gap-4 md:flex-row md:gap-[92px]">
-								<Form.Item
+								<Form.Field
 									control={methods.control}
-									name="existingConditions"
+									name="medicalConditions"
 									className="w-full gap-1 font-roboto font-medium"
 								>
 									<Form.Label className="md:text-[20px]">Existing medical conditions</Form.Label>
 
-									<Form.TextArea
+									<Form.Input
+										type="textarea"
 										placeholder={`write "none" if there is none`}
 										className="min-h-[180px] rounded-[8px] border-[1.4px]
 											border-medinfo-primary-main px-4 py-3 [field-sizing:content]
 											placeholder:text-medinfo-dark-4 md:py-5 md:text-base"
 									/>
-								</Form.Item>
+								</Form.Field>
 
-								<Form.Item
+								<Form.Field
 									control={methods.control}
 									name="allergies"
 									className="w-full gap-1 font-roboto font-medium"
 								>
 									<Form.Label className="md:text-[20px]">Allergies</Form.Label>
 
-									<Form.TextArea
+									<Form.Input
+										type="textarea"
 										placeholder={`write "none" if there is none`}
 										className="min-h-[180px] rounded-[8px] border-[1.4px]
 											border-medinfo-primary-main px-4 py-3 [field-sizing:content]
 											placeholder:text-medinfo-dark-4 md:py-5 md:text-base"
 									/>
-								</Form.Item>
+								</Form.Field>
 							</div>
 
 							<div className="flex flex-col gap-5 md:flex-row">
-								<Form.Item
+								<Form.Field
 									control={methods.control}
 									name="healthInsurance"
 									className="flex-row-reverse items-center justify-end gap-2"
@@ -397,9 +439,9 @@ function AppointmentPage() {
 										value="true"
 										className="size-5 accent-medinfo-primary-main"
 									/>
-								</Form.Item>
+								</Form.Field>
 
-								<Form.Item
+								<Form.Field
 									control={methods.control}
 									name="healthInsurance"
 									className="flex-row-reverse items-center justify-end gap-2"
@@ -414,7 +456,7 @@ function AppointmentPage() {
 										value="false"
 										className="size-5 accent-medinfo-primary-main"
 									/>
-								</Form.Item>
+								</Form.Field>
 							</div>
 						</article>
 					</section>
@@ -427,7 +469,7 @@ function AppointmentPage() {
 						</h2>
 
 						<article className="flex flex-col gap-3">
-							<Form.Item
+							<Form.Field
 								control={methods.control}
 								name="agreeToPrivacyPolicy"
 								className="flex-row-reverse items-center justify-end gap-2"
@@ -440,9 +482,9 @@ function AppointmentPage() {
 									className="size-5 shrink-0 rounded-[4px] border border-medinfo-primary-main
 										accent-medinfo-primary-main"
 								/>
-							</Form.Item>
+							</Form.Field>
 
-							<Form.Item
+							<Form.Field
 								control={methods.control}
 								name="allowTeleMedicine"
 								className="flex-row-reverse items-center justify-end gap-2"
@@ -455,9 +497,9 @@ function AppointmentPage() {
 									className="size-5 shrink-0 rounded-[4px] border border-medinfo-primary-main
 										accent-medinfo-primary-main"
 								/>
-							</Form.Item>
+							</Form.Field>
 
-							<Form.Item
+							<Form.Field
 								control={methods.control}
 								name="allowInfoDisclosure"
 								className="flex-row-reverse items-center justify-end gap-2"
@@ -473,11 +515,11 @@ function AppointmentPage() {
 									className="size-5 shrink-0 rounded-[4px] border border-medinfo-primary-main
 										accent-medinfo-primary-main"
 								/>
-							</Form.Item>
+							</Form.Field>
 
-							<Form.Item
+							<Form.Field
 								control={methods.control}
-								name="allowInfoDisclosure"
+								name="allowEmailOrSMS"
 								className="flex-row-reverse items-center justify-end gap-2"
 							>
 								<Form.Label className="md:text-[20px]">Consent to SMS/email reminders</Form.Label>
@@ -488,7 +530,7 @@ function AppointmentPage() {
 									className="size-5 shrink-0 rounded-[4px] border border-medinfo-primary-main
 										accent-medinfo-primary-main"
 								/>
-							</Form.Item>
+							</Form.Field>
 						</article>
 					</section>
 
@@ -505,7 +547,7 @@ function AppointmentPage() {
 							</Dialog.Trigger>
 						</div>
 
-						<DialogMainContent />
+						<DialogMainContent formData={formData} />
 					</Dialog.Root>
 				</Steps.Root>
 			</Form.Root>
@@ -557,56 +599,79 @@ function StepperList(props: { className?: string }) {
 	);
 }
 
-function DialogMainContent() {
-	const isLoading = false;
+type DialogMainContentProps = {
+	formData: AppointmentFormData | null;
+};
+
+function DialogMainContent(props: DialogMainContentProps) {
+	const { formData } = props;
+
+	const matchDoctorsQueryResult = useQuery(matchDoctorsQuery({ formData }));
+
+	const [trialCount, setTrialCount] = useState(0);
+
+	const dialogCtx = useDialogStateContext();
+
+	const stepsCtx = useStepsContext();
+
+	const matchedDoctor = matchDoctorsQueryResult.data?.selectedDoctors[trialCount];
+
+	const [doctorId, setDoctorId] = useState("");
+
+	const onReset = () => {
+		dialogCtx.setOpen(false);
+		stepsCtx.goToPrevStep();
+
+		setTimeout(() => setTrialCount(0), 500);
+	};
+
+	const bookAppointmentQueryResult = useQuery(
+		bookAppointmentQuery({
+			doctorId,
+			onSuccess: () => {
+				onReset();
+				router.push("/patient");
+			},
+		})
+	);
+
+	const router = useRouter();
+
+	const onAccept = () => {
+		const matchedDoctorId = matchedDoctor?._id ?? "";
+
+		setDoctorId(matchedDoctorId);
+	};
 
 	return (
-		<Show.Root when={isLoading}>
-			<Show.Content>
-				<Dialog.Content
-					onPointerDownOutside={(e) => e.preventDefault()}
-					className="flex w-[292px] flex-col gap-2 rounded-[16px] px-6 pb-[56px] pt-6
-						md:max-w-[372px]"
-					withCloseBtn={false}
-				>
-					<Dialog.Close className="self-end" asChild={true}>
-						<Steps.PrevTrigger>
-							<CloseIcon />
-						</Steps.PrevTrigger>
-					</Dialog.Close>
-
-					<Dialog.Header className="items-center gap-8">
-						<GreenSpinnerIcon className="animate-spin md:size-[100px]" />
-
-						<Dialog.Title className="text-center text-base font-normal text-medinfo-dark-4 md:px-4">
-							Matching you to a doctor, please hold on.
-						</Dialog.Title>
-					</Dialog.Header>
-				</Dialog.Content>
-			</Show.Content>
-
-			<Show.OtherWise>
-				<Dialog.Content
-					onPointerDownOutside={(e) => e.preventDefault()}
-					className="flex max-w-[341px] flex-col gap-8 rounded-[16px] px-6 py-8 md:max-w-[650px]
-						md:gap-9 md:px-10"
-					withCloseBtn={false}
-				>
+		<Dialog.Content
+			onPointerDownOutside={(e) => e.preventDefault()}
+			onEscapeKeyDown={() => stepsCtx.goToPrevStep()}
+			className={cnJoin(
+				"flex flex-col rounded-[16px]",
+				matchDoctorsQueryResult.data
+					? "max-w-[341px] gap-8 px-6 py-8 md:max-w-[650px] md:gap-9 md:px-10"
+					: "w-[292px] gap-2 pb-[56px] pt-6 md:max-w-[372px]"
+			)}
+			withCloseBtn={false}
+		>
+			<Switch.Root>
+				<Switch.Match when={matchDoctorsQueryResult.data}>
 					<StepperList className="mb-4 md:mb-6" />
 
 					<Dialog.Header className="flex flex-col items-center gap-2">
 						<figure className="flex flex-col items-center gap-2">
 							<Image
-								src={doctorAvatar as string}
+								src={matchedDoctor?.picture ?? (doctorAvatar as string)}
 								className="size-[72px]"
 								width={72}
 								height={72}
 								alt=""
 							/>
-
 							<figcaption className="flex items-center gap-1">
-								<p className="text-medinfo-dark-3">Dr Jane Doe</p>
-
+								<p className="text-medinfo-dark-3">
+									Dr. {capitalize(matchedDoctor?.firstName)} {capitalize(matchedDoctor?.lastName)}
+								</p>
 								<span className="size-4">
 									<IconBox
 										icon="solar:verified-check-linear"
@@ -617,28 +682,67 @@ function DialogMainContent() {
 						</figure>
 
 						<Dialog.Title className="text-[18px] font-bold text-medinfo-dark-3">
-							Primary health care specialist
+							{capitalize(matchedDoctor?.specialty)}
 						</Dialog.Title>
 					</Dialog.Header>
 
 					<Dialog.Footer className="flex flex-col items-center gap-3 md:gap-5">
 						<div className="flex flex-col items-center gap-4 md:flex-row-reverse md:gap-6">
-							<Button type="submit" theme="primary">
+							<Button
+								isLoading={bookAppointmentQueryResult.isPending}
+								disabled={bookAppointmentQueryResult.isPending}
+								isDisabled={false}
+								theme="primary"
+								onClick={onAccept}
+							>
 								Accept
 							</Button>
 
-							<Dialog.Close className="text-medinfo-primary-main md:text-[20px]" asChild={true}>
-								<Steps.PrevTrigger>Decline & ask for rematch</Steps.PrevTrigger>
-							</Dialog.Close>
+							<Button
+								unstyled={true}
+								className="text-medinfo-primary-main md:text-[20px]"
+								onClick={() => {
+									const newCount = trialCount + 1;
+
+									if (newCount === matchDoctorsQueryResult.data?.selectedDoctors.length) {
+										onReset();
+
+										return;
+									}
+
+									setTrialCount(newCount);
+								}}
+							>
+								Decline & ask for rematch
+							</Button>
 						</div>
 
 						<p className="text-[14px] text-medinfo-dark-4">
-							You have only <span className="text-medinfo-dark-1">3</span> rematches left
+							You have only{" "}
+							<span className="text-medinfo-dark-1">
+								{Number(matchDoctorsQueryResult.data?.selectedDoctors.length) - 1 - trialCount}
+							</span>{" "}
+							rematches left
 						</p>
 					</Dialog.Footer>
-				</Dialog.Content>
-			</Show.OtherWise>
-		</Show.Root>
+				</Switch.Match>
+
+				<Switch.Match when={!matchDoctorsQueryResult.data}>
+					<Dialog.Close className="self-end" asChild={true}>
+						<Steps.PrevTrigger>
+							<CloseIcon />
+						</Steps.PrevTrigger>
+					</Dialog.Close>
+
+					<Dialog.Header className="items-center gap-8">
+						<GreenSpinnerIcon className="animate-spin md:size-[100px]" />
+						<Dialog.Title className="text-center text-base font-normal text-medinfo-dark-4 md:px-4">
+							Matching you to a doctor, please hold on.
+						</Dialog.Title>
+					</Dialog.Header>
+				</Switch.Match>
+			</Switch.Root>
+		</Dialog.Content>
 	);
 }
 

@@ -32,3 +32,22 @@ export type SingleDisease = {
 	Image: string;
 	Precautions: string[];
 };
+
+type Doctor = {
+	_id: string;
+	firstName: string;
+	lastName: string;
+	picture: string;
+	gender: string;
+	email: string;
+	country: string;
+	specialty: string;
+	medicalCert: string;
+	role: string;
+	haveAppointment: boolean;
+	appointments: unknown[]; // You can define a more specific type if you know the structure of appointments
+};
+
+export type MatchDoctorsResponse = {
+	selectedDoctors: Doctor[];
+};

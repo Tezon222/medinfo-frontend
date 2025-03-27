@@ -1,7 +1,7 @@
 export const WhiteSpinnerIcon = (props: React.SVGProps<SVGSVGElement>) => (
 	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" {...props}>
 		<g stroke="currentColor">
-			<circle cx="12" cy="12" r="9.5" fill="none" stroke-linecap="round" stroke-width="3">
+			<circle cx="12" cy="12" r="9.5" fill="none" strokeLinecap="round" strokeWidth="3">
 				<animate
 					attributeName="stroke-dasharray"
 					calcMode="spline"
