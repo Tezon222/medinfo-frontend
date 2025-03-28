@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Roboto, Work_Sans } from "next/font/google";
 import "../tailwind.css";
 import { SonnerToaster } from "@/components/common";
+import { Providers } from "./Providers";
 
 type RootLayoutProps = {
 	children: React.ReactNode;
@@ -29,7 +30,7 @@ function RootLayout({ children }: RootLayoutProps) {
 	return (
 		<html lang="en" data-theme="light">
 			<body className={cnJoin(roboto.variable, workSans.variable)}>
-				{children}
+				<Providers>{children}</Providers>
 
 				<SonnerToaster />
 			</body>

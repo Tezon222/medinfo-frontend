@@ -11,7 +11,6 @@ const SonnerToaster = (props: ToasterProps) => {
 	return (
 		<Sonner
 			theme={theme}
-			// eslint-disable-next-line tailwindcss/no-custom-classname
 			className="toaster group max-md:inset-x-0 max-md:flex max-md:w-full max-md:justify-center"
 			position="bottom-right"
 			duration={3000}

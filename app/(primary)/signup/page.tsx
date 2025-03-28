@@ -88,7 +88,7 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 							className="w-full gap-[14px]"
 							onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
 						>
-							<Form.Item
+							<Form.Field
 								control={control}
 								name="firstName"
 								className="gap-1 font-roboto font-medium"
@@ -109,9 +109,9 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 										className="placeholder:text-medinfo-dark-4 md:text-base"
 									/>
 								</Form.InputGroup>
-							</Form.Item>
+							</Form.Field>
 
-							<Form.Item
+							<Form.Field
 								control={control}
 								name="lastName"
 								className="gap-1 font-roboto font-medium"
@@ -132,9 +132,9 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 										className="placeholder:text-medinfo-dark-4 md:text-base"
 									/>
 								</Form.InputGroup>
-							</Form.Item>
+							</Form.Field>
 
-							<Form.Item control={control} name="email" className="gap-1 font-roboto font-medium">
+							<Form.Field control={control} name="email" className="gap-1 font-roboto font-medium">
 								<Form.Label className="md:text-[20px]">Email</Form.Label>
 
 								<Form.InputGroup
@@ -151,12 +151,12 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 										className="placeholder:text-medinfo-dark-4 md:text-base"
 									/>
 								</Form.InputGroup>
-							</Form.Item>
+							</Form.Field>
 
-							<Form.Item control={control} name="gender" className="gap-1 font-roboto font-medium">
+							<Form.Field control={control} name="gender" className="gap-1 font-roboto font-medium">
 								<Form.Label className="md:text-[20px]">Gender</Form.Label>
 
-								<Form.Controller
+								<Form.FieldController
 									render={({ field }) => (
 										<Select.Root
 											name={field.name}
@@ -204,12 +204,16 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 										</Select.Root>
 									)}
 								/>
-							</Form.Item>
+							</Form.Field>
 
-							<Form.Item control={control} name="country" className="gap-1 font-roboto font-medium">
+							<Form.Field
+								control={control}
+								name="country"
+								className="gap-1 font-roboto font-medium"
+							>
 								<Form.Label className="md:text-[20px]">Country</Form.Label>
 
-								<Form.Controller
+								<Form.FieldController
 									render={({ field }) => (
 										<Select.Root
 											name={field.name}
@@ -258,17 +262,17 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 										</Select.Root>
 									)}
 								/>
-							</Form.Item>
+							</Form.Field>
 
 							<Show.Root when={user === "doctor"}>
-								<Form.Item
+								<Form.Field
 									control={control}
 									name="specialty"
 									className="gap-1 font-roboto font-medium"
 								>
 									<Form.Label className="md:text-[20px]">Specialty</Form.Label>
 
-									<Form.Controller
+									<Form.FieldController
 										render={({ field }) => (
 											<Select.Root
 												name={field.name}
@@ -319,11 +323,11 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 											</Select.Root>
 										)}
 									/>
-								</Form.Item>
+								</Form.Field>
 							</Show.Root>
 
 							<Show.Root when={user === "doctor"}>
-								<Form.Item
+								<Form.Field
 									control={control}
 									name="license"
 									className="gap-1 font-roboto font-medium"
@@ -332,7 +336,7 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 										Upload medical license/certificate
 									</Form.Label>
 
-									<Form.Controller
+									<Form.FieldController
 										render={({ field }) => (
 											<>
 												<DropZoneInput value={field.value} onChange={field.onChange} />
@@ -347,14 +351,14 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 											</>
 										)}
 									/>
-								</Form.Item>
+								</Form.Field>
 							</Show.Root>
 
 							<Show.Root when={user === "patient"}>
-								<Form.Item control={control} name="dob" className="gap-1 font-roboto font-medium">
+								<Form.Field control={control} name="dob" className="gap-1 font-roboto font-medium">
 									<Form.Label className="md:text-[20px]">Date of Birth</Form.Label>
 
-									<Form.Controller
+									<Form.FieldController
 										render={({ field }) => (
 											<DatePicker
 												className="h-[48px] gap-4 rounded-[8px] border-[1.4px]
@@ -366,10 +370,10 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 											/>
 										)}
 									/>
-								</Form.Item>
+								</Form.Field>
 							</Show.Root>
 
-							<Form.Item
+							<Form.Field
 								control={control}
 								name="password"
 								className="gap-1 font-roboto font-medium"
@@ -390,9 +394,9 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 										className="placeholder:text-medinfo-dark-4 md:text-base"
 									/>
 								</Form.InputGroup>
-							</Form.Item>
+							</Form.Field>
 
-							<Form.Item
+							<Form.Field
 								control={control}
 								name="confirmPassword"
 								className="gap-1 font-roboto font-medium"
@@ -413,7 +417,7 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 										className="placeholder:text-medinfo-dark-4 md:text-base"
 									/>
 								</Form.InputGroup>
-							</Form.Item>
+							</Form.Field>
 
 							<article className="flex flex-col items-center gap-[14px] md:mt-[14px] md:gap-7">
 								<Show.Root when={user === "patient"}>
@@ -443,14 +447,18 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 									</div>
 								</Show.Root>
 
-								<Button
-									type="submit"
-									isLoading={methods.formState.isSubmitting}
-									disabled={methods.formState.isSubmitting}
-									isDisabled={false}
-								>
-									Sign Up
-								</Button>
+								<Form.StateSubscribe
+									render={(formState) => (
+										<Button
+											type="submit"
+											isLoading={formState.isSubmitting}
+											disabled={formState.isSubmitting}
+											isDisabled={false}
+										>
+											Sign Up
+										</Button>
+									)}
+								/>
 
 								<div className="flex flex-col items-center gap-2">
 									<NavLink

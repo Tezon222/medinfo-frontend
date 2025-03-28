@@ -52,7 +52,7 @@ function ProfilePage() {
 				<h3 className="text-[18px] font-medium">User Identity</h3>
 
 				<Form.Root className="w-full max-w-[372px] gap-3 self-center" methods={userIdentityMethods}>
-					<Form.Item<typeof userIdentityMethods.control>
+					<Form.Field<typeof userIdentityMethods.control>
 						name="firstName"
 						className="gap-1 font-roboto font-medium"
 					>
@@ -63,8 +63,8 @@ function ProfilePage() {
 								placeholder:text-medinfo-dark-4 focus-visible:ring-transparent md:h-[64px] md:py-5
 								md:text-base"
 						/>
-					</Form.Item>
-					<Form.Item<typeof userIdentityMethods.control>
+					</Form.Field>
+					<Form.Field<typeof userIdentityMethods.control>
 						name="lastName"
 						className="gap-1 font-roboto font-medium"
 					>
@@ -75,12 +75,12 @@ function ProfilePage() {
 								placeholder:text-medinfo-dark-4 focus-visible:ring-transparent md:h-[64px] md:py-5
 								md:text-base"
 						/>
-					</Form.Item>
+					</Form.Field>
 
-					<Form.Item name="gender" className="gap-1 font-roboto font-medium">
+					<Form.Field name="gender" className="gap-1 font-roboto font-medium">
 						<Form.Label className="md:text-[20px]">Gender</Form.Label>
 
-						<Form.Controller
+						<Form.FieldController
 							render={({ field }) => (
 								<Select.Root name={field.name} value={field.value} onValueChange={field.onChange}>
 									<Select.Trigger
@@ -122,9 +122,9 @@ function ProfilePage() {
 								</Select.Root>
 							)}
 						/>
-					</Form.Item>
+					</Form.Field>
 
-					<Form.Item<typeof userIdentityMethods.control>
+					<Form.Field<typeof userIdentityMethods.control>
 						name="bio"
 						className="gap-1 font-roboto font-medium"
 					>
@@ -135,7 +135,7 @@ function ProfilePage() {
 								py-5 placeholder:text-medinfo-dark-4 focus-visible:ring-transparent md:h-[159px]
 								md:text-base"
 						/>
-					</Form.Item>
+					</Form.Field>
 				</Form.Root>
 
 				<div className="flex gap-6 self-center lg:self-end">
@@ -151,7 +151,7 @@ function ProfilePage() {
 				<h3 className="text-[18px] font-medium">Contact Info</h3>
 
 				<Form.Root className="w-full max-w-[372px] gap-3 self-center" methods={contactInfoMethods}>
-					<Form.Item<typeof contactInfoMethods.control>
+					<Form.Field<typeof contactInfoMethods.control>
 						name="email"
 						className="gap-1 font-roboto font-medium"
 					>
@@ -162,8 +162,8 @@ function ProfilePage() {
 								placeholder:text-medinfo-dark-4 focus-visible:ring-transparent md:h-[64px] md:py-5
 								md:text-base"
 						/>
-					</Form.Item>
-					<Form.Item<typeof contactInfoMethods.control>
+					</Form.Field>
+					<Form.Field<typeof contactInfoMethods.control>
 						name="phoneNumber"
 						className="gap-1 font-roboto font-medium"
 					>
@@ -174,7 +174,7 @@ function ProfilePage() {
 								placeholder:text-medinfo-dark-4 focus-visible:ring-transparent md:h-[64px] md:py-5
 								md:text-base"
 						/>
-					</Form.Item>
+					</Form.Field>
 				</Form.Root>
 
 				<div className="flex gap-6 self-center lg:self-end">
@@ -190,7 +190,7 @@ function ProfilePage() {
 				<h3 className="text-[18px] font-medium">Location</h3>
 
 				<Form.Root className="w-full max-w-[372px] gap-3 self-center" methods={locationMethods}>
-					<Form.Item<typeof locationMethods.control>
+					<Form.Field<typeof locationMethods.control>
 						name="country"
 						className="gap-1 font-roboto font-medium"
 					>
@@ -201,8 +201,8 @@ function ProfilePage() {
 								placeholder:text-medinfo-dark-4 focus-visible:ring-transparent md:h-[64px] md:py-5
 								md:text-base"
 						/>
-					</Form.Item>
-					<Form.Item<typeof locationMethods.control>
+					</Form.Field>
+					<Form.Field<typeof locationMethods.control>
 						name="city"
 						className="gap-1 font-roboto font-medium"
 					>
@@ -213,7 +213,7 @@ function ProfilePage() {
 								placeholder:text-medinfo-dark-4 focus-visible:ring-transparent md:h-[64px] md:py-5
 								md:text-base"
 						/>
-					</Form.Item>
+					</Form.Field>
 				</Form.Root>
 
 				<div className="flex gap-6 self-center lg:self-end">
@@ -229,7 +229,7 @@ function ProfilePage() {
 				<h3 className="text-[18px] font-medium">Change Password</h3>
 
 				<Form.Root className="w-full max-w-[372px] gap-3 self-center" methods={changePasswordMethods}>
-					<Form.Item<typeof changePasswordMethods.control>
+					<Form.Field<typeof changePasswordMethods.control>
 						name="oldPassword"
 						className="gap-1 font-roboto font-medium"
 					>
@@ -243,8 +243,8 @@ function ProfilePage() {
 								md:text-base`,
 							}}
 						/>
-					</Form.Item>
-					<Form.Item<typeof changePasswordMethods.control>
+					</Form.Field>
+					<Form.Field<typeof changePasswordMethods.control>
 						name="newPassword"
 						className="gap-1 font-roboto font-medium"
 					>
@@ -258,8 +258,8 @@ function ProfilePage() {
 								md:text-base`,
 							}}
 						/>
-					</Form.Item>
-					<Form.Item<typeof changePasswordMethods.control>
+					</Form.Field>
+					<Form.Field<typeof changePasswordMethods.control>
 						name="confirmPassword"
 						className="gap-1 font-roboto font-medium"
 					>
@@ -273,7 +273,7 @@ function ProfilePage() {
 								md:text-base`,
 							}}
 						/>
-					</Form.Item>
+					</Form.Field>
 				</Form.Root>
 
 				<div className="flex gap-6 self-center lg:self-end">

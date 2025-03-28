@@ -1,7 +1,55 @@
+"use client";
+
 import { cnMerge } from "@/lib/utils/cn";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import type { InferProps } from "@zayne-labs/toolkit/react/utils";
+import { createCustomContext, useToggle } from "@zayne-labs/toolkit/react";
+import type { DiscriminatedRenderProps, InferProps } from "@zayne-labs/toolkit/react/utils";
+import { useMemo } from "react";
 import { IconBox } from "../common";
+
+type ContextValue = {
+	open: boolean;
+	setOpen: (open: boolean) => void;
+};
+
+const [DialogStateContextProvider, useDialogStateContext] = createCustomContext<ContextValue>();
+
+function DialogRoot(props: InferProps<typeof DialogPrimitive.Root>) {
+	const [openState, toggleOpen] = useToggle(false);
+	// eslint-disable-next-line ts-eslint/unbound-method
+	const { open, onOpenChange, ...restOfProps } = props;
+
+	const selectedOpen = open ?? openState;
+	const selectedOnOpenChange = open ? onOpenChange : toggleOpen;
+
+	const contextValue = useMemo(
+		() =>
+			({
+				open: selectedOpen,
+				setOpen: (value) => selectedOnOpenChange?.(value),
+			}) satisfies ContextValue,
+		[selectedOpen, selectedOnOpenChange]
+	);
+
+	return (
+		<DialogStateContextProvider value={contextValue}>
+			<DialogPrimitive.Root {...restOfProps} open={selectedOpen} onOpenChange={selectedOnOpenChange} />
+		</DialogStateContextProvider>
+	);
+}
+
+type RenderFn = (props: ContextValue) => React.ReactNode;
+
+function DialogContext(props: DiscriminatedRenderProps<RenderFn>) {
+	const { children, render } = props;
+	const { open, setOpen } = useDialogStateContext();
+
+	if (typeof children === "function") {
+		return children({ open, setOpen });
+	}
+
+	return render({ open, setOpen });
+}
 
 function DialogOverlay(props: InferProps<typeof DialogPrimitive.Overlay>) {
 	const { className, ...restOfProps } = props;
@@ -95,7 +143,9 @@ function DialogDescription(props: InferProps<typeof DialogPrimitive.Description>
 	);
 }
 
-export const Root = DialogPrimitive.Root;
+export const Root = DialogRoot;
+
+export const Context = DialogContext;
 
 export const Close = DialogPrimitive.Close;
 
@@ -114,3 +164,6 @@ export const Portal = DialogPrimitive.Portal;
 export const Title = DialogTitle;
 
 export const Trigger = DialogPrimitive.Trigger;
+
+// eslint-disable-next-line react-refresh/only-export-components
+export { useDialogStateContext };

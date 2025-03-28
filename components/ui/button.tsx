@@ -1,5 +1,6 @@
 "use client";
 
+import type { PolymorphicProps } from "@zayne-labs/toolkit/react/utils";
 import type { Prettify } from "@zayne-labs/toolkit/type-helpers";
 import { Slot, Slottable } from "@zayne-labs/ui-react/common/slot";
 import { type VariantProps, tv } from "tailwind-variants";
@@ -95,8 +96,9 @@ const buttonVariants = tv(
 	}
 );
 
-function Button(props: ButtonProps) {
+function Button<TElement extends React.ElementType>(props: PolymorphicProps<TElement, ButtonProps>) {
 	const {
+		as: Element = "button",
 		disabled,
 		asChild,
 		isLoading = false,
@@ -111,7 +113,7 @@ function Button(props: ButtonProps) {
 		...extraButtonProps
 	} = props;
 
-	const Component = asChild ? Slot : "button";
+	const Component = asChild ? Slot : Element;
 
 	const BTN_CLASSES = !unstyled
 		? buttonVariants({

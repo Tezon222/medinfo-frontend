@@ -30,7 +30,7 @@ function ForgotPasswordPage() {
 						setResetMode(radio.value as typeof resetMode);
 					}}
 				>
-					<Form.Item name="resetMode" className="gap-4">
+					<Form.Field name="resetMode" className="gap-4">
 						<Form.InputGroup
 							className="relative justify-normal gap-6 rounded-[12px] border-2
 								border-medinfo-primary-main p-3 md:p-6"
@@ -106,7 +106,7 @@ function ForgotPasswordPage() {
 								</Form.InputRightItem>
 							)}
 						</Form.InputGroup>
-					</Form.Item>
+					</Form.Field>
 
 					<div className="mt-8 flex flex-col items-center gap-5">
 						<Button type="submit">Get link</Button>

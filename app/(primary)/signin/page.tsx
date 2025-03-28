@@ -74,7 +74,7 @@ function SignInPage(props: { searchParams: Promise<Record<string, string | strin
 							className="w-full gap-[14px]"
 							onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
 						>
-							<Form.Item control={control} name="email" className="gap-1 font-roboto font-medium">
+							<Form.Field control={control} name="email" className="gap-1 font-roboto font-medium">
 								<Form.Label className="md:text-[20px]">Email</Form.Label>
 
 								<Form.InputGroup
@@ -91,9 +91,9 @@ function SignInPage(props: { searchParams: Promise<Record<string, string | strin
 										className="placeholder:text-medinfo-dark-4 md:text-base"
 									/>
 								</Form.InputGroup>
-							</Form.Item>
+							</Form.Field>
 
-							<Form.Item
+							<Form.Field
 								control={control}
 								name="password"
 								className="gap-1 font-roboto font-medium"
@@ -121,7 +121,7 @@ function SignInPage(props: { searchParams: Promise<Record<string, string | strin
 								>
 									Forgot password?
 								</NavLink>
-							</Form.Item>
+							</Form.Field>
 
 							<article className="flex flex-col items-center gap-[14px] md:mt-[14px] md:gap-7">
 								<Show.Root when={user !== "doctor"}>
@@ -151,14 +151,18 @@ function SignInPage(props: { searchParams: Promise<Record<string, string | strin
 									</div>
 								</Show.Root>
 
-								<Button
-									type="submit"
-									isLoading={methods.formState.isSubmitting}
-									disabled={methods.formState.isSubmitting}
-									isDisabled={false}
-								>
-									Sign In
-								</Button>
+								<Form.StateSubscribe
+									render={({ isSubmitting }) => (
+										<Button
+											type="submit"
+											isLoading={isSubmitting}
+											disabled={isSubmitting}
+											isDisabled={false}
+										>
+											Sign In
+										</Button>
+									)}
+								/>
 
 								<div className="flex flex-col items-center gap-2">
 									<NavLink
