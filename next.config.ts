@@ -5,6 +5,7 @@ const nextConfig = {
 	devIndicators: {
 		position: "bottom-right",
 	},
+
 	eslint: {
 		ignoreDuringBuilds: true,
 	},

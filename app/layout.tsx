@@ -12,13 +12,13 @@ type RootLayoutProps = {
 const workSans = Work_Sans({
 	subsets: ["latin"],
 	weight: ["500", "600", "700"],
-	variable: "--font-work-sans",
+	variable: "--font-var-work-sans",
 });
 
 const roboto = Roboto({
 	subsets: ["latin"],
 	weight: ["400", "500"],
-	variable: "--font-roboto",
+	variable: "--font-var-roboto",
 });
 
 export const metadata: Metadata = {

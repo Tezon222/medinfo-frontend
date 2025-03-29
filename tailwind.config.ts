@@ -113,8 +113,8 @@ const tailwindConfig = {
 			},
 
 			fontFamily: {
-				roboto: ["var(--font-roboto)"],
-				"work-sans": ["var(--font-work-sans)"],
+				roboto: ["var(--font-var-roboto)"],
+				"work-sans": ["var(--font-var-work-sans)"],
 			},
 
 			keyframes: {
