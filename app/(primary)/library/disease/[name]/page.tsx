@@ -9,13 +9,15 @@ async function TipDetailsPage(props: { params: Promise<{ name: string }> }) {
 	// eslint-disable-next-line react/prefer-destructuring-assignment
 	const params = await props.params;
 
-	const [oneDisease, allDiseases] = await Promise.all([
-		callBackendApi<SingleDisease>("/diseases/oneDisease", { query: params }),
-		callBackendApi<DiseasesResponse>("/diseases/allDiseases", { query: { limit: 3 } }),
+	const [singleDisease, allDiseases] = await Promise.all([
+		callBackendApi<SingleDisease>("/diseases/oneDisease", {
+			query: { name: decodeURIComponent(params.name) },
+		}),
+		callBackendApi<DiseasesResponse>("/diseases/allDiseases"),
 	]);
 
-	if (oneDisease.error) {
-		console.error(oneDisease.error.errorData);
+	if (singleDisease.error) {
+		console.error(singleDisease.error.errorData);
 		return null;
 	}
 
@@ -30,7 +32,7 @@ async function TipDetailsPage(props: { params: Promise<{ name: string }> }) {
 			<section className="lg:flex lg:gap-16">
 				<Image
 					className="size-[272px] rounded-br-[16px] rounded-tl-[16px] lg:size-[460px]"
-					src={oneDisease.data.Image}
+					src={singleDisease.data.Image}
 					alt=""
 					priority={true}
 					width={272}
@@ -52,17 +54,21 @@ async function TipDetailsPage(props: { params: Promise<{ name: string }> }) {
 					className="text-[32px] font-semibold text-medinfo-primary-darker lg:text-[52px]
 						lg:font-bold"
 				>
-					{oneDisease.data.Disease}
+					{singleDisease.data.Disease}
 				</h1>
 
-				<p className="text-[18px]">{oneDisease.data.Description}</p>
+				<p className="text-[18px]">{singleDisease.data.Description}</p>
 
 				<article>
 					<h4>Symptoms</h4>
 					<List
 						className="pl-12"
-						each={oneDisease.data.Symptoms}
-						render={(symptom) => <li className="list-['-_']">{symptom}</li>}
+						each={singleDisease.data.Symptoms}
+						render={(symptom) => (
+							<li key={symptom} className="list-['-_']">
+								{symptom}
+							</li>
+						)}
 					/>
 				</article>
 
@@ -70,8 +76,12 @@ async function TipDetailsPage(props: { params: Promise<{ name: string }> }) {
 					<h4>Precautions</h4>
 					<List
 						className="pl-12"
-						each={oneDisease.data.Precautions}
-						render={(precaution) => <li className="list-['-_']">{precaution}</li>}
+						each={singleDisease.data.Precautions}
+						render={(precaution) => (
+							<li key={precaution} className="list-['-_']">
+								{precaution}
+							</li>
+						)}
 					/>
 				</article>
 			</section>
