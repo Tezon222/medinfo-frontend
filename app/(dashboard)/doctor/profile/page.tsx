@@ -32,7 +32,7 @@ function ProfilePage() {
 						border-medinfo-primary-main bg-gray-300 lg:size-[140px]"
 				>
 					<div
-						className="absolute right-0 top-[2px] flex size-[24px] items-center justify-center
+						className="absolute top-[2px] right-0 flex size-[24px] items-center justify-center
 							rounded-full border-[1.4px] border-medinfo-primary-main bg-white lg:size-[40px]"
 					>
 						<CameraIcon className="size-[16px] lg:size-[26px]" />

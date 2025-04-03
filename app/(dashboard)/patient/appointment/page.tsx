@@ -287,8 +287,8 @@ function AppointmentPage() {
 								<Form.Input
 									type="textarea"
 									placeholder="tell us your symptoms"
-									className="min-h-[180px] gap-4 rounded-[8px] border-[1.4px]
-										border-medinfo-primary-main px-4 py-3 [field-sizing:content]
+									className="[field-sizing:content] min-h-[180px] gap-4 rounded-[8px]
+										border-[1.4px] border-medinfo-primary-main px-4 py-3
 										placeholder:text-medinfo-dark-4 md:py-5 md:text-base"
 								/>
 							</Form.Field>
@@ -403,9 +403,9 @@ function AppointmentPage() {
 									<Form.Input
 										type="textarea"
 										placeholder={`write "none" if there is none`}
-										className="min-h-[180px] rounded-[8px] border-[1.4px]
-											border-medinfo-primary-main px-4 py-3 [field-sizing:content]
-											placeholder:text-medinfo-dark-4 md:py-5 md:text-base"
+										className="[field-sizing:content] min-h-[180px] rounded-[8px] border-[1.4px]
+											border-medinfo-primary-main px-4 py-3 placeholder:text-medinfo-dark-4
+											md:py-5 md:text-base"
 									/>
 								</Form.Field>
 
@@ -419,9 +419,9 @@ function AppointmentPage() {
 									<Form.Input
 										type="textarea"
 										placeholder={`write "none" if there is none`}
-										className="min-h-[180px] rounded-[8px] border-[1.4px]
-											border-medinfo-primary-main px-4 py-3 [field-sizing:content]
-											placeholder:text-medinfo-dark-4 md:py-5 md:text-base"
+										className="[field-sizing:content] min-h-[180px] rounded-[8px] border-[1.4px]
+											border-medinfo-primary-main px-4 py-3 placeholder:text-medinfo-dark-4
+											md:py-5 md:text-base"
 									/>
 								</Form.Field>
 							</div>
@@ -567,8 +567,8 @@ function StepperList(props: { className?: string }) {
 					<Steps.Item key={index} index={index} className="flex items-center">
 						{index !== 0 && (
 							<Steps.Separator
-								className="h-[2px] w-[82px] bg-medinfo-light-2
-									data-current:bg-medinfo-primary-main md:h-1 md:w-[200px]"
+								className="h-[2px] w-[82px] bg-medinfo-light-2 data-current:bg-medinfo-primary-main
+									md:h-1 md:w-[200px]"
 							/>
 						)}
 
@@ -577,17 +577,15 @@ function StepperList(props: { className?: string }) {
 								className="flex size-6 items-center justify-center rounded-full border-[1.4px]
 									border-[hsl(150,20%,95%)] bg-[hsl(150,20%,95%)] text-[10px]
 									text-medinfo-secondary-darker data-complete:border-medinfo-primary-main
-									data-current:border-medinfo-primary-main
-									data-complete:text-medinfo-primary-main
+									data-complete:text-medinfo-primary-main data-current:border-medinfo-primary-main
 									data-current:text-medinfo-primary-main md:size-12 md:text-[20px]"
 							>
 								{index + 1}
 							</Steps.Indicator>
 
 							<span
-								className="absolute top-[calc(--spacing(6)+2px)] text-nowrap text-[10px]
-									italic text-medinfo-dark-3 md:top-[calc(--spacing(12)+2px)]
-									md:text-[14px]"
+								className="absolute top-[calc(--spacing(6)+2px)] text-[10px] text-nowrap
+									text-medinfo-dark-3 italic md:top-[calc(--spacing(12)+2px)] md:text-[14px]"
 							>
 								{item.title}
 							</span>
@@ -651,7 +649,7 @@ function DialogMainContent(props: DialogMainContentProps) {
 				"flex flex-col rounded-[16px]",
 				matchDoctorsQueryResult.data
 					? "max-w-[341px] gap-8 px-6 py-8 md:max-w-[650px] md:gap-9 md:px-10"
-					: "w-[292px] gap-2 pb-[56px] pt-6 md:max-w-[372px]"
+					: "w-[292px] gap-2 pt-6 pb-[56px] md:max-w-[372px]"
 			)}
 			withCloseBtn={false}
 		>

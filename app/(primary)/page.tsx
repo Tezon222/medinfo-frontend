@@ -73,8 +73,8 @@ function HomePage() {
 			<section className="flex flex-col items-center md:flex-row-reverse md:gap-[67px]">
 				<div className="flex flex-col items-center max-md:text-center md:items-start">
 					<h1
-						className="text-[clamp(32px,5.2vw,68px)] font-bold leading-10 text-medinfo-primary-main
-							md:text-balance md:leading-[76px] [&:hover>span]:text-medinfo-secondary-darker
+						className="text-[clamp(32px,5.2vw,68px)] leading-10 font-bold text-medinfo-primary-main
+							md:leading-[76px] md:text-balance [&:hover>span]:text-medinfo-secondary-darker
 							[&>span]:[transition:color_250ms_ease-in-out]"
 					>
 						Free <span>access</span> to knowledge and an easy chit-chat with the best{" "}
@@ -99,8 +99,8 @@ function HomePage() {
 						max-md:mt-[calc(40px_+_var(--offset))]"
 				>
 					<span
-						className="absolute bottom-(--offset) right-(--offset) z-[-1] block size-full
-							rounded-[16px] bg-medinfo-primary-main md:bottom-[28px] md:right-[28px]
+						className="absolute right-(--offset) bottom-(--offset) z-[-1] block size-full
+							rounded-[16px] bg-medinfo-primary-main md:right-[28px] md:bottom-[28px]
 							md:rounded-[24px]"
 					/>
 					<Image
@@ -116,8 +116,8 @@ function HomePage() {
 
 			<section>
 				<h2
-					className="text-center text-[28px] font-semibold leading-9 text-medinfo-primary-main
-						md:text-[52px] md:font-bold md:leading-[60px]"
+					className="text-center text-[28px] leading-9 font-semibold text-medinfo-primary-main
+						md:text-[52px] md:leading-[60px] md:font-bold"
 				>
 					Our Core Services
 				</h2>
@@ -162,8 +162,8 @@ function HomePage() {
 
 			<section>
 				<h2
-					className="text-center text-[28px] font-semibold leading-9 text-medinfo-primary-main
-						md:text-[52px] md:font-bold md:leading-[60px]"
+					className="text-center text-[28px] leading-9 font-semibold text-medinfo-primary-main
+						md:text-[52px] md:leading-[60px] md:font-bold"
 				>
 					Why MedInfo Nigeria?
 				</h2>
@@ -193,8 +193,8 @@ function HomePage() {
 
 			<section>
 				<h2
-					className="text-center text-[28px] font-semibold leading-9 text-medinfo-primary-main
-						md:text-[52px] md:font-bold md:leading-[60px]"
+					className="text-center text-[28px] leading-9 font-semibold text-medinfo-primary-main
+						md:text-[52px] md:leading-[60px] md:font-bold"
 				>
 					Advantages of Virtual Healthcare
 				</h2>
@@ -220,8 +220,8 @@ function HomePage() {
 
 			<section className="flex flex-col items-center">
 				<h2
-					className="text-center text-[28px] font-semibold leading-9 text-medinfo-primary-main
-						md:text-[52px] md:font-bold md:leading-[60px]"
+					className="text-center text-[28px] leading-9 font-semibold text-medinfo-primary-main
+						md:text-[52px] md:leading-[60px] md:font-bold"
 				>
 					Did you know?
 				</h2>
@@ -233,8 +233,8 @@ function HomePage() {
 
 			<section>
 				<h2
-					className="text-center text-[28px] font-semibold leading-9 text-medinfo-primary-main
-						md:text-[52px] md:font-bold md:leading-[60px]"
+					className="text-center text-[28px] leading-9 font-semibold text-medinfo-primary-main
+						md:text-[52px] md:leading-[60px] md:font-bold"
 				>
 					Frequently Asked Questions
 				</h2>

@@ -12,7 +12,7 @@ function page() {
 						className="relative mx-[12px] items-center space-x-4 rounded-[8px] border
 							border-medinfo-primary-lighter px-[16px] py-[14px] lg:w-[251px]"
 					>
-						<SearchIcon type="green" className="absolute left-4 top-4" />
+						<SearchIcon type="green" className="absolute top-4 left-4" />
 						<input type="text" placeholder="search for a chat" className="bg-none pl-[16px]" />
 					</div>
 					<div className="mt-[20px]">
@@ -22,7 +22,7 @@ function page() {
 									className="relative size-[48px] rounded-full border-[1.4px]
 										border-medinfo-primary-main bg-gray-300 lg:size-[48px]"
 								>
-									<div className="absolute right-1 top-[2px]">
+									<div className="absolute top-[2px] right-1">
 										<div className="size-[8px] rounded-full bg-[#05A660]" />
 									</div>
 								</div>
@@ -39,7 +39,7 @@ function page() {
 									className="relative size-[48px] rounded-full border-[1.4px]
 										border-medinfo-primary-main bg-gray-300 lg:size-[48px]"
 								>
-									<div className="absolute right-1 top-[2px]">
+									<div className="absolute top-[2px] right-1">
 										<div className="size-[8px] rounded-full bg-[#05A660]" />
 									</div>
 								</div>

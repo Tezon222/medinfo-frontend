@@ -76,9 +76,9 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 
 					<div className="mt-3 flex flex-col items-center gap-8">
 						<h1
-							className="max-w-[186px] text-center text-[24px] font-semibold leading-[32px]
+							className="max-w-[186px] text-center text-[24px] leading-[32px] font-semibold
 								text-medinfo-primary-darker md:mx-[42px] md:max-w-[375px] md:text-[48px]
-								md:font-bold md:leading-[56px]"
+								md:leading-[56px] md:font-bold"
 						>
 							Join MedInfo Nigeria
 						</h1>
