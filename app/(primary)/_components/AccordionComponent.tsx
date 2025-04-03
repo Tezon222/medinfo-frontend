@@ -54,7 +54,7 @@ function AccordionComponent() {
 								}}
 							>
 								<div className="flex w-full items-center justify-between gap-6">
-									<p className="text-pretty text-left">{FAQ.question}</p>
+									<p className="text-left text-pretty">{FAQ.question}</p>
 
 									<span
 										className="flex items-center justify-center rounded-full

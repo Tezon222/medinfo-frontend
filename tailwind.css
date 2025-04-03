@@ -1,45 +1,120 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@source './node_modules/@zayne-labs/ui-react/dist/esm/**/*.js';
+
+@plugin "tailwindcss-animate";
+@plugin "@tailwindcss/typography";
+
+/* ------------------*/
+/* App Theme         */
+/*-------------------*/
+@theme {
+	--color-medinfo-primary-main: hsl(150, 20%, 25%);
+	--color-medinfo-primary-darker: hsl(150, 21%, 17%);
+	--color-medinfo-primary-lighter: hsl(150, 19%, 48%);
+	--color-medinfo-primary-subtle: hsl(150, 75%, 88%);
+
+	--color-medinfo-secondary-main: hsl(46, 15%, 83%);
+	--color-medinfo-secondary-darker: hsl(46, 15%, 63%);
+	--color-medinfo-secondary-lighter: hsl(46, 15%, 92%);
+	--color-medinfo-secondary-subtle: hsl(46, 15%, 97%);
+
+	--color-medinfo-light-1: hsl(152, 17%, 79%);
+	--color-medinfo-light-2: hsl(150, 8%, 85%);
+	--color-medinfo-light-3: hsl(144, 20%, 95%);
+	--color-medinfo-light-4: hsl(150, 25%, 98%);
+
+	--color-medinfo-dark-1: hsl(0, 0%, 25%);
+	--color-medinfo-dark-2: hsl(0, 0%, 35%);
+	--color-medinfo-dark-3: hsl(0, 0%, 45%);
+	--color-medinfo-dark-4: hsl(0, 0%, 55%);
+
+	--color-medinfo-state-success-main: hsl(154, 94%, 39%);
+	--color-medinfo-state-success-darker: hsl(154, 94%, 34%);
+	--color-medinfo-state-success-lighter: hsl(151, 68%, 54%);
+	--color-medinfo-state-success-subtle: hsl(150, 70%, 63%);
+
+	--color-medinfo-state-error-main: hsl(0, 100%, 62%);
+	--color-medinfo-state-error-darker: hsl(0, 78%, 55%);
+	--color-medinfo-state-error-lighter: hsl(0, 100%, 68%);
+	--color-medinfo-state-error-subtle: hsl(0, 100%, 75%);
+
+	--color-medinfo-disabled-fill: hsl(0, 0%, 93%);
+	--color-medinfo-body-color: hsl(0, 0%, 20%);
+}
 
 /* ------------------*/
 /* Custom Properties */
 /*-------------------*/
 @layer base {
-	:root {
-		--color-primary-main: hsl(150, 20%, 25%);
-		--color-primary-darker: hsl(150, 21%, 17%);
-		--color-primary-lighter: hsl(150, 19%, 48%);
-		--color-primary-subtle: hsl(150, 75%, 88%);
+}
 
-		--color-secondary-main: hsl(46, 15%, 83%);
-		--color-secondary-darker: hsl(46, 15%, 63%);
-		--color-secondary-lighter: hsl(46, 15%, 92%);
-		--color-secondary-subtle: hsl(46, 15%, 97%);
+/* ------------------*/
+/* Shadcn Theme      */
+/*-------------------*/
+@theme {
+	--color-shadcn-background: hsl(0, 0%, 100%);
+	--color-shadcn-foreground: hsl(222.2, 47.4%, 11.2%);
 
-		--color-light-1: hsl(152, 17%, 79%);
-		--color-light-2: hsl(150, 8%, 85%);
-		--color-light-3: hsl(144, 20%, 95%);
-		--color-light-4: hsl(150, 25%, 98%);
+	--color-shadcn-primary: hsl(222.2, 47.4%, 11.2%);
+	--color-shadcn-primary-foreground: hsl(210, 40%, 98%);
 
-		--color-dark-1: hsl(0, 0%, 25%);
-		--color-dark-2: hsl(0, 0%, 35%);
-		--color-dark-3: hsl(0, 0%, 45%);
-		--color-dark-4: hsl(0, 0%, 55%);
+	--color-shadcn-secondary: hsl(210, 40%, 96.1%);
+	--color-shadcn-secondary-foreground: hsl(222.2, 47.4%, 11.2%);
 
-		--color-state-error-main: hsl(0, 100%, 62%);
-		--color-state-error-darker: hsl(0, 78%, 55%);
-		--color-state-error-lighter: hsl(0, 100%, 68%);
-		--color-state-error-subtle: hsl(0, 100%, 75%);
+	--color-shadcn-popover: hsl(0, 0%, 100%);
+	--color-shadcn-popover-foreground: hsl(222.2, 47.4%, 11.2%);
 
-		--color-state-success-main: hsl(154, 94%, 39%);
-		--color-state-success-darker: hsl(154, 94%, 34%);
-		--color-state-success-lighter: hsl(151, 68%, 54%);
-		--color-state-success-subtle: hsl(150, 70%, 63%);
+	--color-shadcn-accent: hsl(210, 40%, 96.1%);
+	--color-shadcn-accent-foreground: hsl(222.2, 47.4%, 11.2%);
 
-		--color-disabled-fill: hsl(0, 0%, 93%);
+	--color-shadcn-muted: hsl(210, 40%, 96.1%);
+	--color-shadcn-muted-foreground: hsl(215.4, 16.3%, 46.9%);
 
-		--color-body-color: hsl(0, 0%, 20%);
+	--color-shadcn-input: hsl(214.3, 31.8%, 91.4%);
+	--color-shadcn-border: hsl(214.3, 31.8%, 91.4%);
+	--color-shadcn-ring: hsl(215, 20.2%, 65.1%);
+
+	--color-sonner-success-bg: hsl(150, 100%, 6%);
+	--color-sonner-success-text: hsl(150, 100%, 90%);
+	--color-sonner-success-border: hsl(147, 100%, 12%);
+
+	--color-sonner-error-bg: hsl(358, 76%, 10%);
+	--color-sonner-error-text: hsl(358, 100%, 81%);
+	--color-sonner-error-border: hsl(357, 89%, 16%);
+}
+
+/* ------------------*/
+/* Main Theme */
+/*-------------------*/
+@theme {
+	--breakpoint-*: initial;
+	--breakpoint-sm: 480px;
+	--breakpoint-md: 800px;
+	--breakpoint-lg: 1000px;
+	--breakpoint-xl: 1280px;
+
+	--font-roboto: var(--font-var-roboto);
+	--font-work-sans: var(--font-var-work-sans);
+
+	--animate-accordion-down: accordion-down 0.2s ease-out;
+	--animate-accordion-up: accordion-up 0.2s ease-out;
+
+	@keyframes accordion-down {
+		from {
+			height: 0;
+		}
+		to {
+			height: var(--radix-accordion-content-height);
+		}
+	}
+	@keyframes accordion-up {
+		from {
+			height: var(--radix-accordion-content-height);
+		}
+		to {
+			height: 0;
+		}
 	}
 }
 
@@ -87,7 +162,68 @@
 
 	body {
 		line-height: 1.5;
-		font-family: theme("fontFamily.work-sans");
-		color: theme("colors.medinfo.body-color");
+		font-family: var(--font-work-sans);
+		color: var(--color-medinfo-body-color);
+	}
+}
+
+/* ------------------*/
+/* Custom Utilities */
+/*-------------------*/
+@utility custom-scrollbar {
+	&::-webkit-scrollbar {
+		width: 10px;
+	}
+
+	&::-webkit-scrollbar-track {
+		background-color: hsl(0, 0%, 76%);
+		border-radius: 10px 10px 0 0;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: hsl(0, 0%, 39%);
+		border: 1px solid hsl(0, 0%, 76%);
+		border-radius: 10px;
+	}
+}
+
+@utility scrollbar-hidden {
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+@utility nav-link-transition {
+	&::before {
+		content: "";
+		position: absolute;
+		bottom: 20px;
+		left: 50%;
+		background-color: var(--color-medinfo-primary-darker);
+		opacity: 0;
+		transform: translateX(-50%);
+		height: 2px;
+		width: 2px;
+		border-radius: 50%;
+		transition:
+			opacity 0.4s ease 0s,
+			bottom 0.3s ease 0.1s,
+			height 0.5s ease 0.3s,
+			border-radius 0.2s ease 0.4s,
+			width 0.5s ease 0.4s;
+	}
+
+	@media (width < 800px) {
+		&.nav-mobile::before {
+			background-color: white;
+		}
+	}
+
+	&:hover::before {
+		bottom: -0.7px;
+		height: 2px;
+		width: calc(100% + 2px);
+		border-radius: 20px;
+		opacity: 1;
 	}
 }

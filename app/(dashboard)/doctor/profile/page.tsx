@@ -32,7 +32,7 @@ function ProfilePage() {
 						border-medinfo-primary-main bg-gray-300 lg:size-[140px]"
 				>
 					<div
-						className="absolute right-0 top-[2px] flex size-[24px] items-center justify-center
+						className="absolute top-[2px] right-0 flex size-[24px] items-center justify-center
 							rounded-full border-[1.4px] border-medinfo-primary-main bg-white lg:size-[40px]"
 					>
 						<CameraIcon className="size-[16px] lg:size-[26px]" />
@@ -84,7 +84,7 @@ function ProfilePage() {
 										classNames={{
 											base: `group h-[48px] gap-2 rounded-[8px] border-[1.4px]
 											border-medinfo-primary-main px-4 font-medium
-											data-[placeholder]:text-medinfo-dark-4 md:h-[64px] md:text-base`,
+											data-placeholder:text-medinfo-dark-4 md:h-[64px] md:text-base`,
 											icon: `text-medinfo-body-color group-data-[state=open]:rotate-180
 											md:size-6`,
 										}}

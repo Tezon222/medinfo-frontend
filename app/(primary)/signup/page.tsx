@@ -76,9 +76,9 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 
 					<div className="mt-3 flex flex-col items-center gap-8">
 						<h1
-							className="max-w-[186px] text-center text-[24px] font-semibold leading-[32px]
+							className="max-w-[186px] text-center text-[24px] leading-[32px] font-semibold
 								text-medinfo-primary-darker md:mx-[42px] md:max-w-[375px] md:text-[48px]
-								md:font-bold md:leading-[56px]"
+								md:leading-[56px] md:font-bold"
 						>
 							Join MedInfo Nigeria
 						</h1>
@@ -167,7 +167,7 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 												classNames={{
 													base: `group h-[48px] gap-2 rounded-[8px] border-[1.4px]
 													border-medinfo-primary-main px-4 font-medium
-													data-[placeholder]:text-medinfo-dark-4 md:h-[64px] md:text-base`,
+													data-placeholder:text-medinfo-dark-4 md:h-[64px] md:text-base`,
 													icon: `text-medinfo-body-color group-data-[state=open]:rotate-180
 													md:size-6`,
 												}}
@@ -224,7 +224,7 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 												classNames={{
 													base: `group h-[48px] gap-2 rounded-[8px] border-[1.4px]
 													border-medinfo-primary-main px-4 font-medium
-													data-[placeholder]:text-medinfo-dark-4 md:h-[64px] md:text-base`,
+													data-placeholder:text-medinfo-dark-4 md:h-[64px] md:text-base`,
 													icon: `text-medinfo-body-color group-data-[state=open]:rotate-180
 													md:size-6`,
 												}}
@@ -283,7 +283,7 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 													classNames={{
 														base: `group h-[48px] gap-2 rounded-[8px] border-[1.4px]
 														border-medinfo-primary-main px-4 font-medium
-														data-[placeholder]:text-medinfo-dark-4 md:h-[64px] md:text-base`,
+														data-placeholder:text-medinfo-dark-4 md:h-[64px] md:text-base`,
 														icon: `text-medinfo-body-color group-data-[state=open]:rotate-180
 														md:size-6`,
 													}}

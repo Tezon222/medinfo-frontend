@@ -44,7 +44,7 @@ export function DiseaseCard({ type, disease }: DiseaseCardProps) {
 				className={cnJoin(
 					"flex flex-col justify-between",
 					type === "grid"
-						&& `absolute bottom-[calc(-95px/2)] right-0 h-[95px] w-fit rounded-[16px] border-2
+						&& `absolute right-0 bottom-[calc(-95px/2)] h-[95px] w-fit rounded-[16px] border-2
 						border-medinfo-primary-main bg-white p-2 lg:bottom-[calc((400px-182px)/2)] lg:h-[182px]
 						lg:max-w-[229px] lg:p-6`
 				)}

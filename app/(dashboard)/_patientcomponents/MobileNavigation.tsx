@@ -33,7 +33,7 @@ function MobileNavigation(props: MobileNavProps) {
 			<Logo type="footer" className="h-[46px] w-[60px]" />
 
 			<nav
-				className="mt-[32px] flex flex-col justify-start gap-5 text-nowrap font-medium lg:text-[22px]"
+				className="mt-[32px] flex flex-col justify-start gap-5 font-medium text-nowrap lg:text-[22px]"
 			>
 				<NavLink transitionType="navbar" href="/patient" className="flex items-center gap-[16px]">
 					<DashboardIcon className="fill-white" />

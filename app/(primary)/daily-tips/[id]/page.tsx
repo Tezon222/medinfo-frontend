@@ -28,7 +28,7 @@ async function TipExpandedPage(props: { params: Promise<{ id: string }> }) {
 			<section className="h-[190px] w-[297px] lg:h-[410px] lg:w-[644px]">
 				<Image
 					src={singleTip.data.imageUrl}
-					className="size-full rounded-br-[16px] rounded-tl-[16px]"
+					className="size-full rounded-tl-[16px] rounded-br-[16px]"
 					priority={true}
 					width={297}
 					height={190}

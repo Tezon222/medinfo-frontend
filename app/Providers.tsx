@@ -1,4 +1,5 @@
 "use client";
+
 // Since QueryClientProvider relies on useContext under the hood, we have to put 'use client' on top
 import { QueryClient, QueryClientProvider, isServer } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -27,9 +28,7 @@ const getQueryClient = () => {
 	// This is very important, so we don't re-make a new client if React
 	// suspends during the initial render. This may not be needed if we
 	// have a suspense boundary BELOW the creation of the query client
-	if (!browserQueryClient) {
-		browserQueryClient = makeQueryClient();
-	}
+	browserQueryClient ??= makeQueryClient();
 
 	return browserQueryClient;
 };
@@ -40,10 +39,7 @@ type ProvidersProps = {
 
 function Providers(props: ProvidersProps) {
 	const { children } = props;
-	// NOTE: Avoid useState when initializing the query client if you don't
-	//       have a suspense boundary between this and the code that may
-	//       suspend because React will throw away the client on the initial
-	//       render if it suspends and there is no boundary
+
 	const queryClient = getQueryClient();
 
 	return (

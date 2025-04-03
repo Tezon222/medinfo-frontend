@@ -20,7 +20,7 @@ function Calendar(props: CalendarProps) {
 			showOutsideDays={showOutsideDays}
 			className={cnMerge("p-[1.2rem]", className)}
 			classNames={{
-				months: "flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0",
+				months: "flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4",
 				month: "space-y-4",
 				caption: "relative flex items-center justify-center pt-1",
 				caption_label: "text-xs font-medium",
@@ -40,9 +40,9 @@ function Calendar(props: CalendarProps) {
 				head_cell: "w-9 rounded-md text-sm font-normal text-shadcn-muted-foreground",
 				row: "mt-2 flex w-full",
 				cell: `relative size-8 p-0 text-center text-xs focus-within:relative focus-within:z-20
-				has-[[aria-selected].day-range-end]:rounded-r-md
-				has-[[aria-selected].day-outside]:bg-shadcn-accent/50 has-[[aria-selected]]:bg-shadcn-accent
-				first:has-[[aria-selected]]:rounded-l-md last:has-[[aria-selected]]:rounded-r-md`,
+				has-aria-[selected]:bg-shadcn-accent first:has-aria-[selected]:rounded-l-md
+				last:has-aria-[selected]:rounded-r-md has-[[aria-selected].day-outside]:bg-shadcn-accent/50
+				has-[[aria-selected].day-range-end]:rounded-r-md`,
 				day: cnMerge(
 					shadcnButtonVariants({
 						variant: "ghost",
