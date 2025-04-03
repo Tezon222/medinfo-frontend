@@ -31,7 +31,7 @@ function NavLink(
 		<Link
 			href={isRelativeLink(href) ? `${pathname}/${href.replaceAll(" ", "")}` : href}
 			className={cnMerge(
-				transitionType !== "no-transition" && "navLink-transition relative",
+				transitionType !== "no-transition" && "nav-link-transition relative",
 				transitionType === "navbar" && "nav-mobile",
 				className
 			)}

@@ -167,7 +167,7 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 												classNames={{
 													base: `group h-[48px] gap-2 rounded-[8px] border-[1.4px]
 													border-medinfo-primary-main px-4 font-medium
-													data-[placeholder]:text-medinfo-dark-4 md:h-[64px] md:text-base`,
+													data-placeholder:text-medinfo-dark-4 md:h-[64px] md:text-base`,
 													icon: `text-medinfo-body-color group-data-[state=open]:rotate-180
 													md:size-6`,
 												}}
@@ -224,7 +224,7 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 												classNames={{
 													base: `group h-[48px] gap-2 rounded-[8px] border-[1.4px]
 													border-medinfo-primary-main px-4 font-medium
-													data-[placeholder]:text-medinfo-dark-4 md:h-[64px] md:text-base`,
+													data-placeholder:text-medinfo-dark-4 md:h-[64px] md:text-base`,
 													icon: `text-medinfo-body-color group-data-[state=open]:rotate-180
 													md:size-6`,
 												}}
@@ -283,7 +283,7 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 													classNames={{
 														base: `group h-[48px] gap-2 rounded-[8px] border-[1.4px]
 														border-medinfo-primary-main px-4 font-medium
-														data-[placeholder]:text-medinfo-dark-4 md:h-[64px] md:text-base`,
+														data-placeholder:text-medinfo-dark-4 md:h-[64px] md:text-base`,
 														icon: `text-medinfo-body-color group-data-[state=open]:rotate-180
 														md:size-6`,
 													}}

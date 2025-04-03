@@ -204,7 +204,7 @@ function AppointmentPage() {
 													classNames={{
 														base: `group h-[48px] gap-2 rounded-[8px] border-[1.4px]
 														border-medinfo-primary-main px-4 font-medium
-														data-[placeholder]:text-medinfo-dark-4 md:h-[64px] md:text-base`,
+														data-placeholder:text-medinfo-dark-4 md:h-[64px] md:text-base`,
 														icon: `text-medinfo-body-color group-data-[state=open]:rotate-180
 														md:size-6`,
 													}}
@@ -337,7 +337,7 @@ function AppointmentPage() {
 														border-medinfo-primary-main px-4 font-medium
 														disabled:border-medinfo-dark-4 disabled:bg-medinfo-disabled-fill
 														disabled:text-medinfo-dark-4 disabled:opacity-[initial]
-														data-[placeholder]:text-medinfo-dark-4 md:h-[64px] md:text-base`,
+														data-placeholder:text-medinfo-dark-4 md:h-[64px] md:text-base`,
 														icon: `text-medinfo-body-color group-data-[state=open]:rotate-180
 														md:size-6`,
 													}}
@@ -568,7 +568,7 @@ function StepperList(props: { className?: string }) {
 						{index !== 0 && (
 							<Steps.Separator
 								className="h-[2px] w-[82px] bg-medinfo-light-2
-									data-[current]:bg-medinfo-primary-main md:h-1 md:w-[200px]"
+									data-current:bg-medinfo-primary-main md:h-1 md:w-[200px]"
 							/>
 						)}
 
@@ -576,17 +576,17 @@ function StepperList(props: { className?: string }) {
 							<Steps.Indicator
 								className="flex size-6 items-center justify-center rounded-full border-[1.4px]
 									border-[hsl(150,20%,95%)] bg-[hsl(150,20%,95%)] text-[10px]
-									text-medinfo-secondary-darker data-[complete]:border-medinfo-primary-main
-									data-[current]:border-medinfo-primary-main
-									data-[complete]:text-medinfo-primary-main
-									data-[current]:text-medinfo-primary-main md:size-12 md:text-[20px]"
+									text-medinfo-secondary-darker data-complete:border-medinfo-primary-main
+									data-current:border-medinfo-primary-main
+									data-complete:text-medinfo-primary-main
+									data-current:text-medinfo-primary-main md:size-12 md:text-[20px]"
 							>
 								{index + 1}
 							</Steps.Indicator>
 
 							<span
-								className="absolute top-[calc(theme(spacing.6)_+_2px)] text-nowrap text-[10px]
-									italic text-medinfo-dark-3 md:top-[calc(theme(spacing.12)_+_2px)]
+								className="absolute top-[calc(--spacing(6)+2px)] text-nowrap text-[10px]
+									italic text-medinfo-dark-3 md:top-[calc(--spacing(12)+2px)]
 									md:text-[14px]"
 							>
 								{item.title}

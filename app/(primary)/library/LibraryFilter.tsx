@@ -20,7 +20,7 @@ function LibraryFilter({ diseases }: { diseases: DiseasesResponse["diseases"] })
 					<DropdownMenu.Trigger
 						className="group flex h-full w-[116px] items-center justify-between gap-2 rounded-[8px]
 							border-[1.4px] border-medinfo-primary-main px-4 font-medium
-							data-[placeholder]:text-medinfo-dark-4 lg:w-[220px]"
+							data-placeholder:text-medinfo-dark-4 lg:w-[220px]"
 					>
 						<p className="text-sm font-medium md:text-base">{filter}</p>
 
@@ -67,14 +67,14 @@ function LibraryFilter({ diseases }: { diseases: DiseasesResponse["diseases"] })
 				<form
 					className="flex h-full items-center gap-[18px] rounded-lg border-[1.4px]
 						border-medinfo-primary-main bg-white px-4 focus-within:ring-2
-						focus-within:ring-medinfo-primary-lighter focus-visible:outline-none lg:w-[500px]"
+						focus-within:ring-medinfo-primary-lighter focus-visible:outline-hidden lg:w-[500px]"
 				>
 					<SearchIcon type="green" className="size-5 shrink-0 lg:size-6" />
 
 					<input
 						type="search"
 						placeholder="search..."
-						className="w-full font-roboto text-sm font-medium outline-none placeholder:font-medium
+						className="w-full font-roboto text-sm font-medium outline-hidden placeholder:font-medium
 							placeholder:text-medinfo-dark-4 md:text-base"
 					/>
 				</form>

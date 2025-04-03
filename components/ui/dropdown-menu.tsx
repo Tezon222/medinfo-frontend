@@ -13,7 +13,7 @@ function DropdownMenuSubTrigger(
 	return (
 		<DropdownMenuPrimitive.SubTrigger
 			className={cnMerge(
-				`flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none
+				`flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-hidden
 				focus:bg-shadcn-accent data-[state=open]:bg-shadcn-accent`,
 				inset && "pl-8",
 				className
@@ -78,8 +78,8 @@ function DropdownMenuItem(
 		<DropdownMenuPrimitive.Item
 			className={cnMerge(
 				`relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm
-				outline-none transition-colors focus:bg-shadcn-accent focus:text-shadcn-accent-foreground
-				data-[disabled]:pointer-events-none data-[disabled]:opacity-50`,
+				outline-hidden transition-colors focus:bg-shadcn-accent focus:text-shadcn-accent-foreground
+				data-disabled:pointer-events-none data-disabled:opacity-50`,
 				inset && "pl-8",
 				className
 			)}
@@ -97,8 +97,8 @@ function DropdownMenuCheckboxItem(
 		<DropdownMenuPrimitive.CheckboxItem
 			className={cnMerge(
 				`relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm
-				outline-none transition-colors focus:bg-shadcn-accent focus:text-shadcn-accent-foreground
-				data-[disabled]:pointer-events-none data-[disabled]:opacity-50`,
+				outline-hidden transition-colors focus:bg-shadcn-accent focus:text-shadcn-accent-foreground
+				data-disabled:pointer-events-none data-disabled:opacity-50`,
 				className
 			)}
 			checked={checked}
@@ -125,8 +125,8 @@ function DropdownMenuRadioItem(
 		<DropdownMenuPrimitive.RadioItem
 			className={cnMerge(
 				`relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm
-				outline-none transition-colors focus:bg-shadcn-accent focus:text-shadcn-accent-foreground
-				data-[disabled]:pointer-events-none data-[disabled]:opacity-50`,
+				outline-hidden transition-colors focus:bg-shadcn-accent focus:text-shadcn-accent-foreground
+				data-disabled:pointer-events-none data-disabled:opacity-50`,
 				className
 			)}
 			{...restOfProps}

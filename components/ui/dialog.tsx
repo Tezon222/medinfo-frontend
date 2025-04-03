@@ -91,7 +91,7 @@ function DialogContent(props: InferProps<typeof DialogPrimitive.Content> & { wit
 				{withCloseBtn && (
 					<DialogPrimitive.Close
 						className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-shadcn-background
-							transition-opacity hover:opacity-100 focus:outline-none focus:ring-2
+							transition-opacity hover:opacity-100 focus:outline-hidden focus:ring-2
 							focus:ring-shadcn-ring focus:ring-offset-2 disabled:pointer-events-none
 							data-[state=open]:bg-shadcn-accent data-[state=open]:text-shadcn-muted-foreground"
 					>

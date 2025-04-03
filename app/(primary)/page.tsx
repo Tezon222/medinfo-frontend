@@ -95,16 +95,16 @@ function HomePage() {
 				</div>
 
 				<div
-					className="relative ml-[--offset] w-max shrink-0 [--offset:19px]
+					className="relative ml-(--offset) w-max shrink-0 [--offset:19px]
 						max-md:mt-[calc(40px_+_var(--offset))]"
 				>
 					<span
-						className="absolute bottom-[--offset] right-[--offset] z-[-1] block size-full
+						className="absolute bottom-(--offset) right-(--offset) z-[-1] block size-full
 							rounded-[16px] bg-medinfo-primary-main md:bottom-[28px] md:right-[28px]
 							md:rounded-[24px]"
 					/>
 					<Image
-						className="aspect-[223/273] min-h-[273px] md:aspect-[340/415] md:min-h-[415px]"
+						className="aspect-223/273 min-h-[273px] md:aspect-340/415 md:min-h-[415px]"
 						src={hero as string}
 						alt=""
 						priority={true}
@@ -131,7 +131,7 @@ function HomePage() {
 							<div className="relative">
 								<Image
 									className={cnJoin(
-										"aspect-[272/292] max-h-[292px] md:aspect-[340/362] md:max-h-[362px]",
+										"aspect-272/292 max-h-[292px] md:aspect-340/362 md:max-h-[362px]",
 										index === 1 && "md:mt-[80px]"
 									)}
 									src={coreService.imageSrc}
@@ -170,7 +170,7 @@ function HomePage() {
 
 				<FeatureList
 					className="mt-12 grid grid-cols-2 justify-center gap-x-5 gap-y-10 text-center md:mt-[88px]
-						md:grid-cols-[repeat(4,_minmax(161px,248px))] md:justify-between md:gap-x-[28px]"
+						md:grid-cols-[repeat(4,minmax(161px,248px))] md:justify-between md:gap-x-[28px]"
 					each={features}
 					render={(feature, index) => (
 						<li

@@ -41,8 +41,8 @@ function Calendar(props: CalendarProps) {
 				row: "mt-2 flex w-full",
 				cell: `relative size-8 p-0 text-center text-xs focus-within:relative focus-within:z-20
 				has-[[aria-selected].day-range-end]:rounded-r-md
-				has-[[aria-selected].day-outside]:bg-shadcn-accent/50 has-[[aria-selected]]:bg-shadcn-accent
-				first:has-[[aria-selected]]:rounded-l-md last:has-[[aria-selected]]:rounded-r-md`,
+				has-[[aria-selected].day-outside]:bg-shadcn-accent/50 has-aria-[selected]:bg-shadcn-accent
+				first:has-aria-[selected]:rounded-l-md last:has-aria-[selected]:rounded-r-md`,
 				day: cnMerge(
 					shadcnButtonVariants({
 						variant: "ghost",

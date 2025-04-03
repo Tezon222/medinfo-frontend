@@ -31,7 +31,7 @@ async function TipDetailsPage(props: { params: Promise<{ name: string }> }) {
 		<Main className="flex w-full flex-col">
 			<section className="lg:flex lg:gap-16">
 				<Image
-					className="size-[272px] rounded-br-[16px] rounded-tl-[16px] lg:size-[460px]"
+					className="size-[272px] rounded-tl-[16px] rounded-br-[16px] lg:size-[460px]"
 					src={singleDisease.data.Image}
 					alt=""
 					priority={true}
@@ -41,7 +41,7 @@ async function TipDetailsPage(props: { params: Promise<{ name: string }> }) {
 
 				<section
 					id="Ads"
-					className="scrollbar-none hidden max-h-[460px] overflow-auto lg:flex lg:flex-col lg:gap-2"
+					className="hidden scrollbar-hidden max-h-[460px] overflow-auto lg:flex lg:flex-col lg:gap-2"
 				>
 					<AlternateDiseaseCard type="list" linkToAd="https://www.google.com" />
 					<AlternateDiseaseCard type="list" linkToAd="https://www.google.com" />

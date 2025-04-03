@@ -80,7 +80,7 @@ export default function Page({ params }: { params: { slug: string } }) {
 											type="text"
 											placeholder="add a comment"
 											className="h-[48px] w-full rounded-[8px] border-2 border-solid
-												border-medinfo-primary-main px-4 focus:outline-none lg:h-[64px]"
+												border-medinfo-primary-main px-4 focus:outline-hidden lg:h-[64px]"
 										/>
 									</div>
 									<Button
