@@ -2,8 +2,8 @@
 
 import { Switch } from "@/components/common/Switch";
 import { cnMerge } from "@/lib/utils/cn";
-import { toArray } from "@zayne-labs/toolkit/core";
-import { isFile, isString } from "@zayne-labs/toolkit/type-helpers";
+import { toArray } from "@zayne-labs/toolkit-core";
+import { isFile, isString } from "@zayne-labs/toolkit-type-helpers";
 import { getElementList } from "@zayne-labs/ui-react/common/for";
 import { DropZone, type UseDropZoneProps } from "@zayne-labs/ui-react/drop-zone";
 import Image from "next/image";
@@ -39,7 +39,7 @@ export function DropZoneInput(props: DropZoneInputProps) {
 				border-medinfo-primary-darker px-4 py-3`,
 			}}
 			allowedFileTypes={["image/jpeg", "image/png", "application/pdf"]}
-			validationSettings={{ maxFileSize: 4 }}
+			maxFileSize={4}
 		>
 			<span className="block shrink-0 md:size-10">
 				<IconBox icon="solar:file-send-outline" className="size-full" />

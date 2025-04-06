@@ -2,8 +2,8 @@
 
 import { cnMerge } from "@/lib/utils/cn";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { createCustomContext, useToggle } from "@zayne-labs/toolkit/react";
-import type { DiscriminatedRenderProps, InferProps } from "@zayne-labs/toolkit/react/utils";
+import { createCustomContext, useToggle } from "@zayne-labs/toolkit-react";
+import type { DiscriminatedRenderProps, InferProps } from "@zayne-labs/toolkit-react/utils";
 import { useMemo } from "react";
 import { IconBox } from "../common";
 
