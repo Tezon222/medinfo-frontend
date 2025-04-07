@@ -1,4 +1,5 @@
 import { SearchIcon } from "@/components/icons";
+import MainMessageBox from "./_components/MainMessageBox";
 
 function page() {
 	const users = [
@@ -27,11 +28,12 @@ function page() {
 						<input type="text" placeholder="Search for a chat" className="bg-none pl-[16px]" />
 					</div>
 					<div className="mt-[20px]">
-						{users.map(({ name, id, time, recentMessage }) => {
+						{users.map(({ name, id, time, recentMessage }, i) => {
 							return (
 								<div
 									key={id}
-									className="flex cursor-pointer justify-between border-b border-solid p-[11px]"
+									className={`flex cursor-pointer justify-between
+									${i === 0 ? "border-y" : "border-b"} border-solid p-[11px]`}
 								>
 									<div className="flex gap-[8px]">
 										<div
@@ -54,10 +56,7 @@ function page() {
 					</div>
 				</div>
 
-				<div
-					className="hidden w-full rounded-[16px] border border-solid border-medinfo-primary-lighter
-						bg-white lg:flex"
-				/>
+				<MainMessageBox />
 			</div>
 		</div>
 	);
