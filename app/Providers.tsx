@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { cache } from "react";
 
+import { HeroUIProvider } from "@heroui/system";
+
 const makeQueryClient = () => {
 	return new QueryClient({
 		defaultOptions: {
@@ -47,7 +49,10 @@ function Providers(props: ProvidersProps) {
 
 	return (
 		<QueryClientProvider client={queryClient}>
-			{children}
+			<HeroUIProvider locale="en-GB" disableAnimation={true}>
+				{children}
+			</HeroUIProvider>
+
 			<ReactQueryDevtools buttonPosition="bottom-left" initialIsOpen={false} />
 		</QueryClientProvider>
 	);

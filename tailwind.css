@@ -4,6 +4,8 @@
 @plugin "@tailwindcss/typography";
 
 @source './node_modules/@zayne-labs/ui-react/dist/esm/**/*.js';
+/* @config "./tailwind.config.ts"; */
+/* @source './node_modules/@heroui/theme/dist/components/date-picker.js'; */
 
 /* ------------------*/
 /* App Theme         */

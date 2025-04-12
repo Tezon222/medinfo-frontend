@@ -15,7 +15,7 @@ import { useRouter } from "next-nprogress-bar";
 import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Main } from "../../_components";
+import { Main } from "../../doctor/_components";
 
 const stepperItems = [
 	{
@@ -295,12 +295,10 @@ function AppointmentPage() {
 							</Form.Field>
 
 							<div className="flex w-full flex-col gap-4">
-								<Form.Field
-									control={methods.control}
-									name="dateOfAppointment"
-									className="gap-1 font-roboto font-medium"
-								>
-									<Form.Label className="md:text-[20px]">Preferred date & time</Form.Label>
+								<Form.Field control={methods.control} name="dateOfAppointment" className="gap-1">
+									<Form.Label className="font-roboto font-medium md:text-[20px]">
+										Preferred date & time
+									</Form.Label>
 
 									<Form.FieldController
 										render={({ field }) => (
