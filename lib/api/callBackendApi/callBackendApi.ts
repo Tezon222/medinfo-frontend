@@ -16,13 +16,15 @@ declare module "@zayne-labs/callapi" {
 	}
 }
 
-// const BASE_BACKEND_URL = "https://medinfo-backend-xie7.onrender.com";
+const BASE_BACKEND_URL = "https://medinfo-backend-xie7.onrender.com";
 
-const HOST =
-	process.env.NODE_ENV === "development" ? "http://localhost:8000" : "https://medical-info.vercel.app";
+// const BACKEND_PROXY =
+// 	process.env.NODE_ENV === "development"
+// 		? "http://localhost:8000/backend-api"
+// 		: "https://medical-info.vercel.app/backend-api";
 
 export const sharedFetchClient = createFetchClient({
-	baseURL: `${HOST}/backend-api`,
+	baseURL: BASE_BACKEND_URL,
 	dedupeStrategy: "cancel",
 	credentials: "include",
 	plugins: [toastPlugin()],

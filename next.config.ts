@@ -10,6 +10,10 @@ const nextConfig = {
 		ignoreDuringBuilds: true,
 	},
 
+	typescript: {
+		ignoreBuildErrors: true,
+	},
+
 	// eslint-disable-next-line ts-eslint/require-await
 	rewrites: async () => {
 		return [

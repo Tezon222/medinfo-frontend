@@ -1,4 +1,5 @@
 import { type SuccessContext, definePlugin } from "@zayne-labs/callapi";
+import { isBrowser } from "@zayne-labs/toolkit-core";
 import { toast } from "sonner";
 
 const toastPlugin = definePlugin(() => ({
@@ -13,7 +14,7 @@ const toastPlugin = definePlugin(() => ({
 
 			const errorMessage = ctx.error.message;
 
-			errorMessage && toast.error(errorMessage);
+			isBrowser() && errorMessage && toast.error(errorMessage);
 		},
 
 		onSuccess: (ctx: SuccessContext<{ message: string }>) => {
