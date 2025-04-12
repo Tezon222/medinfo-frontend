@@ -25,13 +25,13 @@ importers:
         version: 0.9.3
       '@zayne-labs/toolkit-react':
         specifier: ^0.9.3
-        version: 0.9.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(zustand@5.0.3(@types/react@19.1.1)(react@19.1.0))
+        version: 0.9.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(zustand@5.0.3(@types/react@19.1.1)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)))
       '@zayne-labs/toolkit-type-helpers':
         specifier: ^0.9.3
         version: 0.9.3
       '@zayne-labs/ui-react':
         specifier: ^0.7.3
-        version: 0.7.3(react-dom@19.1.0(react@19.1.0))(react-hook-form@7.55.0(react@19.1.0))(react@19.1.0)(tailwind-merge@3.2.0)(zustand@5.0.3(@types/react@19.1.1)(react@19.1.0))
+        version: 0.7.3(react-dom@19.1.0(react@19.1.0))(react-hook-form@7.55.0(react@19.1.0))(react@19.1.0)(tailwind-merge@3.2.0)(zustand@5.0.3(@types/react@19.1.1)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)))
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -68,15 +68,12 @@ importers:
       tailwind-variants:
         specifier: ^1.0.0
         version: 1.0.0(tailwindcss@4.1.3)
-      tailwindcss-animate:
-        specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@4.1.3)
       zod:
         specifier: ^3.24.2
         version: 3.24.2
       zustand:
         specifier: ^5.0.3
-        version: 5.0.3(@types/react@19.1.1)(react@19.1.0)
+        version: 5.0.3(@types/react@19.1.1)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0))
     devDependencies:
       '@eslint-react/eslint-plugin':
         specifier: ^1.45.1
@@ -153,6 +150,9 @@ importers:
       tailwindcss:
         specifier: ^4.1.3
         version: 4.1.3
+      tw-animate-css:
+        specifier: ^1.2.5
+        version: 1.2.5
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
@@ -3161,11 +3161,6 @@ packages:
     peerDependencies:
       tailwindcss: '*'
 
-  tailwindcss-animate@1.0.7:
-    resolution: {integrity: sha512-bl6mpH3T7I3UFxuvDEXLxy/VuFxBk5bbzplh7tXI68mwMokNYd1t9qPBHlnyTwfa4JGC4zP516I1hYYtQ/vspA==}
-    peerDependencies:
-      tailwindcss: '>=3.0.0 || insiders'
-
   tailwindcss@4.1.3:
     resolution: {integrity: sha512-2Q+rw9vy1WFXu5cIxlvsabCwhU2qUwodGq03ODhLJ0jW4ek5BUtoCsnLB0qG+m8AHgEsSJcJGDSDe06FXlP74g==}
 
@@ -3204,6 +3199,9 @@ packages:
 
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
+
+  tw-animate-css@1.2.5:
+    resolution: {integrity: sha512-ABzjfgVo+fDbhRREGL4KQZUqqdPgvc5zVrLyeW9/6mVqvaDepXc7EvedA+pYmMnIOsUAQMwcWzNvom26J2qYvQ==}
 
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
@@ -3266,6 +3264,11 @@ packages:
     peerDependenciesMeta:
       '@types/react':
         optional: true
+
+  use-sync-external-store@1.5.0:
+    resolution: {integrity: sha512-Rb46I4cGGVBmjamjphe8L/UnvJD+uPPtTkNvX5mZgqdbavhI4EbgIWJiIHXJ8bc/i9EQGPRh4DwEURJ552Do0A==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
@@ -5324,26 +5327,26 @@ snapshots:
     dependencies:
       '@zayne-labs/toolkit-type-helpers': 0.9.3
 
-  '@zayne-labs/toolkit-react@0.9.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(zustand@5.0.3(@types/react@19.1.1)(react@19.1.0))':
+  '@zayne-labs/toolkit-react@0.9.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(zustand@5.0.3(@types/react@19.1.1)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)))':
     dependencies:
       '@zayne-labs/toolkit-core': 0.9.3
       '@zayne-labs/toolkit-type-helpers': 0.9.3
     optionalDependencies:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
-      zustand: 5.0.3(@types/react@19.1.1)(react@19.1.0)
+      zustand: 5.0.3(@types/react@19.1.1)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0))
 
   '@zayne-labs/toolkit-type-helpers@0.9.3': {}
 
   '@zayne-labs/tsconfig@0.8.0': {}
 
-  '@zayne-labs/ui-react@0.7.3(react-dom@19.1.0(react@19.1.0))(react-hook-form@7.55.0(react@19.1.0))(react@19.1.0)(tailwind-merge@3.2.0)(zustand@5.0.3(@types/react@19.1.1)(react@19.1.0))':
+  '@zayne-labs/ui-react@0.7.3(react-dom@19.1.0(react@19.1.0))(react-hook-form@7.55.0(react@19.1.0))(react@19.1.0)(tailwind-merge@3.2.0)(zustand@5.0.3(@types/react@19.1.1)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)))':
     dependencies:
       '@zayne-labs/toolkit-core': 0.9.3
-      '@zayne-labs/toolkit-react': 0.9.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(zustand@5.0.3(@types/react@19.1.1)(react@19.1.0))
+      '@zayne-labs/toolkit-react': 0.9.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(zustand@5.0.3(@types/react@19.1.1)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)))
       '@zayne-labs/toolkit-type-helpers': 0.9.3
       react-hook-form: 7.55.0(react@19.1.0)
-      zustand: 5.0.3(@types/react@19.1.1)(react@19.1.0)
+      zustand: 5.0.3(@types/react@19.1.1)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0))
     optionalDependencies:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
@@ -6768,10 +6771,6 @@ snapshots:
       tailwind-merge: 3.0.2
       tailwindcss: 4.1.3
 
-  tailwindcss-animate@1.0.7(tailwindcss@4.1.3):
-    dependencies:
-      tailwindcss: 4.1.3
-
   tailwindcss@4.1.3: {}
 
   tapable@2.2.1: {}
@@ -6803,6 +6802,8 @@ snapshots:
   ts-pattern@5.7.0: {}
 
   tslib@2.8.1: {}
+
+  tw-animate-css@1.2.5: {}
 
   type-check@0.4.0:
     dependencies:
@@ -6855,6 +6856,11 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.1.1
 
+  use-sync-external-store@1.5.0(react@19.1.0):
+    dependencies:
+      react: 19.1.0
+    optional: true
+
   util-deprecate@1.0.2: {}
 
   valibot@1.0.0(typescript@5.8.3):
@@ -6889,7 +6895,8 @@ snapshots:
 
   zod@3.24.2: {}
 
-  zustand@5.0.3(@types/react@19.1.1)(react@19.1.0):
+  zustand@5.0.3(@types/react@19.1.1)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)):
     optionalDependencies:
       '@types/react': 19.1.1
       react: 19.1.0
+      use-sync-external-store: 1.5.0(react@19.1.0)
