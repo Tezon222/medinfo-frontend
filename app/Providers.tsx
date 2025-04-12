@@ -1,8 +1,9 @@
 "use client";
 
 // Since QueryClientProvider relies on useContext under the hood, we have to put 'use client' on top
-import { QueryClient, QueryClientProvider, isServer } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { cache } from "react";
 
 const makeQueryClient = () => {
 	return new QueryClient({
@@ -16,22 +17,24 @@ const makeQueryClient = () => {
 	});
 };
 
-let browserQueryClient: QueryClient | undefined;
+// let browserQueryClient: QueryClient | undefined;
 
-const getQueryClient = () => {
-	if (isServer) {
-		// Server: always make a new query client
-		return makeQueryClient();
-	}
+// const getQueryClient = () => {
+// 	if (isServer) {
+// 		// Server: always make a new query client
+// 		return makeQueryClient();
+// 	}
 
-	// Browser: make a new query client if we don't already have one
-	// This is very important, so we don't re-make a new client if React
-	// suspends during the initial render. This may not be needed if we
-	// have a suspense boundary BELOW the creation of the query client
-	browserQueryClient ??= makeQueryClient();
+// 	// Browser: make a new query client if we don't already have one
+// 	// This is very important, so we don't re-make a new client if React
+// 	// suspends during the initial render. This may not be needed if we
+// 	// have a suspense boundary BELOW the creation of the query client
+// 	browserQueryClient ??= makeQueryClient();
 
-	return browserQueryClient;
-};
+// 	return browserQueryClient;
+// };
+
+const getQueryClient = cache(() => makeQueryClient());
 
 type ProvidersProps = {
 	children: React.ReactNode;

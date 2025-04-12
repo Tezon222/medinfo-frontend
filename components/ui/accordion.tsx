@@ -1,9 +1,9 @@
 "use client";
 
 import { cnMerge } from "@/lib/utils/cn";
-import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import type { InferProps } from "@zayne-labs/toolkit-react/utils";
 import { isString } from "@zayne-labs/toolkit-type-helpers";
+import { Accordion as AccordionPrimitive } from "radix-ui";
 import { IconBox } from "../common/IconBox";
 
 function AccordionItem(props: InferProps<typeof AccordionPrimitive.Item>) {

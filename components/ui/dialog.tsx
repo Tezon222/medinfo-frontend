@@ -1,15 +1,17 @@
 "use client";
 
 import { cnMerge } from "@/lib/utils/cn";
-import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { createCustomContext, useToggle } from "@zayne-labs/toolkit-react";
+import { createCustomContext, useCallbackRef, useToggle } from "@zayne-labs/toolkit-react";
 import type { DiscriminatedRenderProps, InferProps } from "@zayne-labs/toolkit-react/utils";
+import { Dialog as DialogPrimitive } from "radix-ui";
 import { useMemo } from "react";
 import { IconBox } from "../common";
 
 type ContextValue = {
 	open: boolean;
 	setOpen: (open: boolean) => void;
+	onClose: () => void;
+	onOpen: () => void;
 };
 
 const [DialogStateContextProvider, useDialogStateContext] = createCustomContext<ContextValue>();
@@ -21,14 +23,19 @@ function DialogRoot(props: InferProps<typeof DialogPrimitive.Root>) {
 
 	const selectedOpen = open ?? openState;
 	const selectedOnOpenChange = open ? onOpenChange : toggleOpen;
+	const setOpen = useCallbackRef((value: boolean) => selectedOnOpenChange?.(value));
+	const onClose = useCallbackRef(() => setOpen(false));
+	const onOpen = useCallbackRef(() => setOpen(true));
 
 	const contextValue = useMemo(
 		() =>
 			({
 				open: selectedOpen,
-				setOpen: (value) => selectedOnOpenChange?.(value),
+				setOpen,
+				onClose,
+				onOpen,
 			}) satisfies ContextValue,
-		[selectedOpen, selectedOnOpenChange]
+		[onClose, onOpen, selectedOpen, setOpen]
 	);
 
 	return (
@@ -42,13 +49,13 @@ type RenderFn = (props: ContextValue) => React.ReactNode;
 
 function DialogContext(props: DiscriminatedRenderProps<RenderFn>) {
 	const { children, render } = props;
-	const { open, setOpen } = useDialogStateContext();
+	const dialogCtx = useDialogStateContext();
 
 	if (typeof children === "function") {
-		return children({ open, setOpen });
+		return children(dialogCtx);
 	}
 
-	return render({ open, setOpen });
+	return render(dialogCtx);
 }
 
 function DialogOverlay(props: InferProps<typeof DialogPrimitive.Overlay>) {

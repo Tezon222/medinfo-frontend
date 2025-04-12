@@ -2,27 +2,34 @@ import { type MatchDoctorsResponse, callBackendApiForQuery } from "@/lib/api/cal
 import { queryOptions } from "@tanstack/react-query";
 import type { CallApiExtraOptions } from "@zayne-labs/callapi";
 
-export const matchDoctorsQuery = (options?: { formData?: Record<string, unknown> | null }) => {
-	const { formData } = options ?? {};
+export const matchDoctorsQuery = (
+	options?: Pick<CallApiExtraOptions, "onError"> & {
+		formData?: Record<string, unknown> | null;
+	}
+) => {
+	const { formData, onError } = options ?? {};
 
 	return queryOptions({
 		enabled: Boolean(formData),
+		// eslint-disable-next-line tanstack-query/exhaustive-deps
 		queryKey: ["appointments", "match-doctors", formData],
 		queryFn: () => {
 			return callBackendApiForQuery<MatchDoctorsResponse>("/appointments/match-doctors", {
 				method: "POST",
 				body: formData,
+				onError,
 			});
 		},
+		refetchOnWindowFocus: false,
 		retry: false,
 		staleTime: Infinity,
 	});
 };
 
 export const bookAppointmentQuery = (
-	options?: Pick<CallApiExtraOptions, "onSuccess"> & { doctorId?: string }
+	options?: Pick<CallApiExtraOptions, "onSuccess" | "onError"> & { doctorId?: string }
 ) => {
-	const { doctorId = "", onSuccess } = options ?? {};
+	const { doctorId = "", onSuccess, onError } = options ?? {};
 
 	return queryOptions({
 		enabled: Boolean(doctorId),
@@ -33,6 +40,7 @@ export const bookAppointmentQuery = (
 				method: "POST",
 				params: { doctorId },
 				onSuccess,
+				onError,
 			});
 		},
 		retry: false,

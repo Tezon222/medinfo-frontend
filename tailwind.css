@@ -43,10 +43,46 @@
 	--color-medinfo-body-color: hsl(0, 0%, 20%);
 }
 
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 /* ------------------*/
 /* Custom Properties */
 /*-------------------*/
 @layer base {
+}
+
+/* ------------------*/
+/* Main Theme */
+/*-------------------*/
+@theme {
+	--breakpoint-*: initial;
+	--breakpoint-sm: 480px;
+	--breakpoint-md: 768px;
+	--breakpoint-lg: 1000px;
+	--breakpoint-xl: 1280px;
+
+	--font-roboto: var(--font-var-roboto);
+	--font-work-sans: var(--font-var-work-sans);
+
+	--animate-accordion-down: accordion-down 0.2s ease-out;
+	--animate-accordion-up: accordion-up 0.2s ease-out;
+
+	@keyframes accordion-down {
+		from {
+			height: 0;
+		}
+		to {
+			height: var(--radix-accordion-content-height);
+		}
+	}
+	@keyframes accordion-up {
+		from {
+			height: var(--radix-accordion-content-height);
+		}
+		to {
+			height: 0;
+		}
+	}
 }
 
 /* ------------------*/
@@ -82,40 +118,6 @@
 	--color-sonner-error-bg: hsl(358, 76%, 10%);
 	--color-sonner-error-text: hsl(358, 100%, 81%);
 	--color-sonner-error-border: hsl(357, 89%, 16%);
-}
-
-/* ------------------*/
-/* Main Theme */
-/*-------------------*/
-@theme {
-	--breakpoint-*: initial;
-	--breakpoint-sm: 480px;
-	--breakpoint-md: 800px;
-	--breakpoint-lg: 1000px;
-	--breakpoint-xl: 1280px;
-
-	--font-roboto: var(--font-var-roboto);
-	--font-work-sans: var(--font-var-work-sans);
-
-	--animate-accordion-down: accordion-down 0.2s ease-out;
-	--animate-accordion-up: accordion-up 0.2s ease-out;
-
-	@keyframes accordion-down {
-		from {
-			height: 0;
-		}
-		to {
-			height: var(--radix-accordion-content-height);
-		}
-	}
-	@keyframes accordion-up {
-		from {
-			height: var(--radix-accordion-content-height);
-		}
-		to {
-			height: 0;
-		}
-	}
 }
 
 /* ------------------*/

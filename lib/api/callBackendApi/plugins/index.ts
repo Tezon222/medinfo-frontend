@@ -1,0 +1,1 @@
+export { toastPlugin } from "./toastPlugin";
