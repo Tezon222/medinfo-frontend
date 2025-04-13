@@ -1,4 +1,4 @@
-import { IconBox, NavLink } from "@/components/common";
+import { Await, IconBox, NavLink } from "@/components/common";
 import { Button } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import type { TipsResponse } from "@/lib/api/callBackendApi/types";
@@ -6,7 +6,6 @@ import { cnJoin } from "@/lib/utils/cn";
 import { feature1, feature2, feature3, hero } from "@/public/assets/images/landing-page";
 import { getElementList } from "@zayne-labs/ui-react/common/for";
 import Image from "next/image";
-import { Suspense } from "react";
 import { AccordionComponent, Main } from "./_components";
 import { ScrollableTipCards } from "./daily-tips/DailyTipCard";
 
@@ -75,7 +74,7 @@ function HomePage() {
 					<h1
 						className="text-[clamp(32px,5.2vw,68px)] leading-10 font-bold text-medinfo-primary-main
 							md:leading-[76px] md:text-balance [&:hover>span]:text-medinfo-secondary-darker
-							[&>span]:[transition:color_250ms_ease-in-out]"
+							[&>span]:[transition:color_400ms_ease-out]"
 					>
 						Free <span>access</span> to knowledge and an easy chit-chat with the best{" "}
 						<span>doctors</span>
@@ -226,9 +225,9 @@ function HomePage() {
 					Did you know?
 				</h2>
 
-				<Suspense>
-					<ScrollableTipCards tipsResponsePromise={tipsResponsePromise} />
-				</Suspense>
+				<Await promise={tipsResponsePromise} asChild={true}>
+					<ScrollableTipCards />
+				</Await>
 			</section>
 
 			<section>

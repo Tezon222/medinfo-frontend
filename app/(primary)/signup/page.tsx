@@ -31,8 +31,9 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 
 	const router = useRouter();
 
-	// eslint-disable-next-line react/prefer-destructuring-assignment
-	const searchParams = use(props.searchParams);
+	const { searchParams: searchParamsPromise } = props;
+
+	const searchParams = use(searchParamsPromise);
 
 	const user = searchParams.user as "doctor" | "patient" | undefined;
 
@@ -447,12 +448,12 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 									</div>
 								</Show.Root>
 
-								<Form.StateSubscribe
-									render={(formState) => (
+								<Form.SubscribeToFormState
+									render={({ isSubmitting }) => (
 										<Button
 											type="submit"
-											isLoading={formState.isSubmitting}
-											disabled={formState.isSubmitting}
+											isLoading={isSubmitting}
+											disabled={isSubmitting}
 											isDisabled={false}
 										>
 											Sign Up

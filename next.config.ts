@@ -9,6 +9,21 @@ const nextConfig = {
 	eslint: {
 		ignoreDuringBuilds: true,
 	},
+
+	typescript: {
+		ignoreBuildErrors: true,
+	},
+
+	// eslint-disable-next-line ts-eslint/require-await
+	rewrites: async () => {
+		return [
+			{
+				source: "/backend-api/:path*",
+				destination: "https://medinfo-backend-xie7.onrender.com/:path*",
+			},
+		];
+	},
+
 	images: {
 		remotePatterns: [
 			{

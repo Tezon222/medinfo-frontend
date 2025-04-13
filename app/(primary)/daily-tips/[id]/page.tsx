@@ -1,8 +1,8 @@
 import { Main } from "@/app/(primary)/_components";
+import { Await } from "@/components/common";
 import { type SingleTip, type TipsResponse, callBackendApi } from "@/lib/api/callBackendApi";
 import { getElementList } from "@zayne-labs/ui-react/common/for";
 import Image from "next/image";
-import { Suspense } from "react";
 import { ScrollableTipCards } from "../DailyTipCard";
 import HealthFinderLogo from "../HealthFinderLogo";
 
@@ -69,9 +69,9 @@ async function TipExpandedPage(props: { params: Promise<{ id: string }> }) {
 					Checkout Other Tips
 				</h2>
 
-				<Suspense>
-					<ScrollableTipCards tipsResponsePromise={tipsResponsePromise} />
-				</Suspense>
+				<Await promise={tipsResponsePromise} asChild={true}>
+					<ScrollableTipCards />
+				</Await>
 			</section>
 		</Main>
 	);

@@ -109,7 +109,7 @@ export function AlternateDiseaseCard(props: AlternateDiseaseCardProps) {
 			className={cnJoin(
 				type === "grid" && "flex max-w-[161px] shrink-0 flex-col lg:max-w-[340px]",
 				type === "list"
-					&& `flex gap-4 rounded-[16px] bg-medinfo-secondary-subtle p-3
+					&& `flex w-fit gap-4 rounded-[16px] bg-medinfo-secondary-subtle p-3
 					shadow-[0_4px_4px_hsl(0,0%,0%,0.12)] lg:p-6`,
 				className
 			)}
@@ -132,7 +132,7 @@ export function AlternateDiseaseCard(props: AlternateDiseaseCardProps) {
 			<Card.Content
 				className={cnJoin(
 					"flex h-full flex-col justify-between",
-					type === "list" && "max-w-[210px] gap-1 lg:max-w-[552px]",
+					type === "list" && "max-w-[300px] gap-1 md:max-w-[552px]",
 					type === "grid" && "mt-5 gap-2 rounded-[16px] lg:gap-4"
 				)}
 			>
