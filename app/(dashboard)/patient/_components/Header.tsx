@@ -3,6 +3,7 @@
 import { Logo } from "@/components/common";
 import { HamburgerIcon, NotificationIcon, SearchIcon, XIcon } from "@/components/icons";
 import { Button } from "@/components/ui";
+import { capitalize } from "@/lib/utils";
 import { useToggle } from "@zayne-labs/toolkit-react";
 import { usePathname } from "next/navigation";
 import MobileNavigation from "./MobileNavigation";
@@ -12,7 +13,9 @@ const Header = () => {
 	const pathName = usePathname();
 	const [isNavShow, toggleNavShow] = useToggle(false);
 
-	const activeTitle = menuItems.find((menuItem) => menuItem.href === pathName)?.title;
+	const activePath = capitalize(pathName.split("/").at(-1));
+
+	const activeTitle = menuItems.find((menuItem) => menuItem.href === pathName)?.title ?? activePath;
 
 	return (
 		<>
@@ -21,7 +24,7 @@ const Header = () => {
 				className="sticky top-0 z-10 hidden items-center justify-between bg-white px-[40px] py-[16px]
 					shadow-md lg:flex"
 			>
-				<div className="text-[32px] font-semibold">{activeTitle ?? "Community"}</div>
+				<div className="text-[32px] font-semibold">{activeTitle}</div>
 				<div className="relative items-center space-x-4">
 					<SearchIcon type="green" className="absolute top-2 left-8" />
 					<input

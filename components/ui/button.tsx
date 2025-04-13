@@ -33,7 +33,9 @@ const buttonVariants = tv({
 			medium: `h-[48px] w-fit min-w-[105px] px-6 text-base md:h-[64px] md:min-w-[135px] md:text-[20px]
 			md:font-medium`,
 
-			large: "h-[48px] w-full text-base",
+			"full-width": "h-[48px] w-full text-base md:h-[64px] md:text-[20px] md:font-medium",
+
+			large: "h-[48px] w-full text-base md:text-[20px] md:font-medium",
 		},
 
 		isLoading: {

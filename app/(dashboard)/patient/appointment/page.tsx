@@ -15,7 +15,7 @@ import { useRouter } from "next-nprogress-bar";
 import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Main } from "../../doctor/_components";
+import { Main } from "../../_components";
 
 const stepperItems = [
 	{
