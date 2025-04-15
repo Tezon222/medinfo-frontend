@@ -22,7 +22,7 @@ function ProfilePage() {
 	});
 
 	return (
-		<div className="flex flex-col gap-8 px-6 py-14">
+		<main className="flex flex-col gap-8 px-6 py-14">
 			<section
 				className="flex flex-col gap-5 rounded-[16px] p-4 shadow-[0_4px_6px_hsl(150,20%,25%,0.25)]
 					lg:bg-white lg:p-8"
@@ -281,7 +281,7 @@ function ProfilePage() {
 					<Button theme="primary">Save</Button>
 				</div>
 			</section>
-		</div>
+		</main>
 	);
 }
 export default ProfilePage;

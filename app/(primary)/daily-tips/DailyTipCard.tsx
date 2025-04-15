@@ -8,7 +8,6 @@ import { cnMerge } from "@/lib/utils/cn";
 import { getElementList } from "@zayne-labs/ui-react/common/for";
 import { useDragScroll } from "@zayne-labs/ui-react/drag-scroll";
 import Image from "next/image";
-import { use } from "react";
 
 export type DailyTipCardProps = {
 	id: string;
@@ -51,13 +50,13 @@ export function DailyTipCard({ className, id, imageUrl, title }: DailyTipCardPro
 }
 
 type ScrollableCardProps = {
-	tipsResponsePromise: ReturnType<typeof callBackendApi<TipsResponse>>;
+	result?: Awaited<ReturnType<typeof callBackendApi<TipsResponse>>>;
 };
 
 const [CardList] = getElementList();
 
 export function ScrollableTipCards(props: ScrollableCardProps) {
-	const { tipsResponsePromise } = props;
+	const { result: tipsResult } = props;
 
 	const { getItemProps, getRootProps } = useDragScroll<HTMLUListElement>({
 		classNames: {
@@ -65,19 +64,16 @@ export function ScrollableTipCards(props: ScrollableCardProps) {
 		},
 	});
 
-	const tipsResult = use(tipsResponsePromise);
+	if (!tipsResult || tipsResult.error) {
+		tipsResult && console.error(tipsResult.error.errorData);
 
-	if (tipsResult.error) {
-		console.error(tipsResult.error.errorData);
 		return null;
 	}
-
-	const tips = tipsResult.data.data;
 
 	return (
 		<CardList
 			{...getRootProps()}
-			each={tips}
+			each={tipsResult.data.data}
 			render={(tip) => (
 				<DailyTipCard
 					key={tip.id}

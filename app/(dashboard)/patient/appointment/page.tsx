@@ -3,13 +3,13 @@
 import { IconBox, Switch } from "@/components/common";
 import { CloseIcon, GreenSpinnerIcon } from "@/components/icons";
 import { Button, DatePicker, Dialog, Form, Select } from "@/components/ui";
-import { useDialogStateContext } from "@/components/ui/dialog";
 import { capitalize } from "@/lib/utils";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { appointmentPlaceholder, doctorAvatar } from "@/public/assets/images/dashboard";
 import { bookAppointmentQuery, matchDoctorsQuery } from "@/store/react-query/queryFactory";
 import { Steps, useStepsContext } from "@ark-ui/react/steps";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useDisclosure } from "@zayne-labs/toolkit-react";
 import { getElementList } from "@zayne-labs/ui-react/common/for";
 import { useRouter } from "next-nprogress-bar";
 import Image from "next/image";
@@ -70,7 +70,8 @@ function AppointmentPage() {
 
 	const onSubmit = methods.handleSubmit((data) => {
 		setFormData(data);
-		void queryClient.refetchQueries({ queryKey: matchDoctorsQuery({ formData: data }).queryKey });
+		const queryKey = matchDoctorsQuery({ formData: data }).queryKey;
+		void queryClient.refetchQueries({ queryKey });
 	});
 
 	return (
@@ -294,12 +295,10 @@ function AppointmentPage() {
 							</Form.Field>
 
 							<div className="flex w-full flex-col gap-4">
-								<Form.Field
-									control={methods.control}
-									name="dateOfAppointment"
-									className="gap-1 font-roboto font-medium"
-								>
-									<Form.Label className="md:text-[20px]">Preferred date & time</Form.Label>
+								<Form.Field control={methods.control} name="dateOfAppointment" className="gap-1">
+									<Form.Label className="font-roboto font-medium md:text-[20px]">
+										Preferred date & time
+									</Form.Label>
 
 									<Form.FieldController
 										render={({ field }) => (
@@ -534,34 +533,194 @@ function AppointmentPage() {
 						</article>
 					</section>
 
-					<Dialog.Root>
-						<div className="flex justify-center gap-6 md:justify-end">
-							<Button theme="secondary">Cancel</Button>
-
-							<Dialog.Trigger asChild={true}>
-								<Steps.NextTrigger asChild={true}>
-									<Button type="submit" theme="primary">
-										Book Now
-									</Button>
-								</Steps.NextTrigger>
-							</Dialog.Trigger>
-						</div>
-
-						<DialogMainContent formData={formData} />
-					</Dialog.Root>
+					<AppointmentDialog formData={formData} />
 				</Steps.Root>
 			</Form.Root>
 		</Main>
 	);
 }
 
+type DialogMainContentProps = {
+	formData: AppointmentFormData | null;
+};
+
+function AppointmentDialog(props: DialogMainContentProps) {
+	const { formData } = props;
+
+	const dialogCtx = useDisclosure();
+
+	const matchDoctorsQueryResult = useQuery(
+		matchDoctorsQuery({ formData, onError: () => dialogCtx.onClose() })
+	);
+
+	const [trialCount, setTrialCount] = useState(0);
+
+	const stepsCtx = useStepsContext();
+
+	const matchedDoctor = matchDoctorsQueryResult.data?.selectedDoctors[trialCount];
+
+	const [doctorId, setDoctorId] = useState("");
+
+	const onReset = () => {
+		dialogCtx.onClose();
+		stepsCtx.goToPrevStep();
+
+		setTimeout(() => setTrialCount(0), 500);
+	};
+
+	const bookAppointmentQueryResult = useQuery(
+		bookAppointmentQuery({
+			doctorId,
+
+			onError: () => {
+				dialogCtx.onClose();
+			},
+
+			onSuccess: () => {
+				onReset();
+				router.push("/patient");
+			},
+		})
+	);
+
+	const router = useRouter();
+
+	const onAccept = () => {
+		const matchedDoctorId = matchedDoctor?._id ?? "";
+
+		setDoctorId(matchedDoctorId);
+	};
+
+	return (
+		<Dialog.Root open={dialogCtx.isOpen} onOpenChange={dialogCtx.onToggle}>
+			<div className="flex justify-center gap-6 md:justify-end">
+				<Button theme="secondary">Cancel</Button>
+
+				<Button
+					type="submit"
+					theme="primary"
+					onClick={() => {
+						dialogCtx.onOpen();
+						stepsCtx.goToNextStep();
+					}}
+				>
+					Book Now
+				</Button>
+			</div>
+
+			<Dialog.Content
+				onPointerDownOutside={(e) => e.preventDefault()}
+				onEscapeKeyDown={() => stepsCtx.goToPrevStep()}
+				className={cnJoin(
+					"flex flex-col rounded-[16px]",
+					matchDoctorsQueryResult.data
+						? "max-w-[341px] gap-8 px-6 py-8 md:max-w-[650px] md:gap-9 md:px-10"
+						: "w-[292px] gap-2 pt-6 pb-[56px] md:max-w-[372px]"
+				)}
+				withCloseBtn={false}
+			>
+				<Switch.Root>
+					<Switch.Match when={matchDoctorsQueryResult.data}>
+						<StepperList className="mb-4 md:mb-6" />
+
+						<Dialog.Header className="flex flex-col items-center gap-2">
+							<figure className="flex flex-col items-center gap-2">
+								<Image
+									src={matchedDoctor?.picture ?? (doctorAvatar as string)}
+									className="size-[72px]"
+									width={72}
+									height={72}
+									alt=""
+								/>
+								<figcaption className="flex items-center gap-1">
+									<p className="text-medinfo-dark-3">
+										Dr. {capitalize(matchedDoctor?.firstName)}{" "}
+										{capitalize(matchedDoctor?.lastName)}
+									</p>
+									<span className="size-4">
+										<IconBox
+											icon="solar:verified-check-linear"
+											className="size-full text-medinfo-state-success-main"
+										/>
+									</span>
+								</figcaption>
+							</figure>
+
+							<Dialog.Title className="text-[18px] font-bold text-medinfo-dark-3">
+								{capitalize(matchedDoctor?.specialty)}
+							</Dialog.Title>
+						</Dialog.Header>
+
+						<Dialog.Footer className="flex flex-col items-center gap-3 md:gap-5">
+							<div className="flex flex-col items-center gap-4 md:flex-row-reverse md:gap-6">
+								<Button
+									isLoading={bookAppointmentQueryResult.isFetching}
+									disabled={bookAppointmentQueryResult.isFetching}
+									isDisabled={false}
+									theme="primary"
+									onClick={onAccept}
+								>
+									Accept
+								</Button>
+
+								<Button
+									unstyled={true}
+									className="text-medinfo-primary-main md:text-[20px]"
+									onClick={() => {
+										const newCount = trialCount + 1;
+
+										if (newCount === matchDoctorsQueryResult.data?.selectedDoctors.length) {
+											onReset();
+
+											return;
+										}
+
+										setTrialCount(newCount);
+									}}
+								>
+									Decline & ask for rematch
+								</Button>
+							</div>
+
+							<p className="text-[14px] text-medinfo-dark-4">
+								You have only{" "}
+								<span className="text-medinfo-dark-1">
+									{Number(matchDoctorsQueryResult.data?.selectedDoctors.length) - 1 - trialCount}
+								</span>{" "}
+								rematches left
+							</p>
+						</Dialog.Footer>
+					</Switch.Match>
+
+					<Switch.Match when={!matchDoctorsQueryResult.data}>
+						<Dialog.Close className="self-end" asChild={true}>
+							<Steps.PrevTrigger>
+								<CloseIcon />
+							</Steps.PrevTrigger>
+						</Dialog.Close>
+
+						<Dialog.Header className="items-center gap-8">
+							<GreenSpinnerIcon className="animate-spin md:size-[100px]" />
+							<Dialog.Title
+								className="text-center text-base font-normal text-medinfo-dark-4 md:px-4"
+							>
+								Matching you to a doctor, please hold on.
+							</Dialog.Title>
+						</Dialog.Header>
+					</Switch.Match>
+				</Switch.Root>
+			</Dialog.Content>
+		</Dialog.Root>
+	);
+}
+
 function StepperList(props: { className?: string }) {
 	const { className } = props;
-	const [ForList] = getElementList();
+	const [For] = getElementList();
 
 	return (
 		<Steps.List className={cnMerge("flex justify-center", className)} asChild={true}>
-			<ForList
+			<For
 				each={stepperItems}
 				render={(item, index) => (
 					<Steps.Item key={index} index={index} className="flex items-center">
@@ -594,153 +753,6 @@ function StepperList(props: { className?: string }) {
 				)}
 			/>
 		</Steps.List>
-	);
-}
-
-type DialogMainContentProps = {
-	formData: AppointmentFormData | null;
-};
-
-function DialogMainContent(props: DialogMainContentProps) {
-	const { formData } = props;
-
-	const matchDoctorsQueryResult = useQuery(matchDoctorsQuery({ formData }));
-
-	const [trialCount, setTrialCount] = useState(0);
-
-	const dialogCtx = useDialogStateContext();
-
-	const stepsCtx = useStepsContext();
-
-	const matchedDoctor = matchDoctorsQueryResult.data?.selectedDoctors[trialCount];
-
-	const [doctorId, setDoctorId] = useState("");
-
-	const onReset = () => {
-		dialogCtx.setOpen(false);
-		stepsCtx.goToPrevStep();
-
-		setTimeout(() => setTrialCount(0), 500);
-	};
-
-	const bookAppointmentQueryResult = useQuery(
-		bookAppointmentQuery({
-			doctorId,
-			onSuccess: () => {
-				onReset();
-				router.push("/patient");
-			},
-		})
-	);
-
-	const router = useRouter();
-
-	const onAccept = () => {
-		const matchedDoctorId = matchedDoctor?._id ?? "";
-
-		setDoctorId(matchedDoctorId);
-	};
-
-	return (
-		<Dialog.Content
-			onPointerDownOutside={(e) => e.preventDefault()}
-			onEscapeKeyDown={() => stepsCtx.goToPrevStep()}
-			className={cnJoin(
-				"flex flex-col rounded-[16px]",
-				matchDoctorsQueryResult.data
-					? "max-w-[341px] gap-8 px-6 py-8 md:max-w-[650px] md:gap-9 md:px-10"
-					: "w-[292px] gap-2 pt-6 pb-[56px] md:max-w-[372px]"
-			)}
-			withCloseBtn={false}
-		>
-			<Switch.Root>
-				<Switch.Match when={matchDoctorsQueryResult.data}>
-					<StepperList className="mb-4 md:mb-6" />
-
-					<Dialog.Header className="flex flex-col items-center gap-2">
-						<figure className="flex flex-col items-center gap-2">
-							<Image
-								src={matchedDoctor?.picture ?? (doctorAvatar as string)}
-								className="size-[72px]"
-								width={72}
-								height={72}
-								alt=""
-							/>
-							<figcaption className="flex items-center gap-1">
-								<p className="text-medinfo-dark-3">
-									Dr. {capitalize(matchedDoctor?.firstName)} {capitalize(matchedDoctor?.lastName)}
-								</p>
-								<span className="size-4">
-									<IconBox
-										icon="solar:verified-check-linear"
-										className="size-full text-medinfo-state-success-main"
-									/>
-								</span>
-							</figcaption>
-						</figure>
-
-						<Dialog.Title className="text-[18px] font-bold text-medinfo-dark-3">
-							{capitalize(matchedDoctor?.specialty)}
-						</Dialog.Title>
-					</Dialog.Header>
-
-					<Dialog.Footer className="flex flex-col items-center gap-3 md:gap-5">
-						<div className="flex flex-col items-center gap-4 md:flex-row-reverse md:gap-6">
-							<Button
-								isLoading={bookAppointmentQueryResult.isPending}
-								disabled={bookAppointmentQueryResult.isPending}
-								isDisabled={false}
-								theme="primary"
-								onClick={onAccept}
-							>
-								Accept
-							</Button>
-
-							<Button
-								unstyled={true}
-								className="text-medinfo-primary-main md:text-[20px]"
-								onClick={() => {
-									const newCount = trialCount + 1;
-
-									if (newCount === matchDoctorsQueryResult.data?.selectedDoctors.length) {
-										onReset();
-
-										return;
-									}
-
-									setTrialCount(newCount);
-								}}
-							>
-								Decline & ask for rematch
-							</Button>
-						</div>
-
-						<p className="text-[14px] text-medinfo-dark-4">
-							You have only{" "}
-							<span className="text-medinfo-dark-1">
-								{Number(matchDoctorsQueryResult.data?.selectedDoctors.length) - 1 - trialCount}
-							</span>{" "}
-							rematches left
-						</p>
-					</Dialog.Footer>
-				</Switch.Match>
-
-				<Switch.Match when={!matchDoctorsQueryResult.data}>
-					<Dialog.Close className="self-end" asChild={true}>
-						<Steps.PrevTrigger>
-							<CloseIcon />
-						</Steps.PrevTrigger>
-					</Dialog.Close>
-
-					<Dialog.Header className="items-center gap-8">
-						<GreenSpinnerIcon className="animate-spin md:size-[100px]" />
-						<Dialog.Title className="text-center text-base font-normal text-medinfo-dark-4 md:px-4">
-							Matching you to a doctor, please hold on.
-						</Dialog.Title>
-					</Dialog.Header>
-				</Switch.Match>
-			</Switch.Root>
-		</Dialog.Content>
 	);
 }
 

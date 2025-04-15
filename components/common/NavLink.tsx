@@ -2,8 +2,8 @@
 
 import type { UrlObject } from "node:url";
 import { cnMerge } from "@/lib/utils/cn";
-import type { InferProps } from "@zayne-labs/toolkit/react/utils";
-import { isString } from "@zayne-labs/toolkit/type-helpers";
+import type { InferProps } from "@zayne-labs/toolkit-react/utils";
+import { isString } from "@zayne-labs/toolkit-type-helpers";
 import { useRouter } from "next-nprogress-bar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

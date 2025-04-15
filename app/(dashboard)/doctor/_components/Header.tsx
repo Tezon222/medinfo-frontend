@@ -5,7 +5,7 @@ import MobileNavigation from "./MobileNavigation";
 import { menuItems } from "./SidebarLinks";
 import { Logo } from "@/components/common";
 import { Button } from "@/components/ui";
-import { useToggle } from "@zayne-labs/toolkit/react";
+import { useToggle } from "@zayne-labs/toolkit-react";
 import { HamburgerIcon, NotificationIcon, SearchIcon, XIcon } from "@/components/icons";
 
 const Header = () => {

@@ -5,6 +5,7 @@ import { cnMerge } from "@/lib/utils/cn";
 import { format } from "date-fns";
 import { Button } from "../button";
 import Calendar from "../calender";
+import { shadcnButtonVariants } from "../constants";
 import * as Popover from "../popover";
 import { getDateFromString } from "./getDateFromString";
 
@@ -44,10 +45,19 @@ function DatePicker(props: DatePickerProps) {
 					<IconBox icon="solar:calendar-outline" className="size-5" />
 				</Button>
 			</Popover.Trigger>
-			<Popover.Content className="w-auto p-0">
+			<Popover.Content className="w-auto border-none p-0">
 				<Calendar
 					className="rounded-[10px] border-[1.4px] border-medinfo-primary-main p-3"
 					classNames={{
+						day: shadcnButtonVariants({
+							variant: "ghost",
+							className: "hover:bg-medinfo-primary-subtle hover:text-medinfo-body-color",
+						}),
+						nav_button: shadcnButtonVariants({
+							variant: "outline",
+							className: `border-[1.4px] border-medinfo-primary-main hover:border-none
+							hover:bg-medinfo-primary-lighter hover:text-shadcn-primary-foreground`,
+						}),
 						cell: "hover:scale-[1.03]",
 						button: "text-xs font-medium",
 						day_selected: `bg-medinfo-primary-main text-shadcn-primary-foreground

@@ -1,26 +1,53 @@
 import { SearchIcon } from "@/components/icons";
 import MenuIcon from "@/components/icons/MenuIcon";
+import { format } from "date-fns";
 import React from "react";
 
+type messageType = { id: string; senderId: number; receiverId: number; message: string; time: string };
+const formatTime = (time: string): string => {
+	const newDate = new Date(time).getTime();
+	return format(newDate, "HH:mm");
+};
 const MainMessageBox = () => {
 	const messages = [
-		{ id: "a", senderId: 1, receiverId: 2, message: "Hello, how's it going", time: "12:00" },
+		{
+			id: "a",
+			senderId: 1,
+			receiverId: 2,
+			message: "Hello, how's it going",
+			time: "2025-03-25T09:35:02.799+00:00",
+		},
 		{
 			id: "b",
 			senderId: 2,
 			receiverId: 1,
 			message: "Not good, been having slight discomfort in my belly",
-			time: "12:01",
+			time: "2025-03-25T09:35:02.799+00:00",
 		},
 		{
 			id: "c",
 			senderId: 1,
 			receiverId: 2,
 			message: "Can you describe it in more details and when did it start?",
-			time: "12:02",
+			time: "2025-03-25T09:35:02.799+00:00",
 		},
-		{ id: "d", senderId: 2, receiverId: 1, message: "It all started....", time: "12:03" },
+		{
+			id: "d",
+			senderId: 2,
+			receiverId: 1,
+			message: "It all started....",
+			time: "2025-03-25T09:35:02.799+00:00",
+		},
 	];
+
+	const groupedMessages: { [key: string]: messageType[] } = {};
+	messages.forEach((message) => {
+		const createdAtDate = format(new Date(message.time), "MM-dd-yyyy");
+
+		groupedMessages[createdAtDate] ??= [];
+		groupedMessages[createdAtDate].push(message);
+	});
+
 	return (
 		<div
 			className="hidden w-full flex-col rounded-[16px] border border-solid
@@ -42,34 +69,42 @@ const MainMessageBox = () => {
 					<MenuIcon />
 				</div>
 			</div>
-			{messages.map(({ id, message, time, senderId }) => {
+			{Object.entries(groupedMessages).map(([dateKey, conversation]) => {
 				return (
-					<div key={id} className="px-12 py-8">
-						<p className={`pb-2 text-center ${id === "a" ? "block" : "hidden"}`}>January 22nd</p>
-						<div className={`flex w-full flex-col ${senderId === 1 ? "items-start" : "items-end"}`}>
-							<div className="relative w-[45%]">
-								<p
-									className={`w-full rounded-sm
-									${senderId === 1 ? "bg-[#FAFCFB]" : "bg-[#CBF8E1]"} p-3`}
-								>
-									{message}
-								</p>
+					<div key={dateKey} className="px-12 py-8">
+						<p className={"pb-2 text-center"}>{dateKey}</p>
+						{conversation.map(({ id, message, time, senderId }) => {
+							return (
 								<div
-									className={`absolute bottom-0 h-0 w-0 border-r-10 border-b-22 border-l-10
-									border-r-transparent ${
-									senderId === 1
-											? "left-[-10px] border-b-[#FAFCFB]"
-											: "right-[-10px] border-b-[#CBF8E1]"
-									} border-l-transparent`}
-								/>
-								<p
-									className={`absolute ${senderId === 1 ? "left-[-10px]" : "right-[-10px]"}
-									text-[14px]`}
+									key={id}
+									className={`flex w-full flex-col
+									${senderId === 1 ? "items-start" : "items-end"}`}
 								>
-									{time}
-								</p>
-							</div>
-						</div>
+									<div className="relative w-[45%]">
+										<p
+											className={`w-full rounded-sm
+											${senderId === 1 ? "bg-[#FAFCFB]" : "bg-[#CBF8E1]"} p-3`}
+										>
+											{message}
+										</p>
+										<div
+											className={`absolute bottom-0 h-0 w-0 border-r-10 border-b-22 border-l-10
+											border-r-transparent ${
+											senderId === 1
+													? "left-[-10px] border-b-[#FAFCFB]"
+													: "right-[-10px] border-b-[#CBF8E1]"
+											} border-l-transparent`}
+										/>
+										<p
+											className={`absolute ${senderId === 1 ? "left-[-10px]" : "right-[-10px]"}
+											text-[14px]`}
+										>
+											{formatTime(time)}
+										</p>
+									</div>
+								</div>
+							);
+						})}
 					</div>
 				);
 			})}

@@ -1,8 +1,8 @@
 "use client";
 
 import { cnMerge } from "@/lib/utils/cn";
-import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
-import type { InferProps } from "@zayne-labs/toolkit/react/utils";
+import type { InferProps } from "@zayne-labs/toolkit-react/utils";
+import { DropdownMenu as DropdownMenuPrimitive } from "radix-ui";
 import { IconBox } from "../common";
 
 function DropdownMenuSubTrigger(

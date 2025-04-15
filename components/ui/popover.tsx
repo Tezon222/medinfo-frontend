@@ -1,8 +1,8 @@
 "use client";
 
 import { cnMerge } from "@/lib/utils/cn";
-import * as PopoverPrimitive from "@radix-ui/react-popover";
-import type { InferProps } from "@zayne-labs/toolkit/react/utils";
+import type { InferProps } from "@zayne-labs/toolkit-react/utils";
+import { Popover as PopoverPrimitive } from "radix-ui";
 
 function PopoverContent(props: InferProps<typeof PopoverPrimitive.Content>) {
 	const { className, align = "center", sideOffset = 4, ...restOfProps } = props;
