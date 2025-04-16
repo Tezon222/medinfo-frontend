@@ -1,5 +1,8 @@
 import { SearchIcon } from "@/components/icons";
+import AttachmentIcon from "@/components/icons/AttachmentIcon";
+import EmojiIcon from "@/components/icons/EmojiIcon";
 import MenuIcon from "@/components/icons/MenuIcon";
+import SendIcon from "@/components/icons/SendIcon";
 import { format } from "date-fns";
 import React from "react";
 
@@ -36,7 +39,28 @@ const MainMessageBox = () => {
 			senderId: 2,
 			receiverId: 1,
 			message: "It all started....",
-			time: "2025-03-25T09:35:02.799+00:00",
+			time: "2025-03-29T09:35:02.799+00:00",
+		},
+		{
+			id: "e",
+			senderId: 2,
+			receiverId: 1,
+			message: "It all started....",
+			time: "2025-03-29T09:35:02.799+00:00",
+		},
+		{
+			id: "f",
+			senderId: 2,
+			receiverId: 1,
+			message: "It all started....",
+			time: "2025-03-29T09:35:02.799+00:00",
+		},
+		{
+			id: "g",
+			senderId: 2,
+			receiverId: 1,
+			message: "It all started....",
+			time: "2025-03-29T09:35:02.799+00:00",
 		},
 	];
 
@@ -50,10 +74,13 @@ const MainMessageBox = () => {
 
 	return (
 		<div
-			className="hidden w-full flex-col rounded-[16px] border border-solid
-				border-medinfo-primary-lighter bg-white lg:flex"
+			className="relative hidden h-[450px] w-full flex-col overflow-y-scroll rounded-[16px] border
+				border-solid border-medinfo-primary-lighter lg:flex"
 		>
-			<div className="flex h-[10%] w-full items-center justify-between border-b border-solid px-8">
+			<div
+				className="sticky top-0 left-0 z-10 flex h-[15%] w-full items-center justify-between border-b
+					border-solid bg-white px-8 py-2"
+			>
 				<div className="flex gap-3">
 					<div
 						className="relative size-[48px] rounded-full border-[1.4px] border-medinfo-primary-main
@@ -71,7 +98,7 @@ const MainMessageBox = () => {
 			</div>
 			{Object.entries(groupedMessages).map(([dateKey, conversation]) => {
 				return (
-					<div key={dateKey} className="px-12 py-8">
+					<div key={dateKey} className="mt-9 flex flex-col gap-6 px-12 py-8">
 						<p className={"pb-2 text-center"}>{dateKey}</p>
 						{conversation.map(({ id, message, time, senderId }) => {
 							return (
@@ -108,6 +135,25 @@ const MainMessageBox = () => {
 					</div>
 				);
 			})}
+			<div
+				className="sticky bottom-0 z-10 flex w-full items-center justify-between border-t border-solid
+					border-medinfo-primary-lighter bg-white px-5 py-2"
+			>
+				<div className="flex w-[85%] items-center justify-between gap-3 rounded-lg bg-gray-300 px-3">
+					<textarea
+						className="scrollbar-hidden w-full resize-none py-3 outline-none"
+						rows={1}
+						name="message"
+						placeholder="Type your message"
+						id=""
+					/>
+					<SendIcon />
+				</div>
+				<div id="icons" className="flex gap-5">
+					<EmojiIcon />
+					<AttachmentIcon />
+				</div>
+			</div>
 		</div>
 	);
 };

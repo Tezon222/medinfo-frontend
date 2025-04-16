@@ -13,7 +13,7 @@ function SideMessageBox() {
 	];
 
 	return (
-		<div className="flex h-[680px] gap-[28px]">
+		<div className="flex h-[450px] w-[450px] gap-[28px]">
 			<div
 				className="w-full rounded-[16px] border border-solid border-medinfo-primary-lighter bg-white
 					py-[20px] lg:max-w-[274px]"
@@ -25,13 +25,12 @@ function SideMessageBox() {
 					<SearchIcon type="green" className="absolute top-4 left-1" />
 					<input type="text" placeholder="Search for a chat" className="bg-none pl-[16px]" />
 				</div>
-				<div className="mt-[20px]">
-					{users.map(({ name, id, time, recentMessage }, i) => {
+				<div className="mt-[20px] h-[351px] custom-scrollbar overflow-y-scroll">
+					{users.map(({ name, id, time, recentMessage }) => {
 						return (
 							<div
 								key={id}
-								className={`flex cursor-pointer justify-between
-								${i === 0 ? "border-y" : "border-b"} border-solid p-[11px]`}
+								className={"flex cursor-pointer justify-between border-t border-solid p-[11px]"}
 							>
 								<div className="flex gap-[8px]">
 									<div
