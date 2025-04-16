@@ -1,10 +1,19 @@
-import { type CallApiParameters, type ResultModeUnion, createFetchClient } from "@zayne-labs/callapi";
+import {
+	type CallApiParameters,
+	type CallApiResultErrorVariant,
+	type ResultModeUnion,
+	createFetchClient,
+} from "@zayne-labs/callapi";
 import { toastPlugin } from "./plugins";
 
 type GlobalMeta = {
+	skipAuthHeaderAddition?: boolean;
+	skipSessionCheck?: boolean;
 	toast?: {
 		error?: boolean;
-		errorsToSkip?: string[];
+		errorMessageField?: string;
+		errorsToSkip?: Array<CallApiResultErrorVariant<unknown>["error"]["name"]>;
+		errorsToSkipCondition?: (error: CallApiResultErrorVariant<unknown>["error"]) => boolean;
 		success?: boolean;
 	};
 };
@@ -23,12 +32,23 @@ const BASE_BACKEND_URL = "https://medinfo-backend-xie7.onrender.com";
 // 		? "http://localhost:8000/backend-api"
 // 		: "https://medical-info.vercel.app/backend-api";
 
-export const sharedFetchClient = createFetchClient({
+export const sharedFetchClient = createFetchClient((ctx) => ({
 	baseURL: BASE_BACKEND_URL,
 	dedupeStrategy: "cancel",
 	credentials: "include",
 	plugins: [toastPlugin()],
-});
+	mergeMainOptionsManuallyFromBase: true,
+	...ctx.options,
+
+	meta: {
+		...ctx.options.meta,
+		toast: {
+			error: true,
+			errorsToSkip: ["AbortError"],
+			...ctx.options.meta?.toast,
+		},
+	},
+}));
 
 export const callBackendApi = <
 	TData = unknown,
@@ -39,18 +59,7 @@ export const callBackendApi = <
 ) => {
 	const [initUrl, config] = args;
 
-	return sharedFetchClient(initUrl, {
-		...config,
-
-		meta: {
-			...config?.meta,
-			toast: {
-				error: true,
-				errorsToSkip: ["AbortError"],
-				...config?.meta?.toast,
-			},
-		},
-	} as typeof config);
+	return sharedFetchClient(initUrl, config);
 };
 
 export const callBackendApiForQuery = <TData = unknown>(
@@ -58,7 +67,7 @@ export const callBackendApiForQuery = <TData = unknown>(
 ) => {
 	const [initUrl, config] = args;
 
-	return callBackendApi(initUrl, {
+	return sharedFetchClient(initUrl, {
 		resultMode: "onlySuccessWithException",
 		throwOnError: true,
 		...config,

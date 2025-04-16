@@ -10,21 +10,32 @@ const toastPlugin = definePlugin(() => ({
 		onError: (ctx) => {
 			const toastMeta = ctx.options.meta?.toast;
 
-			if (!toastMeta?.error || toastMeta.errorsToSkip?.includes(ctx.error.name)) return;
+			const shouldSkipError =
+				!toastMeta?.error
+				|| toastMeta.errorsToSkip?.includes(ctx.error.name) // eslint-disable-next-line ts-eslint/prefer-nullish-coalescing
+				|| toastMeta.errorsToSkipCondition?.(ctx.error);
+
+			if (shouldSkipError) return;
 
 			const errorMessage = ctx.error.message;
 
-			isBrowser() && errorMessage && toast.error(errorMessage);
+			if (!errorMessage) return;
+
+			isBrowser() && toast.error(errorMessage);
 		},
 
 		onSuccess: (ctx: SuccessContext<{ message: string }>) => {
+			const toastMeta = ctx.options.meta?.toast;
+
+			const shouldSkipSuccess = !toastMeta?.success;
+
+			if (shouldSkipSuccess) return;
+
 			const successMessage = ctx.data.message;
 
-			const shouldDisplayToast = Boolean(successMessage) && ctx.options.meta?.toast?.success;
+			if (!successMessage) return;
 
-			if (!shouldDisplayToast) return;
-
-			toast.success(successMessage);
+			isBrowser() && toast.success(successMessage);
 		},
 	},
 }));

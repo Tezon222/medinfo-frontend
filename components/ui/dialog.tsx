@@ -139,6 +139,21 @@ function DialogTitle(props: InferProps<typeof DialogPrimitive.Title>) {
 	);
 }
 
+function DialogTrigger(props: InferProps<typeof DialogPrimitive.Trigger>) {
+	const { onClick, ...restOfProps } = props;
+	const { onOpen } = useDialogStateContext();
+
+	return (
+		<DialogPrimitive.Trigger
+			{...restOfProps}
+			onClick={(event) => {
+				onOpen();
+				onClick?.(event);
+			}}
+		/>
+	);
+}
+
 function DialogDescription(props: InferProps<typeof DialogPrimitive.Description>) {
 	const { className, ...restOfProps } = props;
 
@@ -170,7 +185,7 @@ export const Portal = DialogPrimitive.Portal;
 
 export const Title = DialogTitle;
 
-export const Trigger = DialogPrimitive.Trigger;
+export const Trigger = DialogTrigger;
 
 // eslint-disable-next-line react-refresh/only-export-components
 export { useDialogStateContext };

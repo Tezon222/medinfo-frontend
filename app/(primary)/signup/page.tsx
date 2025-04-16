@@ -4,12 +4,10 @@ import { Main } from "@/app/(primary)/_components";
 import { DropZoneImagePreview, DropZoneInput, IconBox, Logo, NavLink, Show } from "@/components/common";
 import { Button, DatePicker, Form, Select } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
-import type { SuccessContext } from "@zayne-labs/callapi";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { use } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 
 function SignUpPage(props: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
 	const methods = useForm({
@@ -51,13 +49,13 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 			body: formData,
 			params: { user: resolvedUser },
 
-			onError: (ctx) => {
-				toast.error(ctx.error.message);
+			meta: {
+				toast: {
+					success: true,
+				},
 			},
 
-			onSuccess: (ctx: SuccessContext<{ message: string }>) => {
-				toast.success(ctx.data.message);
-
+			onSuccess: () => {
 				router.push("/signin");
 			},
 		});

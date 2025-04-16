@@ -533,7 +533,13 @@ function AppointmentPage() {
 						</article>
 					</section>
 
-					<AppointmentDialog formData={formData} />
+					<AppointmentDialog
+						formData={formData}
+						resetForm={() => {
+							methods.reset();
+							setFormData(null);
+						}}
+					/>
 				</Steps.Root>
 			</Form.Root>
 		</Main>
@@ -541,11 +547,12 @@ function AppointmentPage() {
 }
 
 type DialogMainContentProps = {
+	resetForm: () => void;
 	formData: AppointmentFormData | null;
 };
 
 function AppointmentDialog(props: DialogMainContentProps) {
-	const { formData } = props;
+	const { formData, resetForm } = props;
 
 	const dialogCtx = useDisclosure();
 
@@ -564,6 +571,7 @@ function AppointmentDialog(props: DialogMainContentProps) {
 	const onReset = () => {
 		dialogCtx.onClose();
 		stepsCtx.goToPrevStep();
+		resetForm();
 
 		setTimeout(() => setTrialCount(0), 500);
 	};
