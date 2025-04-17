@@ -10,13 +10,14 @@ function SideMessageBox() {
 		{ id: 6, name: "Uloma", time: "2:00", recentMessage: "Whats good" },
 		{ id: 7, name: "Charles Mary", time: "2:00", recentMessage: "Whats good" },
 		{ id: 8, name: "Jeff", time: "2:00", recentMessage: "Whats good" },
+		{ id: 9, name: "Nigga", time: "2:00", recentMessage: "Whats good" },
 	];
 
 	return (
-		<div className="flex h-[450px] w-[450px] gap-[28px]">
+		<div className="mx-auto flex h-[440px] w-full gap-[28px] overflow-hidden lg:w-[450px]">
 			<div
 				className="w-full rounded-[16px] border border-solid border-medinfo-primary-lighter bg-white
-					py-[20px] lg:max-w-[274px]"
+					py-[20px]"
 			>
 				<div
 					className="relative mx-[12px] items-center space-x-4 rounded-[8px] border
@@ -26,30 +27,34 @@ function SideMessageBox() {
 					<input type="text" placeholder="Search for a chat" className="bg-none pl-[16px]" />
 				</div>
 				<div className="mt-[20px] h-[351px] custom-scrollbar overflow-y-scroll">
-					{users.map(({ name, id, time, recentMessage }) => {
-						return (
-							<div
-								key={id}
-								className={"flex cursor-pointer justify-between border-t border-solid p-[11px]"}
-							>
-								<div className="flex gap-[8px]">
-									<div
-										className="relative size-[48px] rounded-full border-[1.4px]
-											border-medinfo-primary-main bg-gray-300 lg:size-[48px]"
-									>
-										<div className="absolute top-[2px] right-1">
-											<div className="size-[8px] rounded-full bg-[#05A660]" />
+					{users.length > 0 ? (
+						users.map(({ name, id, time, recentMessage }) => {
+							return (
+								<div
+									key={id}
+									className={"flex cursor-pointer justify-between border-t border-solid p-[11px]"}
+								>
+									<div className="flex gap-[8px]">
+										<div
+											className="relative size-[48px] rounded-full border-[1.4px]
+												border-medinfo-primary-main bg-gray-300 lg:size-[48px]"
+										>
+											<div className="absolute top-[2px] right-1">
+												<div className="size-[8px] rounded-full bg-[#05A660]" />
+											</div>
+										</div>
+										<div>
+											<h2 className="text-[18px]">{name}</h2>
+											<p className="text-[14px]">{recentMessage}</p>
 										</div>
 									</div>
-									<div>
-										<h2 className="text-[18px]">{name}</h2>
-										<p className="text-[14px]">{recentMessage}</p>
-									</div>
+									<p className="text-[12px]">{time}</p>
 								</div>
-								<p className="text-[12px]">{time}</p>
-							</div>
-						);
-					})}
+							);
+						})
+					) : (
+						<div className="text-center">No available chats</div>
+					)}
 				</div>
 			</div>
 		</div>

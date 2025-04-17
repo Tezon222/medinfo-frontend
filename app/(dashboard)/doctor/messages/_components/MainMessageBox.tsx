@@ -74,8 +74,8 @@ const MainMessageBox = () => {
 
 	return (
 		<div
-			className="relative hidden h-[450px] w-full flex-col overflow-y-scroll rounded-[16px] border
-				border-solid border-medinfo-primary-lighter lg:flex"
+			className="relative hidden h-screen w-full flex-col overflow-y-scroll rounded-[16px] border
+				border-solid border-medinfo-primary-lighter lg:flex lg:h-[440px]"
 		>
 			<div
 				className="sticky top-0 left-0 z-10 flex h-[15%] w-full items-center justify-between border-b
@@ -98,7 +98,7 @@ const MainMessageBox = () => {
 			</div>
 			{Object.entries(groupedMessages).map(([dateKey, conversation]) => {
 				return (
-					<div key={dateKey} className="mt-9 flex flex-col gap-6 px-12 py-8">
+					<div key={dateKey} className="mt-1 flex flex-col gap-6 px-12 py-8">
 						<p className={"pb-2 text-center"}>{dateKey}</p>
 						{conversation.map(({ id, message, time, senderId }) => {
 							return (

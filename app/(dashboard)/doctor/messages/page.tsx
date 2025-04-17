@@ -3,7 +3,7 @@ import SideMessageBox from "./_components/SideMessageBox";
 
 function page() {
 	return (
-		<div className="fixed top-[45px] mt-[40px] flex gap-[30px] px-[24px] lg:mt-0 lg:p-[40px]">
+		<div className="static top-[85px] flex gap-[30px] px-0 lg:sticky lg:w-full lg:px-[24px] lg:py-[20px]">
 			<SideMessageBox />
 			<MainMessageBox />
 		</div>
