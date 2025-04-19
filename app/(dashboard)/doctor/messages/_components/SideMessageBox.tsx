@@ -1,18 +1,13 @@
 import { SearchIcon } from "@/components/icons";
+import type { user } from "./types";
 
-function SideMessageBox() {
-	const users = [
-		{ id: 1, name: "Chidiebere", time: "12:00", recentMessage: "Whats good" },
-		{ id: 2, name: "Zayne", time: "2:00", recentMessage: "Whats good" },
-		{ id: 3, name: "Ferdinand", time: "12:00", recentMessage: "Whats good" },
-		{ id: 4, name: "Max", time: "2:00", recentMessage: "Whats good" },
-		{ id: 5, name: "Johnpaul", time: "12:00", recentMessage: "Whats good" },
-		{ id: 6, name: "Uloma", time: "2:00", recentMessage: "Whats good" },
-		{ id: 7, name: "Charles Mary", time: "2:00", recentMessage: "Whats good" },
-		{ id: 8, name: "Jeff", time: "2:00", recentMessage: "Whats good" },
-		{ id: 9, name: "Nigga", time: "2:00", recentMessage: "Whats good" },
-	];
-
+function SideMessageBox({
+	users,
+	setSelectedUser,
+}: {
+	users: user[];
+	setSelectedUser: (id: number) => void;
+}) {
 	return (
 		<div className="mx-auto flex h-[440px] w-full gap-[28px] overflow-hidden lg:w-[450px]">
 			<div
@@ -33,6 +28,7 @@ function SideMessageBox() {
 								<div
 									key={id}
 									className={"flex cursor-pointer justify-between border-t border-solid p-[11px]"}
+									onClick={() => setSelectedUser(id)}
 								>
 									<div className="flex gap-[8px]">
 										<div

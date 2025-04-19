@@ -5,13 +5,18 @@ import MenuIcon from "@/components/icons/MenuIcon";
 import SendIcon from "@/components/icons/SendIcon";
 import { format } from "date-fns";
 import React from "react";
+import type { selectedUserType } from "./types";
 
 type messageType = { id: string; senderId: number; receiverId: number; message: string; time: string };
 const formatTime = (time: string): string => {
 	const newDate = new Date(time).getTime();
 	return format(newDate, "HH:mm");
 };
-const MainMessageBox = () => {
+const MainMessageBox = ({ selectedUser }: { selectedUser: selectedUserType }) => {
+	const getConversation = () => {
+		return selectedUser; // selected receiverId and later get user/senderId from global state storage
+	};
+	getConversation();
 	const messages = [
 		{
 			id: "a",
