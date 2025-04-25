@@ -81,7 +81,7 @@ function MobileNavigation(props: MobileNavProps) {
 	return (
 		<section
 			className={cnMerge(
-				`fixed inset-[0_0_0_auto] flex flex-col items-center gap-7 overflow-hidden
+				`fixed inset-[0_0_0_auto] flex flex-col items-center gap-7 overflow-x-hidden
 				bg-medinfo-primary-main pt-10 text-white`,
 				isNavShow ? "w-full [transition:width_350ms_ease]" : "w-0 [transition:width_500ms_ease]",
 				className

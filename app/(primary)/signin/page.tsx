@@ -4,12 +4,10 @@ import { Main } from "@/app/(primary)/_components";
 import { IconBox, Logo, NavLink, Show } from "@/components/common";
 import { Button, Form } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
-import type { SuccessContext } from "@zayne-labs/callapi";
 import { useRouter } from "next-nprogress-bar";
 import Link from "next/link";
 import { use } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 
 function SignInPage(props: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
 	const methods = useForm({
@@ -37,13 +35,13 @@ function SignInPage(props: { searchParams: Promise<Record<string, string | strin
 			method: "POST",
 			body: data,
 
-			onError: (ctx) => {
-				toast.error(ctx.error.message);
+			meta: {
+				toast: {
+					success: true,
+				},
 			},
 
-			onSuccess: (ctx: SuccessContext<{ message: string }>) => {
-				toast.success(ctx.data.message);
-
+			onSuccess: () => {
 				router.push(`/${resolvedUser}`);
 			},
 		});

@@ -2,61 +2,48 @@
 
 import { Switch } from "@/components/common/Switch";
 import { cnMerge } from "@/lib/utils/cn";
-import { toArray } from "@zayne-labs/toolkit-core";
-import { isFile, isString } from "@zayne-labs/toolkit-type-helpers";
+import { isFile } from "@zayne-labs/toolkit-type-helpers";
 import { getElementList } from "@zayne-labs/ui-react/common/for";
-import { DropZone, type UseDropZoneProps } from "@zayne-labs/ui-react/drop-zone";
+import {
+	DropZone,
+	type DropZoneActions,
+	type DropZoneProps,
+	type FileWithPreview,
+} from "@zayne-labs/ui-react/drop-zone";
 import Image from "next/image";
 import { toast } from "sonner";
-import { Button } from "../ui/button";
 import { IconBox } from "./IconBox";
 
 type FileOrNull = File | null;
 
-type DropZoneInputProps = {
-	onChange: (file: FileOrNull | FileOrNull[]) => void;
-	value: FileOrNull | FileOrNull[];
+type DropZoneInputProps = DropZoneProps & {
+	onChange: (file: FileOrNull) => void;
 };
 
 export function DropZoneInput(props: DropZoneInputProps) {
-	const { onChange, value } = props;
+	const { onChange, onFilesChange, onUploadError, onUploadSuccess, ...restOfProps } = props;
 
-	const existingFiles = toArray(value).filter(Boolean);
+	const handleFileUpload: DropZoneProps["onFilesChange"] = (ctx) => {
+		onFilesChange?.(ctx);
 
-	const handleFileUpload: UseDropZoneProps["onUpload"] = ({ acceptedFiles }) => {
-		const newFileState = [...existingFiles, ...acceptedFiles];
+		if (!isFile(ctx.filesWithPreview[0]?.file)) return;
 
-		onChange(newFileState.at(-1) as File);
+		onChange(ctx.filesWithPreview[0]?.file);
 	};
 
 	return (
-		<DropZone
-			onUploadError={(ctx) => toast.error("Error", { description: ctx.message })}
-			onUploadSuccess={(ctx) => toast.success("Success", { description: ctx.message })}
-			onUpload={handleFileUpload}
-			classNames={{
-				base: `items-center gap-2 rounded-[8px] border-[1.4px] border-dashed
-				border-medinfo-primary-darker px-4 py-3`,
+		<DropZone.Root
+			onUploadError={(ctx) => {
+				toast.error("Error", { description: ctx.message });
+				onUploadError?.(ctx);
 			}}
-			allowedFileTypes={["image/jpeg", "image/png", "application/pdf"]}
-			maxFileSize={4}
-		>
-			<span className="block shrink-0 md:size-10">
-				<IconBox icon="solar:file-send-outline" className="size-full" />
-			</span>
-
-			<p className="text-[18px] font-medium text-medinfo-primary-darker md:text-[20px]">
-				Drag files to upload
-			</p>
-
-			<p className="text-sm text-medinfo-dark-2">Files supported: JPG, PNG, PDF </p>
-
-			<p className="text-sm text-medinfo-dark-2">or</p>
-
-			<Button size="large">Choose File</Button>
-
-			<p className="text-sm text-medinfo-dark-2">Maximum size: 4mb</p>
-		</DropZone>
+			onUploadSuccess={(ctx) => {
+				toast.success("Success", { description: ctx.message });
+				onUploadSuccess?.(ctx);
+			}}
+			onUpload={handleFileUpload}
+			{...restOfProps}
+		/>
 	);
 }
 
@@ -66,30 +53,16 @@ type ImagePreviewProps = {
 		listContainer?: string;
 		listItem?: string;
 	};
-	onChange: (file: File | File[]) => void;
-	value: File | File[];
+	filesWithPreview: FileWithPreview[];
+	removeFile: DropZoneActions["removeFile"];
 };
 
-export function DropZoneImagePreview(props: ImagePreviewProps) {
-	const { classNames, onChange, value } = props;
-
-	const newFilesArray = toArray(value).filter(Boolean);
+export function DropZoneInputImagePreview(props: ImagePreviewProps) {
+	const { classNames, filesWithPreview, removeFile } = props;
 
 	const [ImagePreviewList] = getElementList();
 
-	if (newFilesArray.length === 0) return;
-
-	const handleRemoveImage = (file: File) => () => {
-		const updatedFileState = newFilesArray.filter((item) => {
-			if (isFile(item) && isFile(file)) {
-				return item.name !== file.name;
-			}
-
-			return false;
-		});
-
-		onChange(updatedFileState);
-	};
+	if (filesWithPreview.length === 0) return;
 
 	return (
 		<ImagePreviewList
@@ -98,23 +71,21 @@ export function DropZoneImagePreview(props: ImagePreviewProps) {
 				rounded-md border border-gray-600`,
 				classNames?.listContainer
 			)}
-			each={newFilesArray}
-			render={(file) => {
+			each={filesWithPreview}
+			render={(fileWithPreview) => {
 				return (
 					<li
-						key={isFile(file) ? file.name : file}
+						key={fileWithPreview.id}
 						className={cnMerge(
 							"flex items-center justify-between p-2 text-xs",
 							classNames?.listItem
 						)}
 					>
-						<div className="flex min-h-[66px] min-w-0 items-center gap-4">
+						<div className="flex min-h-[48px] min-w-0 items-center gap-4">
 							<Switch.Root>
-								<Switch.Match
-									when={(isFile(file) && file.type.startsWith("image")) || isString(file)}
-								>
+								<Switch.Match when={fileWithPreview.file.type.startsWith("image")}>
 									<Image
-										src={isFile(file) ? URL.createObjectURL(file) : file}
+										src={fileWithPreview.preview ?? ""}
 										className={cnMerge(
 											"size-[50px] shrink-0 rounded-md object-cover",
 											classNames?.image
@@ -126,7 +97,7 @@ export function DropZoneImagePreview(props: ImagePreviewProps) {
 									/>
 								</Switch.Match>
 
-								<Switch.Match when={isFile(file) && file.type.includes("pdf")}>
+								<Switch.Match when={fileWithPreview.file.type.includes("pdf")}>
 									<span className="block size-[40px] shrink-0">
 										<IconBox icon="solar:document-medicine-linear" className="size-full" />
 									</span>
@@ -139,20 +110,20 @@ export function DropZoneImagePreview(props: ImagePreviewProps) {
 								</Switch.Default>
 							</Switch.Root>
 
-							{isFile(file) && <p className="truncate">{file.name}</p>}
+							<p className="truncate">{fileWithPreview.file.name}</p>
 						</div>
 
-						{isFile(file) && (
-							<button type="button" onClick={handleRemoveImage(file)}>
-								<IconBox
-									icon="lucide:trash-2"
-									className="size-[20px] text-red-500 active:scale-110"
-								/>
-							</button>
-						)}
+						<button type="button" onClick={() => removeFile(fileWithPreview)}>
+							<IconBox
+								icon="lucide:trash-2"
+								className="size-[20px] text-red-500 active:scale-110"
+							/>
+						</button>
 					</li>
 				);
 			}}
 		/>
 	);
 }
+
+DropZoneInputImagePreview.slotReference = DropZone.ImagePreview;
