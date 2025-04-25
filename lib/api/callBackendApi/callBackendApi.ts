@@ -38,6 +38,7 @@ export const sharedFetchClient = createFetchClient((ctx) => ({
 	credentials: "include",
 	plugins: [toastPlugin()],
 	mergeMainOptionsManuallyFromBase: true,
+
 	...ctx.options,
 
 	meta: {

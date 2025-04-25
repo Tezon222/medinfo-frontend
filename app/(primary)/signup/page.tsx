@@ -1,7 +1,14 @@
 "use client";
 
 import { Main } from "@/app/(primary)/_components";
-import { DropZoneImagePreview, DropZoneInput, IconBox, Logo, NavLink, Show } from "@/components/common";
+import {
+	DropZoneInput,
+	DropZoneInputImagePreview,
+	IconBox,
+	Logo,
+	NavLink,
+	Show,
+} from "@/components/common";
 import { Button, DatePicker, Form, Select } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import Link from "next/link";
@@ -337,17 +344,52 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 
 									<Form.FieldController
 										render={({ field }) => (
-											<>
-												<DropZoneInput value={field.value} onChange={field.onChange} />
+											<DropZoneInput
+												allowedFileTypes={["image/jpeg", "image/png", "application/pdf"]}
+												maxFileSize={4}
+												classNames={{
+													base: `items-center gap-2 rounded-[8px] border-[1.4px] border-dashed
+													border-medinfo-primary-darker px-4 py-3`,
+												}}
+												onChange={field.onChange}
+											>
+												{({ dropZoneActions, dropZoneState }) => (
+													<>
+														<span className="block shrink-0 md:size-10">
+															<IconBox
+																icon="solar:file-send-outline"
+																className="size-full"
+															/>
+														</span>
 
-												<DropZoneImagePreview
-													classNames={{
-														listContainer: "border-[1.4px] border-medinfo-primary-main",
-													}}
-													value={field.value}
-													onChange={field.onChange}
-												/>
-											</>
+														<p
+															className="text-[18px] font-medium text-medinfo-primary-darker
+																md:text-[20px]"
+														>
+															Drag files to upload
+														</p>
+
+														<p className="text-sm text-medinfo-dark-2">
+															Files supported: JPG, PNG, PDF{" "}
+														</p>
+
+														<p className="text-sm text-medinfo-dark-2">or</p>
+
+														<Button size="large">Choose File</Button>
+
+														<p className="text-sm text-medinfo-dark-2">Maximum size: 4mb</p>
+
+														<DropZoneInputImagePreview
+															classNames={{
+																listContainer:
+																	"border-[1.4px] border-medinfo-primary-main",
+															}}
+															filesWithPreview={dropZoneState.filesWithPreview}
+															removeFile={dropZoneActions.removeFile}
+														/>
+													</>
+												)}
+											</DropZoneInput>
 										)}
 									/>
 								</Form.Field>
