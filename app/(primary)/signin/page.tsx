@@ -4,8 +4,8 @@ import { Main } from "@/app/(primary)/_components";
 import { IconBox, Logo, NavLink, Show } from "@/components/common";
 import { Button, Form } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
-import { useRouter } from "next-nprogress-bar";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { use } from "react";
 import { useForm } from "react-hook-form";
 

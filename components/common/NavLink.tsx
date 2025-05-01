@@ -4,7 +4,6 @@ import type { UrlObject } from "node:url";
 import { cnMerge } from "@/lib/utils/cn";
 import type { InferProps } from "@zayne-labs/toolkit-react/utils";
 import { isString } from "@zayne-labs/toolkit-type-helpers";
-import { useRouter } from "next-nprogress-bar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -18,9 +17,8 @@ function NavLink(
 		relative?: boolean;
 	}
 ) {
-	const { children, className, onClick, transitionType = "no-transition", href, ...restOfProps } = props;
+	const { children, className, transitionType = "no-transition", href, ...restOfProps } = props;
 
-	const router = useRouter();
 	const pathname = usePathname();
 
 	if (!isString(href) && isRelativeLink(href.pathname)) {
@@ -35,13 +33,6 @@ function NavLink(
 				transitionType === "navbar" && "nav-mobile",
 				className
 			)}
-			onClick={(event) => {
-				event.preventDefault();
-
-				router.push(event.currentTarget.href);
-
-				onClick?.(event);
-			}}
 			{...restOfProps}
 		>
 			{children}

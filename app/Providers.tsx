@@ -1,6 +1,6 @@
 "use client";
 
-// Since QueryClientProvider relies on useContext under the hood, we have to put 'use client' on top
+import { ProgressProvider } from "@bprogress/next/app";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { cache } from "react";
@@ -50,7 +50,14 @@ function Providers(props: ProvidersProps) {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<HeroUIProvider locale="en-GB" disableAnimation={true}>
-				{children}
+				<ProgressProvider
+					height="2.5px"
+					color="hsl(150,21%,17%)"
+					options={{ showSpinner: true }}
+					shallowRouting={true}
+				>
+					{children}
+				</ProgressProvider>
 			</HeroUIProvider>
 
 			<ReactQueryDevtools buttonPosition="bottom-left" initialIsOpen={false} />

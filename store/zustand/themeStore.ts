@@ -15,15 +15,17 @@ type ThemeStore = {
 	theme: "dark" | "light" | "system";
 };
 
-const prefersDarkMode = isBrowser() && globalThis.matchMedia("(prefers-color-scheme: dark)").matches;
+const getPrefersDarkMode = () => {
+	return isBrowser() && globalThis.matchMedia("(prefers-color-scheme: dark)").matches;
+};
 
 // Store Object Initialization
 const themeStoreObjectFn: StateCreator<ThemeStore> = (set, get) => ({
 	theme: "system",
 
-	systemTheme: prefersDarkMode ? "dark" : "light",
+	systemTheme: getPrefersDarkMode() ? "dark" : "light",
 
-	isDarkMode: prefersDarkMode,
+	isDarkMode: getPrefersDarkMode(),
 
 	actions: {
 		initThemeOnLoad: () => {
@@ -59,7 +61,6 @@ export const useThemeStore = create<ThemeStore>()(
 		name: "colorScheme",
 
 		partialize: ({ isDarkMode, theme }) => ({ isDarkMode, theme }),
-
 		version: 1,
 	})
 );
