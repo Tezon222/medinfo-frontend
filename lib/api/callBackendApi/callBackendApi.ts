@@ -36,8 +36,10 @@ export const sharedFetchClient = createFetchClient((ctx) => ({
 	baseURL: BASE_BACKEND_URL,
 	dedupeStrategy: "cancel",
 	credentials: "include",
+
 	plugins: [toastPlugin()],
-	mergeMainOptionsManuallyFromBase: true,
+
+	skipAutoMergeFor: "options",
 
 	...ctx.options,
 

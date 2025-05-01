@@ -1,6 +1,6 @@
 "use client";
 
-import { Logo, NavLink, ProgressBar } from "@/components/common";
+import { Logo, NavLink } from "@/components/common";
 import { HamburgerIcon, SearchIcon, XIcon } from "@/components/icons";
 import { Button } from "@/components/ui";
 import { cnMerge } from "@/lib/utils/cn";
@@ -16,8 +16,6 @@ function NavBar() {
 				py-[17px] shadow-[0_4px_8px_hsl(150,20%,25%,0.25)] [transition:box-shadow_0.3s_ease] md:px-10
 				md:py-5 lg:px-[100px]"
 		>
-			<ProgressBar />
-
 			<Logo className="min-w-fit max-lg:h-[46px] max-lg:w-[60px]" />
 
 			<DesktopNavigation className="max-md:hidden" />
