@@ -6,7 +6,7 @@ import type { callBackendApi } from "@/lib/api/callBackendApi";
 import type { TipsResponse } from "@/lib/api/callBackendApi/types";
 import { cnMerge } from "@/lib/utils/cn";
 import { getElementList } from "@zayne-labs/ui-react/common/for";
-import { useDragScroll } from "@zayne-labs/ui-react/drag-scroll";
+import { useDragScroll } from "@zayne-labs/ui-react/ui/drag-scroll";
 import Image from "next/image";
 
 export type DailyTipCardProps = {

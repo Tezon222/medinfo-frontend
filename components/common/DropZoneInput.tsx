@@ -4,31 +4,26 @@ import { Switch } from "@/components/common/Switch";
 import { cnMerge } from "@/lib/utils/cn";
 import { isFile } from "@zayne-labs/toolkit-type-helpers";
 import { getElementList } from "@zayne-labs/ui-react/common/for";
-import {
-	DropZone,
-	type DropZoneActions,
-	type DropZoneProps,
-	type FileWithPreview,
-} from "@zayne-labs/ui-react/drop-zone";
+import { DropZone, type DropZoneRootProps, useDropZoneContext } from "@zayne-labs/ui-react/ui/drop-zone";
 import Image from "next/image";
 import { toast } from "sonner";
 import { IconBox } from "./IconBox";
 
 type FileOrNull = File | null;
 
-type DropZoneInputProps = DropZoneProps & {
+type DropZoneInputProps = DropZoneRootProps & {
 	onChange: (file: FileOrNull) => void;
 };
 
 export function DropZoneInput(props: DropZoneInputProps) {
 	const { onChange, onFilesChange, onUploadError, onUploadSuccess, ...restOfProps } = props;
 
-	const handleFileUpload: DropZoneProps["onFilesChange"] = (ctx) => {
+	const handleFileUpload: DropZoneRootProps["onFilesChange"] = (ctx) => {
 		onFilesChange?.(ctx);
 
 		if (!isFile(ctx.filesWithPreview[0]?.file)) return;
 
-		onChange(ctx.filesWithPreview[0]?.file);
+		onChange(ctx.filesWithPreview[0].file);
 	};
 
 	return (
@@ -53,16 +48,16 @@ type ImagePreviewProps = {
 		listContainer?: string;
 		listItem?: string;
 	};
-	filesWithPreview: FileWithPreview[];
-	removeFile: DropZoneActions["removeFile"];
 };
 
 export function DropZoneInputImagePreview(props: ImagePreviewProps) {
-	const { classNames, filesWithPreview, removeFile } = props;
+	const { classNames } = props;
 
 	const [ImagePreviewList] = getElementList();
 
-	if (filesWithPreview.length === 0) return;
+	const { dropZoneState, dropZoneActions } = useDropZoneContext();
+
+	if (dropZoneState.filesWithPreview.length === 0) return;
 
 	return (
 		<ImagePreviewList
@@ -71,7 +66,7 @@ export function DropZoneInputImagePreview(props: ImagePreviewProps) {
 				rounded-md border border-gray-600`,
 				classNames?.listContainer
 			)}
-			each={filesWithPreview}
+			each={dropZoneState.filesWithPreview}
 			render={(fileWithPreview) => {
 				return (
 					<li
@@ -113,7 +108,7 @@ export function DropZoneInputImagePreview(props: ImagePreviewProps) {
 							<p className="truncate">{fileWithPreview.file.name}</p>
 						</div>
 
-						<button type="button" onClick={() => removeFile(fileWithPreview)}>
+						<button type="button" onClick={() => dropZoneActions.removeFile(fileWithPreview)}>
 							<IconBox
 								icon="lucide:trash-2"
 								className="size-[20px] text-red-500 active:scale-110"
@@ -126,4 +121,4 @@ export function DropZoneInputImagePreview(props: ImagePreviewProps) {
 	);
 }
 
-DropZoneInputImagePreview.slotReference = DropZone.ImagePreview;
+Object.assign(DropZoneInputImagePreview, DropZone.ImagePreview);

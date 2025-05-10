@@ -1,6 +1,6 @@
 "use client";
 
-import type { PolymorphicProps } from "@zayne-labs/toolkit-react/utils";
+import type { InferProps, PolymorphicProps } from "@zayne-labs/toolkit-react/utils";
 import type { Prettify } from "@zayne-labs/toolkit-type-helpers";
 import { Slot, Slottable } from "@zayne-labs/ui-react/common/slot";
 import { type VariantProps, tv } from "tailwind-variants";
@@ -11,7 +11,7 @@ export type ButtonProps = Prettify<{
 	isLoading?: boolean;
 	asChild?: boolean;
 	unstyled?: boolean;
-} & VariantProps<typeof buttonVariants> & React.ComponentPropsWithRef<"button">>;
+} & VariantProps<typeof buttonVariants> & InferProps<"button">>;
 
 const buttonVariants = tv({
 	base: "flex items-center justify-center rounded-[8px]",

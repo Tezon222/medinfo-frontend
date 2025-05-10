@@ -1,6 +1,7 @@
 import { Main } from "@/app/(primary)/_components";
 import { Await } from "@/components/common";
-import { type SingleTip, type TipsResponse, callBackendApi } from "@/lib/api/callBackendApi";
+import { type SingleTip, callBackendApi } from "@/lib/api/callBackendApi";
+import { getTipsResponse } from "@/lib/api/callBackendApi/utils";
 import { getElementList } from "@zayne-labs/ui-react/common/for";
 import Image from "next/image";
 import { ScrollableTipCards } from "../DailyTipCard";
@@ -12,9 +13,7 @@ async function TipExpandedPage(props: { params: Promise<{ id: string }> }) {
 
 	const singleTip = await callBackendApi<SingleTip>(`/dailyTips/tip/${params.id}`);
 
-	const tipsResponsePromise = callBackendApi<TipsResponse>("/dailyTips/tips", {
-		resultMode: "allWithoutResponse",
-	});
+	const tipsResponsePromise = getTipsResponse();
 
 	if (singleTip.error) {
 		console.error(singleTip.error.errorData);

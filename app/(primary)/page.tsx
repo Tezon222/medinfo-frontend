@@ -1,7 +1,6 @@
 import { Await, IconBox, NavLink } from "@/components/common";
 import { Button } from "@/components/ui";
-import { callBackendApi } from "@/lib/api/callBackendApi";
-import type { TipsResponse } from "@/lib/api/callBackendApi/types";
+import { getTipsResponse } from "@/lib/api/callBackendApi/utils";
 import { cnJoin } from "@/lib/utils/cn";
 import { feature1, feature2, feature3, hero } from "@/public/assets/images/landing-page";
 import { getElementList } from "@zayne-labs/ui-react/common/for";
@@ -63,9 +62,7 @@ const [FeatureList] = getElementList();
 const [AdvantageList] = getElementList();
 
 function HomePage() {
-	const tipsResponsePromise = callBackendApi<TipsResponse>("/dailyTips/tips", {
-		resultMode: "allWithoutResponse",
-	});
+	const tipsResponsePromise = getTipsResponse();
 
 	return (
 		<Main className="w-full gap-14 max-md:max-w-[400px] md:gap-[92px]">

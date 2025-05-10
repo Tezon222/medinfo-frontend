@@ -353,42 +353,32 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 												}}
 												onChange={field.onChange}
 											>
-												{({ dropZoneActions, dropZoneState }) => (
-													<>
-														<span className="block shrink-0 md:size-10">
-															<IconBox
-																icon="solar:file-send-outline"
-																className="size-full"
-															/>
-														</span>
+												<span className="block shrink-0 md:size-10">
+													<IconBox icon="solar:file-send-outline" className="size-full" />
+												</span>
 
-														<p
-															className="text-[18px] font-medium text-medinfo-primary-darker
-																md:text-[20px]"
-														>
-															Drag files to upload
-														</p>
+												<p
+													className="text-[18px] font-medium text-medinfo-primary-darker
+														md:text-[20px]"
+												>
+													Drag files to upload
+												</p>
 
-														<p className="text-sm text-medinfo-dark-2">
-															Files supported: JPG, PNG, PDF{" "}
-														</p>
+												<p className="text-sm text-medinfo-dark-2">
+													Files supported: JPG, PNG, PDF{" "}
+												</p>
 
-														<p className="text-sm text-medinfo-dark-2">or</p>
+												<p className="text-sm text-medinfo-dark-2">or</p>
 
-														<Button size="large">Choose File</Button>
+												<Button size="large">Choose File</Button>
 
-														<p className="text-sm text-medinfo-dark-2">Maximum size: 4mb</p>
+												<p className="text-sm text-medinfo-dark-2">Maximum size: 4mb</p>
 
-														<DropZoneInputImagePreview
-															classNames={{
-																listContainer:
-																	"border-[1.4px] border-medinfo-primary-main",
-															}}
-															filesWithPreview={dropZoneState.filesWithPreview}
-															removeFile={dropZoneActions.removeFile}
-														/>
-													</>
-												)}
+												<DropZoneInputImagePreview
+													classNames={{
+														listContainer: "border-[1.4px] border-medinfo-primary-main",
+													}}
+												/>
 											</DropZoneInput>
 										)}
 									/>
