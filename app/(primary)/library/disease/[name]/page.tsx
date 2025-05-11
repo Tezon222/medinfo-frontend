@@ -41,7 +41,7 @@ async function TipDetailsPage(props: { params: Promise<{ name: string }> }) {
 
 				<section
 					id="Ads"
-					className="hidden scrollbar-hidden max-h-[460px] overflow-auto lg:flex lg:flex-col lg:gap-2"
+					className="scrollbar-hidden hidden max-h-[460px] overflow-auto lg:flex lg:flex-col lg:gap-2"
 				>
 					<AlternateDiseaseCard type="list" linkToAd="https://www.google.com" />
 					<AlternateDiseaseCard type="list" linkToAd="https://www.google.com" />
