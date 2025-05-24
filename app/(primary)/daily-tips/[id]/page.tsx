@@ -68,9 +68,9 @@ async function TipExpandedPage(props: { params: Promise<{ id: string }> }) {
 					Checkout Other Tips
 				</h2>
 
-				<Await promise={tipsResponsePromise} asChild={true}>
+				<Await.Root promise={tipsResponsePromise} asChild={true}>
 					<ScrollableTipCards />
-				</Await>
+				</Await.Root>
 			</section>
 		</Main>
 	);

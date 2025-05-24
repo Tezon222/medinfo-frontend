@@ -226,9 +226,9 @@ function HomePage() {
 				 * NOTE - The Await passes the result of the promise to the ScrollableTipCards component as a `result` prop via the Slot component and the `asChild` prop
 				 * This is a hack necessary to avoid turning this page into a client component due to the use of the Await component's render prop
 				 */}
-				<Await promise={tipsResponsePromise} asChild={true}>
+				<Await.Root promise={tipsResponsePromise} asChild={true}>
 					<ScrollableTipCards />
-				</Await>
+				</Await.Root>
 			</section>
 
 			<section>

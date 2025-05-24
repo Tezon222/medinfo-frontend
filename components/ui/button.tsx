@@ -2,7 +2,7 @@
 
 import type { InferProps, PolymorphicProps } from "@zayne-labs/toolkit-react/utils";
 import type { Prettify } from "@zayne-labs/toolkit-type-helpers";
-import { Slot, Slottable } from "@zayne-labs/ui-react/common/slot";
+import { Slot } from "@zayne-labs/ui-react/common/slot";
 import { type VariantProps, tv } from "tailwind-variants";
 import { WhiteSpinnerIcon } from "../icons";
 
@@ -110,7 +110,7 @@ function Button<TElement extends React.ElementType>(props: PolymorphicProps<TEle
 		...extraButtonProps
 	} = props;
 
-	const Component = asChild ? Slot : Element;
+	const Component = asChild ? Slot.Root : Element;
 
 	const BTN_CLASSES = !unstyled
 		? buttonVariants({
@@ -129,9 +129,9 @@ function Button<TElement extends React.ElementType>(props: PolymorphicProps<TEle
 			<span className="flex justify-center [grid-area:1/1]">
 				<WhiteSpinnerIcon />
 			</span>
-			<Slottable>
+			<Slot.Slottable>
 				<div className="invisible [grid-area:1/1]">{children}</div>
-			</Slottable>
+			</Slot.Slottable>
 		</>
 	);
 
