@@ -1,11 +1,11 @@
 "use client";
 
 import { IconBox } from "@/components/common";
+import { getElementList } from "@/components/common/for";
 import { SearchIcon } from "@/components/icons";
 import { DropdownMenu } from "@/components/ui";
 import type { DiseasesResponse } from "@/lib/api/callBackendApi/types";
 import { cnJoin } from "@/lib/utils/cn";
-import { getElementList } from "@zayne-labs/ui-react/common/for";
 import { useState } from "react";
 import { DiseaseCard } from "./DiseaseCard";
 

@@ -1,7 +1,7 @@
-import { Main } from "@/app/(primary)/_components";
+import { Main } from "@/app/(primary)/-components";
+import { getElementList } from "@/components/common/for";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import type { DiseasesResponse, SingleDisease } from "@/lib/api/callBackendApi/types";
-import { getElementList } from "@zayne-labs/ui-react/common/for";
 import Image from "next/image";
 import { AlternateDiseaseCard, ScrollableAlternateDiseaseCards } from "../../DiseaseCard";
 

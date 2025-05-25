@@ -27,7 +27,7 @@
 		"@zayne-labs/toolkit-core": "^0.9.46",
 		"@zayne-labs/toolkit-react": "^0.9.46",
 		"@zayne-labs/toolkit-type-helpers": "^0.9.46",
-		"@zayne-labs/ui-react": "^0.9.15",
+		"@zayne-labs/ui-react": "^0.9.17",
 		"clsx": "^2.1.1",
 		"date-fns": "^4.1.0",
 		"motion": "^12.12.2",

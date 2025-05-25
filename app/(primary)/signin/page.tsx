@@ -1,6 +1,6 @@
 "use client";
 
-import { Main } from "@/app/(primary)/_components";
+import { Main } from "@/app/(primary)/-components";
 import { IconBox, Logo, NavLink, Show } from "@/components/common";
 import { Button, Form } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";

@@ -1,6 +1,7 @@
 "use client";
 
 import { IconBox, Switch } from "@/components/common";
+import { getElementList } from "@/components/common/for";
 import { CloseIcon, GreenSpinnerIcon } from "@/components/icons";
 import { Button, DatePicker, Dialog, Form, Select } from "@/components/ui";
 import { capitalize } from "@/lib/utils";
@@ -10,7 +11,6 @@ import { bookAppointmentQuery, matchDoctorsQuery } from "@/store/react-query/que
 import { Steps, useStepsContext } from "@ark-ui/react/steps";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useDisclosure } from "@zayne-labs/toolkit-react";
-import { getElementList } from "@zayne-labs/ui-react/common/for";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

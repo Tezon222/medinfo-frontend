@@ -1,11 +1,11 @@
 "use client";
 
 import { IconBox, NavLink } from "@/components/common";
+import { getElementList } from "@/components/common/for";
 import { Button, Card } from "@/components/ui";
 import type { Disease, DiseasesResponse } from "@/lib/api/callBackendApi/types";
 import { cnJoin } from "@/lib/utils/cn";
 import { tipPlaceHolder } from "@/public/assets/images/landing-page";
-import { getElementList } from "@zayne-labs/ui-react/common/for";
 import { useDragScroll } from "@zayne-labs/ui-react/ui/drag-scroll";
 import Image from "next/image";
 

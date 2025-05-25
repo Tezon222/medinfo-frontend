@@ -48,8 +48,8 @@ importers:
         specifier: ^0.9.46
         version: 0.9.46
       '@zayne-labs/ui-react':
-        specifier: ^0.9.15
-        version: 0.9.15(@types/react@19.1.5)(react-dom@19.1.0(react@19.1.0))(react-hook-form@7.56.4(react@19.1.0))(react@19.1.0)(tailwind-merge@3.3.0)(tailwindcss@4.1.7)(zustand@5.0.5(@types/react@19.1.5)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)))
+        specifier: ^0.9.17
+        version: 0.9.17(@types/react@19.1.5)(react-dom@19.1.0(react@19.1.0))(react-hook-form@7.56.4(react@19.1.0))(react@19.1.0)(tailwind-merge@3.3.0)(tailwindcss@4.1.7)(zustand@5.0.5(@types/react@19.1.5)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)))
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -2282,8 +2282,8 @@ packages:
   '@zayne-labs/tsconfig@0.9.1':
     resolution: {integrity: sha512-oOkBUywd0SFe0PHUzH3s2tq8kLXOwuWEJNWrfqr6OzOiNyjhXy6xxQdLhXPdixqKBDfAAdJ4p9xnaUm7iq2ASg==}
 
-  '@zayne-labs/ui-react@0.9.15':
-    resolution: {integrity: sha512-FJRaPbIesGbW+gK/6tsWOuQ7yq7I8sSBLPrHsuz/wQgHsAeBqDGi1jvnwTokaOBCVr8wTCZgGk+eW+7viRwD7Q==}
+  '@zayne-labs/ui-react@0.9.17':
+    resolution: {integrity: sha512-F61vBQpIGn/817FSYK0kI02XLPlShncmwOc5nChaTGc1IzUCvMREoeO3TGIkTnJbcSMNBWLlrsgYzIHOMeHaDw==}
     engines: {node: '>=18.x'}
     peerDependencies:
       react: 19.x.x
@@ -6618,7 +6618,7 @@ snapshots:
 
   '@zayne-labs/tsconfig@0.9.1': {}
 
-  '@zayne-labs/ui-react@0.9.15(@types/react@19.1.5)(react-dom@19.1.0(react@19.1.0))(react-hook-form@7.56.4(react@19.1.0))(react@19.1.0)(tailwind-merge@3.3.0)(tailwindcss@4.1.7)(zustand@5.0.5(@types/react@19.1.5)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)))':
+  '@zayne-labs/ui-react@0.9.17(@types/react@19.1.5)(react-dom@19.1.0(react@19.1.0))(react-hook-form@7.56.4(react@19.1.0))(react@19.1.0)(tailwind-merge@3.3.0)(tailwindcss@4.1.7)(zustand@5.0.5(@types/react@19.1.5)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)))':
     dependencies:
       '@zayne-labs/toolkit-core': 0.9.46
       '@zayne-labs/toolkit-react': 0.9.46(@types/react@19.1.5)(react@19.1.0)(zustand@5.0.5(@types/react@19.1.5)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)))

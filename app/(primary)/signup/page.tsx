@@ -1,6 +1,6 @@
 "use client";
 
-import { Main } from "@/app/(primary)/_components";
+import { Main } from "@/app/(primary)/-components";
 import {
 	DropZoneInput,
 	DropZoneInputImagePreview,
