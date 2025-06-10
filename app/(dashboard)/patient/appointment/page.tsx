@@ -303,6 +303,7 @@ function AppointmentPage() {
 									<Form.FieldController
 										render={({ field }) => (
 											<DateTimePicker
+												variant="datetime"
 												formats={{
 													visibleDate: "PPP - HH:mm:ss",
 													onChangeDate: "yyyy-MM-dd'T'HH:mm:ss",
