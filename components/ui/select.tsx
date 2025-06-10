@@ -16,8 +16,8 @@ function SelectTrigger(
 			className={cnMerge(
 				`flex h-10 w-full items-center justify-between rounded-md border border-shadcn-input
 				bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-sm ring-offset-shadcn-background
-				placeholder:text-medinfo-dark-4 focus:ring-1 focus:ring-shadcn-ring focus:outline-hidden
-				disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1`,
+				placeholder:text-shadcn-muted-foreground focus:ring-1 focus:ring-shadcn-ring
+				focus:outline-hidden disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1`,
 				[classNames?.base, className]
 			)}
 			{...restOfProps}

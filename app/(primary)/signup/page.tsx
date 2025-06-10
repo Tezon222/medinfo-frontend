@@ -9,7 +9,7 @@ import {
 	NavLink,
 	Show,
 } from "@/components/common";
-import { Button, DatePicker, Form, Select } from "@/components/ui";
+import { Button, DateTimePicker, Form, Select } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -391,7 +391,7 @@ function SignUpPage(props: { searchParams: Promise<Record<string, string | strin
 
 									<Form.FieldController
 										render={({ field }) => (
-											<DatePicker
+											<DateTimePicker
 												className="h-[48px] gap-4 rounded-[8px] border-[1.4px]
 													border-medinfo-primary-main px-4 py-3 text-[14px] md:h-[64px]
 													md:py-5 md:text-base"

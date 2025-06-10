@@ -1,9 +1,9 @@
 "use client";
 
-import { IconBox, Switch } from "@/components/common";
+import { IconBox, Show } from "@/components/common";
 import { getElementList } from "@/components/common/for";
 import { CloseIcon, GreenSpinnerIcon } from "@/components/icons";
-import { Button, DatePicker, Dialog, Form, Select } from "@/components/ui";
+import { Button, DateTimePicker, Dialog, Form, Select } from "@/components/ui";
 import { capitalize } from "@/lib/utils";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { appointmentPlaceholder, doctorAvatar } from "@/public/assets/images/dashboard";
@@ -255,7 +255,7 @@ function AppointmentPage() {
 
 									<Form.FieldController
 										render={({ field }) => (
-											<DatePicker
+											<DateTimePicker
 												className="h-[48px] gap-4 rounded-[8px] border-[1.4px]
 													border-medinfo-primary-main px-4 py-3 text-[14px] md:h-[64px]
 													md:py-5 md:text-base"
@@ -302,12 +302,16 @@ function AppointmentPage() {
 
 									<Form.FieldController
 										render={({ field }) => (
-											<DatePicker
+											<DateTimePicker
+												formats={{
+													visibleDate: "PPP - HH:mm:ss",
+													onChangeDate: "yyyy-MM-dd'T'HH:mm:ss",
+												}}
 												className="h-[48px] gap-4 rounded-[8px] border-[1.4px]
 													border-medinfo-primary-main px-4 py-3 text-[14px] md:h-[64px]
 													md:py-5 md:text-base"
 												dateValueString={field.value}
-												placeholder="DD/MM/YYYY - 00:00"
+												placeholder="YYYY-MM-DD - 00:00:00"
 												onChange={field.onChange}
 											/>
 										)}
@@ -370,10 +374,12 @@ function AppointmentPage() {
 						</article>
 
 						<div className="flex flex-col gap-2">
-							<p className="text-[14px] text-medinfo-dark-4">Appointment will be held via</p>
-							<a className="flex items-center gap-1 text-medinfo-primary-main">
-								Google Meet <IconBox icon="logos:google-meet" className="size-5" />
-							</a>
+							<p className="flex items-center gap-2 text-[14px] text-medinfo-dark-4">
+								Appointment will be held via
+								<a href="https://zoom.us" target="_blank" rel="noreferrer noopener">
+									<IconBox icon="logos:zoom" className="w-14" />
+								</a>
+							</p>
 						</div>
 					</section>
 
@@ -535,7 +541,7 @@ function AppointmentPage() {
 
 					<AppointmentDialog
 						formData={formData}
-						resetForm={() => {
+						onResetForm={() => {
 							methods.reset();
 							setFormData(null);
 						}}
@@ -547,12 +553,12 @@ function AppointmentPage() {
 }
 
 type DialogMainContentProps = {
-	resetForm: () => void;
+	onResetForm: () => void;
 	formData: AppointmentFormData | null;
 };
 
 function AppointmentDialog(props: DialogMainContentProps) {
-	const { formData, resetForm } = props;
+	const { formData, onResetForm } = props;
 
 	const dialogCtx = useDisclosure();
 
@@ -571,7 +577,7 @@ function AppointmentDialog(props: DialogMainContentProps) {
 	const onReset = () => {
 		dialogCtx.onClose();
 		stepsCtx.goToPrevStep();
-		resetForm();
+		onResetForm();
 
 		setTimeout(() => setTrialCount(0), 500);
 	};
@@ -579,11 +585,9 @@ function AppointmentDialog(props: DialogMainContentProps) {
 	const bookAppointmentQueryResult = useQuery(
 		bookAppointmentQuery({
 			doctorId,
-
 			onError: () => {
 				dialogCtx.onClose();
 			},
-
 			onSuccess: () => {
 				onReset();
 				router.push("/patient");
@@ -627,8 +631,8 @@ function AppointmentDialog(props: DialogMainContentProps) {
 				)}
 				withCloseBtn={false}
 			>
-				<Switch.Root>
-					<Switch.Match when={matchDoctorsQueryResult.data}>
+				<Show.Root when={matchDoctorsQueryResult.data}>
+					<Show.Content>
 						<StepperList className="mb-4 md:mb-6" />
 
 						<Dialog.Header className="flex flex-col items-center gap-2">
@@ -698,9 +702,9 @@ function AppointmentDialog(props: DialogMainContentProps) {
 								rematches left
 							</p>
 						</Dialog.Footer>
-					</Switch.Match>
+					</Show.Content>
 
-					<Switch.Match when={!matchDoctorsQueryResult.data}>
+					<Show.Fallback>
 						<Dialog.Close className="self-end" asChild={true}>
 							<Steps.PrevTrigger>
 								<CloseIcon />
@@ -715,8 +719,8 @@ function AppointmentDialog(props: DialogMainContentProps) {
 								Matching you to a doctor, please hold on.
 							</Dialog.Title>
 						</Dialog.Header>
-					</Switch.Match>
-				</Switch.Root>
+					</Show.Fallback>
+				</Show.Root>
 			</Dialog.Content>
 		</Dialog.Root>
 	);

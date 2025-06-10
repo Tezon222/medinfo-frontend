@@ -4,7 +4,7 @@ import { cnMerge } from "@/lib/utils/cn";
 import { createCustomContext, useCallbackRef, useToggle } from "@zayne-labs/toolkit-react";
 import type { DiscriminatedRenderProps, InferProps } from "@zayne-labs/toolkit-react/utils";
 import { Dialog as DialogPrimitive } from "radix-ui";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { IconBox } from "../common";
 
 type ContextValue = {
@@ -17,30 +17,39 @@ type ContextValue = {
 const [DialogStateContextProvider, useDialogStateContext] = createCustomContext<ContextValue>();
 
 function DialogRoot(props: InferProps<typeof DialogPrimitive.Root>) {
-	const [openState, toggleOpen] = useToggle(false);
 	// eslint-disable-next-line ts-eslint/unbound-method
 	const { open, onOpenChange, ...restOfProps } = props;
 
-	const selectedOpen = open ?? openState;
-	const selectedOnOpenChange = open ? onOpenChange : toggleOpen;
-	const setOpen = useCallbackRef((value: boolean) => selectedOnOpenChange?.(value));
+	const savedOnOpenChange = useCallbackRef(onOpenChange);
+
+	const [internalOpenState, toggleInternalOpenState] = useToggle(false);
+
+	// == Use the open prop if it is provided
+	// == Otherwise, use the internal open state
+	const selectedOpen = open ?? internalOpenState;
+
+	const setOpen = useCallback(
+		(value: boolean) => {
+			// == Call the onOpenChange prop if the open prop is provided
+			// == Otherwise, toggle the internal open state
+			const selectedOpenChange = open ? savedOnOpenChange : toggleInternalOpenState;
+
+			selectedOpenChange(value);
+		},
+		[open, savedOnOpenChange, toggleInternalOpenState]
+	);
+
 	const onClose = useCallbackRef(() => setOpen(false));
 	const onOpen = useCallbackRef(() => setOpen(true));
 
 	const contextValue = useMemo(
-		() =>
-			({
-				open: selectedOpen,
-				setOpen,
-				onClose,
-				onOpen,
-			}) satisfies ContextValue,
+		() => ({ open: selectedOpen, setOpen, onClose, onOpen }) satisfies ContextValue,
 		[onClose, onOpen, selectedOpen, setOpen]
 	);
 
 	return (
 		<DialogStateContextProvider value={contextValue}>
-			<DialogPrimitive.Root {...restOfProps} open={selectedOpen} onOpenChange={selectedOnOpenChange} />
+			<DialogPrimitive.Root {...restOfProps} open={selectedOpen} onOpenChange={setOpen} />
 		</DialogStateContextProvider>
 	);
 }
@@ -84,11 +93,11 @@ function DialogContent(props: InferProps<typeof DialogPrimitive.Content> & { wit
 				className={cnMerge(
 					`fixed top-1/2 left-1/2 z-50 grid w-full max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4
 					border bg-shadcn-background p-6 shadow-lg duration-200 data-[state=closed]:animate-out
-					data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-left-1/2
-					data-[state=closed]:slide-out-to-top-[48%] data-[state=closed]:zoom-out-95
-					data-[state=open]:animate-in data-[state=open]:fade-in-0
+					data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95
+					data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%]
+					data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95
 					data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]
-					data-[state=open]:zoom-in-95 sm:rounded-lg`,
+					sm:rounded-lg`,
 					className
 				)}
 				{...restOfProps}

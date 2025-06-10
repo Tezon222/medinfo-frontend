@@ -1,7 +1,7 @@
 export * as Accordion from "./accordion";
 export { Button } from "./button";
 export { Card } from "./card";
-export { DatePicker } from "./date-picker";
+export { DateTimePicker } from "./datetime-picker";
 export * as Dialog from "./dialog";
 export * as DropdownMenu from "./dropdown-menu";
 export { Form } from "./form";
