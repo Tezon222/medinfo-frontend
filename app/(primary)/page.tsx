@@ -6,7 +6,7 @@ import { getTipsResponse } from "@/lib/api/callBackendApi/utils";
 import { cnJoin } from "@/lib/utils/cn";
 import { feature1, feature2, feature3, hero } from "@/public/assets/images/landing-page";
 import Image from "next/image";
-import { AccordionComponent, Main } from "./-components";
+import { AccordionFaqs, Main } from "./-components";
 import { ScrollableTipCards } from "./daily-tips/DailyTipCard";
 
 const coreServices = [
@@ -240,7 +240,7 @@ function HomePage() {
 					Frequently Asked Questions
 				</h2>
 
-				<AccordionComponent />
+				<AccordionFaqs />
 			</section>
 		</Main>
 	);

@@ -3,8 +3,8 @@
 import { Logo } from "@/components/common";
 import EmojiHandIcon from "@/components/icons/EmojiHandIcon";
 import LogoutIcon from "@/components/icons/LogoutIcon";
-import Sidebar from "./_components/Sidebar";
-import Header from "./_components/Header";
+import Header from "./-components/Header";
+import Sidebar from "./-components/Sidebar";
 
 function DashboardLayout({ children }: { children: React.ReactNode }) {
 	return (

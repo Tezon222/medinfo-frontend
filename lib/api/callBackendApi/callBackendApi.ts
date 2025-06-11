@@ -41,7 +41,7 @@ export const sharedFetchClient = createFetchClient((ctx) => ({
 
 	skipAutoMergeFor: "options",
 
-	...(ctx.options as NonNullable<unknown>),
+	...(ctx.options as object),
 
 	meta: {
 		...ctx.options.meta,

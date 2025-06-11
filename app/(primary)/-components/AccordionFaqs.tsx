@@ -33,7 +33,7 @@ const FAQs = [
 	},
 ];
 
-function AccordionComponent() {
+function AccordionFaqs() {
 	const [FAQList] = getElementList("base");
 
 	return (
@@ -66,7 +66,7 @@ function AccordionComponent() {
 							</div>
 
 							<Accordion.Content
-								className="border-medinfo-primary-darker py-[18px] text-left md:py-[27px]"
+								className="border-medinfo-primary-darker py-[18px] text-left md:py-7"
 							>
 								<hr className="mb-4 h-[2px] bg-medinfo-secondary-main" />
 
@@ -80,4 +80,4 @@ function AccordionComponent() {
 	);
 }
 
-export default AccordionComponent;
+export default AccordionFaqs;

@@ -6,26 +6,33 @@ import { isString } from "@zayne-labs/toolkit-type-helpers";
 import { Accordion as AccordionPrimitive } from "radix-ui";
 import { IconBox } from "../common/IconBox";
 
+function AccordionRoot(props: InferProps<typeof AccordionPrimitive.Root>) {
+	return <AccordionPrimitive.Root data-slot="accordion-root" {...props} />;
+}
+
 function AccordionItem(props: InferProps<typeof AccordionPrimitive.Item>) {
 	const { className, ...restOfProps } = props;
 
-	return <AccordionPrimitive.Item className={className} {...restOfProps} />;
+	return <AccordionPrimitive.Item data-slot="accordion-item" className={className} {...restOfProps} />;
 }
 
 function AccordionTrigger(
 	props: InferProps<typeof AccordionPrimitive.Trigger> & {
+		classNames?: { base?: string; header?: string; icon?: string };
 		withDefaultIcon?: boolean | string;
-		classNames?: { header?: string; base?: string; icon?: string };
 	}
 ) {
-	const { classNames, className, children, withDefaultIcon = true, ...restOfProps } = props;
+	const { children, className, classNames, withDefaultIcon = true, ...restOfProps } = props;
 
 	return (
 		<AccordionPrimitive.Header className={cnMerge("flex", classNames?.header)}>
 			<AccordionPrimitive.Trigger
+				data-slot="accordion-trigger"
 				className={cnMerge(
-					`flex flex-1 items-center justify-between py-4 text-[14px] font-medium transition-all
-					[&[data-state=open]>svg]:rotate-180`,
+					`flex flex-1 items-start justify-between gap-4 rounded-md py-4 text-left text-[14px]
+					font-medium transition-all outline-none hover:underline focus-visible:border-shadcn-ring
+					focus-visible:ring-[3px] focus-visible:ring-shadcn-ring/50 disabled:pointer-events-none
+					disabled:opacity-50 [&[data-state=open]>svg]:rotate-180`,
 					className,
 					classNames?.base
 				)}
@@ -37,7 +44,8 @@ function AccordionTrigger(
 					<IconBox
 						icon={isString(withDefaultIcon) ? withDefaultIcon : "radix-icons:chevron-down"}
 						className={cnMerge(
-							"size-4 shrink-0 transition-transform duration-200",
+							`pointer-events-none size-4 shrink-0 translate-y-0.5 text-shadcn-muted-foreground
+							transition-transform duration-200`,
 							classNames?.icon
 						)}
 					/>
@@ -48,24 +56,21 @@ function AccordionTrigger(
 }
 
 function AccordionContent(props: InferProps<typeof AccordionPrimitive.Content>) {
-	const { className, children, ...restOfProps } = props;
+	const { children, className, ...restOfProps } = props;
 
 	return (
 		<AccordionPrimitive.Content
-			className={cnMerge(
-				`overflow-hidden py-4 text-[14px] data-[state=closed]:animate-accordion-up
-				data-[state=open]:animate-accordion-down`,
-				className
-			)}
+			data-slot="accordion-content"
+			className="overflow-hidden text-[14px] data-[state=closed]:animate-accordion-up
+				data-[state=open]:animate-accordion-down"
 			{...restOfProps}
 		>
-			{children}
+			<div className={className}>{children}</div>
 		</AccordionPrimitive.Content>
 	);
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const { Root } = AccordionPrimitive;
+export const Root = AccordionRoot;
 
 export const Item = AccordionItem;
 

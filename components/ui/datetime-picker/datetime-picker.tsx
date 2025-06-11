@@ -68,11 +68,14 @@ export function DateTimePicker(props: DatePickerProps) {
 								today: "bg-medinfo-primary-lighter",
 							}}
 							components={{
-								DayButton: (innerProps) => (
+								DayButton: ({ className: innerClassName, ...innerProps }) => (
 									<CalendarDayButton
+										className={cnMerge(
+											`hover:bg-medinfo-primary-subtle hover:text-medinfo-body-color
+											data-[selected-single=true]:bg-medinfo-primary-main`,
+											innerClassName
+										)}
 										{...innerProps}
-										className="hover:bg-medinfo-primary-subtle hover:text-medinfo-body-color
-											data-[selected-single=true]:bg-medinfo-primary-main"
 									/>
 								),
 							}}

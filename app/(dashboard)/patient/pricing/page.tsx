@@ -2,7 +2,7 @@ import { IconBox } from "@/components/common";
 import { getElementList } from "@/components/common/for";
 import { Button, Card } from "@/components/ui";
 import { cnJoin, tw } from "@/lib/utils/cn";
-import { Main } from "../../_components";
+import { Main } from "../../-components";
 
 const pricing = [
 	{
