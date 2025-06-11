@@ -1,7 +1,8 @@
-import { Main } from "@/app/(primary)/_components";
-import { Await } from "@/components/common";
-import { type SingleTip, type TipsResponse, callBackendApi } from "@/lib/api/callBackendApi";
-import { getElementList } from "@zayne-labs/ui-react/common/for";
+import { Main } from "@/app/(primary)/-components";
+import { AwaitRoot } from "@/components/common/await";
+import { getElementList } from "@/components/common/for";
+import { type SingleTip, callBackendApi } from "@/lib/api/callBackendApi";
+import { getTipsResponse } from "@/lib/api/callBackendApi/utils";
 import Image from "next/image";
 import { ScrollableTipCards } from "../DailyTipCard";
 import HealthFinderLogo from "../HealthFinderLogo";
@@ -12,9 +13,7 @@ async function TipExpandedPage(props: { params: Promise<{ id: string }> }) {
 
 	const singleTip = await callBackendApi<SingleTip>(`/dailyTips/tip/${params.id}`);
 
-	const tipsResponsePromise = callBackendApi<TipsResponse>("/dailyTips/tips", {
-		resultMode: "allWithoutResponse",
-	});
+	const tipsResponsePromise = getTipsResponse();
 
 	if (singleTip.error) {
 		console.error(singleTip.error.errorData);
@@ -69,9 +68,9 @@ async function TipExpandedPage(props: { params: Promise<{ id: string }> }) {
 					Checkout Other Tips
 				</h2>
 
-				<Await promise={tipsResponsePromise} asChild={true}>
+				<AwaitRoot promise={tipsResponsePromise} asChild={true}>
 					<ScrollableTipCards />
-				</Await>
+				</AwaitRoot>
 			</section>
 		</Main>
 	);

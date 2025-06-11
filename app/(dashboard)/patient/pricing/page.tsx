@@ -1,7 +1,7 @@
 import { IconBox } from "@/components/common";
+import { getElementList } from "@/components/common/for";
 import { Button, Card } from "@/components/ui";
 import { cnJoin, tw } from "@/lib/utils/cn";
-import { getElementList } from "@zayne-labs/ui-react/common/for";
 import { Main } from "../../_components";
 
 const pricing = [

@@ -1,7 +1,7 @@
-import { Main } from "@/app/(primary)/_components";
+import { Main } from "@/app/(primary)/-components";
+import { getElementList } from "@/components/common/for";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import type { DiseasesResponse, SingleDisease } from "@/lib/api/callBackendApi/types";
-import { getElementList } from "@zayne-labs/ui-react/common/for";
 import Image from "next/image";
 import { AlternateDiseaseCard, ScrollableAlternateDiseaseCards } from "../../DiseaseCard";
 
@@ -41,7 +41,7 @@ async function TipDetailsPage(props: { params: Promise<{ name: string }> }) {
 
 				<section
 					id="Ads"
-					className="hidden scrollbar-hidden max-h-[460px] overflow-auto lg:flex lg:flex-col lg:gap-2"
+					className="scrollbar-hidden hidden max-h-[460px] overflow-auto lg:flex lg:flex-col lg:gap-2"
 				>
 					<AlternateDiseaseCard type="list" linkToAd="https://www.google.com" />
 					<AlternateDiseaseCard type="list" linkToAd="https://www.google.com" />

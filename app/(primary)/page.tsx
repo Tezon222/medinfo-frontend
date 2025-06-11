@@ -1,12 +1,12 @@
-import { Await, IconBox, NavLink } from "@/components/common";
+import { IconBox, NavLink } from "@/components/common";
+import { AwaitRoot } from "@/components/common/await";
+import { getElementList } from "@/components/common/for";
 import { Button } from "@/components/ui";
-import { callBackendApi } from "@/lib/api/callBackendApi";
-import type { TipsResponse } from "@/lib/api/callBackendApi/types";
+import { getTipsResponse } from "@/lib/api/callBackendApi/utils";
 import { cnJoin } from "@/lib/utils/cn";
 import { feature1, feature2, feature3, hero } from "@/public/assets/images/landing-page";
-import { getElementList } from "@zayne-labs/ui-react/common/for";
 import Image from "next/image";
-import { AccordionComponent, Main } from "./_components";
+import { AccordionComponent, Main } from "./-components";
 import { ScrollableTipCards } from "./daily-tips/DailyTipCard";
 
 const coreServices = [
@@ -63,9 +63,7 @@ const [FeatureList] = getElementList();
 const [AdvantageList] = getElementList();
 
 function HomePage() {
-	const tipsResponsePromise = callBackendApi<TipsResponse>("/dailyTips/tips", {
-		resultMode: "allWithoutResponse",
-	});
+	const tipsResponsePromise = getTipsResponse();
 
 	return (
 		<Main className="w-full gap-14 max-md:max-w-[400px] md:gap-[92px]">
@@ -229,9 +227,9 @@ function HomePage() {
 				 * NOTE - The Await passes the result of the promise to the ScrollableTipCards component as a `result` prop via the Slot component and the `asChild` prop
 				 * This is a hack necessary to avoid turning this page into a client component due to the use of the Await component's render prop
 				 */}
-				<Await promise={tipsResponsePromise} asChild={true}>
+				<AwaitRoot promise={tipsResponsePromise} asChild={true}>
 					<ScrollableTipCards />
-				</Await>
+				</AwaitRoot>
 			</section>
 
 			<section>
