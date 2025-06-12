@@ -20,9 +20,9 @@ const buttonVariants = tv({
 		theme: {
 			primary: "bg-medinfo-primary-main text-white",
 
-			"primary-inverted": "text-medinfo-primary-main bg-white",
+			"primary-inverted": "bg-white text-medinfo-primary-main",
 
-			secondary: "border-medinfo-primary-main text-medinfo-primary-main border-2 bg-transparent",
+			secondary: "border-2 border-medinfo-primary-main bg-transparent text-medinfo-primary-main",
 
 			"secondary-inverted": "border-2 border-white bg-transparent text-white",
 		},
@@ -47,8 +47,8 @@ const buttonVariants = tv({
 		},
 
 		isDisabled: {
-			true: `border-medinfo-dark-4 bg-medinfo-disabled-fill text-medinfo-dark-4 cursor-not-allowed
-			border-2`,
+			true: `cursor-not-allowed border-2 border-medinfo-dark-4 bg-medinfo-disabled-fill
+			text-medinfo-dark-4`,
 		},
 
 		withInteractions: {
@@ -83,7 +83,7 @@ const buttonVariants = tv({
 		{
 			isDisabled: true,
 			isLoading: false,
-			className: "border-medinfo-dark-4 bg-medinfo-disabled-fill text-medinfo-dark-4 border-2",
+			className: "border-2 border-medinfo-dark-4 bg-medinfo-disabled-fill text-medinfo-dark-4",
 		},
 	],
 
@@ -124,20 +124,21 @@ function Button<TElement extends React.ElementType>(props: PolymorphicProps<TEle
 			})
 		: className;
 
-	const childrenWithIcon = (
-		<>
-			<span className="flex justify-center [grid-area:1/1]">
-				<WhiteSpinnerIcon />
-			</span>
-			<Slot.Slottable>
-				<div className="invisible [grid-area:1/1]">{children}</div>
-			</Slot.Slottable>
-		</>
+	const childrenWithSlottable = (
+		<Slot.Slottable>
+			<div className="invisible [grid-area:1/1]">{children}</div>
+		</Slot.Slottable>
 	);
 
 	return (
 		<Component type={type} className={BTN_CLASSES} disabled={disabled} {...extraButtonProps}>
-			{isLoading ? childrenWithIcon : children}
+			{isLoading ? childrenWithSlottable : children}
+
+			{isLoading && (
+				<span className="flex justify-center [grid-area:1/1]">
+					<WhiteSpinnerIcon />
+				</span>
+			)}
 		</Component>
 	);
 }
