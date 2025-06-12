@@ -2,7 +2,6 @@
 
 import { cnMerge } from "@/lib/utils/cn";
 import type { InferProps } from "@zayne-labs/toolkit-react/utils";
-import { isString } from "@zayne-labs/toolkit-type-helpers";
 import { Accordion as AccordionPrimitive } from "radix-ui";
 import { IconBox } from "../common/IconBox";
 
@@ -19,20 +18,20 @@ function AccordionItem(props: InferProps<typeof AccordionPrimitive.Item>) {
 function AccordionTrigger(
 	props: InferProps<typeof AccordionPrimitive.Trigger> & {
 		classNames?: { base?: string; header?: string; icon?: string };
-		withDefaultIcon?: boolean | string;
+		withIcon?: boolean;
 	}
 ) {
-	const { children, className, classNames, withDefaultIcon = true, ...restOfProps } = props;
+	const { children, className, classNames, withIcon = true, ...restOfProps } = props;
 
 	return (
 		<AccordionPrimitive.Header className={cnMerge("flex", classNames?.header)}>
 			<AccordionPrimitive.Trigger
 				data-slot="accordion-trigger"
 				className={cnMerge(
-					`flex flex-1 items-start justify-between gap-4 rounded-md py-4 text-left text-[14px]
-					font-medium transition-all outline-none hover:underline focus-visible:border-shadcn-ring
+					`flex flex-1 items-start justify-between gap-4 rounded-md text-left text-[14px] font-medium
+					transition-all outline-none hover:underline focus-visible:border-shadcn-ring
 					focus-visible:ring-[3px] focus-visible:ring-shadcn-ring/50 disabled:pointer-events-none
-					disabled:opacity-50 [&[data-state=open]>svg]:rotate-180`,
+					disabled:opacity-50 [&[data-state=open]>svg,_&[data-state=open]>[data-icon]>svg]:rotate-180`,
 					className,
 					classNames?.base
 				)}
@@ -40,9 +39,9 @@ function AccordionTrigger(
 			>
 				{children}
 
-				{withDefaultIcon && (
+				{withIcon && (
 					<IconBox
-						icon={isString(withDefaultIcon) ? withDefaultIcon : "radix-icons:chevron-down"}
+						icon="radix-icons:chevron-down"
 						className={cnMerge(
 							`pointer-events-none size-4 shrink-0 translate-y-0.5 text-shadcn-muted-foreground
 							transition-transform duration-200`,

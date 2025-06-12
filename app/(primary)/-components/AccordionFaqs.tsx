@@ -1,7 +1,7 @@
 "use client";
 // FIXME - Change accordions component to another suitable one and then remove use client from this page`
 
-import { getElementList } from "@/components/common/for";
+import { For } from "@/components/common/for";
 import { ChevronDownIcon } from "@/components/icons";
 import { Accordion } from "@/components/ui";
 
@@ -34,45 +34,45 @@ const FAQs = [
 ];
 
 function AccordionFaqs() {
-	const [FAQList] = getElementList("base");
-
 	return (
 		<Accordion.Root
 			type="single"
-			className="mt-6 grid w-full gap-2 md:mt-14 md:gap-4"
+			className="mt-6 flex w-full flex-col gap-2 md:mt-14 md:gap-4"
 			collapsible={true}
 		>
-			<FAQList
+			<For
 				each={FAQs}
 				render={(FAQ) => (
-					<Accordion.Item key={FAQ.question} value={FAQ.answer}>
+					<Accordion.Item
+						key={FAQ.question}
+						value={FAQ.answer}
+						className="w-full rounded-[16px] border border-medinfo-primary-darker"
+					>
 						<Accordion.Trigger
-							withDefaultIcon={false}
+							withIcon={false}
 							classNames={{
-								base: `flex min-h-[68px] flex-col items-start rounded-[16px] border
-								border-medinfo-primary-darker px-6 py-[15px] text-[22px] text-medinfo-primary-main
-								md:p-6 md:text-[32px] md:font-semibold [&[data-state=open]_svg]:rotate-180`,
+								base: `px-6 py-[15px] text-[22px] text-medinfo-primary-main md:p-6 md:text-[32px]
+								md:font-semibold`,
 							}}
 						>
-							<div className="flex w-full items-center justify-between gap-6">
-								<p className="text-left text-pretty">{FAQ.question}</p>
+							<p className="text-left text-pretty">{FAQ.question}</p>
 
-								<span
-									className="flex items-center justify-center rounded-full bg-medinfo-primary-main
-										p-[10px] md:p-4"
-								>
-									<ChevronDownIcon className="size-4 md:size-6" />
-								</span>
-							</div>
-
-							<Accordion.Content
-								className="border-medinfo-primary-darker py-[18px] text-left md:py-7"
+							<span
+								data-icon="true"
+								className="flex items-center justify-center rounded-full bg-medinfo-primary-main
+									p-[10px] md:p-4"
 							>
-								<hr className="mb-4 h-[2px] bg-medinfo-secondary-main" />
-
-								<p>{FAQ.answer}</p>
-							</Accordion.Content>
+								<ChevronDownIcon className="size-4 md:size-6" />
+							</span>
 						</Accordion.Trigger>
+
+						<Accordion.Content
+							className="flex flex-col gap-4 border-medinfo-primary-darker px-6 pb-[15px] md:pb-6"
+						>
+							<hr className="h-[2px] bg-medinfo-secondary-main" />
+
+							<p>{FAQ.answer}</p>
+						</Accordion.Content>
 					</Accordion.Item>
 				)}
 			/>
