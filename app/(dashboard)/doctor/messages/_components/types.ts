@@ -1,11 +1,16 @@
-export type user = {
-	id: number;
-	name: string;
+export type chatListUserType = {
+	id: string;
+	firstname: string;
+	lastName: string;
+	picture: string;
 	time: string;
-	recentMessage: string;
+	lastMessage: string | null;
 };
 
-export type selectedUserType = {
+export type messageType = {
+	id: string;
 	senderId: string;
 	receiverId: string;
+	message: string;
+	time: string;
 };

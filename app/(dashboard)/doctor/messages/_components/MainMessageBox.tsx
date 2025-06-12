@@ -5,70 +5,75 @@ import MenuIcon from "@/components/icons/MenuIcon";
 import SendIcon from "@/components/icons/SendIcon";
 import { format } from "date-fns";
 import React from "react";
-import type { selectedUserType } from "./types";
+import type { chatListUserType, messageType } from "./types";
 
-type messageType = { id: string; senderId: number; receiverId: number; message: string; time: string };
 const formatTime = (time: string): string => {
 	const newDate = new Date(time).getTime();
 	return format(newDate, "HH:mm");
 };
-const MainMessageBox = ({ selectedUser }: { selectedUser: selectedUserType }) => {
+const MainMessageBox = ({ selectedUser }: { selectedUser: chatListUserType | null }) => {
+	if (!selectedUser) {
+		return <div className="w-full text-center lg:h-[440px]">Please select a chat</div>;
+	}
 	const getConversation = () => {
+		console.warn(selectedUser);
 		return selectedUser; // selected receiverId and later get user/senderId from global state storage
 	};
 	getConversation();
-	const messages = [
-		{
-			id: "a",
-			senderId: 1,
-			receiverId: 2,
-			message: "Hello, how's it going",
-			time: "2025-03-25T09:35:02.799+00:00",
-		},
-		{
-			id: "b",
-			senderId: 2,
-			receiverId: 1,
-			message: "Not good, been having slight discomfort in my belly",
-			time: "2025-03-25T09:35:02.799+00:00",
-		},
-		{
-			id: "c",
-			senderId: 1,
-			receiverId: 2,
-			message: "Can you describe it in more details and when did it start?",
-			time: "2025-03-25T09:35:02.799+00:00",
-		},
-		{
-			id: "d",
-			senderId: 2,
-			receiverId: 1,
-			message: "It all started....",
-			time: "2025-03-29T09:35:02.799+00:00",
-		},
-		{
-			id: "e",
-			senderId: 2,
-			receiverId: 1,
-			message: "It all started....",
-			time: "2025-03-29T09:35:02.799+00:00",
-		},
-		{
-			id: "f",
-			senderId: 2,
-			receiverId: 1,
-			message: "It all started....",
-			time: "2025-03-29T09:35:02.799+00:00",
-		},
-		{
-			id: "g",
-			senderId: 2,
-			receiverId: 1,
-			message: "It all started....",
-			time: "2025-03-29T09:35:02.799+00:00",
-		},
-	];
+	// const messages = [
+	// 	{
+	// 		id: "a",
+	// 		senderId: 1,
+	// 		receiverId: 2,
+	// 		message: "Hello, how's it going",
+	// 		time: "2025-03-25T09:35:02.799+00:00",
+	// 	},
+	// 	{
+	// 		id: "b",
+	// 		senderId: 2,
+	// 		receiverId: 1,
+	// 		message: "Not good, been having slight discomfort in my belly",
+	// 		time: "2025-03-25T09:35:02.799+00:00",
+	// 	},
+	// 	{
+	// 		id: "c",
+	// 		senderId: 1,
+	// 		receiverId: 2,
+	// 		message: "Can you describe it in more details and when did it start?",
+	// 		time: "2025-03-25T09:35:02.799+00:00",
+	// 	},
+	// 	{
+	// 		id: "d",
+	// 		senderId: 2,
+	// 		receiverId: 1,
+	// 		message: "It all started....",
+	// 		time: "2025-03-29T09:35:02.799+00:00",
+	// 	},
+	// 	{
+	// 		id: "e",
+	// 		senderId: 2,
+	// 		receiverId: 1,
+	// 		message: "It all started....",
+	// 		time: "2025-03-29T09:35:02.799+00:00",
+	// 	},
+	// 	{
+	// 		id: "f",
+	// 		senderId: 2,
+	// 		receiverId: 1,
+	// 		message: "It all started....",
+	// 		time: "2025-03-29T09:35:02.799+00:00",
+	// 	},
+	// 	{
+	// 		id: "g",
+	// 		senderId: 2,
+	// 		receiverId: 1,
+	// 		message: "It all started....",
+	// 		time: "2025-03-29T09:35:02.799+00:00",
+	// 	},
+	// ];
 
+	const messages: messageType[] | [] = [];
+	const userId = "1";
 	const groupedMessages: { [key: string]: messageType[] } = {};
 	messages.forEach((message) => {
 		const createdAtDate = format(new Date(message.time), "MM-dd-yyyy");
@@ -92,7 +97,7 @@ const MainMessageBox = ({ selectedUser }: { selectedUser: selectedUserType }) =>
 							bg-gray-300 lg:size-[48px]"
 					/>
 					<div>
-						<p className="font-[500]">Mary Doe</p>
+						<p className="font-[500]">{`${selectedUser.firstname} ${selectedUser.lastName}`}</p>
 						<p className="rounded-full bg-[#FDED72] text-center">Inactive</p>
 					</div>
 				</div>
@@ -101,45 +106,52 @@ const MainMessageBox = ({ selectedUser }: { selectedUser: selectedUserType }) =>
 					<MenuIcon />
 				</div>
 			</div>
-			{Object.entries(groupedMessages).map(([dateKey, conversation]) => {
-				return (
-					<div key={dateKey} className="mt-1 flex flex-col gap-6 px-12 py-8">
-						<p className={"pb-2 text-center"}>{dateKey}</p>
-						{conversation.map(({ id, message, time, senderId }) => {
-							return (
-								<div
-									key={id}
-									className={`flex w-full flex-col
-									${senderId === 1 ? "items-start" : "items-end"}`}
-								>
-									<div className="relative w-[45%]">
-										<p
-											className={`w-full rounded-sm
-											${senderId === 1 ? "bg-[#FAFCFB]" : "bg-[#CBF8E1]"} p-3`}
-										>
-											{message}
-										</p>
-										<div
-											className={`absolute bottom-0 h-0 w-0 border-r-10 border-b-22 border-l-10
-											border-r-transparent ${
-											senderId === 1
-													? "left-[-10px] border-b-[#FAFCFB]"
-													: "right-[-10px] border-b-[#CBF8E1]"
-											} border-l-transparent`}
-										/>
-										<p
-											className={`absolute ${senderId === 1 ? "left-[-10px]" : "right-[-10px]"}
-											text-[14px]`}
-										>
-											{formatTime(time)}
-										</p>
+			{messages.length > 0 ? (
+				Object.entries(groupedMessages).map(([dateKey, conversation]) => {
+					return (
+						<div key={dateKey} className="mt-1 flex flex-col gap-6 px-12 py-8">
+							<p className={"pb-2 text-center"}>{dateKey}</p>
+							{conversation.map(({ id, message, time, senderId }) => {
+								return (
+									<div
+										key={id}
+										className={`flex w-full flex-col
+											${senderId === userId ? "items-start" : "items-end"}`}
+									>
+										<div className="relative w-[45%]">
+											<p
+												className={`w-full rounded-sm
+													${senderId === userId ? "bg-[#FAFCFB]" : "bg-[#CBF8E1]"} p-3`}
+											>
+												{message}
+											</p>
+											<div
+												className={`absolute bottom-0 h-0 w-0 border-r-10 border-b-22
+													border-l-10 border-r-transparent ${
+													senderId === userId
+															? "left-[-10px] border-b-[#FAFCFB]"
+															: "right-[-10px] border-b-[#CBF8E1]"
+													} border-l-transparent`}
+											/>
+											<p
+												className={`absolute
+													${senderId === userId ? "left-[-10px]" : "right-[-10px]"}
+													text-[14px]`}
+											>
+												{formatTime(time)}
+											</p>
+										</div>
 									</div>
-								</div>
-							);
-						})}
-					</div>
-				);
-			})}
+								);
+							})}
+						</div>
+					);
+				})
+			) : (
+				<div className="mx-auto h-[440px] px-12 py-8">
+					<h1>{`Start a conversation.`}</h1>
+				</div>
+			)}
 			<div
 				className="sticky bottom-0 z-10 flex w-full items-center justify-between border-t border-solid
 					border-medinfo-primary-lighter bg-white px-5 py-2"

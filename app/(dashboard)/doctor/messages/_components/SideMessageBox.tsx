@@ -1,12 +1,12 @@
 import { SearchIcon } from "@/components/icons";
-import type { user } from "./types";
+import type { chatListUserType } from "./types";
 
 function SideMessageBox({
-	users,
+	chatListUsers,
 	setSelectedUser,
 }: {
-	users: user[];
-	setSelectedUser: (id: number) => void;
+	chatListUsers: chatListUserType[];
+	setSelectedUser: (user: chatListUserType) => void;
 }) {
 	return (
 		<div className="mx-auto flex h-[440px] w-full gap-[28px] overflow-hidden lg:w-[450px]">
@@ -22,13 +22,14 @@ function SideMessageBox({
 					<input type="text" placeholder="Search for a chat" className="bg-none pl-[16px]" />
 				</div>
 				<div className="mt-[20px] h-[351px] custom-scrollbar overflow-y-scroll">
-					{users.length > 0 ? (
-						users.map(({ name, id, time, recentMessage }) => {
+					{chatListUsers.length > 0 ? (
+						chatListUsers.map((user) => {
 							return (
 								<div
-									key={id}
-									className={"flex cursor-pointer justify-between border-t border-solid p-[11px]"}
-									onClick={() => setSelectedUser(id)}
+									key={user.id}
+									className={`flex cursor-pointer justify-between border-t border-solid p-[11px]
+										hover:bg-amber-200`}
+									onClick={() => setSelectedUser(user)}
 								>
 									<div className="flex gap-[8px]">
 										<div
@@ -40,11 +41,11 @@ function SideMessageBox({
 											</div>
 										</div>
 										<div>
-											<h2 className="text-[18px]">{name}</h2>
-											<p className="text-[14px]">{recentMessage}</p>
+											<h2 className="text-[18px]">{user.firstname}</h2>
+											<p className="text-[14px]">{user.lastMessage}</p>
 										</div>
 									</div>
-									<p className="text-[12px]">{time}</p>
+									<p className="text-[12px]">{user.time}</p>
 								</div>
 							);
 						})
