@@ -115,6 +115,8 @@
 	--color-shadcn-border: hsl(214.3, 31.8%, 91.4%);
 	--color-shadcn-ring: hsl(215, 20.2%, 65.1%);
 
+	--color-shadcn-destructive: oklch(0.577 0.245 27.325);
+
 	--color-sonner-success-bg: hsl(150, 100%, 6%);
 	--color-sonner-success-text: hsl(150, 100%, 90%);
 	--color-sonner-success-border: hsl(147, 100%, 12%);

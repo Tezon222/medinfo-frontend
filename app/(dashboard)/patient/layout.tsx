@@ -3,12 +3,12 @@
 import { Logo } from "@/components/common";
 import EmojiHandIcon from "@/components/icons/EmojiHandIcon";
 import LogoutIcon from "@/components/icons/LogoutIcon";
-import Sidebar from "./_components/Sidebar";
-import Header from "./_components/Header";
+import Header from "./-components/Header";
+import Sidebar from "./-components/Sidebar";
 
 function DashboardLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<div className="flex h-full lg:bg-medinfo-light-4">
+		<div className="lg:bg-medinfo-light-4 flex h-full">
 			<aside
 				className="hidden py-8 lg:sticky lg:top-0 lg:flex lg:h-screen lg:max-h-[832px] lg:w-[220px]
 					lg:shrink-0 lg:flex-col lg:gap-[48px] lg:bg-white lg:shadow-md"

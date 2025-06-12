@@ -12,7 +12,7 @@ const SonnerToaster = (props: ToasterProps) => {
 		<Sonner
 			theme={theme}
 			richColors={true}
-			className="group toaster"
+			className="toaster group"
 			position="bottom-right"
 			duration={3000}
 			closeButton={true}

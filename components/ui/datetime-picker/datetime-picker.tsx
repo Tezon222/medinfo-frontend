@@ -41,7 +41,7 @@ export function DateTimePicker(props: DatePickerProps) {
 					theme="secondary"
 					withInteractions={false}
 					className={cnMerge(
-						"w-full justify-between text-[14px] text-medinfo-body-color md:w-full",
+						"text-medinfo-body-color w-full justify-between text-[14px] md:w-full",
 						className
 					)}
 				>
@@ -54,7 +54,7 @@ export function DateTimePicker(props: DatePickerProps) {
 			</Popover.Trigger>
 
 			<Popover.Content className="w-auto border-none p-0">
-				<div className="flex rounded-[10px] border-[1.4px] border-medinfo-primary-main">
+				<div className="border-medinfo-primary-main flex rounded-[10px] border-[1.4px]">
 					{showDatePicker && (
 						<Calendar
 							mode="single"
@@ -68,11 +68,14 @@ export function DateTimePicker(props: DatePickerProps) {
 								today: "bg-medinfo-primary-lighter",
 							}}
 							components={{
-								DayButton: (innerProps) => (
+								DayButton: ({ className: innerClassName, ...innerProps }) => (
 									<CalendarDayButton
+										className={cnMerge(
+											`hover:bg-medinfo-primary-subtle hover:text-medinfo-body-color
+											data-[selected-single=true]:bg-medinfo-primary-main`,
+											innerClassName
+										)}
 										{...innerProps}
-										className="hover:bg-medinfo-primary-subtle hover:text-medinfo-body-color
-											data-[selected-single=true]:bg-medinfo-primary-main"
 									/>
 								),
 							}}
@@ -145,7 +148,7 @@ function TimeScrollArea(props: TimeScrollAreaProps) {
 		onChange(format(newDate, formats?.onChangeDate ?? "MM-dd-yyyy HH:mm:ss"));
 	}
 	return (
-		<div className="flex h-[332px] divide-x divide-y-0 divide-medinfo-primary-main">
+		<div className="divide-medinfo-primary-main flex h-[332px] divide-x divide-y-0">
 			<ScrollArea className="w-auto">
 				<ForWithWrapper
 					className="flex flex-col p-2"
