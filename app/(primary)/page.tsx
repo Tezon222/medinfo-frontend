@@ -1,12 +1,12 @@
-import { Await, IconBox, NavLink } from "@/components/common";
+import { IconBox, NavLink } from "@/components/common";
+import { AwaitRoot } from "@/components/common/await";
+import { getElementList } from "@/components/common/for";
 import { Button } from "@/components/ui";
-import { callBackendApi } from "@/lib/api/callBackendApi";
-import type { TipsResponse } from "@/lib/api/callBackendApi/types";
+import { getTipsResponse } from "@/lib/api/callBackendApi/utils";
 import { cnJoin } from "@/lib/utils/cn";
 import { feature1, feature2, feature3, hero } from "@/public/assets/images/landing-page";
-import { getElementList } from "@zayne-labs/ui-react/common/for";
 import Image from "next/image";
-import { AccordionComponent, Main } from "./_components";
+import { AccordionFaqs, Main } from "./-components";
 import { ScrollableTipCards } from "./daily-tips/DailyTipCard";
 
 const coreServices = [
@@ -63,17 +63,15 @@ const [FeatureList] = getElementList();
 const [AdvantageList] = getElementList();
 
 function HomePage() {
-	const tipsResponsePromise = callBackendApi<TipsResponse>("/dailyTips/tips", {
-		resultMode: "allWithoutResponse",
-	});
+	const tipsResponsePromise = getTipsResponse();
 
 	return (
 		<Main className="w-full gap-14 max-md:max-w-[400px] md:gap-[92px]">
 			<section className="flex flex-col items-center md:flex-row-reverse md:gap-[67px]">
 				<div className="flex flex-col items-center max-md:text-center md:items-start">
 					<h1
-						className="text-[clamp(32px,5.2vw,68px)] leading-10 font-bold text-medinfo-primary-main
-							md:leading-[76px] md:text-balance [&:hover>span]:text-medinfo-secondary-darker
+						className="text-medinfo-primary-main [&:hover>span]:text-medinfo-secondary-darker
+							text-[clamp(32px,5.2vw,68px)] font-bold leading-10 md:text-balance md:leading-[76px]
 							[&>span]:[transition:color_400ms_ease-out]"
 					>
 						Free <span>access</span> to knowledge and an easy chit-chat with the best{" "}
@@ -94,16 +92,15 @@ function HomePage() {
 				</div>
 
 				<div
-					className="relative ml-(--offset) w-max shrink-0 [--offset:19px]
+					className="ml-(--offset) relative w-max shrink-0 [--offset:19px]
 						max-md:mt-[calc(40px_+_var(--offset))]"
 				>
 					<span
-						className="absolute right-(--offset) bottom-(--offset) z-[-1] block size-full
-							rounded-[16px] bg-medinfo-primary-main md:right-[28px] md:bottom-[28px]
-							md:rounded-[24px]"
+						className="right-(--offset) bottom-(--offset) bg-medinfo-primary-main absolute z-[-1]
+							block size-full rounded-[16px] md:bottom-[28px] md:right-[28px] md:rounded-[24px]"
 					/>
 					<Image
-						className="aspect-223/273 min-h-[273px] md:aspect-340/415 md:min-h-[415px]"
+						className="aspect-223/273 md:aspect-340/415 min-h-[273px] md:min-h-[415px]"
 						src={hero as string}
 						alt=""
 						priority={true}
@@ -115,8 +112,8 @@ function HomePage() {
 
 			<section>
 				<h2
-					className="text-center text-[28px] leading-9 font-semibold text-medinfo-primary-main
-						md:text-[52px] md:leading-[60px] md:font-bold"
+					className="text-medinfo-primary-main text-center text-[28px] font-semibold leading-9
+						md:text-[52px] md:font-bold md:leading-[60px]"
 				>
 					Our Core Services
 				</h2>
@@ -130,7 +127,7 @@ function HomePage() {
 							<div className="relative">
 								<Image
 									className={cnJoin(
-										"aspect-272/292 max-h-[292px] md:aspect-340/362 md:max-h-[362px]",
+										"aspect-272/292 md:aspect-340/362 max-h-[292px] md:max-h-[362px]",
 										index === 1 && "md:mt-[80px]"
 									)}
 									src={coreService.imageSrc}
@@ -140,8 +137,8 @@ function HomePage() {
 								/>
 
 								<span
-									className="absolute inset-0 flex items-end rounded-[16px]
-										bg-medinfo-primary-main p-7 font-normal text-white opacity-0
+									className="bg-medinfo-primary-main absolute inset-0 flex items-end
+										rounded-[16px] p-7 font-normal text-white opacity-0
 										[transition:opacity_300ms_ease] group-hover:opacity-100 md:text-[18px]"
 								>
 									{coreService.description}
@@ -161,8 +158,8 @@ function HomePage() {
 
 			<section>
 				<h2
-					className="text-center text-[28px] leading-9 font-semibold text-medinfo-primary-main
-						md:text-[52px] md:leading-[60px] md:font-bold"
+					className="text-medinfo-primary-main text-center text-[28px] font-semibold leading-9
+						md:text-[52px] md:font-bold md:leading-[60px]"
 				>
 					Why MedInfo Nigeria?
 				</h2>
@@ -174,8 +171,8 @@ function HomePage() {
 					render={(feature, index) => (
 						<li
 							key={index}
-							className="relative flex flex-col items-center justify-center rounded-[16px] border
-								border-medinfo-primary-main px-[3.5px] py-[54px] text-medinfo-primary-main
+							className="border-medinfo-primary-main text-medinfo-primary-main relative flex
+								flex-col items-center justify-center rounded-[16px] border px-[3.5px] py-[54px]
 								md:px-[47px] md:py-[67px]"
 						>
 							<span
@@ -192,8 +189,8 @@ function HomePage() {
 
 			<section>
 				<h2
-					className="text-center text-[28px] leading-9 font-semibold text-medinfo-primary-main
-						md:text-[52px] md:leading-[60px] md:font-bold"
+					className="text-medinfo-primary-main text-center text-[28px] font-semibold leading-9
+						md:text-[52px] md:font-bold md:leading-[60px]"
 				>
 					Advantages of Virtual Healthcare
 				</h2>
@@ -203,12 +200,12 @@ function HomePage() {
 					render={(advantage, index) => (
 						<li key={index}>
 							<span
-								className="block size-[92px] rounded-[16px] bg-medinfo-primary-subtle p-6
-									text-[44px] text-medinfo-primary-main"
+								className="bg-medinfo-primary-subtle text-medinfo-primary-main block size-[92px]
+									rounded-[16px] p-6 text-[44px]"
 							>
 								<IconBox icon={advantage.icon} />
 							</span>
-							<h3 className="mt-5 text-[24px] font-semibold text-medinfo-primary-main">
+							<h3 className="text-medinfo-primary-main mt-5 text-[24px] font-semibold">
 								{advantage.title}
 							</h3>
 							<p className="mt-3">{advantage.description}</p>
@@ -219,26 +216,30 @@ function HomePage() {
 
 			<section className="flex flex-col items-center">
 				<h2
-					className="text-center text-[28px] leading-9 font-semibold text-medinfo-primary-main
-						md:text-[52px] md:leading-[60px] md:font-bold"
+					className="text-medinfo-primary-main text-center text-[28px] font-semibold leading-9
+						md:text-[52px] md:font-bold md:leading-[60px]"
 				>
 					Did you know?
 				</h2>
 
-				<Await promise={tipsResponsePromise} asChild={true}>
+				{/*
+				 * NOTE - The Await passes the result of the promise to the ScrollableTipCards component as a `result` prop via the Slot component and the `asChild` prop
+				 * This is a hack necessary to avoid turning this page into a client component due to the use of the Await component's render prop
+				 */}
+				<AwaitRoot promise={tipsResponsePromise} asChild={true}>
 					<ScrollableTipCards />
-				</Await>
+				</AwaitRoot>
 			</section>
 
 			<section>
 				<h2
-					className="text-center text-[28px] leading-9 font-semibold text-medinfo-primary-main
-						md:text-[52px] md:leading-[60px] md:font-bold"
+					className="text-medinfo-primary-main text-center text-[28px] font-semibold leading-9
+						md:text-[52px] md:font-bold md:leading-[60px]"
 				>
 					Frequently Asked Questions
 				</h2>
 
-				<AccordionComponent />
+				<AccordionFaqs />
 			</section>
 		</Main>
 	);

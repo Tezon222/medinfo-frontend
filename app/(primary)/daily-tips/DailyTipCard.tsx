@@ -1,12 +1,12 @@
 "use client";
 
 import { IconBox, NavLink } from "@/components/common";
+import { getElementList } from "@/components/common/for";
 import { Card } from "@/components/ui";
 import type { callBackendApi } from "@/lib/api/callBackendApi";
 import type { TipsResponse } from "@/lib/api/callBackendApi/types";
 import { cnMerge } from "@/lib/utils/cn";
-import { getElementList } from "@zayne-labs/ui-react/common/for";
-import { useDragScroll } from "@zayne-labs/ui-react/drag-scroll";
+import { useDragScroll } from "@zayne-labs/ui-react/ui/drag-scroll";
 import Image from "next/image";
 
 export type DailyTipCardProps = {
@@ -21,7 +21,7 @@ export function DailyTipCard({ className, id, imageUrl, title }: DailyTipCardPro
 		<Card.Root
 			as="li"
 			className={cnMerge(
-				`flex w-[161px] shrink-0 flex-col gap-3 rounded-[16px] border-[1.4px] border-medinfo-light-1
+				`border-medinfo-light-1 flex w-[161px] shrink-0 flex-col gap-3 rounded-[16px] border-[1.4px]
 				pb-3 md:w-[276px]`,
 				className
 			)}

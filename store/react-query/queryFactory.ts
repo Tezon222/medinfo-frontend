@@ -22,6 +22,7 @@ export const matchDoctorsQuery = (
 		},
 		refetchOnWindowFocus: false,
 		retry: false,
+		refetchOnReconnect: false,
 		staleTime: Infinity,
 	});
 };

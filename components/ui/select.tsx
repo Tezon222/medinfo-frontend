@@ -3,22 +3,46 @@ import type { InferProps } from "@zayne-labs/toolkit-react/utils";
 import { Select as SelectPrimitive } from "radix-ui";
 import { IconBox } from "../common";
 
+function SelectRoot(props: InferProps<typeof SelectPrimitive.Root>) {
+	return <SelectPrimitive.Root data-slot="select-root" {...props} />;
+}
+
+function SelectGroup(props: InferProps<typeof SelectPrimitive.Group>) {
+	return <SelectPrimitive.Group data-slot="select-group" {...props} />;
+}
+
+function SelectValue(props: InferProps<typeof SelectPrimitive.Value>) {
+	return <SelectPrimitive.Value data-slot="select-value" {...props} />;
+}
+
 function SelectTrigger(
 	props: InferProps<typeof SelectPrimitive.Trigger> & {
 		icon?: string;
+		size?: "sm" | "default";
 		classNames?: { icon?: string; base?: string };
 	}
 ) {
-	const { children, icon, classNames, className, ...restOfProps } = props;
+	const { children, icon, classNames, size = "default", className, ...restOfProps } = props;
 
 	return (
 		<SelectPrimitive.Trigger
+			data-slot="select-trigger"
 			className={cnMerge(
-				`flex h-10 w-full items-center justify-between rounded-md border border-shadcn-input
-				bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-sm ring-offset-shadcn-background
-				placeholder:text-medinfo-dark-4 focus:ring-1 focus:ring-shadcn-ring focus:outline-hidden
-				disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1`,
-				[classNames?.base, className]
+				`border-shadcn-input shadow-xs focus-visible:border-shadcn-ring
+				focus-visible:ring-shadcn-ring/50 aria-invalid:border-shadcn-destructive
+				aria-invalid:ring-shadcn-destructive/20 data-[placeholder]:text-shadcn-muted-foreground
+				dark:bg-shadcn-input/30 dark:hover:bg-shadcn-input/50
+				dark:aria-invalid:ring-shadcn-destructive/40
+				[&_svg:not([class*='text-'])]:text-shadcn-muted-foreground flex w-full items-center
+				justify-between gap-2 whitespace-nowrap rounded-md border bg-transparent px-3 py-2 text-sm
+				outline-none transition-[color,box-shadow] focus-visible:ring-[3px] disabled:cursor-not-allowed
+				disabled:opacity-50 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex
+				*:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2
+				[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0`,
+				size === "sm" && "h-8",
+				size === "default" && "h-9",
+				className,
+				classNames?.base
 			)}
 			{...restOfProps}
 		>
@@ -27,7 +51,7 @@ function SelectTrigger(
 			<SelectPrimitive.Icon asChild={true}>
 				<IconBox
 					icon={icon ?? "lucide:chevron-down"}
-					className={cnMerge("size-5", classNames?.icon)}
+					className={cnMerge("size-4 opacity-50", classNames?.icon)}
 				/>
 			</SelectPrimitive.Icon>
 		</SelectPrimitive.Trigger>
@@ -39,10 +63,11 @@ function SelectScrollUpButton(props: InferProps<typeof SelectPrimitive.ScrollUpB
 
 	return (
 		<SelectPrimitive.ScrollUpButton
+			data-slot="select-scroll-up-button"
 			className={cnMerge("flex cursor-default items-center justify-center py-1", className)}
 			{...restOfProps}
 		>
-			<IconBox icon="lucide:chevron-up" />
+			<IconBox icon="lucide:chevron-up" className="size-4" />
 		</SelectPrimitive.ScrollUpButton>
 	);
 }
@@ -52,10 +77,11 @@ function SelectScrollDownButton(props: InferProps<typeof SelectPrimitive.ScrollD
 
 	return (
 		<SelectPrimitive.ScrollDownButton
+			data-slot="select-scroll-down-button"
 			className={cnMerge("flex cursor-default items-center justify-center py-1", className)}
 			{...restOfProps}
 		>
-			<IconBox icon="lucide:chevron-down" />
+			<IconBox icon="lucide:chevron-down" className="size-4" />
 		</SelectPrimitive.ScrollDownButton>
 	);
 }
@@ -70,14 +96,16 @@ function SelectContent(
 	return (
 		<SelectPrimitive.Portal>
 			<SelectPrimitive.Content
+				data-slot="select-content"
 				className={cnMerge(
-					`relative z-50 flex max-h-96 min-w-[128px] flex-col overflow-hidden rounded-md border
-					bg-shadcn-popover text-shadcn-popover-foreground shadow-md
-					data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2
-					data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2
-					data-[state=closed]:animate-out data-[state=closed]:fade-out-0
-					data-[state=closed]:zoom-out-95 data-[state=open]:animate-in data-[state=open]:fade-in-0
-					data-[state=open]:zoom-in-95`,
+					`max-h-(--radix-select-content-available-height)
+					origin-(--radix-select-content-transform-origin) bg-shadcn-popover
+					text-shadcn-popover-foreground data-[side=bottom]:slide-in-from-top-2
+					data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2
+					data-[side=top]:slide-in-from-bottom-2 data-[state=closed]:animate-out
+					data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=open]:animate-in
+					data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 relative z-50 min-w-[8rem]
+					overflow-y-auto overflow-x-hidden rounded-md border shadow-md`,
 					position === "popper"
 						&& `data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1
 						data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1`,
@@ -86,20 +114,21 @@ function SelectContent(
 				position={position}
 				{...restOfProps}
 			>
-				<ScrollDownButton />
+				<SelectScrollUpButton />
 
 				<SelectPrimitive.Viewport
 					className={cnMerge(
 						"flex flex-col p-1",
 						position === "popper"
-							&& "h-(--radix-select-trigger-height) w-full min-w-(--radix-select-trigger-width)",
+							&& `h-(--radix-select-trigger-height) min-w-(--radix-select-trigger-width) w-full
+							scroll-my-1`,
 						classNames?.viewport
 					)}
 				>
 					{children}
 				</SelectPrimitive.Viewport>
 
-				<ScrollDownButton />
+				<SelectScrollDownButton />
 			</SelectPrimitive.Content>
 		</SelectPrimitive.Portal>
 	);
@@ -110,7 +139,8 @@ function SelectLabel(props: InferProps<typeof SelectPrimitive.Label>) {
 
 	return (
 		<SelectPrimitive.Label
-			className={cnMerge("px-2 py-2.5 text-sm font-semibold", className)}
+			data-slot="select-label"
+			className={cnMerge("text-shadcn-muted-foreground px-2 py-1.5 text-xs", className)}
 			{...restOfProps}
 		/>
 	);
@@ -121,18 +151,22 @@ function SelectItem(props: InferProps<typeof SelectPrimitive.Item> & { withIndic
 
 	return (
 		<SelectPrimitive.Item
+			data-slot="select-item"
 			className={cnMerge(
-				`relative flex w-full cursor-default items-center rounded-sm py-1.5 pr-2 pl-[25px] text-[13px]
-				outline-hidden select-none focus:bg-shadcn-accent focus:text-shadcn-accent-foreground
-				data-disabled:pointer-events-none data-disabled:opacity-50`,
+				`outline-hidden focus:bg-shadcn-accent focus:text-shadcn-accent-foreground
+				[&_svg:not([class*='text-'])]:text-shadcn-muted-foreground *:[span]:last:flex
+				*:[span]:last:items-center *:[span]:last:gap-2 relative flex w-full cursor-default select-none
+				items-center gap-2 rounded-sm py-1.5 pl-2 pr-8 text-sm data-[disabled]:pointer-events-none
+				data-[disabled]:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none
+				[&_svg]:shrink-0`,
 				className
 			)}
 			{...restOfProps}
 		>
 			{withIndicator && (
-				<span className="absolute left-2 flex size-3.5 items-center justify-center">
+				<span className="absolute right-2 flex size-3.5 items-center justify-center">
 					<SelectPrimitive.ItemIndicator>
-						<IconBox icon="lucide:check" className="size-[14px]" />
+						<IconBox icon="lucide:check" className="size-4" />
 					</SelectPrimitive.ItemIndicator>
 				</span>
 			)}
@@ -147,14 +181,15 @@ function SelectSeparator(props: InferProps<typeof SelectPrimitive.Separator>) {
 
 	return (
 		<SelectPrimitive.Separator
-			className={cnMerge("-mx-1 my-1 h-px bg-shadcn-muted", className)}
+			className={cnMerge("bg-shadcn-border pointer-events-none -mx-1 my-1 h-px", className)}
 			{...restOfProps}
 		/>
 	);
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const { Root, Group, Value } = SelectPrimitive;
+export const Root = SelectRoot;
+export const Group = SelectGroup;
+export const Value = SelectValue;
 export const Content = SelectContent;
 export const Item = SelectItem;
 export const Label = SelectLabel;
