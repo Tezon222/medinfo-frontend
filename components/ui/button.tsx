@@ -52,7 +52,7 @@ const buttonVariants = tv({
 		},
 
 		withInteractions: {
-			true: "[transition:border-radius_250ms_ease] hover:shadow-[0_4px_4px_0_hsl(0,0%,0%,0.12)]",
+			true: "[transition:border-radius_350ms_ease] hover:shadow-[0_4px_4px_0_hsl(0,0%,0%,0.12)]",
 		},
 	},
 
@@ -78,7 +78,7 @@ const buttonVariants = tv({
 		{
 			size: "icon",
 			withInteractions: true,
-			className: "hover:rounded-full hover:shadow-none",
+			className: "hover:rounded-[50%] hover:shadow-none",
 		},
 		{
 			isDisabled: true,
