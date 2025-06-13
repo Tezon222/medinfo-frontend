@@ -7,6 +7,8 @@
 /* ------------------*/
 /* App Theme         */
 /*-------------------*/
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 @theme {
 	--color-medinfo-primary-main: hsl(150, 20%, 25%);
 	--color-medinfo-primary-darker: hsl(150, 21%, 17%);
@@ -41,8 +43,6 @@
 	--color-medinfo-disabled-fill: hsl(0, 0%, 93%);
 	--color-medinfo-body-color: hsl(0, 0%, 20%);
 }
-
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 /* ------------------*/
 /* Custom Properties */

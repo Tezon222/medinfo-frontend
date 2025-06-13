@@ -124,21 +124,22 @@ function Button<TElement extends React.ElementType>(props: PolymorphicProps<TEle
 			})
 		: className;
 
-	const childrenWithSlottable = (
-		<Slot.Slottable>
-			<div className="invisible [grid-area:1/1]">{children}</div>
-		</Slot.Slottable>
+	const withIcon = (
+		<>
+			<Slot.Slottable>
+				<div className="invisible [grid-area:1/1]">{children}</div>
+			</Slot.Slottable>
+
+			<span className="flex justify-center [grid-area:1/1]">
+				<WhiteSpinnerIcon />
+			</span>
+		</>
 	);
 
+	// == This technique helps prevents content shift when replacing children with spinner icon
 	return (
 		<Component type={type} className={BTN_CLASSES} disabled={disabled} {...extraButtonProps}>
-			{isLoading ? childrenWithSlottable : children}
-
-			{isLoading && (
-				<span className="flex justify-center [grid-area:1/1]">
-					<WhiteSpinnerIcon />
-				</span>
-			)}
+			{isLoading ? withIcon : children}
 		</Component>
 	);
 }
