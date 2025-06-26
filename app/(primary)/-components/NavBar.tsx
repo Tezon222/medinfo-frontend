@@ -94,7 +94,7 @@ function MobileNavigation(props: MobileNavProps) {
 
 			<NavList
 				as="nav"
-				className="flex flex-col items-center gap-5 font-medium text-nowrap lg:text-[22px]"
+				className="flex flex-col items-center gap-5 font-medium text-nowrap"
 				each={linkItems}
 				render={(linkItem) => (
 					<NavLink key={linkItem.title} transitionType="navbar" href={linkItem.href}>

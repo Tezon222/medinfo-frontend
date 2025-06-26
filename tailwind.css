@@ -115,7 +115,8 @@
 	--color-shadcn-border: hsl(214.3, 31.8%, 91.4%);
 	--color-shadcn-ring: hsl(215, 20.2%, 65.1%);
 
-	--color-shadcn-destructive: oklch(0.577 0.245 27.325);
+	--color-shadcn-destructive: hsl(0 100% 50%);
+	--color-shadcn-destructive-foreground: hsl(210 40% 98%);
 
 	--color-sonner-success-bg: hsl(150, 100%, 6%);
 	--color-sonner-success-text: hsl(150, 100%, 90%);
@@ -147,6 +148,10 @@
 	html {
 		scroll-behavior: smooth;
 		-webkit-tap-highlight-color: transparent;
+		font-synthesis: none;
+		text-rendering: optimizeLegibility;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
 	}
 
 	input:focus-visible {
@@ -160,12 +165,12 @@
 		max-width: unset;
 	}
 
-	button:not(:disabled) {
-		cursor: pointer;
-	}
-
 	button {
 		outline: transparent;
+	}
+
+	button:not(:disabled) {
+		cursor: pointer;
 	}
 
 	body {
