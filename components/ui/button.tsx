@@ -3,15 +3,17 @@
 import type { InferProps, PolymorphicProps } from "@zayne-labs/toolkit-react/utils";
 import type { Prettify } from "@zayne-labs/toolkit-type-helpers";
 import { Slot } from "@zayne-labs/ui-react/common/slot";
-import { type VariantProps, tv } from "tailwind-variants";
+import { tv, type VariantProps } from "tailwind-variants";
 import { WhiteSpinnerIcon } from "../icons";
 
-// prettier-ignore
-export type ButtonProps = Prettify<{
-	isLoading?: boolean;
-	asChild?: boolean;
-	unstyled?: boolean;
-} & VariantProps<typeof buttonVariants> & InferProps<"button">>;
+export type ButtonProps = Prettify<
+	{
+		isLoading?: boolean;
+		asChild?: boolean;
+		unstyled?: boolean;
+	} & VariantProps<typeof buttonVariants>
+>
+	& InferProps<"button">;
 
 const buttonVariants = tv({
 	base: "flex items-center justify-center rounded-[8px]",
@@ -30,7 +32,7 @@ const buttonVariants = tv({
 		size: {
 			icon: "size-12 md:size-16",
 
-			medium: `h-[48px] w-fit min-w-[105px] px-6 text-base md:h-[64px] md:min-w-[135px] md:text-[20px]
+			medium: `h-[48px] w-fit min-w-[105px] text-base md:h-[64px] md:min-w-[135px] md:text-[20px]
 			md:font-medium`,
 
 			"full-width": "h-[48px] w-full text-base md:h-[64px] md:text-[20px] md:font-medium",
