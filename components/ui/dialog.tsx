@@ -1,75 +1,75 @@
 "use client";
 
 import { createCustomContext, useCallbackRef, useToggle } from "@zayne-labs/toolkit-react";
-import type { DiscriminatedRenderProps, InferProps } from "@zayne-labs/toolkit-react/utils";
+import { composeEventHandlers, type InferProps } from "@zayne-labs/toolkit-react/utils";
+import { isFunction } from "@zayne-labs/toolkit-type-helpers";
 import { Dialog as DialogPrimitive } from "radix-ui";
 import { useCallback, useMemo } from "react";
 import { cnMerge } from "@/lib/utils/cn";
 import { IconBox } from "../common/IconBox";
 
 type ContextValue = {
-	open: boolean;
-	setOpen: (open: boolean) => void;
+	isOpen: boolean;
 	onClose: () => void;
 	onOpen: () => void;
+	setOpen: (open: boolean) => void;
 };
 
-const [DialogStateContextProvider, useDialogStateContext] = createCustomContext<ContextValue>();
+const [DialogContextProvider, useDialogContext] = createCustomContext<ContextValue>();
 
 function DialogRoot(props: InferProps<typeof DialogPrimitive.Root>) {
 	// eslint-disable-next-line ts-eslint/unbound-method
-	const { open, onOpenChange, ...restOfProps } = props;
+	const { defaultOpen, onOpenChange: setOpenProp, open: openProp, ...restOfProps } = props;
 
-	const savedOnOpenChange = useCallbackRef(onOpenChange);
+	const savedSetOpenProp = useCallbackRef(setOpenProp);
 
-	const [internalOpenState, toggleInternalOpenState] = useToggle(false);
+	const [internalOpen, toggleInternalOpen] = useToggle(defaultOpen);
 
 	// == Use the open prop if it is provided
 	// == Otherwise, use the internal open state
-	const selectedOpen = open ?? internalOpenState;
+	const isOpen = openProp ?? internalOpen;
 
 	const setOpen = useCallback(
-		(value: boolean) => {
-			// == Call the onOpenChange prop if the open prop is provided
-			// == Otherwise, toggle the internal open state
-			const selectedOpenChange = open ? savedOnOpenChange : toggleInternalOpenState;
+		(value: boolean | ((value: boolean) => boolean)) => {
+			const resolvedValue = isFunction(value) ? value(isOpen) : value;
 
-			selectedOpenChange(value);
+			// == Call the onOpenChange prop if the openProp is provided
+			// == Otherwise, toggle the internal open state
+			const selectedOpenChange = openProp ? savedSetOpenProp : toggleInternalOpen;
+
+			selectedOpenChange(resolvedValue);
 		},
-		[open, savedOnOpenChange, toggleInternalOpenState]
+		[isOpen, openProp, savedSetOpenProp, toggleInternalOpen]
 	);
 
 	const onClose = useCallbackRef(() => setOpen(false));
 	const onOpen = useCallbackRef(() => setOpen(true));
 
 	const contextValue = useMemo(
-		() => ({ open: selectedOpen, setOpen, onClose, onOpen }) satisfies ContextValue,
-		[onClose, onOpen, selectedOpen, setOpen]
+		() => ({ isOpen, onClose, onOpen, setOpen }) satisfies ContextValue,
+		[onClose, onOpen, isOpen, setOpen]
 	);
 
 	return (
-		<DialogStateContextProvider value={contextValue}>
+		<DialogContextProvider value={contextValue}>
 			<DialogPrimitive.Root
-				data-slot="dialog-root"
 				{...restOfProps}
-				open={selectedOpen}
+				data-slot="dialog-root"
+				open={isOpen}
 				onOpenChange={setOpen}
 			/>
-		</DialogStateContextProvider>
+		</DialogContextProvider>
 	);
 }
 
 type RenderFn = (props: ContextValue) => React.ReactNode;
 
-function DialogContext(props: DiscriminatedRenderProps<RenderFn>) {
-	const { children, render } = props;
-	const dialogCtx = useDialogStateContext();
+function DialogContext(props: { children: RenderFn }) {
+	const { children } = props;
 
-	if (typeof children === "function") {
-		return children(dialogCtx);
-	}
+	const dialogCtx = useDialogContext();
 
-	return render(dialogCtx);
+	return children(dialogCtx);
 }
 
 function DialogOverlay(props: InferProps<typeof DialogPrimitive.Overlay>) {
@@ -92,7 +92,7 @@ function DialogClose(props: InferProps<typeof DialogPrimitive.Close>) {
 }
 
 function DialogContent(props: InferProps<typeof DialogPrimitive.Content> & { withCloseBtn?: boolean }) {
-	const { className, children, withCloseBtn = true, ...restOfProps } = props;
+	const { children, className, withCloseBtn = true, ...restOfProps } = props;
 
 	return (
 		<DialogPortal>
@@ -101,8 +101,8 @@ function DialogContent(props: InferProps<typeof DialogPrimitive.Content> & { wit
 			<DialogPrimitive.Content
 				data-slot="dialog-content"
 				className={cnMerge(
-					`fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%]
-					translate-y-[-50%] gap-4 rounded-lg border bg-shadcn-background p-6 shadow-lg duration-200
+					`fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-[-50%] gap-4
+					rounded-lg border bg-shadcn-background p-6 shadow-lg duration-200
 					data-[state=closed]:animate-out data-[state=closed]:fade-out-0
 					data-[state=closed]:zoom-out-95 data-[state=open]:animate-in data-[state=open]:fade-in-0
 					data-[state=open]:zoom-in-95 sm:max-w-lg`,
@@ -171,16 +171,13 @@ function DialogTitle(props: InferProps<typeof DialogPrimitive.Title>) {
 
 function DialogTrigger(props: InferProps<typeof DialogPrimitive.Trigger>) {
 	const { onClick, ...restOfProps } = props;
-	const { onOpen } = useDialogStateContext();
+	const { onOpen } = useDialogContext();
 
 	return (
 		<DialogPrimitive.Trigger
 			data-slot="dialog-trigger"
 			{...restOfProps}
-			onClick={(event) => {
-				onOpen();
-				onClick?.(event);
-			}}
+			onClick={composeEventHandlers(onClick, onOpen)}
 		/>
 	);
 }
@@ -220,4 +217,4 @@ export const Title = DialogTitle;
 export const Trigger = DialogTrigger;
 
 // eslint-disable-next-line react-refresh/only-export-components
-export { useDialogStateContext };
+export { useDialogContext };

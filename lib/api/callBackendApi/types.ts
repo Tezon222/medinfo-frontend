@@ -19,18 +19,17 @@ export type Disease = {
 };
 
 export type DiseasesResponse = {
-	page: number;
-	limit: number;
-	totalDiseases: number;
-	diseases: Disease[];
+	data: { page: number; limit: number; totalDiseases: number; diseases: Disease[] };
 };
 
 export type SingleDisease = {
-	Disease: string;
-	Symptoms: string[];
-	Description: string;
-	Image: string;
-	Precautions: string[];
+	data: {
+		Disease: string;
+		Symptoms: string[];
+		Description: string;
+		Image: string;
+		Precautions: string[];
+	};
 };
 
 type Doctor = {

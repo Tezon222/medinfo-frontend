@@ -1,8 +1,8 @@
+import Image from "next/image";
 import { Main } from "@/app/(primary)/-components";
 import { getElementList } from "@/components/common/for";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import type { DiseasesResponse, SingleDisease } from "@/lib/api/callBackendApi/types";
-import Image from "next/image";
 import { AlternateDiseaseCard, ScrollableAlternateDiseaseCards } from "../../DiseaseCard";
 
 async function TipDetailsPage(props: { params: Promise<{ name: string }> }) {
@@ -31,8 +31,8 @@ async function TipDetailsPage(props: { params: Promise<{ name: string }> }) {
 		<Main className="flex w-full flex-col">
 			<section className="lg:flex lg:gap-16">
 				<Image
-					className="size-[272px] rounded-br-[16px] rounded-tl-[16px] lg:size-[460px]"
-					src={singleDisease.data.Image}
+					className="size-[272px] rounded-tl-[16px] rounded-br-[16px] lg:size-[460px]"
+					src={singleDisease.data.data.Image}
 					alt=""
 					priority={true}
 					width={272}
@@ -51,19 +51,19 @@ async function TipDetailsPage(props: { params: Promise<{ name: string }> }) {
 
 			<section className="mt-5 flex flex-col gap-5 lg:mt-10">
 				<h1
-					className="text-medinfo-primary-darker text-[32px] font-semibold lg:text-[52px]
+					className="text-[32px] font-semibold text-medinfo-primary-darker lg:text-[52px]
 						lg:font-bold"
 				>
-					{singleDisease.data.Disease}
+					{singleDisease.data.data.Disease}
 				</h1>
 
-				<p className="text-[18px]">{singleDisease.data.Description}</p>
+				<p className="text-[18px]">{singleDisease.data.data.Description}</p>
 
 				<article>
 					<h4>Symptoms</h4>
 					<List
 						className="pl-12"
-						each={singleDisease.data.Symptoms}
+						each={singleDisease.data.data.Symptoms}
 						render={(symptom) => (
 							<li key={symptom} className="list-['-_']">
 								{symptom}
@@ -76,7 +76,7 @@ async function TipDetailsPage(props: { params: Promise<{ name: string }> }) {
 					<h4>Precautions</h4>
 					<List
 						className="pl-12"
-						each={singleDisease.data.Precautions}
+						each={singleDisease.data.data.Precautions}
 						render={(precaution) => (
 							<li key={precaution} className="list-['-_']">
 								{precaution}
@@ -93,11 +93,13 @@ async function TipDetailsPage(props: { params: Promise<{ name: string }> }) {
 			</section>
 
 			<section id="Related Posts" className="mt-14 w-full lg:mt-[92px]">
-				<h2 className="text-medinfo-primary-darker text-[48px] font-bold max-lg:hidden">
+				<h2 className="text-[48px] font-bold text-medinfo-primary-darker max-lg:hidden">
 					Related Posts
 				</h2>
 
-				{allDiseases.data && <ScrollableAlternateDiseaseCards diseases={allDiseases.data.diseases} />}
+				{allDiseases.data && (
+					<ScrollableAlternateDiseaseCards diseases={allDiseases.data.data.diseases} />
+				)}
 			</section>
 		</Main>
 	);
